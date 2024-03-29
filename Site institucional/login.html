@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SafeSleep</h1>
+          <ul class="navbar">
+            <li>Inicio</li>
+            <li>||</li>
+            <li>Simulador</li>
+            <li>||</li>
+            <li>Login</li>
+            <li>||</li>
+            <li>Cadastro</li>
+          </ul>
+        </div>
+    </div>
+    <div class = "caixa">
+    <h1 class="h1">Digite seu Usuario e sua Senha:</h1><br><br>
+    <span class="span">Usuario:    </span><input type="text" id="id_login"><br><br>
+    <span class="span">Senha:      </span><input type="text" id="id_senha"><br><br>
+    <button class="botao" onclick="autenticar()">Autenticar</button><br>
+    <div class= "mensagem" id="div_mensagem"></div>
+</div>
+</body>
+</html>
+<script>
+    var verificar = 0
+    var tentativas = 3
+    function autenticar(){
+        var login = id_login.value
+        var senha = id_senha.value
+        if (verificar == 0 || verificar == 1 || verificar == 2){
+        if (login == 'Brandão' && senha == '12345'){
+            div_mensagem.innerHTML = `Usuario autenticado`
+        }
+        else {
+            verificar = verificar + 1
+            tentativas = tentativas - 1
+            div_mensagem.innerHTML = `Falha na autenticação `
+            alert(`Falha na autenticação, você ainda tem ${tentativas} tentativas.`)
+        }
+    }
+    else{
+        div_mensagem.innerHTML = `O numero maximo de tentativas foi alcançado,<br> tente novamente mais tarde.`
+    }
+    }
+</script>

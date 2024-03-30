@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_cadastro.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SafeSleep</h1>
+          <ul class="navbar">
+            <li>Inicio</li>
+            <li>||</li>
+            <li>Simulador</li>
+            <li>||</li>
+            <li>Login</li>
+            <li>||</li>
+            <li>Cadastro</li>
+          </ul>
+        </div>
+    </div>
+    <div class = "caixa">
+    <h1 class="h1">CADASTRO:</h1><br><br>
+    <span class="span">Nome:    </span><input type="text" id="id_login">
+    <span class="span">CPF:    </span><input type="text" id="id_login"><br><br>
+    <span class="span">RG:    </span><input type="text" id="id_login">
+    <span class="span">Telefone:    </span><input type="text" id="id_login"><br><br>
+    <span class="span">Senha:      </span><input type="text" id="id_senha">
+    <span class="span">Confirme sua senha:    </span><input type="text" id="id_login"><br><br>
+    <button class="botao" onclick="cadastrar()">CADASTRAR</button><br>
+    <div class= "mensagem" id="div_mensagem"></div>
+</div>
+</body>
+</html>
+<script>
+    function cadastrar(){
+          div_mensagem.innerHTML =`Usuario Cadastrado`
+    }
+</script>

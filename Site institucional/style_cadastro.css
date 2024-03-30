@@ -32,7 +32,7 @@ body{
  }
  .h1{
     top: 10%;
-    left: 30%;
+    left: 25%;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
  }
@@ -45,7 +45,6 @@ body{
     background-color: #b2dafa;
     border: 5px solid black;
     border-radius: 30px;
-
 }
   .span{
     margin-left: 10%;
@@ -60,8 +59,7 @@ body{
     font-weight: bold;
 }
  .mensagem{
-    display: flex;
-    margin-left: 34%;
+    margin-left: 37%;
     margin-top: 5%;
     align-items: center;
     font-weight: bold;

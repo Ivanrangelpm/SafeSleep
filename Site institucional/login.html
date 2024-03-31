@@ -27,6 +27,7 @@
     <span class="span">Senha:      </span><input type="text" id="id_senha"><br><br>
     <button class="botao" onclick="autenticar()">Autenticar</button><br>
     <div class= "mensagem" id="div_mensagem"></div>
+    <div class= "mensagem2" id="div_mensagem2"></div>
 </div>
 </body>
 </html>
@@ -48,7 +49,9 @@
         }
     }
     else{
-        div_mensagem.innerHTML = `O numero maximo de tentativas foi alcançado,<br> tente novamente mais tarde.`
+        div_mensagem.innerHTML = ``
+        div_mensagem2.innerHTML = `O numero maximo de tentativas foi alcançado, tente novamente mais tarde.`
+
     }
     }
 </script>

@@ -65,5 +65,11 @@ body{
     margin-top: 5%;
     align-items: center;
     font-weight: bold;
-    
+ }
+ .mensagem2{
+    display: flex;
+    margin-left: 7%;
+    margin-top: 2%;
+    align-items: center;
+    font-weight: bold;
  }

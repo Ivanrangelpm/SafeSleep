@@ -9,4 +9,7 @@ Relatorio dos Commits do projeto: <br>
 30/03 - 13:11 - Documentação de projeto atualizada/corrigida - Bruno Yuji <br>
 31/03 - 20:30 - Mensagem de erro da tela de login corrigida - Renan Rocha <br>
 31/03 - 20:40 - Primeira versão da página da dashboard - Diego Campos <br>
-31/03 - 23:46 - Primeira versão da página inicial - Fabrício Prudente <br> 
+31/03 - 23:46 - Primeira versão da página inicial - Fabrício Prudente <br>
+01/04 - 19:30 - Finalizando modelagem - Ivan rangel <br>
+01/04 - 20:56 - Adicionando tabela métricas e mudando fk_bebe_incubadora - Ivan Rangel - <br>
+

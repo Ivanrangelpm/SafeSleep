@@ -22,13 +22,13 @@
         </div>
     </div>
     <div class = "caixa">
-    <h1 class="h1">Digite seu Usuario e sua Senha:</h1><br><br>
-    <span class="span">Usuario:    </span><input type="text" id="id_login">
-    <span class="span">Senha:      </span><input type="text" id="id_senha"><br><br>
-    <button class="botao" onclick="autenticar()">Autenticar</button><br>
-    <div class= "mensagem" id="div_mensagem"></div>
-    <div class= "mensagem2" id="div_mensagem2"></div>
-</div>
+        <h1 class="h1">Digite seu Usuário e sua Senha:</h1><br><br>
+        <span class="span">Usuário:</span><input type="text" id="id_login">
+        <span class="span">Senha:</span><input type="text" id="id_senha"><br><br>
+        <button class="botao" onclick="autenticar()">Autenticar</button><br>
+        <div class= "mensagem" id="div_mensagem"></div>
+        <div class= "mensagem2" id="div_mensagem2"></div>
+    </div>
 </body>
 </html>
 <script>
@@ -39,7 +39,7 @@
         var senha = id_senha.value
         if (verificar == 0 || verificar == 1 || verificar == 2){
         if (login == 'Brandão' && senha == '12345'){
-            div_mensagem.innerHTML = `Usuario autenticado`
+            div_mensagem.innerHTML = `Usuário autenticado`
         }
         else {
             verificar = verificar + 1
@@ -50,7 +50,7 @@
     }
     else{
         div_mensagem.innerHTML = ``
-        div_mensagem2.innerHTML = `O numero maximo de tentativas foi alcançado, tente novamente mais tarde.`
+        div_mensagem2.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`
 
     }
     }

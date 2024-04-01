@@ -3,10 +3,14 @@ body{
     padding: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
  .header{
     border-bottom: 3px solid #32b9cd;
     background-color: #b2dafa;
+    width: 100%;
 }
  .container{
      display: flex;
@@ -37,7 +41,7 @@ body{
     font-family: 'Times New Roman', Times, serif;
  }
   .caixa{
-    position: absolute;
+    /* position: absolute; */
     top: 30%;
     left: 30%;
     width: 800px;
@@ -45,10 +49,12 @@ body{
     background-color: #b2dafa;
     border: 5px solid black;
     border-radius: 30px;
-
+    margin-top: 10%;
+    padding: 50px;
 }
   .span{
     margin-left: 10%;
+    margin-right: 10px;
     font-weight: bold; 
     font-family: 'Times New Roman', Times, serif
 }

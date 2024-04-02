@@ -27,31 +27,28 @@
     <div class="opcoes">
       <button class="botao1" onclick="todos()">Geral </button>
       <button class="botao2" onclick="risco()">Em risco </button>
-      <button class="botao3" onclick="info()">Alertas </button>
+      <button class="botao3" onclick="alerta()">Alertas </button>
     </div>
-    <div class="geral">
-    <div class="lista">
-      <span>Incubadora 1 <button>Ver</button></span>
-      <span>Incubadora 2 <button>Ver</button></span>
-      <span>Incubadora 3 <button>Ver</button></span>
-      <span>Incubadora 4 <button>Ver</button></span>
-      <span>Incubadora 5 <button>Ver</button></span>
-      <span>Incubadora 6 <button>Ver</button></span>
-      <span>Incubadora 7 <button>Ver</button></span>
-      <span>Incubadora 8 <button>Ver</button></span>
-      <span>Incubadora 9 <button>Ver</button></span>
-      <span>Incubadora 10 <button>Ver</button></span>
-      <span>Incubadora 11 <button>Ver</button></span>
-      <span>Incubadora 12 <button>Ver</button></span>
-    </div>
-    <div class="info"> 
-      <div class="texto"> 
-      Peso: <input type="number" id="peso"> 
-      Tempo na incubadora: <input type="number" id="tempo">
-      XXX: <input type="number" id="xxx">
-      </div> 
-      <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="imagem">
-    </div>
+    <div class="geral" id="div_geral">
+      <div class="selecao">
+        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
+        <select class="lista" id="slc_incubadora">
+          <option value="0" selected disabled>Selecione a incubadora</option>
+          <option value="1">Incubadora 1 </option>
+          <option value="2">Incubadora 2 </option>
+          <option value="3">Incubadora 3 </option>
+          <option value="4">Incubadora 4 </option>
+          <option value="5">Incubadora 5 </option>
+          <option value="6">Incubadora 6 </option>
+          <option value="7">Incubadora 7 </option>
+          <option value="8">Incubadora 8 </option>
+          <option value="9">Incubadora 9 </option>
+          <option value="10">Incubadora 10 </option>
+        </select>
+        <button onclick="verificar()">Verificar</button>
+      </div>
+      <div id="div_info" class="info">
+      </div>
     </div>
   </div>
 </body>
@@ -59,5 +56,108 @@
 </html>
 
 <script>
-    
+
+  function todos() {
+    div_geral.innerHTML = 
+    `<div class="selecao">
+        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
+        <select class="lista" id="slc_incubadora">
+          <option value="0" selected disabled>Selecione a incubadora</option>
+          <option value="1">Incubadora 1 </option>
+          <option value="2">Incubadora 2 </option>
+          <option value="3">Incubadora 3 </option>
+          <option value="4">Incubadora 4 </option>
+          <option value="5">Incubadora 5 </option>
+          <option value="6">Incubadora 6 </option>
+          <option value="7">Incubadora 7 </option>
+          <option value="8">Incubadora 8 </option>
+          <option value="9">Incubadora 9 </option>
+          <option value="10">Incubadora 10 </option>
+        </select>
+        <button onclick="verificar()">Verificar</button>
+     </div>
+     <div class="info" id="div_info">
+      </div>`
+  }
+
+  function risco() {
+    div_geral.innerHTML = 
+    `<div class="selecao">
+        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
+        <select class="lista" id="slc_incubadora">
+          <option value="0" selected disabled>Selecione a incubadora</option>
+          <option value="1">Incubadora 1 </option>
+          <option value="3">Incubadora 3 </option>
+          <option value="7">Incubadora 7 </option>
+          <option value="9">Incubadora 9 </option>
+        </select>
+        <button onclick="verificar()">Verificar</button>
+     </div>
+     <div class="info" id="div_info">
+      </div>`
+  }
+
+  function alerta() {
+    div_geral.innerHTML = 
+    `<img src= "https://support.content.office.net/pt-br/media/c77dc6ec-262c-4bab-b22c-74f4ac54e134.gif" alt="" id="">
+    <img src= "https://invitedresearcher.com/wp-content/uploads/2022/11/CAPA_Grafico_de_Pizza1.png" alt="">`
+  }
+
+  function verificar() {
+    var incubadora = slc_incubadora.value;
+
+    if (incubadora == 0) {
+      alert(`Selecione uma opção válida!`)
+    } else if (incubadora == 1) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2 KG || Tempo de uso da incubadora: 10 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`
+    } else if (incubadora == 2) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,2 KG || Tempo de uso da incubadora: 14 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`
+    } else if (incubadora == 3) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,5 KG || Tempo de uso da incubadora: 11 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`
+    } else if (incubadora == 4) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,8 KG || Tempo de uso da incubadora: 12 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`
+    } else if (incubadora == 5) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 0,9 KG || Tempo de uso da incubadora: 6 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`
+    } else if (incubadora == 6) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,2 KG || Tempo de uso da incubadora: 9 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`
+    } else if (incubadora == 7) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,9 KG || Tempo de uso da incubadora: 10 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`
+    } else if (incubadora == 8) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,1 KG || Tempo de uso da incubadora: 7 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`
+    } else if (incubadora == 9) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,8 KG || Tempo de uso da incubadora: 4 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`
+    } else if (incubadora == 10) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 3 KG || Tempo de uso da incubadora: 14 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`
+    }
+  }
 </script>

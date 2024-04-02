@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SafeSleep</h1>
+          <ul class="navbar">
+            <li>Inicio </li>
+            <li>||</li>
+            <li> Simulador </li>
+            <li>||</li>
+            <li> Login </li>
+            <li>||</li>
+            <li> Cadastro</li>
+          </ul>
+        </div>
+    </div>
+    <div class = "caixa">
+    <h1 class="h1">CADASTRO (Médico Resposavel):</h1><br><br>
+    <span class="span">Nome Completo:    </span><input type="text" id="input_nome">
+    <span class="span">CPF:    </span><input type="text" id="input_cpf"><br><br>
+    <span class="span">Licença Médica:    </span><input type="text" id="input_licenca">
+    <span class="span">Telefone:     </span><input type="text" id="input_telefone"><br><br>
+    <span class="span">Senha:      </span><input type="password" id="input_senha">
+    <span class="span">Confirme sua senha:    </span><input type="password" id="input_conf_senha"><br><br>
+    <span id="span2">(A senha deve possuir pelo menos 8 caracteres)</span>
+    <button class="botao" onclick="cadastrar()">CADASTRAR</button><br>
+    <div class= "mensagem" id="div_mensagem_cadastro"></div>
+</div>
+</body>
+</html>
+<script>
+    function cadastrar(){
+      var telefone = input_telefone.value
+      var cpf = input_cpf.value
+      var licenca = input_licenca.value
+      var parametro_senha = input_senha.value
+      var senha = input_conf_senha.value
+      var tamanho_senha = senha.length
+      if (parametro_senha != senha){
+        div_mensagem_cadastro.innerHTML = `Senhas não correspondem`
+      }
+      else if (tamanho_senha < 8){
+        div_mensagem_cadastro.innerHTML = `Senha curta demais.`
+      }
+      else{
+        div_mensagem_cadastro.innerHTML = `Médico Cadastrado`
+      }
+    }
+</script>

@@ -11,5 +11,6 @@ Relatorio dos Commits do projeto: <br>
 31/03 - 20:40 - Primeira versão da página da dashboard - Diego Campos <br>
 31/03 - 23:46 - Primeira versão da página inicial - Fabrício Prudente <br>
 01/04 - 19:30 - Finalizando modelagem - Ivan rangel <br>
-01/04 - 20:56 - Adicionando tabela métricas e mudando fk_bebe_incubadora - Ivan Rangel - <br>
+01/04 - 20:56 - Adicionando tabela métricas e mudando fk_bebe_incubadora - Ivan Rangel <br>
+01/04 - 21:15 - Adicionando funcionalidade nos botões e nas opções da dashboard <br>
 

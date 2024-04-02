@@ -27,9 +27,9 @@
     <span class="span">CPF:    </span><input type="text" id="input_cpf"><br><br>
     <span class="span">Licença Médica:    </span><input type="text" id="input_licenca">
     <span class="span">Telefone:     </span><input type="text" id="input_telefone"><br><br>
-    <span class="span">Senha:      </span><input type="password" id="input_senha">
-    <span class="span">Confirme sua senha:    </span><input type="password" id="input_conf_senha"><br><br>
-    <span id="span2">(A senha deve possuir pelo menos 8 caracteres)</span>
+    <span class="span">Senha:      </span><input type="text" id="input_senha">
+    <span class="span">Confirme sua senha:    </span><input type="text" id="input_conf_senha"><br><br>
+    <span id="span2">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
     <button class="botao" onclick="cadastrar()">CADASTRAR</button><br>
     <div class= "mensagem" id="div_mensagem_cadastro"></div>
 </div>
@@ -43,10 +43,15 @@
       var parametro_senha = input_senha.value
       var senha = input_conf_senha.value
       var tamanho_senha = senha.length
+      if (senha.indexOf("!") < 0 || senha.indexOf("@") < 0 || senha.indexOf("#") < 0 || senha.indexOf("$") < 0 || 
+      senha.indexOf("%") < 0 || senha.indexOf("&") < 0 || 
+      senha.indexOf("/") < 0 || senha.indexOf("*") < 0) {
+        div_mensagem_cadastro.innerHTML = `Senhas não possuem caracteres especiais`
+      }
       if (parametro_senha != senha){
         div_mensagem_cadastro.innerHTML = `Senhas não correspondem`
       }
-      else if (tamanho_senha < 8){
+      if (tamanho_senha < 8){
         div_mensagem_cadastro.innerHTML = `Senha curta demais.`
       }
       else{

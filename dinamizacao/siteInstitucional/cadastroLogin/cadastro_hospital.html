@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SafeSleep</h1>
+          <ul class="navbar">
+            <li>Inicio </li>
+            <li>||</li>
+            <li> Simulador </li>
+            <li>||</li>
+            <li> Login </li>
+            <li>||</li>
+            <li> Cadastro</li>
+          </ul>
+        </div>
+    </div>
+    <div class = "caixa">
+    <h1 class="h1">CADASTRO (HOSPITAL):</h1><br><br>
+    <span class="span">Nome:    </span><input type="text" id="input_nome">
+    <span class="span">CNPJ:    </span><input type="text" id="input_cpf"><br><br>
+    <span class="span">Endereço:    </span><input type="text" id="input_licenca">
+    <span class="span">Telefone:     </span><input type="text" id="input_telefone"><br><br>
+    <span class="span">Nome do responsavel:      </span><input type="password" id="input_senha"><br><br>
+    <span class="span">Numero de Incubadoras:      </span><input type="password" id="input_senha"><br><br>
+    <span class="span">Numero de crianças:    </span><input type="password" id="input_conf_senha"><br><br>
+    <button class="botao" onclick="cadastrar()">CADASTRAR</button><br>
+    <div class= "mensagem" id="div_mensagem_cadastro"></div>
+</div>
+</body>
+</html>
+<script>
+    function cadastrar(){
+    div_mensagem_cadastro.innerHTML = `Hopsital Cadastrado`
+    }
+</script>

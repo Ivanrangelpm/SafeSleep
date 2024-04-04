@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(178,218,250);
+  background: linear-gradient(0deg, rgba(222,240,254,1) 0%, rgba(255,255,255,1) 100%);
+  background-attachment: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header{
+  border-bottom: 3px solid #32b9cd;
+  background-color: #b2dafa;
+}
+
+.container{
+   display: flex;
+   width: 80%;
+   margin: auto;        
+}
+
+.header .container{
+  justify-content: space-between;
+
+}
+
+.titulo{
+    color: #6a9eda;
+}
+
+.navbar{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  width: 300px;
+  justify-content: space-between;
+  color: #6a9eda;
+  align-items: center;
+  font-weight: bold;
+}
+
+.h1{
+  top: 10%;
+  left: 30%;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.content {
+  margin-top: 70px;
+}
+
+.opcoes {
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.opcoes button {
+  width: 20%;
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.botao1 {
+  background: rgb(131,242,143);
+  background: linear-gradient(0deg, rgba(145,242,156,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.botao2 {
+  background: rgb(250,135,135);
+  background: linear-gradient(0deg, rgba(250,135,135,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.botao3 {
+  background: rgb(252,252,160);
+  background: linear-gradient(0deg, rgba(252,252,160,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.selecao {
+  display: flex;
+  flex-direction: column;
+}
+
+.selecao button {
+  display: flex;
+  align-self: center;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.subtitulo {
+  color: #6a9eda;
+  font-size: larger;
+}
+
+.lista {
+  border: 1px solid black;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  width: fit-content;
+  font-size: 15px;
+}
+
+.geral {
+  margin-top: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  font-size: 18px;
+}
+
+.geral img {
+  border: 0;
+}
+
+.texto {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.info {
+  height: 400px;
+}
+
+.info img {
+  width: 500px;
+}

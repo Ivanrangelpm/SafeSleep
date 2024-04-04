@@ -43,19 +43,18 @@
       var parametro_senha = input_senha.value
       var senha = input_conf_senha.value
       var tamanho_senha = senha.length
-      if (senha.indexOf("!") < 0 || senha.indexOf("@") < 0 || senha.indexOf("#") < 0 || senha.indexOf("$") < 0 || 
-      senha.indexOf("%") < 0 || senha.indexOf("&") < 0 || 
-      senha.indexOf("/") < 0 || senha.indexOf("*") < 0) {
-        div_mensagem_cadastro.innerHTML = `Senhas não possuem caracteres especiais`
-      }
-      if (parametro_senha != senha){
-        div_mensagem_cadastro.innerHTML = `Senhas não correspondem`
-      }
+      var index = senha.indexOf("!") >= 0 || senha.indexOf("@") >= 0 ||senha.indexOf("#") >= 0 ||senha.indexOf("$") >= 0 ||senha.indexOf("%") >= 0 ||senha.indexOf("&") >= 0 ||senha.indexOf("/") >= 0 ||senha.indexOf("*") >= 0 
+      if (index == false){
+       div_mensagem_cadastro.innerHTML = `Senhas não contém <br> caracteres especiais.`
+       }
+      if (parametro_senha != senha) {
+       div_mensagem_cadastro.innerHTML = `Senhas não são iguais.` 
+       }
       if (tamanho_senha < 8){
         div_mensagem_cadastro.innerHTML = `Senha curta demais.`
       }
-      else{
-        div_mensagem_cadastro.innerHTML = `Médico Cadastrado`
-      }
+       if (index == true && parametro_senha == senha && tamanho_senha >= 8) {
+        div_mensagem_cadastro.innerHTML = `Médico Cadastrado.`
+       }
     }
 </script>

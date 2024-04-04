@@ -14,3 +14,4 @@ Relatorio dos Commits do projeto: <br>
 01/04 - 20:56 - Adicionando tabela métricas e mudando fk_bebe_incubadora - Ivan Rangel <br>
 01/04 - 21:15 - Adicionando funcionalidade nos botões e nas opções da dashboard - Diego Campos <br>
 01/04 - 21:31 - Adicionado a primeira versão da tela cadastro hospital + cadastro criança - Renan Rocha <br>
+03/04 - 22:26 - Adicionado o conteúdo nos "Nossos Valores" e nos "Objetivos" - Matheus Yukio <br>

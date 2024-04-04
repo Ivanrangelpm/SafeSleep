@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: monospace;
     background-color: white;
     text-align: left;
 }
@@ -20,6 +20,7 @@ body{
 }
  .titulo{
       color: #6a9eda;
+      font-size: 40px;
 }
  .navbar{
     display: flex;
@@ -30,46 +31,51 @@ body{
     color: #6a9eda;
     align-items: center;
     font-weight: bold;
+    font-size: 19px;
  }
 
  .h1{
     display: flex;
-    flex-direction: row;    
+    flex-direction: row; 
+    justify-content: center;
     margin-top: 50px;
     margin-bottom: 10px;
     padding: 0px 10px;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 40px;
+    color: #5086e1;
+
     }
 .texto{
     display: flex;
     flex-direction: row;
     margin-top: 30px;
     margin-bottom: 10px;
+    margin-left: 20px;
     padding: 0px 10px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 18px;
+    font-size: 25px;
     }
 
 .h2{
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
+    justify-content: center; 
     margin-top: 50px;
     margin-bottom: 10px;
     padding: 0px 10px;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 40px;
+    color: #5086e1;
 }
 .h3{
     display: flex;
     flex-direction: row;    
+    justify-content: center;
     margin-top: 50px;
     margin-bottom: 10px;
     padding: 0px 10px;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 40px;
+    color: #5086e1;
 }
 .list{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 18px;
+    font-size: 25px;
+    margin-left: 25px;
 }

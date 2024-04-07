@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SafeSleep</h1>
+          <ul class="navbar">
+            <li>Inicio </li>
+            <li>||</li>
+            <li> Simulador </li>
+            <li>||</li>
+            <li> Login </li>
+            <li>||</li>
+            <li> Cadastro</li>
+          </ul>
+        </div>
+    </div>
+    <h1 class="titulo"> <u>Calculadora Financeira</u> </h1> 
+    <div class="caixa">
+        <div>
+            <h3>Insira os dados abaixo para verificar os custos relacionados ao monitoramento inadequado da temperatura nas incubadoras</h3> <br>
+            Quantidade de bebês internados por mês: <input type="number" id="input_internados"> <br>
+            Média de dias internados por mês: <input type="number" id="input_dias"> <br>
+            Custo diário para o hospital (por recém-nascido): <input type="number" id="input_custo"> <br>
+            <button class="botao" onclick="calcular()">Calcular</button> <br>
+            <div id="div_mensagem"></div><br>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function limpar() {
+        input_internados.value = '';
+        input_dias.value = '';
+        input_custo.value = '';
+        div_mensagem.innerHTML = '';
+    }
+    function calcular() {
+        var internados = Number(input_internados.value);
+        var dias = Number(input_dias.value);
+        var custo = Number(input_custo.value);
+
+        if (internados < 0 || dias < 0 || custo < 0) {
+            alert("Os valores inseridos não podem ser negativos.");
+            limpar();
+        } else {
+            var custoDiario = (internados * custo).toFixed(2);
+            var custoMensal = (dias * custoDiario).toFixed(2);
+            var custoAnual = (custoMensal * 12).toFixed(2);
+            var monit_inadeq = (internados * 0.16).toFixed(2);
+    
+            //desconto dado por conta dos bebes que não precisarão de cuidados extremos por conta da temperatura e pela radução de mão de obra no monitoramento do bebê
+    
+            var reducaoDiaria = (monit_inadeq * custo).toFixed(2);
+            var reducaoMensal = (dias * reducaoDiaria).toFixed(2);
+            var reducaoAnual = (reducaoMensal * 12).toFixed(2);
+    
+            var custoFinalDiario = (custoDiario - reducaoDiaria).toFixed(2);
+            var custoFinalMensal = (custoMensal - reducaoMensal).toFixed(2);
+            var custoFinalAnual = (custoAnual - reducaoAnual).toFixed(2);
+    
+            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3>
+            Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento.
+            <h4>Cálculo para saber o quanto os bebês gastam diariamente, mensalmente e anualmente:</h4>
+            
+            <b>- Custo Diário:</b> Internados X Custo Por Bebê <br>
+            <b>- Custo Mensal:</b> Dias X Custo Diário<br>
+            <b>- Custo Anual:</b> Custo Mensal X 12(Quantidade de meses em um ano)<br><br>
+    
+            <b>Portanto o custo será de:</b><br> 
+            Por ano <b style="color: red;"> R$${custoAnual}</b><br>
+            Por mês <b style="color: red;">R$${custoMensal}</b><br>
+            Por dia <b style="color: red;">R$${custoDiario}</b><br>
+    
+            <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3>
+            
+            <b>Cálculo do desconto médio:</b><br><br>
+    
+            - Valor do Desconto Diário = Custo Diário x 0.16 <br>
+            - Valor do Desconto Mensal = Custo Mensal x 0.16 <br>
+            - Valor do Desconto Anual = Custo Anual x 0.16 <br> <br>
+            
+            <b>Então, o valor do desconto médio será de: </b> <br>   
+            Por ano <b style="color: green;">R$${reducaoAnual}</b> <br>
+            Por mês <b style="color: green;">R$${reducaoMensal}</b> <br>
+            Por dia <b style="color: green;">R$${reducaoDiaria}</b> <br>
+            <br>
+    
+            <b>Calculo do custo final Mínimo:</b><br><br>
+    
+            - Custo Final <b>Mínimo</b> Anual = Custo Anual - Valor Desconto Diário <br>
+            - Custo Final <b>Mínimo</b> Mensal = Custo Mensal - Valor Desconto  Mensal <br>
+            - Custo Final <b>Mínimo</b> Diario = Custo Diario - Valor Desconto Anual <br><br>
+    
+            <b>Então, o custo final com o desconto será de: </b> <br> <br>
+    
+            Por ano <b style="color: rgb(161, 161, 0);">R$${custoFinalAnual}</b> <br>
+            Por mês <b style="color: rgb(161, 161, 0);">R$${custoFinalMensal}</b> <br>
+            Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br>
+            
+            <button class="botao" onclick="limpar()">Limpar resultado</button>`;
+        }
+    }
+</script>

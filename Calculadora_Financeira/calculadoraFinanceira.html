@@ -46,6 +46,8 @@
         var internados = Number(input_internados.value);
         var dias = Number(input_dias.value);
         var custo = Number(input_custo.value);
+        var morte = internados * 0.28
+        var processo = morte * 681000
 
         if (internados < 0 || dias < 0 || custo < 0) {
             alert("Os valores inseridos não podem ser negativos.");
@@ -70,7 +72,6 @@
             Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento.
             <h4>Cálculo para saber o quanto os bebês gastam diariamente, mensalmente e anualmente:</h4>
             
-            <b>- Custo Diário:</b> Internados X Custo Por Bebê <br>
             <b>- Custo Mensal:</b> Dias X Custo Diário<br>
             <b>- Custo Anual:</b> Custo Mensal X 12(Quantidade de meses em um ano)<br><br>
     
@@ -82,8 +83,6 @@
             <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3>
             
             <b>Cálculo do desconto médio:</b><br><br>
-    
-            - Valor do Desconto Diário = Custo Diário x 0.16 <br>
             - Valor do Desconto Mensal = Custo Mensal x 0.16 <br>
             - Valor do Desconto Anual = Custo Anual x 0.16 <br> <br>
             
@@ -104,6 +103,13 @@
             Por ano <b style="color: rgb(161, 161, 0);">R$${custoFinalAnual}</b> <br>
             Por mês <b style="color: rgb(161, 161, 0);">R$${custoFinalMensal}</b> <br>
             Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br>
+
+            <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém nascido em 28% <h3> <br>
+            
+            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$681.996 <br>
+
+            O que, nesse caso, será de: R$ ${processo}
+            
             
             <button class="botao" onclick="limpar()">Limpar resultado</button>`;
         }

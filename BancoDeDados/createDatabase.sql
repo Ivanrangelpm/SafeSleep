@@ -47,14 +47,14 @@ create table historico(
   peso decimal(5, 2) not null,
   temperatura decimal(5, 2) not null,
   fkBebe int not null,
-  constraint fkHistoricoBebe foreign key (fkBebe) references bebe(idBebe)
+  constraint fkHistoricoIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
 );
 create table metrica(
   dataHora datetime not null,
   temperaturaMinima decimal(5, 2) not null,
   temperaturaMaxima decimal(5, 2) not null,
-  fkBebe int not null,
-  constraint fkMetricaBebe foreign key (fkBebe) references bebe(idBebe)
+  fkIncubadora int not null,
+  constraint fkMetricaIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
 );
 create table bebeResponsavel(
   idBebe int not null,

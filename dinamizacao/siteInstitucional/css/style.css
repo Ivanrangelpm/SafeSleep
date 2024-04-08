@@ -10,17 +10,15 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #eaefea;
-  color: #506fce;
+  color: #6080a0;
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 3px #50b2c0 solid;
   padding: 1rem;
   width: 100%;
-  background-color: #6a5acd;
-  color: #eaefea;
+  background-color: #507090;
 }
 .header .logo {
   height: 5rem;
@@ -32,7 +30,7 @@ body {
   list-style-type: none;
 }
 .header .navbar * {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #eaefea;
 }
@@ -71,11 +69,11 @@ body {
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: auto;
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
-  background-color: #362a8d;
+  background-color: #003050;
   color: #eaefea;
 }
 .footer div {
@@ -89,5 +87,5 @@ body {
   margin-top: 1rem;
 }
 .footer .contato .logo {
-  width: 6rem;
+  height: 10rem;
 }

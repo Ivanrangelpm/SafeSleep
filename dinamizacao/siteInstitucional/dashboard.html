@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/dashboard.css" rel="stylesheet" />
+    <title>SafeSleep</title>
+  </head>
+  <body>
+    <div class="header">
+      <img src="./imagens/logo.png" class="logo" />
+      <ul class="navbar">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="./sobreNos.html">Sobre Nós</a></li>
+        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><a href="./perfil.html">Perfil</a></li>
+        <li><button>Sair</button></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="section opcoes">
+        <button class="botao-geral" onclick="geral()">Geral</button>
+        <button class="botao-risco" onclick="risco()">Em risco</button>
+        <button class="botao-alertas" onclick="alertas()">Alertas</button>
+      </div>
+      <hr />
+      <div class="section div-select" id="divContent">
+        <div class="selecao">
+          <h3>Selecione a incubadora para ver informações adicionais</h3>
+          <div class="campo">
+            <select class="lista" id="slc_incubadora">
+              <option value="0" selected disabled>Selecione a incubadora</option>
+            </select>
+            <button onclick="verificar()">Verificar</button>
+          </div>
+        </div>
+        <div id="div_info" class="info"></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="developers">
+        <h3>Desenvolvedores da SafeSleep:</h3>
+        <ul>
+          <li>Bruno Yuji Takahashi</li>
+          <li>Diego Crispim dos Santos Campos</li>
+          <li>Fabrício Prudente Ferreira</li>
+          <li>Ivan Rangel Pestana Marcolin</li>
+          <li>Lucas Tetsuo Nagasse</li>
+          <li>Matheus Yukio Makiyama</li>
+          <li>Renan Rocha Pacanaro</li>
+        </ul>
+      </div>
+      <div class="contato">
+        <h3>Contato:</h3>
+        <ul>
+          <li>safesleep@gmail.com</li>
+          <li>+55 11 99999-9999</li>
+        </ul>
+        <img src="./imagens/logo.png" class="logo" />
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function geral() {
+    divContent.innerHTML = `<div class="selecao">
+        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
+        <select class="lista" id="slc_incubadora">
+          <option value="0" selected disabled>Selecione a incubadora</option>
+          <option value="1">Incubadora 1 </option>
+          <option value="2">Incubadora 2 </option>
+          <option value="3">Incubadora 3 </option>
+          <option value="4">Incubadora 4 </option>
+          <option value="5">Incubadora 5 </option>
+          <option value="6">Incubadora 6 </option>
+          <option value="7">Incubadora 7 </option>
+          <option value="8">Incubadora 8 </option>
+          <option value="9">Incubadora 9 </option>
+          <option value="10">Incubadora 10 </option>
+        </select>
+        <button onclick="verificar()">Verificar</button>
+     </div>
+     <div class="info" id="div_info">
+      </div>`;
+  }
+
+  function risco() {
+    divContent.innerHTML = `<div class="selecao">
+        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
+        <select class="lista" id="slc_incubadora">
+          <option value="0" selected disabled>Selecione a incubadora</option>
+          <option value="1">Incubadora 1 </option>
+          <option value="3">Incubadora 3 </option>
+          <option value="7">Incubadora 7 </option>
+          <option value="9">Incubadora 9 </option>
+        </select>
+        <button onclick="verificar()">Verificar</button>
+     </div>
+     <div class="info" id="div_info">
+      </div>`;
+  }
+
+  function alertas() {
+    divContent.innerHTML = `<img src= "https://support.content.office.net/pt-br/media/c77dc6ec-262c-4bab-b22c-74f4ac54e134.gif" alt="" id="">
+    <img src= "https://invitedresearcher.com/wp-content/uploads/2022/11/CAPA_Grafico_de_Pizza1.png" alt="">`;
+  }
+
+  function verificar() {
+    var incubadora = slc_incubadora.value;
+
+    if (incubadora == 0) {
+      alert(`Selecione uma opção válida!`);
+    } else if (incubadora == 1) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2 KG || Tempo de uso da incubadora: 10 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+    } else if (incubadora == 2) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,2 KG || Tempo de uso da incubadora: 14 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+    } else if (incubadora == 3) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,5 KG || Tempo de uso da incubadora: 11 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+    } else if (incubadora == 4) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,8 KG || Tempo de uso da incubadora: 12 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+    } else if (incubadora == 5) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 0,9 KG || Tempo de uso da incubadora: 6 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+    } else if (incubadora == 6) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,2 KG || Tempo de uso da incubadora: 9 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+    } else if (incubadora == 7) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 1,9 KG || Tempo de uso da incubadora: 10 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+    } else if (incubadora == 8) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,1 KG || Tempo de uso da incubadora: 7 dias 
+        </div>
+        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+    } else if (incubadora == 9) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 2,8 KG || Tempo de uso da incubadora: 4 dias 
+        </div>
+        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+    } else if (incubadora == 10) {
+      div_info.innerHTML = `<div class="texto">
+      Peso: 3 KG || Tempo de uso da incubadora: 14 dias 
+        </div>
+        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+    }
+  }
+</script>

@@ -1,0 +1,62 @@
+.introduction {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #120e2f;
+}
+.introduction p {
+  width: 35%;
+  font-size: 1.5rem;
+}
+.introduction img {
+  border-radius: 10px;
+  border: 15px #120e2f double;
+  width: 40%;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  width: 100%;
+  height: 20rem;
+  background-color: #584bad;
+}
+.carousel span {
+  font-weight: bold;
+  color: #eaefea;
+}
+
+.incubators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.incubator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 3px #120e2f solid;
+  padding: 1%;
+  width: 25%;
+  background-color: #d0ccd0;
+}
+.incubator h2 {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #584bad;
+}
+.incubator img {
+  margin: 5%;
+  border-radius: 5px;
+  border: 2px #120e2f solid;
+  width: 80%;
+}
+.incubator .status {
+  font-weight: bold;
+}

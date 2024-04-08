@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eaefea;
+  color: #506fce;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px #50b2c0 solid;
+  padding: 1rem;
+  width: 100%;
+  background-color: #6a5acd;
+  color: #eaefea;
+}
+.header .logo {
+  height: 5rem;
+}
+.header .navbar {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  list-style-type: none;
+}
+.header .navbar * {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #eaefea;
+}
+.header .navbar a {
+  text-decoration: none;
+}
+.header .navbar button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.main hr {
+  border: 1px solid #120e2f;
+  width: 90%;
+}
+
+.main .section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+}
+.main .section h1 {
+  margin-bottom: 2rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: auto;
+  padding: 2rem;
+  width: 100%;
+  background-color: #362a8d;
+  color: #eaefea;
+}
+.footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+.footer div ul {
+  list-style-type: none;
+  margin-top: 1rem;
+}
+.footer .contato .logo {
+  width: 6rem;
+}

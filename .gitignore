@@ -1,0 +1,2 @@
+# A linha abaixo determina que o diretório dat-acqu-ino/node_modules não será enviado ao repositório remoto
+dat-acqu-ino/node_modules

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard com ChartJS</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      canvas {
+        width: 100%;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>Dashboard com ChartJS</h1>
+      <h2>Temperatura das incubadoras</h2>
+      <canvas id="grafico1"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <script>
+      var grafico1 = document.getElementById("grafico1"); // elemento html do gráfico
+      grafico1.width = 1000; // altera a largura
+      grafico1.height = 300; // altera a altura
+      var chart1 = new Chart(grafico1.getContext("2d"), {
+        // configura um gráfico para ser exibido no elemento
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "Temperatura",
+              type: "line",
+              borderColor: ["#ffd902"],
+              backgroundColor: ["#ffe135"],
+            },
+          ],
+        },
+        options: {
+          scales: {
+            xAxes: [
+              {
+                distribution: "series",
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Temperatura",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+          animation: {
+            duration: 0,
+          },
+        },
+      });
+
+      var dadosGrafico = {}; // armazena os dados sobre o gráfico em si
+
+      function obterDados(grafico, endpoint) {
+        var http = new XMLHttpRequest();
+        http.open("GET", "http://localhost:3300/" + endpoint, false); // faz uma requisição dos dados para o servidor
+        http.send(null);
+
+        var valores = JSON.parse(http.responseText); // armazena os dados recebidos na variável "valores"
+
+        if (!(endpoint in dadosGrafico)) dadosGrafico[endpoint] = {}; // caso esse endpoint (sensor) ainda não tenha sido registrado, registra-o
+        if (!(tempo in dadosGrafico[endpoint])) { // caso não exista a contagem de tempo do gráfico, cria uma
+          dadosGrafico[endpoint].tempo = 0;
+        }
+
+        valores = valores.slice(dadosGrafico[endpoint].paginacao); // armazena os novos valores adicionados a lista
+        dadosGrafico[endpoint].paginacao = valores.length; // armazena o tamanho da lista dos dados recebidos pelo servidor
+
+        valores.forEach((valor) => { // para cada novo valor, atualiza o gráfico
+          if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) { // exibe no gráfico somente os últimos 10 registros
+            grafico.data.labels.shift(); // remove o registro mais antigo do gráfico
+            grafico.data.datasets[0].data.shift(); // remove o registro mais antigo do gráfico
+          }
+
+          grafico.data.labels.push(dadosGrafico[endpoint].tempo++); // adiciona o novo registro no gráfico
+          grafico.data.datasets[0].data.push(parseFloat(valor)); // adiciona o novo registro no gráfico
+          grafico.update(); // atualiza o gráfico
+        });
+      }
+
+      setInterval(() => {
+        // a cada 1 segundo, executa a função "obterDados()" passando o gráfico definido e o link configurado no servidor (main.js)
+        obterDados(chart1, "monitoramento");
+      }, 1000);
+    </script>
+  </body>
+</html>

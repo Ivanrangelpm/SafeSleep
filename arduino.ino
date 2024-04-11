@@ -8,7 +8,7 @@ void setup() {
 }
 //Função que será executada continuamente
 void loop() {
-  temperatura = (float) analogRead(pino)*0.49;
+  temperatura = (float) analogRead(pino)*0.49; // conversão para ºC
   Serial.println(temperatura);
   delay(500);
 }

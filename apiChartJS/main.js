@@ -24,9 +24,11 @@ async function serial(valores) {
     .promise(); // variável da conexão com o banco de dados
 
   const portas = await serialport.SerialPort.list(); // lista de portas seriais do computador
+  // console.log(portas);
 
   const portaArduino = portas.find(function (porta) {
-    return porta.vendorId == "1A86" && porta.productId == "7523";
+    return porta.manufacturer.includes("Arduino");
+    // return porta.vendorId == "2341" && porta.productId == "0043";
   }); // procura pela porta do arduino
   if (!portaArduino) {
     // emite um erro caso o arduino não tenha sido encontrado conectado na máquina
@@ -38,7 +40,7 @@ async function serial(valores) {
   }); // conexão com o arduino
   arduino.on("open", function () {
     // exibe no console uma mensagem de sucesso ao conectar com o arduino
-    console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
+    console.log(`A leitura do arduino foi iniciada na porta "${portaArduino.path}" utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
   });
   arduino.pipe(new serialport.ReadlineParser({ delimiter: "\r\n" })).on("data", async function (data) {
     // função para ler os dados enviados pela porta serial

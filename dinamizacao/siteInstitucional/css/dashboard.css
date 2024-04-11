@@ -6,22 +6,18 @@
 .main .opcoes button {
   border-radius: 10px;
   cursor: pointer;
-  width: 20%;
-  height: 100px;
+  padding: 2% 5%;
   font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
 }
 .botao-geral {
   background: rgb(131, 242, 143);
-  background: linear-gradient(0deg, rgba(145, 242, 156, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 .botao-risco {
   background: rgb(250, 135, 135);
-  background: linear-gradient(0deg, rgba(250, 135, 135, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 .botao-alertas {
   background: rgb(252, 252, 160);
-  background: linear-gradient(0deg, rgba(252, 252, 160, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 
 .main .content {

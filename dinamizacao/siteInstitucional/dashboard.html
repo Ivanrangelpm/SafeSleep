@@ -9,12 +9,14 @@
   </head>
   <body>
     <div class="header">
-      <img src="./imagens/logo.png" class="logo" />
+      <img src="./imagens/logoExtended.png" alt="logo" class="logo" />
       <ul class="navbar">
         <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
         <li><a href="./perfil.html">Perfil</a></li>
+        <li><a href="./cadastros.html">Cadastro</a></li>
+        <li><a href="./login.html">Login</a></li>
         <li><button>Sair</button></li>
       </ul>
     </div>
@@ -25,18 +27,19 @@
         <button class="botao-alertas" onclick="alertas()">Alertas</button>
       </div>
       <hr />
-      <div class="section div-select" id="divContent">
+      <div class="section">
+        <h2>Selecione a incubadora para ver informações adicionais</h2>
         <div class="selecao">
-          <h3>Selecione a incubadora para ver informações adicionais</h3>
           <div class="campo">
-            <select class="lista" id="slc_incubadora">
+            <label>Selecione a incubadora:</label>
+            <select class="lista" id="selectIncubadora">
               <option value="0" selected disabled>Selecione a incubadora</option>
             </select>
-            <button onclick="verificar()">Verificar</button>
           </div>
+          <button onclick="verificar()">Verificar</button>
         </div>
-        <div id="div_info" class="info"></div>
       </div>
+      <div id="divResponse"></div>
     </div>
     <div class="footer">
       <div class="developers">

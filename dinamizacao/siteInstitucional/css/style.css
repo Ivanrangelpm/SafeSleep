@@ -10,13 +10,13 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #eaefea;
-  color: #6080a0;
+  color: #003050;
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1%;
   width: 100%;
   background-color: #507090;
 }
@@ -42,6 +42,9 @@ body {
   border: none;
   background-color: transparent;
 }
+.header .navbar .paginaAtual {
+  color: #a0a0a0;
+}
 
 .main {
   display: flex;
@@ -49,9 +52,8 @@ body {
   align-items: center;
   width: 100%;
 }
-
 .main hr {
-  border: 1px solid #120e2f;
+  border: 1px solid #101030;
   width: 90%;
 }
 
@@ -59,11 +61,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 3%;
   width: 100%;
 }
 .main .section h1 {
-  margin-bottom: 2rem;
+  margin-bottom: 2%;
+}
+.main .section h2 {
+  margin-bottom: 2%;
 }
 
 .footer {
@@ -71,7 +76,7 @@ body {
   align-items: center;
   justify-content: space-around;
   margin-top: auto;
-  padding: 1rem;
+  padding: 1%;
   width: 100%;
   background-color: #003050;
   color: #eaefea;
@@ -80,11 +85,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: 1%;
 }
 .footer div ul {
   list-style-type: none;
-  margin-top: 1rem;
+  margin-top: 5%;
 }
 .footer .contato .logo {
   height: 10rem;

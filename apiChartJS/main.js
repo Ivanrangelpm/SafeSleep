@@ -10,7 +10,7 @@ const SERVIDOR_PORTA = 3300; // define a porta de funcionamento do servidor
 const HABILITAR_OPERACAO_INSERIR = false; // habilitar a inserção do banco de dados
 
 // o valor de uma variável pode ser uma função também:
-async function serial(valoresLm35Temperatura) {
+async function serial(valores) {
   // função assíncrona (que roda em segundo plano) para conectar o arduino e o banco de dados
 
   let poolBancoDados = mysql
@@ -25,7 +25,9 @@ async function serial(valoresLm35Temperatura) {
 
   const portas = await serialport.SerialPort.list(); // lista de portas seriais do computador
 
-  const portaArduino = portas.find((porta) => porta.vendorId == 2341 && porta.productId == 43); // procura pela porta do arduino
+  const portaArduino = portas.find(function (porta) {
+    return porta.vendorId == "1A86" && porta.productId == "7523";
+  }); // procura pela porta do arduino
   if (!portaArduino) {
     // emite um erro caso o arduino não tenha sido encontrado conectado na máquina
     throw new Error("O arduino não foi encontrado em nenhuma porta serial");
@@ -40,22 +42,23 @@ async function serial(valoresLm35Temperatura) {
   });
   arduino.pipe(new serialport.ReadlineParser({ delimiter: "\r\n" })).on("data", async function (data) {
     // função para ler os dados enviados pela porta serial
-    const valores = data.split(";"); // divide cada um dos dados em uma lista
-    const lm35Temperatura = parseFloat(valores[2]); // pega o segundo valor da lista (obs: não tenho certeza se vai funcionar com este valor)
+    const fData = parseFloat(data); // pega o segundo valor da lista (obs: não tenho certeza se vai funcionar com este valor)
 
-    valoresLm35Temperatura.push(lm35Temperatura); // adiciona à variável passada para a função um valor de temperatura
+    valores.push(fData); // adiciona à variável passada para a função um valor de temperatura
 
-    if (HABILITAR_OPERACAO_INSERIR) { // caso a inserção no banco de dados esteja habilitada, insere no banco
-      await poolBancoDados.execute("INSERT INTO medida (temperatura) VALUES (?)", [lm35Temperatura]);
-      console.log(`valores inseridos no banco: ${lm35Temperatura}`);
+    if (HABILITAR_OPERACAO_INSERIR) {
+      // caso a inserção no banco de dados esteja habilitada, insere no banco
+      await poolBancoDados.execute("INSERT INTO medida (temperatura) VALUES (?)", [fData]);
+      console.log(`valores inseridos no banco: ${fData}`);
     }
   });
-  arduino.on("error", function (mensagem) { // caso ocorra algum erro sobre a conexão com o arduino, exibe o mesmo
-    console.error(`Erro no arduino (Mensagem: ${mensagem}`);
+  arduino.on("error", function (mensagem) {
+    // caso ocorra algum erro sobre a conexão com o arduino, exibe o mesmo
+    console.error(`Erro no arduino: ${mensagem}`);
   });
 }
 
-function servidor(valoresLm35Temperatura) {
+function servidor(valores) {
   // função para rodar o servidor da aplicação express (o site)
   const app = express(); // cria uma aplicação express
   app.use(function (request, response, next) {
@@ -66,16 +69,16 @@ function servidor(valoresLm35Temperatura) {
   });
   app.listen(SERVIDOR_PORTA, function () {
     // inicia o servidor na porta definida
-    console.log(`API executada com sucesso na porta ${SERVIDOR_PORTA}`); // exibe no console uma mensagem de sucesso ao iniciar o servidor
+    console.log(`Servidor aberto na porta ${SERVIDOR_PORTA} (link: "127.0.0.1:3300")`); // exibe no console uma mensagem de sucesso ao iniciar o servidor
   });
   app.get("/monitoramento", function (request, response) {
     // caso o endereço "localhost:3300/monitoramento" seja acessado, envia os valores da temperatura
-    return response.json(valoresLm35Temperatura);
+    return response.json(valores);
   });
 }
 
 (async function () {
-  const valoresLm35Temperatura = [];
-  await serial(valoresLm35Temperatura);
-  servidor(valoresLm35Temperatura);
+  const valores = [];
+  await serial(valores);
+  servidor(valores);
 })(); // função para executar as outras funções, o código "(function () {})()" serve para executar a função instantâneamente, sem nomeá-la

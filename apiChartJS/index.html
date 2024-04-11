@@ -86,22 +86,30 @@
       var dadosGrafico = {}; // armazena os dados sobre o gráfico em si
 
       function obterDados(grafico, endpoint) {
-        var http = new XMLHttpRequest();
-        http.open("GET", "http://localhost:3300/" + endpoint, false); // faz uma requisição dos dados para o servidor
-        http.send(null);
-
-        var valores = JSON.parse(http.responseText); // armazena os dados recebidos na variável "valores"
+        var valores; // armazena os dados posteriormente recebidos pelo servidor na variável "valores"
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          valores = JSON.parse(this.responseText);
+        };
+        xhr.open("GET", "http://localhost:3300/" + endpoint, false); // faz uma requisição dos dados para o servidor
+        xhr.send(null);
 
         if (!(endpoint in dadosGrafico)) dadosGrafico[endpoint] = {}; // caso esse endpoint (sensor) ainda não tenha sido registrado, registra-o
-        if (!(tempo in dadosGrafico[endpoint])) { // caso não exista a contagem de tempo do gráfico, cria uma
+        if (!("tempo" in dadosGrafico[endpoint])) {
+          // caso não exista a contagem de tempo do gráfico, cria uma
           dadosGrafico[endpoint].tempo = 0;
         }
-
+        if (!("paginacao" in dadosGrafico[endpoint])) {
+          // caso não exista o tamanho da lista do gráfico, cria uma
+          dadosGrafico[endpoint].paginacao = 0;
+        }
         valores = valores.slice(dadosGrafico[endpoint].paginacao); // armazena os novos valores adicionados a lista
         dadosGrafico[endpoint].paginacao = valores.length; // armazena o tamanho da lista dos dados recebidos pelo servidor
 
-        valores.forEach((valor) => { // para cada novo valor, atualiza o gráfico
-          if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) { // exibe no gráfico somente os últimos 10 registros
+        valores.forEach(function (valor) {
+          // para cada novo valor, atualiza o gráfico
+          if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+            // exibe no gráfico somente os últimos 10 registros
             grafico.data.labels.shift(); // remove o registro mais antigo do gráfico
             grafico.data.datasets[0].data.shift(); // remove o registro mais antigo do gráfico
           }

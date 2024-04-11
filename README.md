@@ -2,7 +2,7 @@
 
 ## Monitoramento da temperatura das incubadoras de bebês em hospitais.
 
-**negrito**
+**negrito** <br>
 *italico*
 
 - Tópico 1

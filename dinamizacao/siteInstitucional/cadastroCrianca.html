@@ -7,23 +7,32 @@
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/cadastro.css" rel="stylesheet" />
   </head>
+
   <body>
     <div class="header">
       <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
         <li><a class="paginaAtual" href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./cadastro.html">Cadastro</a></li>
-        <li><a href="./login.html">Login</a></li>
+        <li><a href="./gerenciar.html">Gerenciar</a></li>
+        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><button>Sair</button></li>
       </ul>
     </div>
     <div class="caixa">
-      <h1 class="h1">Digite seu Usuário e sua Senha:</h1>
+      <h1 class="h1">CADASTRO (Criança):</h1>
       <br /><br />
-      <span class="span">Usuário:</span><input type="text" id="id_login" /> <span class="span">Senha:</span><input type="text" id="id_senha" /><br /><br />
-      <button class="botao" onclick="autenticar()">Autenticar</button><br />
-      <div class="mensagem" id="div_mensagem"></div>
-      <div class="mensagem2" id="div_mensagem2"></div>
+      <span class="span">Nome: </span><input type="text" id="input_nome" /> <span class="span">Peso (gramas): </span><input type="number" id="input_peso" /><br /><br />
+      <span class="span">Semanas: </span><input type="number" id="input_dias" /> <span class="span">Nome do responsavel: </span><input type="text" id="input_responsavel" /><br />
+      <br />
+      <span class="span">Telefone do responsavel: </span><input type="text" id="iunput_telefone" /> <span class="span">É prematura? </span>
+      <select id="select_prematura">
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+      </select>
+      <br /><br />
+      <button class="botao" onclick="cadastrar()">CADASTRAR</button><br />
+      <div class="mensagem" id="div_mensagem_cadastro"></div>
     </div>
     <div class="footer">
       <div class="developers">
@@ -50,23 +59,13 @@
   </body>
 </html>
 <script>
-  var verificar = 0;
-  var tentativas = 3;
-  function autenticar() {
-    var login = id_login.value;
-    var senha = id_senha.value;
-    if (verificar == 0 || verificar == 1 || verificar == 2) {
-      if (login == "Brandão" && senha == "12345") {
-        div_mensagem.innerHTML = `Usuário autenticado`;
-      } else {
-        verificar = verificar + 1;
-        tentativas = tentativas - 1;
-        div_mensagem.innerHTML = `Falha na autenticação `;
-        alert(`Falha na autenticação, você ainda tem ${tentativas} tentativas.`);
-      }
-    } else {
-      div_mensagem.innerHTML = ``;
-      div_mensagem2.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`;
-    }
+  function cadastrar() {
+    var nome = input_nome.value;
+    var peso = Number(input_peso.value);
+    var semanas = input_semanas.value;
+    var responsavel = input_responsavel.value;
+    var telefone = input_telefone.value;
+    var prematura = select_prematura.value;
+    div_mensagem_cadastro.innerHTML = `Criança cadastrada`;
   }
 </script>

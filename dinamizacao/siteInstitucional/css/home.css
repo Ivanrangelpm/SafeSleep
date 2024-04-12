@@ -2,6 +2,9 @@
   font-size: 2.5rem;
 }
 
+.section .logo {
+  width: 20rem;
+}
 .introduction {
   display: flex;
   align-items: center;
@@ -34,7 +37,7 @@
 .tecnologies {
   display: flex;
   flex-wrap: wrap;
-  gap: 5%;
+  gap: 5%; /* espaço fixo entre 2 itens */
   justify-content: space-evenly;
   width: 100%;
 }

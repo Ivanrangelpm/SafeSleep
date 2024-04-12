@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* o padding e a borda são contados no tamanho definido */
   margin: 0;
   padding: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -9,8 +9,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh; /* altura mínima */
   background-color: #eaefea;
-  color: #003050;
+  color: #101030;
 }
 .header {
   display: flex;
@@ -25,7 +26,7 @@ body {
 }
 .header .navbar {
   display: flex;
-  gap: 2rem;
+  gap: 2rem; /* espaço fixo entre 2 itens */
   align-items: center;
   list-style-type: none;
 }
@@ -36,6 +37,9 @@ body {
 }
 .header .navbar a {
   text-decoration: none;
+}
+.header .navbar a:hover {
+  text-decoration: underline;
 }
 .header .navbar button {
   cursor: pointer;
@@ -55,6 +59,17 @@ body {
 .main hr {
   border: 1px solid #101030;
   width: 90%;
+}
+.main button {
+  transition: transform 0.2s, background-color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
+  cursor: pointer;
+  border: none;
+  font-family: monospace;
+  font-weight: bold;
+  color: #101030;
+}
+.main button:hover { /* estilização somente para quando o mouse estiver em cima do elemento */
+  transform: scale(110%, 110%); /* altera o tamanho com base no tamanho atual */
 }
 
 .main .section {
@@ -91,6 +106,6 @@ body {
   list-style-type: none;
   margin-top: 5%;
 }
-.footer .contato .logo {
+.footer .contact .logo {
   height: 10rem;
 }

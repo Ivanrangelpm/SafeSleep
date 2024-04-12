@@ -1,46 +1,53 @@
 .main .opcoes {
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: flex;
+  gap: 5%; /* espaço fixo entre 2 itens */
+  justify-content: center;
   width: 100%;
 }
 .main .opcoes button {
   border-radius: 10px;
-  cursor: pointer;
-  padding: 2% 5%;
+  padding: 1%;
   font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .botao-geral {
-  background: rgb(131, 242, 143);
+  background-color: #70e070;
+}
+.botao-geral:hover {
+  background-color: #60d060;
 }
 .botao-risco {
-  background: rgb(250, 135, 135);
+  background-color: #e07070;
+}
+.botao-risco:hover {
+  background-color: #d06060;
 }
 .botao-alertas {
-  background: rgb(252, 252, 160);
+  background-color: #e0e070;
+}
+.botao-alertas:hover {
+  background-color: #d0d060;
 }
 
-.main .content {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-}
-.main .content .selecao {
+.main .selecao {
   display: flex;
   flex-direction: column;
-  margin: 5%;
+  gap: 1rem;
+  align-items: center;
 }
-.main .content .selecao .campo {
+.main .selecao label {
   display: flex;
+  gap: 0.5rem;
   justify-content: center;
 }
-.main .content .selecao .campo .lista {
+.main .selecao label select {
+  cursor: pointer;
   font-size: 1rem;
 }
-.main .content .selecao .campo button {
-  margin-left: 2%;
-  font-size: 1rem;
+
+#divResponse {
+  gap: 1rem;
 }
-.main .content .info {
-  height: 40%;
+.main .row {
+  flex-direction: row;
+  justify-content: space-evenly;
 }

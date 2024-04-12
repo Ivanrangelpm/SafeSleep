@@ -1,107 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/home.css" rel="stylesheet" />
+    <title>SafeSleep</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="./css/style.css" rel="stylesheet" />
-  <link href="./css/home.css" rel="stylesheet" />
-  <title>SafeSleep</title>
-</head>
-
-<body>
-  <div class="header">
-    <img src="./imagens/logoExtended.png" alt="logo" class="logo" />
-    <ul class="navbar">
-      <li><a class="paginaAtual" href="index.html">Início</a></li>
-      <li><a href="./sobreNos.html">Sobre Nós</a></li>
-      <li><a href="./dashboard.html">Incubadoras</a></li>
-      <li><a href="./perfil.html">Perfil</a></li>
-      <li><a href="./cadastros.html">Cadastro</a></li>
-      <li><a href="./login.html">Login</a></li>
-      <li><button>Sair</button></li>
-    </ul>
-  </div>
-  <div class="main">
-    <div class="carousel">
-      <span>Carrossel de Imagens</span>
-    </div>
-    <div class="section">
-      <img src="imagens/logoBlue.png" alt="logo" class="logo" />
-      <div class="introduction">
-        <p>
-          O projeto tem como objetivo desenvolver um sistema de monitoramento
-          da temperatura de incubadoras para recém-nascidos prematuros, com o
-          uso de um sensor. Este problema foi selecionado para o projeto,
-          pois, segundo os dados obtidos da FIOCRUZ, a queda de 1°C da
-          temperatura corporal em um recém-nascido ocasiona em 28% de aumento
-          na taxa de óbitos.
-        </p>
-        <img
-          src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3433755:1698003286/shutterstock_629118866%20(1).jpg?f=16x9&$p$f=8f8be62"
-          alt="imagemIncubadora" />
-      </div>
-    </div>
-    <hr />
-    <div class="section">
-      <h1>Tecnologias</h1>
-      <div class="tecnologies">
-        <img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" alt="semImg" class="imgIcone" />
-        <img src="https://cdn-icons-png.flaticon.com/512/919/919826.png" alt="semImg" class="imgIcone" />
-        <img src="https://cdn-icons-png.flaticon.com/512/919/919828.png" alt="semImg" class="imgIcone" />
-      </div>
-    </div>
-    <hr />
-    <div class="section">
-      <h1>Vantagens</h1>
-      <div class="advantages">
-        <div class="card">
-          <h2>Titulo</h2>
-          <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png"
-            alt="imagemIncubadora" />
-          <p>Descição Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque rerum similique voluptate autem
-            ipsam, fuga aperiam dicta aliquid dolorum. Officia quas nam quia quasi culpa tenetur consequatur, odio
-            labore ipsa?</p>
-        </div>
-        <div class="card">
-          <h2>Titulo</h2>
-          <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png"
-            alt="imagemIncubadora" />
-          <p>Descição Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque rerum similique voluptate autem
-            ipsam, fuga aperiam dicta aliquid dolorum. Officia quas nam quia quasi culpa tenetur consequatur, odio
-            labore ipsa?</p>
-        </div>
-        <div class="card">
-          <h2>Titulo</h2>
-          <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png"
-            alt="imagemIncubadora" />
-          <p>Descição</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">
-    <div class="developers">
-      <h3>Desenvolvedores da SafeSleep:</h3>
-      <ul>
-        <li>Bruno Yuji Takahashi</li>
-        <li>Diego Crispim dos Santos Campos</li>
-        <li>Fabrício Prudente Ferreira</li>
-        <li>Ivan Rangel Pestana Marcolin</li>
-        <li>Lucas Tetsuo Nagasse</li>
-        <li>Matheus Yukio Makiyama</li>
-        <li>Renan Rocha Pacanaro</li>
+  <body>
+    <div class="header">
+      <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
+      <ul class="navbar">
+        <li><a class="paginaAtual" href="index.html">Início</a></li>
+        <li><a href="./sobreNos.html">Sobre Nós</a></li>
+        <li><a href="./gerenciar.html">Gerenciar</a></li>
+        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><a href="./cadastro.html">Cadastro</a></li>
+        <li><a href="./login.html">Login</a></li>
+        <li><button>Sair</button></li>
       </ul>
     </div>
-    <div class="contato">
-      <h3>Contato:</h3>
-      <ul>
-        <li>safesleep@gmail.com</li>
-        <li>+55 11 99999-9999</li>
-      </ul>
-      <img src="./imagens/logo.png" class="logo" />
+    <div class="main">
+      <div class="carousel">
+        <span>Carrossel de Imagens</span>
+      </div>
+      <div class="section">
+        <img src="imagens/logoBlue.png" alt="logo" class="logo" />
+        <div class="introduction">
+          <p>O projeto tem como objetivo desenvolver um sistema de monitoramento da temperatura de incubadoras para recém-nascidos prematuros, com o uso de um sensor. Este problema foi selecionado para o projeto, pois, segundo os dados obtidos da FIOCRUZ, a queda de 1°C da temperatura corporal em um recém-nascido ocasiona em 28% de aumento na taxa de óbitos.</p>
+          <img src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3433755:1698003286/shutterstock_629118866%20(1).jpg?f=16x9&$p$f=8f8be62" alt="imagemIncubadora" />
+        </div>
+      </div>
+      <hr />
+      <div class="section">
+        <h1>Tecnologias</h1>
+        <div class="tecnologies">
+          <img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" alt="semImg" class="imgIcone" />
+          <img src="https://cdn-icons-png.flaticon.com/512/919/919826.png" alt="semImg" class="imgIcone" />
+          <img src="https://cdn-icons-png.flaticon.com/512/919/919828.png" alt="semImg" class="imgIcone" />
+        </div>
+      </div>
+      <hr />
+      <div class="section">
+        <h1>Vantagens</h1>
+        <div class="advantages">
+          <div class="card">
+            <h2>Titulo</h2>
+            <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png" alt="imagemIncubadora" />
+            <p>Descição Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque rerum similique voluptate autem ipsam, fuga aperiam dicta aliquid dolorum. Officia quas nam quia quasi culpa tenetur consequatur, odio labore ipsa?</p>
+          </div>
+          <div class="card">
+            <h2>Titulo</h2>
+            <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png" alt="imagemIncubadora" />
+            <p>Descição Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque rerum similique voluptate autem ipsam, fuga aperiam dicta aliquid dolorum. Officia quas nam quia quasi culpa tenetur consequatur, odio labore ipsa?</p>
+          </div>
+          <div class="card">
+            <h2>Titulo</h2>
+            <img src="https://static-00.iconduck.com/assets.00/placeholder-icon-2048x2048-48kucnce.png" alt="imagemIncubadora" />
+            <p>Descição</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
-
+    <div class="footer">
+      <div class="developers">
+        <h3>Desenvolvedores da SafeSleep:</h3>
+        <ul>
+          <li>Bruno Yuji Takahashi</li>
+          <li>Diego Crispim dos Santos Campos</li>
+          <li>Fabrício Prudente Ferreira</li>
+          <li>Ivan Rangel Pestana Marcolin</li>
+          <li>Lucas Tetsuo Nagasse</li>
+          <li>Matheus Yukio Makiyama</li>
+          <li>Renan Rocha Pacanaro</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Contato:</h3>
+        <ul>
+          <li>safesleep@gmail.com</li>
+          <li>+55 11 99999-9999</li>
+        </ul>
+        <img src="./imagens/logo.png" class="logo" />
+      </div>
+    </div>
+  </body>
 </html>

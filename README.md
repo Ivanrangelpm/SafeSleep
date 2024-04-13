@@ -4,6 +4,10 @@
 O projeto tem como objetivo desenvolver um sistema de **monitoramento** da temperatura de incubadoras para recém-nascidos prematuros, através do uso de um sensor (*arduíno*), visando manter os bebês seguros. <br>Este problema foi selecionado para o projeto, pois, segundo os dados obtidos da *FIOCRUZ*, a queda de **1°C** da temperatura corporal em um recém-nascido ocasiona **28%** de aumento na taxa de óbitos.
 
 
+## Principal Meta
+### Diminuir mortalidade de bebês prematuros em até **28%**.
+
+
 ### Objetivo
 Ao final do projeto, é esperado como resultado uma solução, acoplada a incubadora em que o recém-nascido esteja, que utiliza o sensor de temperatura. A solução indicará ao médico responsável os níveis de temperatura das incubadoras de recém-nascidos e com tais dados adquiridos gerar gráficos em uma página web e mostrá-las para os clientes.
 
@@ -15,10 +19,21 @@ Ao final do projeto, é esperado como resultado uma solução, acoplada a incuba
 - Alertar os usuários caso haja uma alteração de temperatura.
 
 
-**negrito** <br>
-*italico*
+### Ferramentas
+~~~html
+<h1>Utilizamos HTML para desenvolvimento da aplicação web...</h1>
+~~~
 
-~~~linguagem...
+~~~css
+h1 {
+    font-size: "Para design, usamos a linguagem CSS..." 
+}
+~~~
+
+~~~JavaScript
+function SafeSleep() {
+    var funcionalidade = "Para todas as funcionalidades do projeto, utilizamos o JavaScript"
+}
 ~~~
 
 coluna | coluna2 | coluna 3 

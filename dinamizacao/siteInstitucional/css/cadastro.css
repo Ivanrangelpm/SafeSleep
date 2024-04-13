@@ -1,66 +1,14 @@
-
- .container{
-     display: flex;
-     width: 80%;
-     margin: auto;        
+.main .cadastro-hospital {
+  gap: 1rem;
+  border-radius: 5px;
+  padding: 2rem;
+  width: auto;
 }
- .titulo{
-      color: #6a9eda;
+.main .cadastro-hospital .forms {
+  display: flex;
+  gap: 1rem;
 }
- .h1{
-    top: 10%;
-    left: 30%;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
- }
-  .caixa{
-    /* position: absolute; */
-    top: 30%;
-    left: 30%;
-    width: 800px;
-    height: 40%;
-    background-color: #b2dafa;
-    border: 5px solid black;
-    border-radius: 30px;
-    margin-top: 10%;
-    padding: 50px;
+.cadastro-hospital button {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
-  .span{
-    margin-left: 10%;
-    margin-right: 10px;
-    font-weight: bold; 
-    font-family: 'Times New Roman', Times, serif
-}
- .botao{
-    border-radius: 10px;
-    margin-left: 40%;
-    margin-top: 5%;
-    font-size: medium;
-    font-weight: bold;
-}
- .mensagem{
-    display: flex;
-    margin-left: 34%;
-    margin-top: 5%;
-    align-items: center;
-    font-weight: bold;
- }
-  #div_mensagem2{
-    display: flex;
-    margin-left: 7%;
-    margin-top: 2%;
-    align-items: center;
-    font-weight: bold;
- }
-  #div_mensagem_cadastro{
-    margin-left: 37%;
-    margin-top: 5%;
-    align-items: center;
-    font-weight: bold;
-  }
-  #span2{
-    margin-left: 20%;
-    margin-right: 10px;
-    font-weight: bold; 
-    font-family: 'Times New Roman', Times, serif
-  }

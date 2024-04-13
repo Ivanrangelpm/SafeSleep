@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SafeSleep | Login</title>
     <link href="./css/style.css" rel="stylesheet" />
-    <link href="./css/cadastro.css" rel="stylesheet" />
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a class="paginaAtual" href="index.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a href="./cadastro.html">Cadastro</a></li>
-        <li><a href="./login.html">Login</a></li>
+        <li><a class="paginaAtual" href="./login.html">Login</a></li>
       </ul>
     </div>
-    <div class="caixa">
-      <h1 class="h1">Digite seu Usuário e sua Senha:</h1>
-      <br /><br />
-      <span class="span">Usuário:</span><input type="text" id="id_login" /> <span class="span">Senha:</span><input type="text" id="id_senha" /><br /><br />
-      <button class="botao" onclick="autenticar()">Autenticar</button><br />
-      <div class="mensagem" id="div_mensagem"></div>
-      <div class="mensagem2" id="div_mensagem2"></div>
+    <div class="main">
+      <div class="form">
+        <h1>Login</h1>
+        <div class="inputs">
+          <label>
+            <span class="span">Usuário:</span>
+            <input type="text" id="inputLogin" />
+          </label>
+          <label>
+            <span class="span">Senha:</span>
+            <input type="text" id="inputPassword" />
+          </label>
+        </div>
+        <span id="spanResponse" class="error"></span>
+        <button class="botao" onclick="autenticar()">Autenticar</button>
+      </div>
     </div>
     <div class="footer">
       <div class="developers">
@@ -44,7 +52,7 @@
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./imagens/logo.png" class="logo" />
+        <img src="./images/logo.png" class="logo" />
       </div>
     </div>
   </body>

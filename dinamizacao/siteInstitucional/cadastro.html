@@ -1,76 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SafeSleep | Cadastro</title>
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/cadastro.css" rel="stylesheet" />
   </head>
 
   <body>
     <div class="header">
-      <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a class="paginaAtual" href="index.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./cadastro.html">Cadastro</a></li>
+        <li><a class="paginaAtual" href="./cadastro.html">Cadastro</a></li>
         <li><a href="./login.html">Login</a></li>
       </ul>
     </div>
     <div class="main">
-      <div class="formulario">
-        <h1 class="h1">Cadastre seu hospital:</h1>
-        <label>
-          <span>Razão social:</span>
-          <input type="text" id="inputRazao" />
-        </label>
-        <label>
-          <span>Nome fantasia:</span>
-          <input type="text" id="inputFantasia" />
-        </label>
-        <label>
-          <span>CNPJ:</span>
-          <input type="text" id="inputCnpj" />
-        </label>
-        <label>
-          <span>Email:</span>
-          <input type="text" id="inputEmail" />
-        </label>
-        <label>
-          <span>Telefone:</span>
-          <input type="text" id="inputTelefone" />
-        </label>
-        <label>
-          <span>Logradouro:</span>
-          <input type="text" id="inputLogradouro" />
-        </label>
+      <div class="section cadastro-hospital">
+        <div class="forms">
+          <div class="form">
+            <h1>Cadastre seu hospital</h1>
+            <div class="inputs">
+              <label>
+                <span>Razão social:</span>
+                <input type="text" id="inputRazao" />
+              </label>
+              <label>
+                <span>Nome fantasia:</span>
+                <input type="text" id="inputFantasia" />
+              </label>
+              <label>
+                <span>CNPJ:</span>
+                <input type="text" id="inputCnpj" />
+              </label>
+              <label>
+                <span>Email:</span>
+                <input type="text" id="inputEmail" />
+              </label>
+              <label>
+                <span>Telefone:</span>
+                <input type="text" id="inputTelefone" />
+              </label>
+              <label>
+                <span>Logradouro:</span>
+                <input type="text" id="inputLogradouro" />
+              </label>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastre-se</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputNome" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputCpf" />
+              </label>
+              <label>
+                <span>Senha:</span>
+                <input type="password" id="inputSenha" />
+              </label>
+              <label>
+                <span>Confirme sua senha:</span>
+                <input type="password" id="inputConfirmarSenha" />
+              </label>
+            </div>
+          </div>
+        </div>
+        <span id="spanResponse" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
+        <button onclick="cadastrar()">Cadastrar</button>
       </div>
-      <div class="formulario">
-        <h1 class="h1">Cadastre-se:</h1>
-        <label>
-          <span>Nome Completo:</span>
-          <input type="text" id="inputNome" />
-        </label>
-        <label>
-          <span>CPF:</span>
-          <input type="text" id="inputCpf" />
-        </label>
-        <label>
-          <span>Cargo (diretor ou médico):</span>
-          <input type="text" id="inputCargo" />
-        </label>
-        <label>
-          <span>Senha:</span>
-          <input type="password" id="inputSenha" />
-        </label>
-        <label>
-          <span>Confirme sua senha:</span>
-          <input type="password" id="inputConfirmarSenha" />
-        </label>
-      </div>
-      <span id="mensagem">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
-      <button onclick="cadastrar()">Cadastrar</button>
     </div>
     <div class="footer">
       <div class="developers">
@@ -91,7 +95,7 @@
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./imagens/logo.png" class="logo" />
+        <img src="./images/logo.png" class="logo" />
       </div>
     </div>
   </body>

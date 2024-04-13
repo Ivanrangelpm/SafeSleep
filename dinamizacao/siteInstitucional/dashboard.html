@@ -9,12 +9,12 @@
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a class="paginaAtual" href="index.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a href="./gerenciar.html">Gerenciar</a></li>
-        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
         <li><button>Sair</button></li>
       </ul>
     </div>
@@ -22,9 +22,9 @@
       <div class="section">
         <h1>Selecione as opções desejadas:</h1>
         <div class="opcoes">
-          <button class="botao-geral" onclick="btnGeral()">Geral</button>
-          <button class="botao-risco" onclick="btnRisco()">Em risco</button>
-          <button class="botao-alertas" onclick="btnAlertas()">Alertas</button>
+          <button id="botaoGeral" onclick="btnGeral()">Geral</button>
+          <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
+          <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./imagens/logo.png" class="logo" />
+        <img src="./images/logo.png" class="logo" />
       </div>
     </div>
   </body>
@@ -58,9 +58,9 @@
   var mainContent = `<div class="section">
   <h1>Selecione as opções desejadas:</h1>
   <div class="opcoes">
-    <button class="botao-geral" onclick="btnGeral()">Geral</button>
-    <button class="botao-risco" onclick="btnRisco()">Em risco</button>
-    <button class="botao-alertas" onclick="btnAlertas()">Alertas</button>
+    <button id="botaoGeral" onclick="btnGeral()">Geral</button>
+    <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
+    <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
   </div>
 </div>
 <hr />`;
@@ -161,7 +161,7 @@
       var tempo = 14;
       var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
     }
-    divResponse.innerHTML = `<p>Peso: ${peso} KG || Tempo de uso da incubadora: ${tempo} dias</p>
+    divResponse.innerHTML = `<h2>Incubadora ${incubadora}</h2><p> Peso: ${peso} KG || Tempo de uso da incubadora: ${tempo} dias</p>
 <img src="${img}" alt="gráfico">`;
   }
 </script>

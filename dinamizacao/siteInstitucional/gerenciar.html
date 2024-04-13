@@ -1,32 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SafeSleep | Gerenciar</title>
     <link href="./css/style.css" rel="stylesheet" />
-    <link href="./css/cadastro.css" rel="stylesheet" />
+    <link href="./css/gerenciar.css" rel="stylesheet" />
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./imagens/logoExtended.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a class="paginaAtual" href="index.html">Início</a></li>
+        <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./gerenciar.html">Gerenciar</a></li>
+        <li><a class="paginaAtual" href="./gerenciar.html">Gerenciar</a></li>
         <li><a href="./dashboard.html">Incubadoras</a></li>
         <li><button>Sair</button></li>
       </ul>
     </div>
-    <div class="caixa">
-      <h1 class="h1">CADASTRO (Médico Resposavel):</h1>
-      <br /><br />
-      <span class="span">Nome Completo: </span><input type="text" id="input_nome" /> <span class="span">CPF: </span><input type="text" id="input_cpf" /><br /><br />
-      <span class="span">Licença Médica: </span><input type="text" id="input_licenca" /> <span class="span">Telefone: </span><input type="text" id="input_telefone" /><br /><br />
-      <span class="span">Senha: </span><input type="text" id="input_senha" /> <span class="span">Confirme sua senha: </span><input type="text" id="input_conf_senha" /><br /><br />
-      <span id="span2">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
-      <button class="botao" onclick="cadastrar()">CADASTRAR</button><br />
-      <div class="mensagem" id="div_mensagem_cadastro"></div>
+    <div class="main">
+      <div class="section">
+        <h1>Cadastros</h1>
+        <div class="cadastros">
+          <div class="form">
+            <h1>Cadastro de funcionário</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputFuncionarioNome" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputFuncionarioCpf" />
+              </label>
+              <label>
+                <span>Senha:</span>
+                <input type="password" id="inputFuncionarioSenha" />
+              </label>
+              <label>
+                <span>Confirme sua senha:</span>
+                <input type="password" id="inputFuncionarioConfirmarSenha" />
+              </label>
+            </div>
+            <span id="spanResponseFuncionario" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
+            <button onclick="cadastrarFuncionario()">Cadastrar</button>
+          </div>
+          <div class="form">
+            <h1>Cadastro de incubadoras</h1>
+            <div class="inputs">
+              <label>
+                <span>Código de série:</span>
+                <input type="text" id="inputIncubadoraCodigo" />
+              </label>
+              <label>
+                <span>Modelo:</span>
+                <input type="text" id="inputIncubadoraModelo" />
+              </label>
+              <span id="spanResponseIncubadora" class="error"></span>
+              <button onclick="cadastrarIncubadora()">Cadastrar</button>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastro do responsável</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputResponsavelNome" />
+              </label>
+              <label>
+                <span>Apelido:</span>
+                <input type="text" id="inputResponsavelApelido" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputResponsavelCpf" />
+              </label>
+              <label>
+                <span>Email:</span>
+                <input type="text" id="inputResponsavelEmail" />
+              </label>
+              <label>
+                <span>Telefone:</span>
+                <input type="text" id="inputResponsavelTelefone" />
+              </label>
+              <label>
+                <span>Parentesco:</span>
+                <input type="text" id="inputResponsavelParentesco" />
+              </label>
+              <span id="spanResponseResponsavel" class="error"></span>
+              <button onclick="cadastrarResponsavel()">Cadastrar</button>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastro do bebê</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputBebeNome" />
+              </label>
+              <label>
+                <span>Responsável:</span>
+                <input type="text" id="inputBebeResponsavel" />
+              </label>
+              <label>
+                <span>Código da incubadora:</span>
+                <input type="text" id="inputBebeIncubadora" />
+              </label>
+              <label>
+                <span>Data de nascimento:</span>
+                <input type="text" id="inputBebeNasc" />
+              </label>
+              <label>
+                <span>Sexo:</span>
+                <select id="selectBebeSexo">
+                  <option disabled selected>Selecione</option>
+                  <option>Feminino</option>
+                  <option>Masculino</option>
+                </select>
+              </label>
+              <label>
+                <span>Prematuridade</span>
+                <select id="selectBebePrematura">
+                  <option disabled selected>Selecione</option>
+                  <option value="0">Não</option>
+                  <option value="1">Sim</option>
+                </select>
+              </label>
+              <span id="spanResponseBebe" class="error"></span>
+              <button onclick="cadastrarBebe()">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer">
       <div class="developers">
@@ -47,7 +152,7 @@
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./imagens/logo.png" class="logo" />
+        <img src="./images/logo.png" class="logo" />
       </div>
     </div>
   </body>

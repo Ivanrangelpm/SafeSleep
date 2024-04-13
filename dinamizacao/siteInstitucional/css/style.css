@@ -1,3 +1,16 @@
+/*
+cores:
+  #101030 black, font
+  #30a0a0 carousel
+  #003050 footer
+  #507090 header, card-hover
+  #6080a0 card-border
+  #70e070 button
+  #60d060 button-hover
+  #eaefea body-background
+  #f0f5f0 card
+*/
+
 * {
   box-sizing: border-box; /* o padding e a borda são contados no tamanho definido */
   margin: 0;
@@ -13,6 +26,7 @@ body {
   background-color: #eaefea;
   color: #101030;
 }
+
 .header {
   display: flex;
   align-items: center;
@@ -42,9 +56,13 @@ body {
   text-decoration: underline;
 }
 .header .navbar button {
+  transition: color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+.header .navbar button:hover {
+  color: #e07070;
 }
 .header .navbar .paginaAtual {
   font-weight: 100;
@@ -54,29 +72,39 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  margin: 3%;
+  width: 94%;
 }
 .main hr {
+  margin: 3% 0;
   border: 1px solid #101030;
   width: 90%;
 }
 .main button {
-  transition: transform 0.2s, background-color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
+  transition: transform 0.2s, background-color 0.2s;
   cursor: pointer;
+  border-radius: 5px;
   border: none;
+  padding: 0.5rem;
   font-family: monospace;
   font-weight: bold;
   color: #101030;
+  background-color: #70e070;
 }
-.main button:hover { /* estilização somente para quando o mouse estiver em cima do elemento */
+.main button:hover {
+  /* estilização somente para quando o mouse estiver em cima do elemento */
   transform: scale(110%, 110%); /* altera o tamanho com base no tamanho atual */
+  background-color: #60d060;
+}
+.main .error {
+  font-weight: bold;
+  color: red;
 }
 
 .main .section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3%;
   width: 100%;
 }
 .main .section h1 {
@@ -84,6 +112,53 @@ body {
 }
 .main .section h2 {
   margin-bottom: 2%;
+}
+
+.main .form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  border-radius: 5px;
+  padding: 2rem;
+  border: 2px solid #101030;
+  background-color: #f0f5f0;
+}
+.main .form .inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.main .form .inputs label {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  align-items: center;
+  border-radius: 5px;
+}
+.main .form .inputs span {
+  font-weight: bold;
+  color: #101030;
+}
+.main .form .inputs input {
+  border-radius: 5px;
+  padding: 0.2rem;
+  width: 15rem;
+  color: #101030;
+}
+.main select {
+  border-radius: 5px;
+  border: 2px solid #101030;
+  padding: 0.2rem;
+  width: 15rem;
+  font-weight: bold;
+  color: #101030;
+}
+.main .form button {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .footer {

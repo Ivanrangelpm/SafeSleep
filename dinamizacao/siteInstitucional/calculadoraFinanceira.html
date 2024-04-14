@@ -11,7 +11,7 @@
     <div class="header">
         <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
         <ul class="navbar">
-          <li><a class="paginaAtual" href="index.html">Início</a></li>
+          <li><a href="index.html">Início</a></li>
           <li><a href="./sobreNos.html">Sobre Nós</a></li>
           <li><a href="./gerenciar.html">Gerenciar</a></li>
           <li><a href="./dashboard.html">Incubadoras</a></li>
@@ -62,6 +62,8 @@
         var dias = Number(input_dias.value);
         var custo = Number(input_custo.value);
         var prematuros = internados * 0.12;
+        var custoPrematuro = (custo * 9) * prematuros;
+        custo = custo + custoPrematuro;
         var morte = internados * 0.28 //28% = Médias de recem nascidos que morrem em internações com auxilio das incubadoras
         var processo = morte * 681000 //681000 = Preço médio de um processo por negligencia de monitoramento
 

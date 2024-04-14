@@ -1,0 +1,40 @@
+.titulo{
+    margin-top: 30px;
+}
+
+.caixa{
+    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    width: 730px;
+    border: 3px solid black;
+    text-align: center;
+}
+
+.botao{
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 25px;
+    height: 35px;
+    width: 150px;
+    margin: 15px;
+    background-color: #30a0a0;
+    color: white;
+    border: 2px solid #003050;
+    border-radius: 13px;
+}
+
+.btnDiv{
+    height: 40px;
+    margin-bottom: 5px;
+    width: 230px;
+
+}
+
+input{
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+

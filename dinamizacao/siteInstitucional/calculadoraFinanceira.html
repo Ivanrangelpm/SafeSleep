@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeSleep | Calculadora</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculadora.css">
+</head>
+<body>
+    <div class="header">
+        <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+        <ul class="navbar">
+          <li><a class="paginaAtual" href="index.html">Início</a></li>
+          <li><a href="./sobreNos.html">Sobre Nós</a></li>
+          <li><a href="./gerenciar.html">Gerenciar</a></li>
+          <li><a href="./dashboard.html">Incubadoras</a></li>
+          <li><a href="./cadastro.html">Cadastro</a></li>
+          <li><a href="./login.html">Login</a></li>
+          <li><button>Sair</button></li>
+        </ul>
+    </div>
+    <h1 class="titulo">Calculadora Financeira </h1> 
+    <div class="caixa">
+        <div>
+            <h3>Insira os dados abaixo para verificar os custos relacionados ao monitoramento inadequado da temperatura nas incubadoras</h3> <br>
+            Quantidade de bebês internados por mês: <br> <input type="number" id="input_internados"> <br>
+            Média de dias internados por mês: <br><input type="number" id="input_dias"> <br>
+            Custo diário para o hospital (por recém-nascido): <br> <input type="number" id="input_custo"> <br>
+            <button class="botao" onclick="calcular()">Calcular</button> <br>
+            <div id="div_mensagem"></div><br>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="developers">
+          <h3>Desenvolvedores da SafeSleep:</h3>
+          <ul>
+            <li>Bruno Yuji Takahashi</li>
+            <li>Diego Crispim dos Santos Campos</li>
+            <li>Fabrício Prudente Ferreira</li>
+            <li>Ivan Rangel Pestana Marcolin</li>
+            <li>Lucas Tetsuo Nagasse</li>
+            <li>Matheus Yukio Makiyama</li>
+            <li>Renan Rocha Pacanaro</li>
+          </ul>
+        </div>
+        <div class="contact">
+          <h3>Contato:</h3>
+          <ul>
+            <li>safesleep@gmail.com</li>
+            <li>+55 11 99999-9999</li>
+          </ul>
+          <img src="./images/logo.png" class="logo" />
+        </div>
+      </div>
+</body>
+</html>
+
+<script>
+    function calcular() {
+        var internados = Number(input_internados.value);
+        var dias = Number(input_dias.value);
+        var custo = Number(input_custo.value);
+        var prematuros = internados * 0.12;
+        var morte = internados * 0.28 //28% = Médias de recem nascidos que morrem em internações com auxilio das incubadoras
+        var processo = morte * 681000 //681000 = Preço médio de um processo por negligencia de monitoramento
+
+        if (internados <= 0 || dias <= 0 || custo <= 0) {
+            alert("Os valores inseridos não podem ser negativos ou nulos.");
+            limpar();
+        } else {
+            var custoDiario = (internados * custo).toFixed(2);
+            var custoMensal = (30 * custoDiario).toFixed(2);
+            var custoAnual = (custoMensal * 12).toFixed(2);
+            var monit_inadeq = (internados * 0.16).toFixed(2);
+    
+            //desconto dado por conta dos bebes que não precisarão de cuidados extremos por conta da temperatura e pela radução de mão de obra no monitoramento do bebê
+    
+            var reducaoDiaria = (monit_inadeq * custo).toFixed(2);
+            var reducaoMensal = (dias * reducaoDiaria).toFixed(2);
+            var reducaoAnual = (reducaoMensal * 12).toFixed(2);
+    
+            var custoFinalDiario = (custoDiario - reducaoDiaria).toFixed(2);
+            var custoFinalMensal = (custoMensal - reducaoMensal).toFixed(2);
+            var custoFinalAnual = (custoAnual - reducaoAnual).toFixed(2);
+    
+            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3> <br>
+            Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento. <br> <br>
+    
+            <b>O custo será de:</b><br> 
+            Por ano <b style="color: red;"> R$${custoAnual}</b><br>
+            Por mês <b style="color: red;">R$${custoMensal}</b><br>
+            Por dia <b style="color: red;">R$${custoDiario}</b><br> <br>
+    
+            <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3> <br>
+            
+            <b>O valor do desconto médio será de: </b> <br>   <br>
+            Por ano <b style="color: green;">R$${reducaoAnual}</b> <br>
+            Por mês <b style="color: green;">R$${reducaoMensal}</b> <br>
+            Por dia <b style="color: green;">R$${reducaoDiaria}</b> <br>
+            <br>
+
+    
+            <b>Então, o custo final com o desconto será de: </b> <br> <br>
+    
+            Por ano <b style="color: rgb(161, 161, 0);">R$${custoFinalAnual}</b> <br>
+            Por mês <b style="color: rgb(161, 161, 0);">R$${custoFinalMensal}</b> <br>
+            Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br><br>
+
+            <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém nascido em 28% <h3> <br>
+            
+            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$681.996 <br>
+
+            O que, nesse caso, será de: R$ ${processo} <br> <br>
+            
+            
+            <button class="botao btnDiv" onclick="limpar()">Limpar resultado</button> <br>
+            <button class="botao btnDiv" onclick="calculos()">Mostrar cálculos</button> <br>
+            `;
+        }
+
+    }
+
+    function limpar() {
+        input_internados.value = '';
+        input_dias.value = '';
+        input_custo.value = '';
+        div_mensagem.innerHTML = '';
+    }
+
+    function calculos() {
+        div_mensagem.innerHTML += `
+        <h4>Cálculo para saber o quanto os bebês gastam diariamente, mensalmente e anualmente:</h4>
+            <b>- Custo Diário:</b> Quantidade de bebês X Custo por bebê<br>
+            <b>- Custo Mensal:</b> 30 X Custo Diário<br>
+            <b>- Custo Anual:</b> Custo Mensal X 12(Quantidade de meses em um ano)<br><br>    
+            
+            <b>Cálculo do desconto médio:</b><br><br>
+            - Valor do Desconto Mensal = Custo Mensal x 0.16 <br>
+            - Valor do Desconto Anual = Custo Anual x 0.16 <br> <br>
+                
+            <b>Calculo do custo final Mínimo:</b><br><br>
+    
+            - Custo Final <b>Mínimo</b> Anual = Custo Anual - Valor Desconto Diário <br>
+            - Custo Final <b>Mínimo</b> Mensal = Custo Mensal - Valor Desconto  Mensal <br>
+            - Custo Final <b>Mínimo</b> Diario = Custo Diario - Valor Desconto Anual <br><br>
+        `;
+    }
+</script>

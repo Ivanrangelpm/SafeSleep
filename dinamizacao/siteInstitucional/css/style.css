@@ -184,3 +184,9 @@ body {
 .footer .contact .logo {
   height: 10rem;
 }
+
+.enviado {
+  background-color: #b8feb8;
+  padding: 3%;
+  color: #2ca52c;
+}

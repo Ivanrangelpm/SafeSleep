@@ -24,6 +24,11 @@ create table usuario(
   idUsuario int primary key not null auto_increment,
   login varchar(45) not null,
   senha varchar(45) not null,
+  cpf char(11) not null,
+  cargo varchar(45),
+  nome varchar(45),
+  licenca varchar(45),
+  telefone char(14),
   fkHospital int not null,
   constraint fkUsuarioHospital foreign key (fkHospital) references hospital(idHospital)
 );
@@ -46,6 +51,7 @@ create table historico(
   dataHora date not null,
   peso decimal(5, 2) not null,
   temperatura decimal(5, 2) not null,
+  prematuridade binary(1),
   fkBebe int not null,
   constraint fkHistoricoIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
 );
@@ -53,8 +59,7 @@ create table metrica(
   dataHora datetime not null,
   temperaturaMinima decimal(5, 2) not null,
   temperaturaMaxima decimal(5, 2) not null,
-  fkIncubadora int not null,
-  constraint fkMetricaIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
+  fkIncubadora int not null
 );
 create table bebeResponsavel(
   idBebe int not null,

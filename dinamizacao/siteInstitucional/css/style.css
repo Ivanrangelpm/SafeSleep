@@ -185,6 +185,16 @@ body {
   height: 10rem;
 }
 
+.linkRedirecionar{
+  width: 93vw;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.linkRedirecionar a{
+  color: black;
+}
+
 .enviado {
   background-color: #b8feb8;
   padding: 3%;

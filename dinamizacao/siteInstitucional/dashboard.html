@@ -15,7 +15,7 @@
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a href="./gerenciar.html">Gerenciar</a></li>
         <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
-        <li><button>Sair</button></li>
+        <li><button onclick="sair()">Sair</button></li>
       </ul>
     </div>
     <div class="main" id="main">
@@ -163,5 +163,9 @@
     }
     divResponse.innerHTML = `<h2>Incubadora ${incubadora}</h2><p> Peso: ${peso} KG || Tempo de uso da incubadora: ${tempo} dias</p>
 <img src="${img}" alt="gráfico">`;
+  }
+
+  function sair() {
+    window.location.href = "./login.html";
   }
 </script>

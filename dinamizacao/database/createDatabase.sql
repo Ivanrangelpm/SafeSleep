@@ -11,6 +11,12 @@ create table hospital(
   telefone char(14) not null,
   logradouro varchar(150) not null
 );
+create table metrica(
+  dataHora datetime not null,
+  temperaturaMinima decimal(5, 2) not null,
+  temperaturaMaxima decimal(5, 2) not null,
+  fkIncubadora int not null,
+);
 create table responsavel(
   idResponsavel int primary key not null auto_increment,
   nome varchar(50) not null,
@@ -22,8 +28,11 @@ create table responsavel(
 );
 create table usuario(
   idUsuario int primary key not null auto_increment,
-  login varchar(45) not null,
+  login varchar(45) not null unique,
+  nome varchar(45) not null,
+  cpf char(11) not null,
   senha varchar(45) not null,
+  cargo varchar(45) not null check (cargo in ("diretor", "médico")),
   fkHospital int not null,
   constraint fkUsuarioHospital foreign key (fkHospital) references hospital(idHospital)
 );
@@ -39,6 +48,7 @@ create table bebe(
   nome varchar(50) not null,
   nasc date not null,
   sexo varchar(9) not null,
+  prematuro boolean not null,
   fkIncubadora int not null,
   constraint fkBebeIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
 );
@@ -47,14 +57,7 @@ create table historico(
   peso decimal(5, 2) not null,
   temperatura decimal(5, 2) not null,
   fkBebe int not null,
-  constraint fkHistoricoBebe foreign key (fkBebe) references bebe(idBebe)
-);
-create table metrica(
-  dataHora datetime not null,
-  temperaturaMinima decimal(5, 2) not null,
-  temperaturaMaxima decimal(5, 2) not null,
-  fkBebe int not null,
-  constraint fkMetricaBebe foreign key (fkBebe) references bebe(idBebe)
+  constraint fkHistoricoIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
 );
 create table bebeResponsavel(
   idBebe int not null,

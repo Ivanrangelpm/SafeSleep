@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeSleep | Cadastro</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/cadastro.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+      <ul class="navbar">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="./sobreNos.html">Sobre Nós</a></li>
+        <li><a class="paginaAtual" href="./cadastro.html">Cadastro</a></li>
+        <li><a href="./login.html">Login</a></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="section cadastro-hospital">
+        <div class="forms">
+          <div class="form">
+            <h1>Cadastre seu hospital</h1>
+            <div class="inputs">
+              <label>
+                <span>Razão social:</span>
+                <input type="text" id="inputRazao" />
+              </label>
+              <label>
+                <span>Nome fantasia:</span>
+                <input type="text" id="inputFantasia" />
+              </label>
+              <label>
+                <span>CNPJ:</span>
+                <input type="text" id="inputCnpj" />
+              </label>
+              <label>
+                <span>Email:</span>
+                <input type="text" id="inputEmail" />
+              </label>
+              <label>
+                <span>Telefone:</span>
+                <input type="text" id="inputTelefone" />
+              </label>
+              <label>
+                <span>Logradouro:</span>
+                <input type="text" id="inputLogradouro" />
+              </label>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastre-se</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputNome" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputCpf" />
+              </label>
+              <label>
+                <span>Senha:</span>
+                <input type="password" id="inputSenha" />
+              </label>
+              <label>
+                <span>Confirme sua senha:</span>
+                <input type="password" id="inputConfirmarSenha" />
+              </label>
+            </div>
+          </div>
+        </div>
+        <span id="spanResponse" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
+        <button onclick="cadastrar()">Cadastrar</button>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="developers">
+        <h3>Desenvolvedores da SafeSleep:</h3>
+        <ul>
+          <li>Bruno Yuji Takahashi</li>
+          <li>Diego Crispim dos Santos Campos</li>
+          <li>Fabrício Prudente Ferreira</li>
+          <li>Ivan Rangel Pestana Marcolin</li>
+          <li>Lucas Tetsuo Nagasse</li>
+          <li>Matheus Yukio Makiyama</li>
+          <li>Renan Rocha Pacanaro</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Contato:</h3>
+        <ul>
+          <li>safesleep@gmail.com</li>
+          <li>+55 11 99999-9999</li>
+        </ul>
+        <img src="./images/logo.png" class="logo" />
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function cadastrar() {
+    alert(`Hopsital Cadastrado`);
+  }
+</script>

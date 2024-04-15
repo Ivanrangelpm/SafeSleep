@@ -3,35 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Financeira</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SafeSleep | Calculadora</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculadora.css">
 </head>
 <body>
     <div class="header">
-        <div class="container">
-          <h1 class="titulo">SafeSleep</h1>
-          <ul class="navbar">
-            <li>Inicio </li>
-            <li>||</li>
-            <li> Simulador </li>
-            <li>||</li>
-            <li> Login </li>
-            <li>||</li>
-            <li> Cadastro</li>
-          </ul>
-        </div>
+        <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+        <ul class="navbar">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="./sobreNos.html">Sobre Nós</a></li>
+          <li><a href="./gerenciar.html">Gerenciar</a></li>
+          <li><a href="./dashboard.html">Incubadoras</a></li>
+          <li><a href="./cadastro.html">Cadastro</a></li>
+          <li><a href="./login.html">Login</a></li>
+          <li><button>Sair</button></li>
+        </ul>
     </div>
-    <h1 class="titulo"> <u>Calculadora Financeira</u> </h1> 
+    <h1 class="titulo">Calculadora Financeira </h1> 
     <div class="caixa">
         <div>
             <h3>Insira os dados abaixo para verificar os custos relacionados ao monitoramento inadequado da temperatura nas incubadoras</h3> <br>
-            Quantidade de bebês internados por mês: <input type="number" id="input_internados"> <br>
-            Média de dias internados por mês: <input type="number" id="input_dias"> <br>
-            Custo diário para o hospital (por recém-nascido): <input type="number" id="input_custo"> <br>
+            Quantidade de bebês internados por mês: <br> <input type="number" id="input_internados"> <br>
+            Média de dias internados por mês: <br><input type="number" id="input_dias"> <br>
+            Custo diário para o hospital (por recém-nascido): <br> <input type="number" id="input_custo"> <br>
             <button class="botao" onclick="calcular()">Calcular</button> <br>
             <div id="div_mensagem"></div><br>
         </div>
     </div>
+    <div class="footer">
+        <div class="developers">
+          <h3>Desenvolvedores da SafeSleep:</h3>
+          <ul>
+            <li>Bruno Yuji Takahashi</li>
+            <li>Diego Crispim dos Santos Campos</li>
+            <li>Fabrício Prudente Ferreira</li>
+            <li>Ivan Rangel Pestana Marcolin</li>
+            <li>Lucas Tetsuo Nagasse</li>
+            <li>Matheus Yukio Makiyama</li>
+            <li>Renan Rocha Pacanaro</li>
+          </ul>
+        </div>
+        <div class="contact">
+          <h3>Contato:</h3>
+          <ul>
+            <li>safesleep@gmail.com</li>
+            <li>+55 11 99999-9999</li>
+          </ul>
+          <img src="./images/logo.png" class="logo" />
+        </div>
+      </div>
 </body>
 </html>
 
@@ -40,6 +61,9 @@
         var internados = Number(input_internados.value);
         var dias = Number(input_dias.value);
         var custo = Number(input_custo.value);
+        var prematuros = internados * 0.12;
+        var custoPrematuro = (custo * 9) * prematuros;
+        custo = custo + custoPrematuro;
         var morte = internados * 0.28 //28% = Médias de recem nascidos que morrem em internações com auxilio das incubadoras
         var processo = morte * 681000 //681000 = Preço médio de um processo por negligencia de monitoramento
 
@@ -62,17 +86,17 @@
             var custoFinalMensal = (custoMensal - reducaoMensal).toFixed(2);
             var custoFinalAnual = (custoAnual - reducaoAnual).toFixed(2);
     
-            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3>
-            Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento.
+            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3> <br>
+            Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento. <br> <br>
     
             <b>O custo será de:</b><br> 
             Por ano <b style="color: red;"> R$${custoAnual}</b><br>
             Por mês <b style="color: red;">R$${custoMensal}</b><br>
-            Por dia <b style="color: red;">R$${custoDiario}</b><br>
+            Por dia <b style="color: red;">R$${custoDiario}</b><br> <br>
     
-            <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3>
+            <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3> <br>
             
-            <b>O valor do desconto médio será de: </b> <br>   
+            <b>O valor do desconto médio será de: </b> <br>   <br>
             Por ano <b style="color: green;">R$${reducaoAnual}</b> <br>
             Por mês <b style="color: green;">R$${reducaoMensal}</b> <br>
             Por dia <b style="color: green;">R$${reducaoDiaria}</b> <br>
@@ -83,17 +107,17 @@
     
             Por ano <b style="color: rgb(161, 161, 0);">R$${custoFinalAnual}</b> <br>
             Por mês <b style="color: rgb(161, 161, 0);">R$${custoFinalMensal}</b> <br>
-            Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br>
+            Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br><br>
 
             <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém nascido em 28% <h3> <br>
             
             O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$681.996 <br>
 
-            O que, nesse caso, será de: R$ ${processo}
+            O que, nesse caso, será de: R$ ${processo} <br> <br>
             
             
-            <button class="botao" onclick="limpar()">Limpar resultado</button> <br>
-            <button class="botao" onclick="calculos()">Mostrar cálculos</button> <br>
+            <button class="botao btnDiv" onclick="limpar()">Limpar resultado</button> <br>
+            <button class="botao btnDiv" onclick="calculos()">Mostrar cálculos</button> <br>
             `;
         }
 

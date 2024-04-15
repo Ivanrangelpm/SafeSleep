@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeSleep | Gerenciar</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/gerenciar.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+      <ul class="navbar">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="./sobreNos.html">Sobre Nós</a></li>
+        <li><a class="paginaAtual" href="./gerenciar.html">Gerenciar</a></li>
+        <li><a href="./dashboard.html">Incubadoras</a></li>
+        <li><button>Sair</button></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="section">
+        <h1>Cadastros</h1>
+        <div class="cadastros">
+          <div class="form">
+            <h1>Cadastro de funcionário</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputFuncionarioNome" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputFuncionarioCpf" />
+              </label>
+              <label>
+                <span>Senha:</span>
+                <input type="password" id="inputFuncionarioSenha" />
+              </label>
+              <label>
+                <span>Confirme sua senha:</span>
+                <input type="password" id="inputFuncionarioConfirmarSenha" />
+              </label>
+            </div>
+            <span id="spanResponseFuncionario" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
+            <button onclick="cadastrarFuncionario()">Cadastrar</button>
+          </div>
+          <div class="form">
+            <h1>Cadastro de incubadoras</h1>
+            <div class="inputs">
+              <label>
+                <span>Código de série:</span>
+                <input type="text" id="inputIncubadoraCodigo" />
+              </label>
+              <label>
+                <span>Modelo:</span>
+                <input type="text" id="inputIncubadoraModelo" />
+              </label>
+              <span id="spanResponseIncubadora" class="error"></span>
+              <button onclick="cadastrarIncubadora()">Cadastrar</button>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastro do responsável</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputResponsavelNome" />
+              </label>
+              <label>
+                <span>Apelido:</span>
+                <input type="text" id="inputResponsavelApelido" />
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputResponsavelCpf" />
+              </label>
+              <label>
+                <span>Email:</span>
+                <input type="text" id="inputResponsavelEmail" />
+              </label>
+              <label>
+                <span>Telefone:</span>
+                <input type="text" id="inputResponsavelTelefone" />
+              </label>
+              <label>
+                <span>Parentesco:</span>
+                <input type="text" id="inputResponsavelParentesco" />
+              </label>
+              <span id="spanResponseResponsavel" class="error"></span>
+              <button onclick="cadastrarResponsavel()">Cadastrar</button>
+            </div>
+          </div>
+          <div class="form">
+            <h1>Cadastro do bebê</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome Completo:</span>
+                <input type="text" id="inputBebeNome" />
+              </label>
+              <label>
+                <span>Responsável:</span>
+                <input type="text" id="inputBebeResponsavel" />
+              </label>
+              <label>
+                <span>Código da incubadora:</span>
+                <input type="text" id="inputBebeIncubadora" />
+              </label>
+              <label>
+                <span>Data de nascimento:</span>
+                <input type="text" id="inputBebeNasc" />
+              </label>
+              <label>
+                <span>Sexo:</span>
+                <select id="selectBebeSexo">
+                  <option disabled selected>Selecione</option>
+                  <option>Feminino</option>
+                  <option>Masculino</option>
+                </select>
+              </label>
+              <label>
+                <span>Prematuridade</span>
+                <select id="selectBebePrematura">
+                  <option disabled selected>Selecione</option>
+                  <option value="0">Não</option>
+                  <option value="1">Sim</option>
+                </select>
+              </label>
+              <span id="spanResponseBebe" class="error"></span>
+              <button onclick="cadastrarBebe()">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="developers">
+        <h3>Desenvolvedores da SafeSleep:</h3>
+        <ul>
+          <li>Bruno Yuji Takahashi</li>
+          <li>Diego Crispim dos Santos Campos</li>
+          <li>Fabrício Prudente Ferreira</li>
+          <li>Ivan Rangel Pestana Marcolin</li>
+          <li>Lucas Tetsuo Nagasse</li>
+          <li>Matheus Yukio Makiyama</li>
+          <li>Renan Rocha Pacanaro</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Contato:</h3>
+        <ul>
+          <li>safesleep@gmail.com</li>
+          <li>+55 11 99999-9999</li>
+        </ul>
+        <img src="./images/logo.png" class="logo" />
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function cadastrar() {
+    var telefone = input_telefone.value;
+    var cpf = input_cpf.value;
+    var licenca = input_licenca.value;
+    var parametro_senha = input_senha.value;
+    var senha = input_conf_senha.value;
+    var tamanho_senha = senha.length;
+    var index = senha.indexOf("!") >= 0 || senha.indexOf("@") >= 0 || senha.indexOf("#") >= 0 || senha.indexOf("$") >= 0 || senha.indexOf("%") >= 0 || senha.indexOf("&") >= 0 || senha.indexOf("/") >= 0 || senha.indexOf("*") >= 0;
+    if (index == false) {
+      div_mensagem_cadastro.innerHTML = `Senhas não contém <br> caracteres especiais.`;
+    }
+    if (parametro_senha != senha) {
+      div_mensagem_cadastro.innerHTML = `Senhas não são iguais.`;
+    }
+    if (tamanho_senha < 8) {
+      div_mensagem_cadastro.innerHTML = `Senha curta demais.`;
+    }
+    if (index == true && parametro_senha == senha && tamanho_senha >= 8) {
+      div_mensagem_cadastro.innerHTML = `Médico Cadastrado.`;
+    }
+  }
+</script>

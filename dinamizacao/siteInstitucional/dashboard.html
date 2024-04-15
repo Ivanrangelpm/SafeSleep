@@ -9,33 +9,23 @@
   </head>
   <body>
     <div class="header">
-      <img src="./imagens/logo.png" class="logo" />
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
         <li><a href="index.html">Início</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./dashboard.html">Incubadoras</a></li>
-        <li><a href="./perfil.html">Perfil</a></li>
+        <li><a href="./gerenciar.html">Gerenciar</a></li>
+        <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
         <li><button>Sair</button></li>
       </ul>
     </div>
-    <div class="main">
-      <div class="section opcoes">
-        <button class="botao-geral" onclick="geral()">Geral</button>
-        <button class="botao-risco" onclick="risco()">Em risco</button>
-        <button class="botao-alertas" onclick="alertas()">Alertas</button>
-      </div>
-      <hr />
-      <div class="section div-select" id="divContent">
-        <div class="selecao">
-          <h3>Selecione a incubadora para ver informações adicionais</h3>
-          <div class="campo">
-            <select class="lista" id="slc_incubadora">
-              <option value="0" selected disabled>Selecione a incubadora</option>
-            </select>
-            <button onclick="verificar()">Verificar</button>
-          </div>
+    <div class="main" id="main">
+      <div class="section">
+        <h1>Selecione as opções desejadas:</h1>
+        <div class="opcoes">
+          <button id="botaoGeral" onclick="btnGeral()">Geral</button>
+          <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
+          <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
         </div>
-        <div id="div_info" class="info"></div>
       </div>
     </div>
     <div class="footer">
@@ -51,117 +41,127 @@
           <li>Renan Rocha Pacanaro</li>
         </ul>
       </div>
-      <div class="contato">
+      <div class="contact">
         <h3>Contato:</h3>
         <ul>
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./imagens/logo.png" class="logo" />
+        <img src="./images/logo.png" class="logo" />
       </div>
     </div>
   </body>
 </html>
 
 <script>
-  function geral() {
-    divContent.innerHTML = `<div class="selecao">
-        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
-        <select class="lista" id="slc_incubadora">
-          <option value="0" selected disabled>Selecione a incubadora</option>
-          <option value="1">Incubadora 1 </option>
-          <option value="2">Incubadora 2 </option>
-          <option value="3">Incubadora 3 </option>
-          <option value="4">Incubadora 4 </option>
-          <option value="5">Incubadora 5 </option>
-          <option value="6">Incubadora 6 </option>
-          <option value="7">Incubadora 7 </option>
-          <option value="8">Incubadora 8 </option>
-          <option value="9">Incubadora 9 </option>
-          <option value="10">Incubadora 10 </option>
-        </select>
-        <button onclick="verificar()">Verificar</button>
-     </div>
-     <div class="info" id="div_info">
-      </div>`;
+  var totalIncubadoras = 10;
+  var mainContent = `<div class="section">
+  <h1>Selecione as opções desejadas:</h1>
+  <div class="opcoes">
+    <button id="botaoGeral" onclick="btnGeral()">Geral</button>
+    <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
+    <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
+  </div>
+</div>
+<hr />`;
+  var btnApertado = "";
+
+  function showSelect() {
+    var selectContent = "";
+    if (btnApertado == "geral") {
+      for (var cont = 1; cont <= totalIncubadoras; cont++) {
+        selectContent += `<option value="${cont}">Incubadora ${cont}</option>`;
+      }
+    } else if (btnApertado == "risco") {
+      for (var cont = 1; cont <= totalIncubadoras; cont++) {
+        if (cont == 1 || cont == 3 || cont == 7 || cont == 9) {
+          selectContent += `<option value="${cont}">Incubadora ${cont}</option>`;
+        }
+      }
+    }
+    main.innerHTML = `${mainContent}
+<div class="section">
+  <h2>Selecione a incubadora para ver informações adicionais:</h2>
+  <div class="selecao">
+    <label>
+      <span>Selecione a incubadora:</span>
+      <select id="selectIncubadora" onchange="verificar()">
+        <option value="0" selected disabled>Selecione a incubadora</option>
+        ${selectContent}
+      </select>
+    </label>
+  </div>
+</div>`;
   }
 
-  function risco() {
-    divContent.innerHTML = `<div class="selecao">
-        <h3 class="subtitulo">Selecione a incubadora para ver informações adicionais</h3>
-        <select class="lista" id="slc_incubadora">
-          <option value="0" selected disabled>Selecione a incubadora</option>
-          <option value="1">Incubadora 1 </option>
-          <option value="3">Incubadora 3 </option>
-          <option value="7">Incubadora 7 </option>
-          <option value="9">Incubadora 9 </option>
-        </select>
-        <button onclick="verificar()">Verificar</button>
-     </div>
-     <div class="info" id="div_info">
-      </div>`;
+  function btnGeral() {
+    btnApertado = "geral";
+    showSelect();
   }
 
-  function alertas() {
-    divContent.innerHTML = `<img src= "https://support.content.office.net/pt-br/media/c77dc6ec-262c-4bab-b22c-74f4ac54e134.gif" alt="" id="">
-    <img src= "https://invitedresearcher.com/wp-content/uploads/2022/11/CAPA_Grafico_de_Pizza1.png" alt="">`;
+  function btnRisco() {
+    btnApertado = "risco";
+    showSelect();
+  }
+
+  function btnAlertas() {
+    btnApertado = "alertas";
+    main.innerHTML = `${mainContent}
+<div id="divResponse" class="section row">
+  <img src= "https://support.content.office.net/pt-br/media/c77dc6ec-262c-4bab-b22c-74f4ac54e134.gif" alt="" id="">
+  <img src= "https://invitedresearcher.com/wp-content/uploads/2022/11/CAPA_Grafico_de_Pizza1.png" alt="">
+</div>`;
   }
 
   function verificar() {
-    var incubadora = slc_incubadora.value;
+    var incubadora = selectIncubadora.value;
+    showSelect();
 
-    if (incubadora == 0) {
-      alert(`Selecione uma opção válida!`);
-    } else if (incubadora == 1) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 2 KG || Tempo de uso da incubadora: 10 dias 
-        </div>
-        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+    main.innerHTML += `<hr />
+<div id="divResponse" class="section"></div>`;
+
+    if (incubadora == 1) {
+      var peso = 2;
+      var tempo = 10;
+      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
     } else if (incubadora == 2) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 1,2 KG || Tempo de uso da incubadora: 14 dias 
-        </div>
-        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+      var peso = 1.2;
+      var tempo = 14;
+      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
     } else if (incubadora == 3) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 1,5 KG || Tempo de uso da incubadora: 11 dias 
-        </div>
-        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+      var peso = 1.5;
+      var tempo = 11;
+      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
     } else if (incubadora == 4) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 1,8 KG || Tempo de uso da incubadora: 12 dias 
-        </div>
-        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+      var peso = 1.8;
+      var tempo = 12;
+      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
     } else if (incubadora == 5) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 0,9 KG || Tempo de uso da incubadora: 6 dias 
-        </div>
-        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+      var peso = 0.9;
+      var tempo = 6;
+      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
     } else if (incubadora == 6) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 2,2 KG || Tempo de uso da incubadora: 9 dias 
-        </div>
-        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+      var peso = 2.2;
+      var tempo = 9;
+      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
     } else if (incubadora == 7) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 1,9 KG || Tempo de uso da incubadora: 10 dias 
-        </div>
-        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+      var peso = 1.9;
+      var tempo = 10;
+      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
     } else if (incubadora == 8) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 2,1 KG || Tempo de uso da incubadora: 7 dias 
-        </div>
-        <img src="https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png" alt="">`;
+      var peso = 2.1;
+      var tempo = 7;
+      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
     } else if (incubadora == 9) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 2,8 KG || Tempo de uso da incubadora: 4 dias 
-        </div>
-        <img src="https://wiki.taticview.com/images/e/e1/Linechart_ex1.png" alt="">`;
+      var peso = 2.8;
+      var tempo = 4;
+      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
     } else if (incubadora == 10) {
-      div_info.innerHTML = `<div class="texto">
-      Peso: 3 KG || Tempo de uso da incubadora: 14 dias 
-        </div>
-        <img src="https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png" alt="">`;
+      var peso = 3;
+      var tempo = 14;
+      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
     }
+    divResponse.innerHTML = `<h2>Incubadora ${incubadora}</h2><p> Peso: ${peso} KG || Tempo de uso da incubadora: ${tempo} dias</p>
+<img src="${img}" alt="gráfico">`;
   }
 </script>

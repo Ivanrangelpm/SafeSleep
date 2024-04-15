@@ -1,50 +1,57 @@
 .main .opcoes {
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: flex;
+  gap: 5%;
+  justify-content: center;
   width: 100%;
 }
 .main .opcoes button {
   border-radius: 10px;
-  cursor: pointer;
-  width: 20%;
-  height: 100px;
+  padding: 1rem;
   font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
 }
-.botao-geral {
-  background: rgb(131, 242, 143);
-  background: linear-gradient(0deg, rgba(145, 242, 156, 1) 0%, rgba(255, 255, 255, 1) 100%);
+#botaoGeral {
+  background-color: #70e070;
 }
-.botao-risco {
-  background: rgb(250, 135, 135);
-  background: linear-gradient(0deg, rgba(250, 135, 135, 1) 0%, rgba(255, 255, 255, 1) 100%);
+#botaoGeral:hover {
+  background-color: #60d060;
 }
-.botao-alertas {
-  background: rgb(252, 252, 160);
-  background: linear-gradient(0deg, rgba(252, 252, 160, 1) 0%, rgba(255, 255, 255, 1) 100%);
+#botaoRisco {
+  background-color: #e07070;
+}
+#botaoRisco:hover {
+  background-color: #d06060;
+}
+#botaoAlertas {
+  background-color: #e0e070;
+}
+#botaoAlertas:hover {
+  background-color: #d0d060;
 }
 
-.main .content {
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-}
-.main .content .selecao {
+.main .selecao {
   display: flex;
   flex-direction: column;
-  margin: 5%;
+  gap: 1rem;
+  align-items: center;
 }
-.main .content .selecao .campo {
+.main .selecao label {
   display: flex;
+  gap: 0.5rem;
+  align-items: center;
   justify-content: center;
 }
-.main .content .selecao .campo .lista {
+.main .selecao label span {
+  font-size: 1.2rem;
+}
+.main .selecao label select {
+  cursor: pointer;
   font-size: 1rem;
 }
-.main .content .selecao .campo button {
-  margin-left: 2%;
-  font-size: 1rem;
+
+#divResponse {
+  gap: 1rem;
 }
-.main .content .info {
-  height: 40%;
+.main .row {
+  flex-direction: row;
+  justify-content: space-evenly;
 }

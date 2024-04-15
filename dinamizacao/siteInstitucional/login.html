@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeSleep | Login</title>
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+      <ul class="navbar">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="./sobreNos.html">Sobre Nós</a></li>
+        <li><a href="./cadastro.html">Cadastro</a></li>
+        <li><a class="paginaAtual" href="./login.html">Login</a></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="form">
+        <h1>Login</h1>
+        <div class="inputs">
+          <label>
+            <span class="span">Usuário:</span>
+            <input type="text" id="id_login" />
+          </label>
+          <label>
+            <span class="span">Senha:</span>
+            <input type="password" id="id_senha" />
+          </label>
+        </div>
+        <div id="div_mensagem"></div>
+        <button class="botao" onclick="autenticar()">Autenticar</button>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="developers">
+        <h3>Desenvolvedores da SafeSleep:</h3>
+        <ul>
+          <li>Bruno Yuji Takahashi</li>
+          <li>Diego Crispim dos Santos Campos</li>
+          <li>Fabrício Prudente Ferreira</li>
+          <li>Ivan Rangel Pestana Marcolin</li>
+          <li>Lucas Tetsuo Nagasse</li>
+          <li>Matheus Yukio Makiyama</li>
+          <li>Renan Rocha Pacanaro</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Contato:</h3>
+        <ul>
+          <li>safesleep@gmail.com</li>
+          <li>+55 11 99999-9999</li>
+        </ul>
+        <img src="./images/logo.png" class="logo" />
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  var verificar = 0;
+  var tentativas = 3;
+  function autenticar() {
+    var login = id_login.value;
+    var senha = id_senha.value;
+    if (verificar == 0 || verificar == 1 || verificar == 2) {
+      if (login == "Brandão" && senha == "12345") {
+        window.location.href = "./dashboard.html";
+      } else {
+        verificar = verificar + 1;
+        tentativas = tentativas - 1;
+        div_mensagem.innerHTML = `Falha na autenticação `;
+        alert(`Falha na autenticação, você ainda tem ${tentativas} tentativas.`);
+      }
+    } else {
+      div_mensagem.innerHTML = ``;
+      div_mensagem.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`;
+    }
+  }
+</script>

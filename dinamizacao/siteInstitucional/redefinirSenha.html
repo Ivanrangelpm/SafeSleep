@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeSleep | Esqueci minha senha</title>
+  <link href="./css/style.css" rel="stylesheet" />
+  <link href="./css/cadastro.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="header">
+    <a href="index.html"><img src="./images/logoExtended.png" alt="logo" class="logo" /></a>
+    <ul class="navbar">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="./sobreNos.html">Sobre Nós</a></li>
+      <li><a class="paginaAtual" href="./cadastro.html">Cadastro</a></li>
+      <li><a href="./login.html">Login</a></li>
+    </ul>
+  </div>
+  <div id="div_tela" class="main">
+    <div class="form">
+      <h1>Redefinição de senha</h1>
+      <span>Para redefinir a sua senha, insira os dados abaixo.</span>
+      <div class="inputs">
+        <label>
+          <span class="span">Digite a senha atual:</span>
+          <input type="password" id="input_senha" placeholder="senha atual" />
+        </label>
+        <label>
+            <span class="span">Digite a nova senha:</span>
+            <input type="password" id="input_nova_senha" placeholder="nova senha" />
+          </label>
+          <label>
+            <span class="span">Confirme a nova senha:</span>
+            <input type="password" id="input_confirmacao" placeholder="confirmação da senha" />
+          </label>
+      </div>
+      <div id="div_erro"></div>
+      <button class="botao" onclick="confirmar()">Confirmar</button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="developers">
+      <h3>Desenvolvedores da SafeSleep:</h3>
+      <ul>
+        <li>Bruno Yuji Takahashi</li>
+        <li>Diego Crispim dos Santos Campos</li>
+        <li>Fabrício Prudente Ferreira</li>
+        <li>Ivan Rangel Pestana Marcolin</li>
+        <li>Lucas Tetsuo Nagasse</li>
+        <li>Matheus Yukio Makiyama</li>
+        <li>Renan Rocha Pacanaro</li>
+      </ul>
+    </div>
+    <div class="contact">
+      <h3>Contato:</h3>
+      <ul>
+        <li>safesleep@gmail.com</li>
+        <li>+55 11 99999-9999</li>
+      </ul>
+      <img src="./images/logo.png" class="logo" />
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+    function confirmar() {
+        var senha = input_senha.value;
+        var nova_senha = input_nova_senha.value;
+        var confirmacao = input_confirmacao.value;
+
+      if ((senha == "12345") && (nova_senha == confirmacao)) {
+        div_tela.innerHTML = `<h2 class="enviado"> Sua senha foi redefinida com sucesso! </h2>`;
+        div_tela.innerHTML += `<br> <u> <a href="index.html"> Retornar para a página inicial </a> </u>`;
+      } else {
+        div_erro.innerHTML = `<span style="color: red">Os dados inseridos são inválidos</span>`;
+        input_email.style = 'border="1px solid red"';
+      }
+    }
+  </script>

@@ -18,7 +18,7 @@
         <li><a href="./login.html">Login</a></li>
       </ul>
     </div>
-    <div class="main">
+    <div id="div_cadastro" class="main">
       <div class="section cadastro-hospital">
         <div class="forms">
           <div class="form">
@@ -26,27 +26,27 @@
             <div class="inputs">
               <label>
                 <span>Razão social:</span>
-                <input type="text" id="inputRazao" />
+                <input type="text" id="input_razao" />
               </label>
               <label>
                 <span>Nome fantasia:</span>
-                <input type="text" id="inputFantasia" />
+                <input type="text" id="input_fantasia" />
               </label>
               <label>
                 <span>CNPJ:</span>
-                <input type="text" id="inputCnpj" />
+                <input type="text" id="input_cnpj" />
               </label>
               <label>
                 <span>Email:</span>
-                <input type="text" id="inputEmail" />
+                <input type="text" id="input_email" />
               </label>
               <label>
                 <span>Telefone:</span>
-                <input type="text" id="inputTelefone" />
+                <input type="text" id="input_telefone" />
               </label>
               <label>
                 <span>Logradouro:</span>
-                <input type="text" id="inputLogradouro" />
+                <input type="text" id="input_logradouro" />
               </label>
             </div>
           </div>
@@ -55,29 +55,30 @@
             <div class="inputs">
               <label>
                 <span>Nome Completo:</span>
-                <input type="text" id="inputNome" />
+                <input type="text" id="input_nome" />
               </label>
               <label>
                 <span>CPF:</span>
-                <input type="text" id="inputCpf" />
+                <input type="text" id="input_cpf" />
               </label>
               <label>
                 <span>Senha:</span>
-                <input type="password" id="inputSenha" />
+                <input type="password" id="input_senha" />
               </label>
               <label>
                 <span>Confirme sua senha:</span>
-                <input type="password" id="inputConfirmarSenha" />
+                <input type="password" id="input_confirmar" />
               </label>
+              <span id="spanResponse">(A senha deve possuir pelo menos 8 <br> caracteres e um caracter especial)</span>
             </div>
           </div>
         </div>
-        <span id="spanResponse" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
         <button onclick="cadastrar()">Cadastrar</button>
+        <span id="div_erro"></span>
       </div>
-    </div>
-    <div class="linkRedirecionar">
-      <p>Já possui um usuário? <a href="login.html">Fazer login</a></p>
+      <div class="linkRedirecionar">
+        <p>Já possui um usuário? <a href="login.html">Fazer login</a></p>
+      </div>
     </div>
     <div class="footer">
       <div class="developers">
@@ -103,8 +104,25 @@
     </div>
   </body>
 </html>
+
 <script>
   function cadastrar() {
-    alert(`Hopsital Cadastrado`);
+    var razao = input_razao.value;
+    var fantasia = input_fantasia.value;
+    var cnpj = input_cnpj.value;
+    var email = input_email.value;
+    var telefone = input_telefone.value;
+    var logradouro = input_logradouro.value;
+    var nome = input_nome.value;
+    var cpf = input_cpf.value;
+    var senha = input_senha.value;
+    var confirmar = input_confirmar;
+
+    if (razao != '' && fantasia != '' && cnpj != '' && email != '' && telefone != '' && logradouro != '' && nome != '' && cpf != '' && senha != '' && confirmar != '') {
+      div_cadastro.innerHTML = '<h2 class="enviado"> Cadastro concluído! </span> <h2>';  
+      div_cadastro.innerHTML += '<br> <a href="login.html"> Fazer login </a>';  
+    } else {
+      div_erro.innerHTML = '<span class="error"> É necessário preencher todos os campos! </span>';
+    }
   }
 </script>

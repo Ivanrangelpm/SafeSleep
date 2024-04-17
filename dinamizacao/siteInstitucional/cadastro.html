@@ -34,15 +34,18 @@
               </label>
               <label>
                 <span>CNPJ:</span>
-                <input type="text" id="input_cnpj" />
+                <input type="text" id="input_cnpj" oninput="completar_cnpj()" />
+                <div id="div_erro_cnpj" class="error"></div>
               </label>
               <label>
                 <span>Email:</span>
                 <input type="text" id="input_email" />
+                <div id="div_erro_email" class="error"></div>
               </label>
               <label>
                 <span>Telefone:</span>
                 <input type="text" id="input_telefone" />
+                <div id="div_erro_telefone" class="error"></div>
               </label>
               <label>
                 <span>Logradouro:</span>
@@ -59,22 +62,25 @@
               </label>
               <label>
                 <span>CPF:</span>
-                <input type="text" id="input_cpf" />
+                <input type="text" id="input_cpf" oninput="completar_cpf()" />
+                <div id="div_erro_cpf" class="error"></div>
               </label>
               <label>
                 <span>Senha:</span>
                 <input type="password" id="input_senha" />
+                <div id="div_erro_senha" class="error"></div>
               </label>
               <label>
                 <span>Confirme sua senha:</span>
-                <input type="password" id="input_confirmar" />
+                <input type="password" id="input_confirmar"/>
+                <div id="div_erro_confirmar" class="error"></div>
               </label>
               <span id="spanResponse">(A senha deve possuir pelo menos 8 <br> caracteres e um caracter especial)</span>
             </div>
           </div>
         </div>
         <button onclick="cadastrar()">Cadastrar</button>
-        <span id="div_erro"></span>
+        <div id="div_erro" class="error"></div>
       </div>
       <div class="linkRedirecionar">
         <p>Já possui um usuário? <a href="login.html">Fazer login</a></p>
@@ -106,7 +112,32 @@
 </html>
 
 <script>
+  function completar_cnpj() {
+    var cnpj = input_cnpj.value;
+    var tamanho = cnpj.length;
+
+    if (tamanho == 2 || tamanho == 6) {
+      input_cnpj.value += ".";
+    } else if (tamanho == 10) {
+      input_cnpj.value += "/";
+    } else if (tamanho == 15) {
+      input_cnpj.value += "-";
+    } 
+  }
+
+  function completar_cpf() {
+    var cpf = input_cpf.value;
+    var tamanho = cpf.length;
+
+    if (tamanho == 3 || tamanho == 7) {
+      input_cpf.value += ".";
+    } else if (tamanho == 11) {
+      input_cpf.value += "-";
+    } 
+  }
+
   function cadastrar() {
+    div_erro.innerHTML = "";
     var razao = input_razao.value;
     var fantasia = input_fantasia.value;
     var cnpj = input_cnpj.value;
@@ -116,13 +147,54 @@
     var nome = input_nome.value;
     var cpf = input_cpf.value;
     var senha = input_senha.value;
-    var confirmar = input_confirmar;
+    var confirmar = input_confirmar.value;
+    var valido = false;
 
-    if (razao != '' && fantasia != '' && cnpj != '' && email != '' && telefone != '' && logradouro != '' && nome != '' && cpf != '' && senha != '' && confirmar != '') {
+    if (razao == '' || fantasia == '' || cnpj == '' || email == '' || telefone == '' || logradouro == '' || nome == '' || cpf == '' || senha == '' || confirmar == '') {
+      div_erro.innerHTML = 'É necessário preencher todos os campos!';
+    } else {
+      if (cnpj.length != 18) {
+        div_erro_cnpj.innerHTML = `CNPJ inválido`;
+        valido = false;
+      } else {
+        div_erro_cnpj.innerHTML = "";
+        valido = true;
+      }
+      if (cpf.length != 14) {
+        div_erro_cpf.innerHTML = `CPF inválido`;
+        valido = false;
+      } else {
+        div_erro_cpf.innerHTML = "";
+        valido = true;
+      }
+      if (email.indexOf('@') == -1) {
+        div_erro_email.innerHTML = `E-mail inválido`;
+        valido = false;
+      } else {
+        div_erro_email.innerHTML = "";
+        valido = true;
+      }
+      if (senha.length < 8) {
+        div_erro_senha.innerHTML = `Senha fraca`;
+        valido = false;
+      } else if (senha.indexOf('@') < 0 && senha.indexOf('$') < 0 && senha.indexOf('#') < 0 && senha.indexOf('*') < 0 && senha.indexOf('%') < 0 && senha.indexOf('/') < 0 && senha.indexOf('_') < 0 && senha.indexOf('&') < 0) {
+        div_erro_senha.innerHTML = `Senha fraca`;
+        valido = false;
+      } else {
+        div_erro_senha.innerHTML = "";
+        valido = true;
+        if (senha == confirmar) {
+          div_erro_confirmar.innerHTML = "";
+          valido = true;
+        } else {
+          div_erro_confirmar.innerHTML = `Confirmação de senha incorreta`;
+          valido = false;
+        }
+      }
+    }
+    if (valido) {
       div_cadastro.innerHTML = '<h2 class="enviado"> Cadastro concluído! </span> <h2>';  
       div_cadastro.innerHTML += '<br> <a href="login.html"> Fazer login </a>';  
-    } else {
-      div_erro.innerHTML = '<span class="error"> É necessário preencher todos os campos! </span>';
     }
   }
 </script>

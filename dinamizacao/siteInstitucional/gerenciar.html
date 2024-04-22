@@ -61,7 +61,7 @@
                 <input type="password" id="inputFuncionarioConfirmarSenha" placeholder="Senha"/>
               </label>
             </div>
-            <span id="spanResponseFuncionario" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
+            <div id="erroFuncionario" style="color: red; font-weight: bold;"></div>
             <button onclick="cadastrarFuncionario()">Cadastrar</button>
           </div>
           <div class="form" id="form2">
@@ -75,7 +75,7 @@
                 <span>Modelo da Incubadora:</span>
                 <input type="text" id="inputIncubadoraModelo" placeholder="Modelo"/>
               </label>
-              <span id="spanResponseIncubadora" class="error"></span>
+              <div id="erroIncubadora" style="color: red; font-weight: bold;"></div>
               <button onclick="cadastrarIncubadora()">Cadastrar</button>
             </div>
           </div>
@@ -118,7 +118,7 @@
                   <option value="1">Sim</option>
                 </select>
               </label>
-              <span id="spanResponseBebe" class="error"></span>
+              <div id="erroBebe" style="color: red; font-weight: bold;"></div>
               <button onclick="cadastrarBebe()">Cadastrar</button>
             </div>
           </div>
@@ -247,20 +247,62 @@
     var senha = input_conf_senha.value;
     var tamanho_senha = senha.length;
     var index = senha.indexOf("!") >= 0 || senha.indexOf("@") >= 0 || senha.indexOf("#") >= 0 || senha.indexOf("$") >= 0 || senha.indexOf("%") >= 0 || senha.indexOf("&") >= 0 || senha.indexOf("/") >= 0 || senha.indexOf("*") >= 0;
+    erroFuncionario.innerHTML = ``
     if (index == false) {
-      div_mensagem_cadastro.innerHTML = `Senhas não contém <br> caracteres especiais.`;
+      erroFuncionario.innerHTML += `Senhas não contém caracteres especiais! <br>`;
     }
-    if (parametro_senha != senha) {
-      div_mensagem_cadastro.innerHTML = `Senhas não são iguais.`;
+    if (senhaConf != senha) {
+      erroFuncionario.innerHTML += `Senhas não são iguais! <br> `;
     }
     if (tamanho_senha < 8) {
-      div_mensagem_cadastro.innerHTML = `Senha curta demais.`;
+      erroFuncionario.innerHTML += `Senha curta demais! <br>`;
     }
-    if (index == true && parametro_senha == senha && tamanho_senha >= 8) {
-      div_mensagem_cadastro.innerHTML = `Médico Cadastrado.`;
+    if (index == true && senhaConf == senha && tamanho_senha >= 8) {
+      erroFuncionario.innerHTML = `<b style="color: rgb(8, 234, 12);">Médico cadastrado!</b>`;
     }
   }
+  function cadastrarIncubadora() {
+    var codigo = inputIncubadoraCodigo.value;
+    var modelo = inputIncubadoraModelo.value;
+    var tamanhoCodigo = codigo.length;
+    if(tamanhoCodigo > 10) {
+      erroIncubadora.innerHTML = `O código da incubadora só pode ter menos de 10 casas!`
+  }else{
+    erroIncubadora.innerHTML = `<b style="color: rgb(8, 234, 12);">Incubadora cadastrada!</b>`
+  }
+}
 
+  function cadastrarResponsavel() {
+  var nome = inputResponsavelNome.value;
+  var apelido= inputResponsavelApelido.value;
+  var cpf = inputResponsavelCpf.value;
+  var email = inputResponsavelEmail.value;
+  var telefone = inputResponsavelTelefone.value;
+  var parentesco = inputResponsavelParentesco.value;
+  var tamanhoCpf = cpf.length;  
+  if (tamanhoCpf != 11) {
+    erroResponsavel.innerHTML = `O CPF precisa ter 11 digitos !`
+
+}else{
+  erroResponsavel.innerHTML = `<b style="color: rgb(8, 234, 12);">Responsavel cadastrado!</b>`
+}
+}
+  function cadastrarBebe(){
+var nome = inputBebeNome.value;
+var responsavel = inputBebeResponsavel.value;
+var incubadora = inputBebeIncubadora.value;
+var dtNasc = inputBebeNasc.value;
+var sexo = selectBebeSexo.value;
+var prematuro = selectBebePrematura.value;
+var tamanhoResponsavel = responsavel.length;
+  
+    if(sexo == 'Selecione' || prematuro == 'Selecione'){
+      erroBebe.innerHTML = `Selecione um valor valido! <br>`
+    }else{
+      erroBebe.innerHTML = `<b style="color: rgb(8, 234, 12);">Bebe cadastrado!</b>`
+    }
+}
+  
 
 function sair(){
     window.location.href = "./login.html";

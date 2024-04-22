@@ -70,7 +70,7 @@ body {
 
 .header .navbar button {
   transition: color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
-  cursor: pointer;
+  cursor: pointer; /* altera o estilo do cursor */
   border: none;
   background-color: transparent;
 }

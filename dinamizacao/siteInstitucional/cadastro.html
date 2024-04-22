@@ -10,110 +10,165 @@
 
   <body>
     <div class="header">
-      <a href="index.html"><img src="./images/Logo_SafeSleep.png" alt="logo" class="logo" /></a>
+      <a href="index.html">
+        <img src="./images/ssLogoExtended.png" alt="logo" class="logo"/>
+      </a>
       <ul class="navbar">
         <li><a href="index.html">Início</a></li>
+        <li><a href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a class="paginaAtual" href="./cadastro.html">Cadastro</a></li>
         <li><a href="./login.html">Login</a></li>
       </ul>
-    </div>
+    </div> 
     <div id="div_cadastro" class="main">
       <div class="section cadastro-hospital">
+        <h1>CADASTRO</h1>
+        <div class="lineForms">
+          <div class="line">
+            <label>
+              <button onclick="changePage(1)" id="chgPage1">1</button>
+              <span>Hospital</span>
+            </label>
+            <label>
+              <button onclick="changePage(2)" id="chgPage2">2</button>
+              <span>Representante</span>
+            </label>
+            <label>
+              <button onclick="cadastrar()" id="cadastrar">➜</button>
+              <span>Concluir</span>
+            </label>
+          </div>
+        </div>
         <div class="forms">
-          <div class="form">
-            <h1>Cadastre seu hospital</h1>
+          <div class="form form1" id="form1">
+            <h1>Cadastre seu Hospital</h1>
             <div class="inputs">
               <label>
                 <span>Razão social:</span>
-                <input type="text" id="input_razao" />
+                <input type="text" id="input_razao" placeholder="Razão Social"/>
               </label>
               <label>
                 <span>Nome fantasia:</span>
-                <input type="text" id="input_fantasia" />
+                <input type="text" id="input_fantasia" placeholder='Nome Fantasia'/>
                 <div id="div_erro_fantasia" class="error"></div>
               </label>
               <label>
                 <span>CNPJ:</span>
-                <input type="text" id="input_cnpj" oninput="formatar_cnpj()" />
+                <input type="text" id="input_cnpj" oninput="formatar_cnpj()" placeholder="XX.XXX.XXX/XXXX-XX"/>
                 <div id="div_erro_cnpj" class="error"></div>
               </label>
               <label>
-                <span>Email:</span>
-                <input type="text" id="input_email" />
+                <span>E-mail:</span>
+                <input type="text" id="input_email" placeholder="E-mail"/>
                 <div id="div_erro_email" class="error"></div>
               </label>
               <label>
                 <span>Telefone:</span>
-                <input type="text" id="input_telefone" oninput="formatar_telefone()" />
+                <input type="text" id="input_telefone" oninput="formatar_telefone()" placeholder="(xx) xxxx-xxxx"/>
                 <div id="div_erro_telefone" class="error"></div>
               </label>
               <label>
-                <span>Logradouro:</span>
-                <input type="text" id="input_logradouro" />
+                <span>CEP:</span>
+                <input type="text" id="input_cep" placeholder="xxxxx-xxx"/>
+                <div id="div_erro_cep" class="error"></div>
+              </label>
+              <label>
+                <span>Número:</span>
+                <input type="number" id="input_numero" placeholder="Número da Instituição"/>
+                <div id="div_erro_numero" class="error"></div>
               </label>
             </div>
           </div>
-          <div class="form">
-            <h1>Cadastre-se</h1>
+          <div class="form form2" id="form2">
+            <h1>Cadastre-se como Representante</h1>
             <div class="inputs">
               <label>
-                <span>Nome Completo:</span>
-                <input type="text" id="input_nome" />
+                <span>Nome:</span>
+                <input type="text" id="input_nome" placeholder="Nome"/>
                 <div id="div_erro_nome" class="error"></div>
               </label>
               <label>
+                <span>Sobrenome:</span>
+                <input type="text" id="input_sobrenome" placeholder="Sobrenome"/>
+                <div id="div_erro_sobrenome" class="error"></div>
+              </label>
+              <label>
                 <span>CPF:</span>
-                <input type="text" id="input_cpf" oninput="formatar_cpf()" />
+                <input type="text" id="input_cpf" oninput="formatar_cpf()" placeholder="xxx.xxx.xxx-xx"/>
                 <div id="div_erro_cpf" class="error"></div>
               </label>
               <label>
                 <span>Senha:</span>
-                <input type="password" id="input_senha" />
+                <input type="password" id="input_senha" placeholder="Senha"/>
                 <div id="div_erro_senha" class="error"></div>
               </label>
               <label>
                 <span>Confirme sua senha:</span>
-                <input type="password" id="input_confirmar"/>
+                <input type="password" id="input_confirmar" placeholder="Senha"/>
                 <div id="div_erro_confirmar" class="error"></div>
               </label>
               <span id="spanResponse">(A senha deve possuir pelo menos 8 <br> caracteres e um caracter especial)</span>
             </div>
           </div>
+          <button onclick="changePage(2)" class='btn_forms' id="btn_next">Prosseguir</button>
+          <div class="linkRedirecionar">
+            <span>Já possui um usuário? <a href="login.html">Fazer login</a></span>
+          </div>
         </div>
-        <button onclick="cadastrar()">Cadastrar</button>
         <div id="div_erro" class="error"></div>
-      </div>
-      <div class="linkRedirecionar">
-        <p>Já possui um usuário? <a href="login.html">Fazer login</a></p>
       </div>
     </div>
     <div class="footer">
       <div class="developers">
-        <h3>Desenvolvedores da SafeSleep:</h3>
+        <h3>Desenvolvedores da SafeSleep</h3>
         <ul>
-          <li>Bruno Yuji Takahashi</li>
-          <li>Diego Crispim dos Santos Campos</li>
-          <li>Fabrício Prudente Ferreira</li>
-          <li>Ivan Rangel Pestana Marcolin</li>
-          <li>Lucas Tetsuo Nagasse</li>
-          <li>Matheus Yukio Makiyama</li>
-          <li>Renan Rocha Pacanaro</li>
+          <li>Bruno Yuji Takahashi - 042410</li>
+          <li>Diego Crispim dos Santos Campos - 042410</li>
+          <li>Fabricio Prudente Ferreira - 04241070</li>
+          <li>Ivan Rangel Pestana Marcolin - 042410</li>
+          <li>Lucas Tetsuo Nagasse - 042410</li>
+          <li>Matheus Yukio Makiyama - 042410</li>
+          <li>Renan Rocha Pacanaro - 042410</li>
         </ul>
       </div>
       <div class="contact">
-        <h3>Contato:</h3>
+        <h3>Contatos</h3>
         <ul>
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./images/logo.png" class="logo" />
+        <img src="./images/ssLogoName.png" class="logo" />
       </div>
     </div>
   </body>
 </html>
 
 <script>
+  function changePage(page){
+    var form1 = document.getElementById('form1');
+    var form2 = document.getElementById('form2');
+    var btn1 = document.getElementById('chgPage1');
+    var btn2 = document.getElementById('chgPage2');
+    var btnNext = document.getElementById('btn_next');
+
+    if(page == 1) {
+      form1.style.display = 'flex';
+      form2.style.display = 'none';
+      btnNext.textContent = 'Prosseguir';
+      btnNext.onclick = function(){changePage(2)};
+      btn1.style = 'transform: scale(120%, 120%); background-color: #19A7A8;'
+      btn2.style = 'transform: scale(100%, 100%); background-color: #3b536b;'
+    } else {
+      form2.style.display = 'flex';
+      form1.style.display = 'none';
+      btnNext.textContent = 'Concluir Cadastro';
+      btnNext.onclick = function(){cadastrar()};
+      btn1.style = 'transform: scale(100%, 100%); background-color: #3b536b;'
+      btn2.style = 'transform: scale(120%, 120%); background-color: #19A7A8;'
+    }
+  }
+
   function formatar_cnpj() {
     var cnpj = input_cnpj.value;
     var tamanho = cnpj.length;
@@ -156,57 +211,123 @@
     var cnpj = input_cnpj.value;
     var email = input_email.value;
     var telefone = input_telefone.value;
-    var logradouro = input_logradouro.value;
+    var cep = input_cep.value;
+    var numero = input_numero.value;
     var nome = input_nome.value;
+    var sobrenome = input_sobrenome.value;
     var cpf = input_cpf.value;
     var senha = input_senha.value;
     var confirmar = input_confirmar.value;
     var valido = 0;
 
-    if (razao == '' || fantasia == '' || cnpj == '' || email == '' || telefone == '' || logradouro == '' || nome == '' || cpf == '' || senha == '' || confirmar == '') {
+    if (
+      razao == '' ||
+      fantasia == '' ||
+      cnpj == '' ||
+      email == '' ||
+      telefone == '' ||
+      cep == '' ||
+      numero == '' ||
+      nome == '' || 
+      sobrenome == '' || 
+      cpf == '' || 
+      senha == '' ||
+      confirmar == ''
+    ) {
       div_erro.innerHTML = 'É necessário preencher todos os campos!';
     } else {
+
+      //Erro para Nome Fantasia
       if (fantasia.length <= 1) {
         div_erro_fantasia.innerHTML = `Nome inválido`;
       } else {
         div_erro_fantasia.innerHTML = "";
         valido++;
       }
+
+      //Erro para CNPJ
       if (cnpj.length != 18) {
         div_erro_cnpj.innerHTML = `CNPJ inválido`;
       } else {
         div_erro_cnpj.innerHTML = "";
         valido++;
       }
+
+      //Erro para Email
       if (email.indexOf('@') == -1 || email.indexOf(".") == -1) {
         div_erro_email.innerHTML = `E-mail inválido`;
       } else {
         div_erro_email.innerHTML = "";
         valido++;
       }
+
+      //Erro para Telefone
       if (telefone.length != 13) {
         div_erro_telefone.innerHTML = `Número de telefone inválido`;
       } else {
         div_erro_telefone.innerHTML = "";
         valido++;
       }
+
+      //Erro para CEP
+      if (cep.length != 8) {
+        div_erro_cep.innerHTML = `CEP Inválido`;
+      } else {
+        div_erro_cep.innerHTML = "";
+        valido++;
+      }
+
+      //Erro para Número
+      if (numero.length < 1 && Number(numero) < 1) {
+        div_erro_numero.innerHTML = `Número do Enderenço Inválido`;
+      } else {
+        div_erro_numero.innerHTML = "";
+        valido++;
+      }
+
+      //Erro para Nome do Representante
       if (nome.length <= 1) {
         div_erro_nome.innerHTML = `Nome inválido`;
       } else {
         div_erro_nome.innerHTML = "";
         valido++;
       }
+
+      //Erro para Sobrenome do Representante
+      if (sobrenome.length <= 1) {
+        div_erro_sobrenome.innerHTML = `Sobrenome inválido`;
+      } else {
+        div_erro_sobrenome.innerHTML = "";
+        valido++;
+      }
+
+      //Erro para CPF do Representante
       if (cpf.length != 14) {
         div_erro_cpf.innerHTML = `CPF inválido`;
       } else {
         div_erro_cpf.innerHTML = "";
         valido++;
       }
+
+      //Erro para a Senha
       if (senha.length < 8) {
         div_erro_senha.innerHTML = `Senha fraca`;
-      } else if (senha.indexOf('@') < 0 && senha.indexOf('$') < 0 && senha.indexOf('#') < 0 && senha.indexOf('*') < 0 && senha.indexOf('%') < 0 && senha.indexOf('/') < 0 && senha.indexOf('_') < 0 && senha.indexOf('&') < 0) {
+      } 
+      else if (
+        senha.indexOf('@') < 0 && 
+        senha.indexOf('$') < 0 && 
+        senha.indexOf('#') < 0 && 
+        senha.indexOf('*') < 0 && 
+        senha.indexOf('%') < 0 && 
+        senha.indexOf('/') < 0 && 
+        senha.indexOf('_') < 0 && 
+        senha.indexOf('&') < 0 &&
+        senha.indexOf('!') < 0 &&
+        senha.indexOf('?') < 0
+      ) {
         div_erro_senha.innerHTML = `Senha fraca`;
-      } else {
+      } 
+      else {
         div_erro_senha.innerHTML = "";
         valido++;
         if (senha == confirmar) {
@@ -217,6 +338,7 @@
         }
       }
     }
+
     if (valido == 8) {
       div_cadastro.innerHTML = '<h2 class="enviado"> Cadastro concluído! </span> <h2>';  
       div_cadastro.innerHTML += '<br> <a href="login.html"> Fazer login </a>';  

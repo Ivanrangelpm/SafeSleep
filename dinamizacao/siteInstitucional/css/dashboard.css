@@ -9,23 +9,70 @@
   padding: 1rem;
   font-size: 1.5rem;
 }
+
+.main .graficos #sectionCanvas1 {
+  width: 95vw;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 60px 0;
+}
+
+.main .graficos #sectionCanvas1 section {
+  display: flex;
+  flex-direction: column;
+}
+
+.main .graficos #sectionCanvas1 span {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #101030;
+}
+
+.main .graficos #sectionCanvas2 {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.cardSection {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  width: 500px;
+  padding: 20px;
+}
+
+.pieTitle {
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 #botaoGeral {
-  background-color: #70e070;
+  background-color: #19A7A8;
 }
 #botaoGeral:hover {
-  background-color: #60d060;
+  background-color: #0d5858;
 }
 #botaoRisco {
-  background-color: #e07070;
+  background-color: #003050;
 }
 #botaoRisco:hover {
-  background-color: #d06060;
+  background-color: #001725;
 }
 #botaoAlertas {
-  background-color: #e0e070;
+  background-color: #507090;
 }
 #botaoAlertas:hover {
-  background-color: #d0d060;
+  background-color: #2d4053;
 }
 
 .main .selecao {
@@ -54,4 +101,27 @@
 .main .row {
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+.section .opcoes button {
+  width: 200px;
+  height: 60px;
+  color: white;
+  font-weight: bold;
+}
+
+.lineTitle {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#kidInfo {
+  text-align: center;
+  margin-top: 10px;
+  line-height: 30px;
+  font-size: 17px;
 }

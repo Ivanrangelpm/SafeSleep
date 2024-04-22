@@ -6,16 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SafeSleep | Esqueci minha senha</title>
   <link href="./css/style.css" rel="stylesheet" />
-  <link href="./css/cadastro.css" rel="stylesheet" />
+  <link href="./css/login.css" rel="stylesheet" />
 </head>
 
 <body>
   <div class="header">
-    <a href="index.html"><img src="./images/Logo_SafeSleep.png" alt="logo" class="logo" /></a>
+    <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
       <li><a href="index.html">Início</a></li>
+      <li><a href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
       <li><a href="./sobreNos.html">Sobre Nós</a></li>
-      <li><a class="paginaAtual" href="./cadastro.html">Cadastro</a></li>
+      <li><a href="./cadastro.html">Cadastro</a></li>
       <li><a href="./login.html">Login</a></li>
     </ul>
   </div>
@@ -27,10 +28,10 @@
       <div class="inputs">
         <label>
           <span class="span">E-mail cadastrado:</span>
-          <input type="text" id="input_email" placeholder="e-mail" />
+          <input type="text" id="input_email" placeholder="E-mail" />
         </label>
       </div>
-      <div id="div_erro"></div>
+      <div id="div_mensagem"></div>
       <button class="botao" onclick="enviar()">Enviar</button>
     </div>
   </div>
@@ -53,7 +54,7 @@
         <li>safesleep@gmail.com</li>
         <li>+55 11 99999-9999</li>
       </ul>
-      <img src="./images/logo.png" class="logo" />
+      <img src="./images/ssLogoName.png" class="logo" />
     </div>
   </div>
 </body>
@@ -62,11 +63,11 @@
 
 <script>
   function enviar() {
-    if (input_email.value == "brandão@gmail.com") {
+    if (input_email.value == "brandao@gmail.com") {
       div_tela.innerHTML = `<h2 class="enviado"> O e-mail de recuperação foi enviado com sucesso! </h2>`;
       div_tela.innerHTML += `<br> <u> <a href="login.html"> Retornar para a página de login </a> </u>`;
     } else {
-      div_erro.innerHTML = `<span style="color: red">O e-mail inserido é inválido!</span>`;
+      div_mensagem.innerHTML = `O e-mail inserido é inválido!`;
       input_email.style = 'border="1px solid red"';
     }
   }

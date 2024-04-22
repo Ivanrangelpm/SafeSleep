@@ -5,21 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/dashboard.css" rel="stylesheet" />
-    <title>SafeSleep</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <title>SafeSleep | Dashboard</title>
+    <style>
+      canvas {
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+  </style>
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./images/Logo_SafeSleep.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a href="./gerenciar.html">Gerenciar</a></li>
         <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
-        <li><button onclick="sair()">Sair</button></li>
+        <li><button>Sair</button></li>
       </ul>
     </div>
     <div class="main" id="main">
-      <div class="section">
+      <div class="graficos">
+        <div id="sectionCanvas1">
+          <section>
+            <span>Temperatura das Incubadoras</span>
+            <canvas id="temperaturaAll"></canvas>
+          </section>
+        </div>
+        <div id="sectionCanvas2">
+          <section class="cardSection">
+            <span class="pieTitle">Incubadoras Disponíveis</span>
+            <canvas id="incubadorasUso"></canvas>
+          </section>
+          <section class="cardSection">
+            <span class="pieTitle">Bebês Vulneráveis</span>
+            <canvas id="bebesCritico"></canvas>
+          </section>
+          <section class="cardSection">
+            <span class="pieTitle">Taxa de Prematuridade</span>
+            <canvas id="prematuridade"></canvas>
+          </section>
+        </div>
+      </div>
+      <div class="section" id="sectionInfos">
         <h1>Selecione as opções desejadas:</h1>
         <div class="opcoes">
           <button id="botaoGeral" onclick="btnGeral()">Geral</button>
@@ -30,40 +62,39 @@
     </div>
     <div class="footer">
       <div class="developers">
-        <h3>Desenvolvedores da SafeSleep:</h3>
+        <h3>Desenvolvedores da SafeSleep</h3>
         <ul>
-          <li>Bruno Yuji Takahashi</li>
-          <li>Diego Crispim dos Santos Campos</li>
-          <li>Fabrício Prudente Ferreira</li>
-          <li>Ivan Rangel Pestana Marcolin</li>
-          <li>Lucas Tetsuo Nagasse</li>
-          <li>Matheus Yukio Makiyama</li>
-          <li>Renan Rocha Pacanaro</li>
+          <li>Bruno Yuji Takahashi - 04241032</li>
+          <li>Diego Crispim dos Santos Campos - 04241019</li>
+          <li>Fabricio Prudente Ferreira - 04241070</li>
+          <li>Ivan Rangel Pestana Marcolin - 04241013</li>
+          <li>Lucas Tetsuo Nagasse - 04241066</li>
+          <li>Matheus Yukio Makiyama - 04241061</li>
+          <li>Renan Rocha Pacanaro - 04241004</li>
         </ul>
       </div>
       <div class="contact">
-        <h3>Contato:</h3>
+        <h3>Contatos</h3>
         <ul>
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./images/logo.png" class="logo" />
+        <img src="./images/ssLogoName.png" class="logo" />
       </div>
     </div>
+    <script src="./chartjs.js"></script>
   </body>
 </html>
 
 <script>
-  var totalIncubadoras = 10;
-  var mainContent = `<div class="section">
+  var totalIncubadoras = 4;
+  var mainContent = `
   <h1>Selecione as opções desejadas:</h1>
   <div class="opcoes">
     <button id="botaoGeral" onclick="btnGeral()">Geral</button>
     <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
     <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
-  </div>
-</div>
-<hr />`;
+  </div>`;
   var btnApertado = "";
 
   function showSelect() {
@@ -74,24 +105,25 @@
       }
     } else if (btnApertado == "risco") {
       for (var cont = 1; cont <= totalIncubadoras; cont++) {
-        if (cont == 1 || cont == 3 || cont == 7 || cont == 9) {
+        if (cont == 1 || cont == 3) {
           selectContent += `<option value="${cont}">Incubadora ${cont}</option>`;
         }
       }
     }
-    main.innerHTML = `${mainContent}
-<div class="section">
-  <h2>Selecione a incubadora para ver informações adicionais:</h2>
-  <div class="selecao">
-    <label>
-      <span>Selecione a incubadora:</span>
-      <select id="selectIncubadora" onchange="verificar()">
-        <option value="0" selected disabled>Selecione a incubadora</option>
-        ${selectContent}
-      </select>
-    </label>
-  </div>
-</div>`;
+    sectionInfos.innerHTML = `${mainContent}
+    <hr/>
+    <div class="section">
+      <h2>Selecione a incubadora para ver informações adicionais:</h2>
+      <div class="selecao">
+        <label>
+          <span>Selecione a incubadora:</span>
+          <select id="selectIncubadora" onchange="verificar()">
+            <option value="0" selected disabled>Selecione a incubadora</option>
+            ${selectContent}
+          </select>
+        </label>
+      </div>
+    </div>`;
   }
 
   function btnGeral() {
@@ -106,66 +138,178 @@
 
   function btnAlertas() {
     btnApertado = "alertas";
-    main.innerHTML = `${mainContent}
-<div id="divResponse" class="section row">
-  <img src= "https://support.content.office.net/pt-br/media/c77dc6ec-262c-4bab-b22c-74f4ac54e134.gif" alt="" id="">
-  <img src= "https://invitedresearcher.com/wp-content/uploads/2022/11/CAPA_Grafico_de_Pizza1.png" alt="">
-</div>`;
+    sectionInfos.innerHTML = `${mainContent}
+      <div id='divResponse' class='section'>
+        <section class="cardSection">
+          <span class="pieTitle">Quantidade de Bebês com Risco de Adquirir Doenças</span>
+          <canvas id='pieRisk'></canvas>
+        </section>
+      </div>
+    `;
+
+    var divPieRisk = document.getElementById('pieRisk').getContext('2d');
+    divPieRisk.canvas.width = 1;
+    divPieRisk.canvas.height = 1;
+
+    var graficoPieRisk = new Chart(
+        divPieRisk,
+        {
+            type: 'pie',
+            data: {
+                labels: ['Risco de Hipotermia', 'Risco de Hipertermia'],
+                datasets: [{
+                    data: [1, 1],
+                    backgroundColor: [
+                    '#003050',
+                    '#19A7A8'
+                    ]
+                }]
+            }
+        }
+    )
   }
+
+  var temperatura_maxima = 0;
+  var temperatura_minima = 0;
 
   function verificar() {
     var incubadora = selectIncubadora.value;
-    showSelect();
+    var nomeDoBebe = "";
+    var nomeDoResponsavel = "";
+    var parentesco = "";
+    var nomeDoMedico = "";
+    var peso = 0;
+    var idade = 0;
+    var prematuridade = "";
+    var temperatures = [];
+    var maxTemperatures = [];
+    var minTemperatures = [];
 
-    main.innerHTML += `<hr />
-<div id="divResponse" class="section"></div>`;
+    sectionInfos.innerHTML = `${mainContent}
+    <div id="divResponse" class="section">
+      <span class='lineTitle'>Temperatura da Incubadora Nº${incubadora}</span>  
+      <section id='lineSection'>
+        <canvas id='incubadoraNum${incubadora}'></canvas>
+      </section>
+      <span id='kidInfo'></span>
+    </div>`;
 
-    if (incubadora == 1) {
-      var peso = 2;
-      var tempo = 10;
-      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
-    } else if (incubadora == 2) {
-      var peso = 1.2;
-      var tempo = 14;
-      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
-    } else if (incubadora == 3) {
-      var peso = 1.5;
-      var tempo = 11;
-      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
-    } else if (incubadora == 4) {
-      var peso = 1.8;
-      var tempo = 12;
-      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
-    } else if (incubadora == 5) {
-      var peso = 0.9;
-      var tempo = 6;
-      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
-    } else if (incubadora == 6) {
-      var peso = 2.2;
-      var tempo = 9;
-      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
-    } else if (incubadora == 7) {
-      var peso = 1.9;
-      var tempo = 10;
-      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
-    } else if (incubadora == 8) {
-      var peso = 2.1;
-      var tempo = 7;
-      var img = "https://exceleasy.com.br/wp-content/uploads/2023/01/Grafico-de-linhas-no-Excel.png";
-    } else if (incubadora == 9) {
-      var peso = 2.8;
-      var tempo = 4;
-      var img = "https://wiki.taticview.com/images/e/e1/Linechart_ex1.png";
-    } else if (incubadora == 10) {
-      var peso = 3;
-      var tempo = 14;
-      var img = "https://www.alura.com.br/artigos/assets/uploads/2018/05/image6-1.png";
+    if(incubadora == 1)
+    {
+      nomeDoBebe = 'Maria';
+      nomeDoMedico = "Gustavo";
+      nomeDoResponsavel = "Paulo";
+      parentesco = "Pai";
+      peso = 3.2;
+      idade = 3;
+      temperatures = [32.25, 32, 31.5, 31.25, 30, 31.1, 32.5];
+      prematuridade = "Não";
+    } else if(incubadora == 2){
+      nomeDoBebe = "Enzo";
+      nomeDoMedico = "José";
+      nomeDoResponsavel = "Lourdes";
+      parentesco = "Mãe";
+      peso = 2.1;
+      idade = 1;
+      temperatures = [32.25, 32.5, 32.3, 31.8, 32.3, 32.25, 31.4];
+      prematuridade = "Sim";
+    } else if(incubadora == 3){
+      nomeDoBebe = "Lucas";
+      nomeDoMedico = "Ricardo";
+      nomeDoResponsavel = "Vanessa";
+      parentesco = "Mãe";
+      peso = 2.7;
+      idade = 1;
+      temperatures = [32.6, 32.05, 31.7, 31.95, 31.3, 31.1, 30.5];
+      prematuridade = "Não"
+    } else {
+      nomeDoBebe = "Valentina";
+      nomeDoMedico = "Douglas";
+      nomeDoResponsavel = "Iris";
+      parentesco = "Tia";
+      peso = 3.7;
+      idade = 4;
+      temperatures = [31.4, 29.3, 30.25, 30.75, 30.9, 31.1, 30.1];
+      prematuridade = "Não"
     }
-    divResponse.innerHTML = `<h2>Incubadora ${incubadora}</h2><p> Peso: ${peso} KG || Tempo de uso da incubadora: ${tempo} dias</p>
-<img src="${img}" alt="gráfico">`;
+
+
+    if(prematuridade == "Sim"){
+      temperatura_maxima = 35;
+      temperatura_minima = 32;
+    } else {
+      temperatura_maxima = 32;
+      temperatura_minima = 29.5;
+    }
+    
+
+    for(var cont = 0; cont < 7; cont++){
+      maxTemperatures[cont] = temperatura_maxima;
+      minTemperatures[cont] = temperatura_minima;
+    }
+
+    gerarGraficoInc(
+      `incubadoraNum${incubadora}`,
+      temperatures,
+      maxTemperatures,
+      minTemperatures
+    );
+
+    kidInfo.innerHTML += `
+      <strong>Criança: ${nomeDoBebe}</strong><br>
+      Peso: ${peso} kg | Idade: ${idade} dias | Prematuro? ${prematuridade}<br>
+      Responsável pela Criança: ${nomeDoResponsavel} | Parentesco: ${parentesco}<br>
+      Médico Responsável: ${nomeDoMedico}
+    `
   }
 
-  function sair() {
-    window.location.href = "./login.html";
+  function gerarGraficoInc(divId, temperature, max, min){
+    var incubadoraElement = document.getElementById(divId).getContext('2d');
+    incubadoraElement.canvas.parentNode.style.width = '1600px';
+    incubadoraElement.canvas.parentNode.style.height = '400px';
+    incubadoraElement.canvas.width = 4;
+    incubadoraElement.canvas.height = 1;
+    
+    var chartIncubadora = new Chart(
+        incubadoraElement,
+        {
+            type: 'line',
+            data: {
+                labels: ['10h', '11h', '12h', '13h', '14h', '15h', '16h'],
+                datasets: [{
+                    label: 'Temperatura da Incubadora (°C)',
+                    data: temperature,
+                    borderWidth: 4,
+                    borderColor: '#415a74',
+                    backgroundColor: 'transparent'
+                },{
+                    label: 'Temperatura Máxima (°C)',
+                    data: max,
+                    borderWidth: 4,
+                    borderColor: '#003050',
+                    backgroundColor: 'transparent',
+                    pointRadius: 0
+                },{
+                    label: 'Temperatura Mínima (°C)',
+                    data: min,
+                    borderWidth: 4,
+                    borderColor: '#19A7A8',
+                    backgroundColor: 'transparent',
+                    pointRadius: 0
+                }]
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false,
+                        min: Number(temperatura_minima.toFixed(0)) - 2,
+                        max: Number(temperatura_maxima.toFixed(0)) + 2
+                    }
+                }]
+              }
+            }
+        }
+    )
   }
 </script>

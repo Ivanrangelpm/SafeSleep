@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+  <head> 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SafeSleep | Gerenciar</title>
@@ -9,107 +9,98 @@
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./images/Logo_SafeSleep.png" alt="logo" class="logo" /></a>
+      <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="./sobreNos.html">Sobre Nós</a></li>
         <li><a class="paginaAtual" href="./gerenciar.html">Gerenciar</a></li>
         <li><a href="./dashboard.html">Incubadoras</a></li>
         <li><button onclick="sair()">Sair</button></li>
       </ul>
     </div>
     <div class="main">
+      <div class="leftDiv">
+        <img src="./images/Logo_SafeSleep.png" alt="logomarca" class="leftLogo">
+        <div class="topics">
+          <h3>Cadastrar...</h3>
+          <button onclick="changeRegisterForm(1)" id="btn1">Funcionário</button>
+          <button onclick="changeRegisterForm(2)" id="btn2">Incubadora</button>
+          <button onclick="changeRegisterForm(3)" id="btn3">Bebê</button>
+          <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button>
+        </div>
+      </div>
       <div class="section">
-        <h1>Cadastros</h1>
-        <h3><a href="redefinirSenha.html">Redefinir a senha</a></h3> <br>
         <div class="cadastros">
-          <div class="form">
+          <div class="form" id="form1">
             <h1>Cadastro de funcionário</h1>
             <div class="inputs">
               <label>
-                <span>Nome Completo:</span>
-                <input type="text" id="inputFuncionarioNome" />
+                <span>Nome:</span>
+                <input type="text" id="inputFuncionarioNome" placeholder="Nome"/>
+              </label>
+              <label>
+                <span>Sobrenome:</span>
+                <input type="text" id="inputFuncionarioSobrenome" placeholder="Sobrenome"/>
               </label>
               <label>
                 <span>CPF:</span>
-                <input type="text" id="inputFuncionarioCpf" />
+                <input type="text" id="inputFuncionarioCpf" placeholder="xxx.xxx.xxx-xx"/>
+              </label>
+              <label>
+                <span>Licença Médica:</span>
+                <input type="text" id="inputFuncionarioLicenca" placeholder="Licença Médica"/>
+              </label>
+              <label>
+                <span>Cargo:</span>
+                <input type="text" id="inputFuncionarioCargo" placeholder="Cargo"/>
               </label>
               <label>
                 <span>Senha:</span>
-                <input type="password" id="inputFuncionarioSenha" />
+                <input type="password" id="inputFuncionarioSenha" placeholder="Senha"/>
               </label>
               <label>
                 <span>Confirme sua senha:</span>
-                <input type="password" id="inputFuncionarioConfirmarSenha" />
+                <input type="password" id="inputFuncionarioConfirmarSenha" placeholder="Senha"/>
               </label>
             </div>
             <span id="spanResponseFuncionario" class="error">(A senha deve possuir pelo menos 8 caracteres e um caracter especial)</span>
             <button onclick="cadastrarFuncionario()">Cadastrar</button>
           </div>
-          <div class="form">
+          <div class="form" id="form2">
             <h1>Cadastro de incubadoras</h1>
             <div class="inputs">
               <label>
-                <span>Código de série:</span>
-                <input type="text" id="inputIncubadoraCodigo" />
+                <span>Código de Série:</span>
+                <input type="text" id="inputIncubadoraCodigo" placeholder="Código"/>
               </label>
               <label>
-                <span>Modelo:</span>
-                <input type="text" id="inputIncubadoraModelo" />
+                <span>Modelo da Incubadora:</span>
+                <input type="text" id="inputIncubadoraModelo" placeholder="Modelo"/>
               </label>
               <span id="spanResponseIncubadora" class="error"></span>
               <button onclick="cadastrarIncubadora()">Cadastrar</button>
             </div>
           </div>
-          <div class="form">
-            <h1>Cadastro do responsável</h1>
+          <div class="form" id="form3">
+            <h1>Cadastro do Bebê</h1>
             <div class="inputs">
               <label>
-                <span>Nome Completo:</span>
-                <input type="text" id="inputResponsavelNome" />
+                <span>Nome:</span>
+                <input type="text" id="inputBebeNome" placeholder="Nome"/>
               </label>
               <label>
-                <span>Apelido:</span>
-                <input type="text" id="inputResponsavelApelido" />
-              </label>
-              <label>
-                <span>CPF:</span>
-                <input type="text" id="inputResponsavelCpf" />
-              </label>
-              <label>
-                <span>Email:</span>
-                <input type="text" id="inputResponsavelEmail" />
-              </label>
-              <label>
-                <span>Telefone:</span>
-                <input type="text" id="inputResponsavelTelefone" />
-              </label>
-              <label>
-                <span>Parentesco:</span>
-                <input type="text" id="inputResponsavelParentesco" />
-              </label>
-              <span id="spanResponseResponsavel" class="error"></span>
-              <button onclick="cadastrarResponsavel()">Cadastrar</button>
-            </div>
-          </div>
-          <div class="form">
-            <h1>Cadastro do bebê</h1>
-            <div class="inputs">
-              <label>
-                <span>Nome Completo:</span>
-                <input type="text" id="inputBebeNome" />
+                <span>Sobrenome:</span>
+                <input type="text" id="inputBebeSobrenome" placeholder="Sobrenome"/>
               </label>
               <label>
                 <span>Responsável:</span>
-                <input type="text" id="inputBebeResponsavel" />
+                <input type="text" id="inputBebeResponsavel" placeholder="Nome do Responsável"/>
               </label>
               <label>
                 <span>Código da incubadora:</span>
-                <input type="text" id="inputBebeIncubadora" />
+                <input type="text" id="inputBebeIncubadora" placeholder="Código de Série"/>
               </label>
               <label>
                 <span>Data de nascimento:</span>
-                <input type="text" id="inputBebeNasc" />
+                <input type="date" id="inputBebeNasc" placeholder="dd/mm/aaaa"/>
               </label>
               <label>
                 <span>Sexo:</span>
@@ -131,34 +122,123 @@
               <button onclick="cadastrarBebe()">Cadastrar</button>
             </div>
           </div>
+          <div class="form" id="form4">
+            <h1>Cadastro do responsável</h1>
+            <div class="inputs">
+              <label>
+                <span>Nome:</span>
+                <input type="text" id="inputResponsavelNome" placeholder="Nome"/>
+              </label>
+              <label>
+                <span>Sobrenome:</span>
+                <input type="text" id="inputResponsavelSobrenome" placeholder="Sobrenome"/>
+              </label>
+              <label>
+                <span>CPF:</span>
+                <input type="text" id="inputResponsavelCpf" placeholder="xxx.xxx.xxx-xx"/>
+              </label>
+              <label>
+                <span>E-mail:</span>
+                <input type="text" id="inputResponsavelEmail" placeholder="E-mail"/>
+              </label>
+              <label>
+                <span>Telefone:</span>
+                <input type="text" id="inputResponsavelTelefone" placeholder="(xx) xxxxx-xxxx"/>
+              </label>
+              <label>
+                <span>Parentesco:</span>
+                <select id="selectParentesco">
+                  <option disabled selected>Selecione</option>
+                  <option>Mãe</option>
+                  <option>Pai</option>
+                  <option>Irmão / Irmã </option>
+                  <option>Avô / Avó</option>
+                  <option>Tio / Tia</option>
+                  <option>Outro</option>
+                </select>
+              </label>
+              <span id="spanResponseResponsavel" class="error"></span>
+              <button onclick="cadastrarResponsavel()">Cadastrar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="footer">
       <div class="developers">
-        <h3>Desenvolvedores da SafeSleep:</h3>
+        <h3>Desenvolvedores da SafeSleep</h3>
         <ul>
-          <li>Bruno Yuji Takahashi</li>
-          <li>Diego Crispim dos Santos Campos</li>
-          <li>Fabrício Prudente Ferreira</li>
-          <li>Ivan Rangel Pestana Marcolin</li>
-          <li>Lucas Tetsuo Nagasse</li>
-          <li>Matheus Yukio Makiyama</li>
-          <li>Renan Rocha Pacanaro</li>
+          <li>Bruno Yuji Takahashi - 04241032</li>
+          <li>Diego Crispim dos Santos Campos - 04241019</li>
+          <li>Fabricio Prudente Ferreira - 04241070</li>
+          <li>Ivan Rangel Pestana Marcolin - 04241013</li>
+          <li>Lucas Tetsuo Nagasse - 04241066</li>
+          <li>Matheus Yukio Makiyama - 04241061</li>
+          <li>Renan Rocha Pacanaro - 04241004</li>
         </ul>
       </div>
       <div class="contact">
-        <h3>Contato:</h3>
+        <h3>Contatos</h3>
         <ul>
           <li>safesleep@gmail.com</li>
           <li>+55 11 99999-9999</li>
         </ul>
-        <img src="./images/logo.png" class="logo" />
+        <img src="./images/ssLogoName.png" class="logo" />
       </div>
     </div>
   </body>
 </html>
 <script>
+  function changeRegisterForm(form){
+    var form1 = document.getElementById('form1');
+    var form2 = document.getElementById('form2');
+    var form3 = document.getElementById('form3');
+    var form4 = document.getElementById('form4');
+    var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    var btn3 = document.getElementById('btn3');
+    var btn4 = document.getElementById('btn4');
+
+    if(form == 1){
+      form1.style.display = 'flex';
+      form2.style.display = 'none';
+      form3.style.display = 'none';
+      form4.style.display = 'none';
+      btn1.style.backgroundColor = '#19A7A8';
+      btn2.style.backgroundColor = '#2d4053';
+      btn3.style.backgroundColor = '#2d4053';
+      btn4.style.backgroundColor = '#2d4053';
+    } else if(form == 2){
+      form1.style.display = 'none';
+      form2.style.display = 'flex';
+      form3.style.display = 'none';
+      form4.style.display = 'none';
+      btn1.style.backgroundColor = '#2d4053';
+      btn2.style.backgroundColor = '#19A7A8';
+      btn3.style.backgroundColor = '#2d4053';
+      btn4.style.backgroundColor = '#2d4053';
+    } else if(form == 3){
+      form1.style.display = 'none';
+      form2.style.display = 'none';
+      form3.style.display = 'flex';
+      form4.style.display = 'none';
+      btn1.style.backgroundColor = '#2d4053';
+      btn2.style.backgroundColor = '#2d4053';
+      btn3.style.backgroundColor = '#19A7A8';
+      btn4.style.backgroundColor = '#2d4053';
+    } else {
+      form1.style.display = 'none';
+      form2.style.display = 'none';
+      form3.style.display = 'none';
+      form4.style.display = 'flex';
+      btn1.style.backgroundColor = '#2d4053';
+      btn2.style.backgroundColor = '#2d4053';
+      btn3.style.backgroundColor = '#2d4053';
+      btn4.style.backgroundColor = '#19A7A8';
+    }
+
+  }
+
   function cadastrar() {
     var telefone = input_telefone.value;
     var cpf = input_cpf.value;

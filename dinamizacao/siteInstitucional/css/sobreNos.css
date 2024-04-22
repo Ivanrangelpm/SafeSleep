@@ -1,4 +1,104 @@
+* {
+  text-align: justify;
+}
+
 .main .section p {
   margin: 0 20%;
-  font-size: 1.2rem;
+}
+
+.identidade {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.identidade .idCard {
+  transition: transform 0.2s, background-color 0.2s, color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #001725;
+  border-radius: 20px;
+  width: 500px;
+  color: white;
+  padding: 20px;
+  border: 10px dashed #eaefea;
+}
+
+.identidade .idCard:hover {
+  transform: scale(105%, 105%);
+}
+
+.idCard h2 {
+  font-size: 31px;
+  color: #eaefea;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-bottom: #eaefea dashed 6px;
+}
+
+.idCard img {
+  width: 200px;
+  height: 200px;
+  margin: 30px 0;
+}
+
+.idCard span {
+  font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  border: 7px dashed #001725;
+  background-color: #eaefea;
+  color: #001725;
+  border-radius: 10px;
+}
+
+.members {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 550px;
+  justify-content: space-around;
+}
+
+.members .card {
+  transition: transform 0.2s, background-color 0.2s, color 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 3px solid #003050;
+  background-color: #f0f5f0;
+  border-radius: 10px;
+  width: 400px;
+  height: 500px;
+}
+
+.members .card:hover{
+  transform: scale(110%, 110%);
+}
+
+.card h2 {
+  font-size: 30px;
+  background-color: #003050;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.card img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 2px solid #003050;
+}
+
+.diagrama {
+  width: 70%;
+  border: 8px dashed #101F2F;
+  border-radius: 8px;
 }

@@ -1,10 +1,85 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
+
+.section h1 {
+  margin-top: 30px;
+}
+
+.main .leftDiv {
+  width: 45%;
+  height: 1100px;
+  background-color: #0d1c2b;
+  justify-content: space-evenly;
+  color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .main .cadastros {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-between;
+  width: 73vw;
+  justify-content: center;
 }
+
 .main .cadastros .form {
-  width: 48%;
+  width: 50%;
+  margin: 30px 0;
+}
+
+.form button {
+  background-color: #0d5858;
+  width: 200px;
+}
+
+.form button:hover{
+  background-color: #19A7A8;
+}
+
+#form1 {
+  display: flex;
+}
+
+#form2 {
+  display: none;
+}
+
+#form3 {
+  display: none;
+}
+
+#form4 {
+  display: none;
+}
+
+.leftLogo {
+  width: 250px;
+  height: 250px;
+}
+
+.topics {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+  font-size: 25px;
+}
+
+.topics button {
+  width: 85%;
+  height: 50px;
+  background-color: #2d4053;
+  font-size: 25px;
+}
+
+#btn1 {
+  background-color: #19A7A8;
 }

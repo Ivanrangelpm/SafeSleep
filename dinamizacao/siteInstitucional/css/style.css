@@ -18,6 +18,10 @@ cores:
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+p {
+  font-size: 1.5rem;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -25,7 +29,7 @@ body {
   min-height: 100vh; /* altura mínima */
   background-color: #eaefea;
   color: #101030;
-}
+} 
 
 .header {
   display: flex;
@@ -33,39 +37,52 @@ body {
   justify-content: space-between;
   padding: 1%;
   width: 100%;
-  background-color: #507090;
+  background-color: #001725;
 }
+
 .header .logo {
-  height: 5rem;
+  height: 110px;
+  width: 220px;
 }
+
 .header .navbar {
   display: flex;
-  gap: 2rem; /* espaço fixo entre 2 itens */
+  gap: 3rem; /* espaço fixo entre 2 itens */
   align-items: center;
   list-style-type: none;
+  margin-right: 20px;
 }
+
 .header .navbar * {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: #eaefea;
 }
+
 .header .navbar a {
   text-decoration: none;
 }
+
 .header .navbar a:hover {
   text-decoration: underline;
+  color: #b2fafa;
 }
+
 .header .navbar button {
   transition: color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
   cursor: pointer;
   border: none;
   background-color: transparent;
 }
+
 .header .navbar button:hover {
   color: #e07070;
 }
+
 .header .navbar .paginaAtual {
-  font-weight: 100;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #20d8d8
 }
 
 .main {
@@ -75,11 +92,13 @@ body {
   margin: 3%;
   width: 94%;
 }
+
 .main hr {
   margin: 3% 0;
   border: 1px solid #101030;
   width: 90%;
 }
+
 .main button {
   transition: transform 0.2s, background-color 0.2s;
   cursor: pointer;
@@ -88,14 +107,14 @@ body {
   padding: 0.5rem;
   font-family: monospace;
   font-weight: bold;
-  color: #101030;
-  background-color: #70e070;
+  color: #fff;
 }
+
 .main button:hover {
   /* estilização somente para quando o mouse estiver em cima do elemento */
   transform: scale(110%, 110%); /* altera o tamanho com base no tamanho atual */
-  background-color: #60d060;
 }
+
 .main .error {
   font-weight: bold;
   color: red;
@@ -107,52 +126,62 @@ body {
   align-items: center;
   width: 100%;
 }
+
 .main .section h1 {
   margin-bottom: 2%;
+  font-size: 45px;
+  text-align: center;
 }
+
 .main .section h2 {
   margin-bottom: 2%;
+  font-size: 35px; 
 }
 
 .main .form {
-  display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  border-radius: 5px;
+  width: 750px;
+  border-radius: 8px;
   padding: 2rem;
   border: 2px solid #101030;
   background-color: #f0f5f0;
 }
+
 .main .form .inputs {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
 }
+
 .main .form .inputs label {
   display: flex;
   flex-direction: column;
-  gap: .2rem;
-  align-items: center;
+  gap: 0.5rem;
+  align-items: flex-start;
   border-radius: 5px;
 }
 .main .form .inputs span {
   font-weight: bold;
   color: #101030;
+  text-align: center;
 }
 .main .form .inputs input {
   border-radius: 5px;
-  padding: 0.2rem;
-  width: 15rem;
+  padding: 0.5rem;
+  width: 31rem;
   color: #101030;
+  height: 40px;
 }
 .main select {
   border-radius: 5px;
   border: 2px solid #101030;
-  padding: 0.2rem;
-  width: 15rem;
+  padding: 0.5rem;
+  width: 31rem;
+  height: 40px;
   font-weight: bold;
   color: #101030;
 }
@@ -168,8 +197,10 @@ body {
   margin-top: auto;
   padding: 1%;
   width: 100%;
-  background-color: #003050;
+  background-color: #001725;
   color: #eaefea;
+  line-height: 26px;
+  text-align: center;
 }
 .footer div {
   display: flex;
@@ -187,12 +218,13 @@ body {
 
 .linkRedirecionar{
   width: 93vw;
-  text-align: right;
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .linkRedirecionar a{
-  color: black;
+  color: #2d4053;
+  font-weight: bold;
 }
 
 .enviado {

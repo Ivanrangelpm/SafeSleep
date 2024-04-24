@@ -59,9 +59,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  border: 8px #eaefea dashed;
-  padding: 10px;
-  padding-top: 0;
+  padding: 20px;
   width: 25%;
   background-color: #0d1c2b;
   color: white;
@@ -74,7 +72,6 @@
   font-size: 1.8rem;
   width: 80%;
   color: white;
-  border-bottom: 7px white dashed;
   text-align: center;
 }
 
@@ -99,8 +96,6 @@
   align-items: center;
   justify-content: center;
   height: auto;
-  border-top: 20px dashed #19A7A8;
-  border-bottom: 20px dashed #19A7A8;
   margin-bottom: 80px;
   padding: 20px 0;
 }

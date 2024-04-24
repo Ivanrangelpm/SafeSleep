@@ -21,7 +21,7 @@
   </head>
   <body>
     <div class="header">
-      <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
+      <a><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
       <ul class="navbar">
         <li><a href="./gerenciar.html">Gerenciar</a></li>
         <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
@@ -200,7 +200,7 @@
       nomeDoMedico = "Gustavo";
       nomeDoResponsavel = "Paulo";
       parentesco = "Pai";
-      peso = 3.2;
+      peso = 1.78;
       idade = 3;
       temperatures = [32.25, 32, 31.5, 31.25, 30, 31.1, 32.5];
       prematuridade = "Não";
@@ -209,7 +209,7 @@
       nomeDoMedico = "José";
       nomeDoResponsavel = "Lourdes";
       parentesco = "Mãe";
-      peso = 2.1;
+      peso = 1.5;
       idade = 1;
       temperatures = [32.25, 32.5, 32.3, 31.8, 32.3, 32.25, 31.4];
       prematuridade = "Sim";
@@ -218,7 +218,7 @@
       nomeDoMedico = "Ricardo";
       nomeDoResponsavel = "Vanessa";
       parentesco = "Mãe";
-      peso = 2.7;
+      peso = 1.66;
       idade = 1;
       temperatures = [32.6, 32.05, 31.7, 31.95, 31.3, 31.1, 30.5];
       prematuridade = "Não"
@@ -227,21 +227,87 @@
       nomeDoMedico = "Douglas";
       nomeDoResponsavel = "Iris";
       parentesco = "Tia";
-      peso = 3.7;
+      peso = 2.41;
       idade = 4;
       temperatures = [31.4, 29.3, 30.25, 30.75, 30.9, 31.1, 30.1];
       prematuridade = "Não"
     }
 
+    
+    
+    /*
+    Dias  |     < 1.5 kg     |  1.5 kg à 2.49 kg  |    >= 2.5 kg
+          |      (col1)      |        (col2)      |      (col3)                  
+    ----  |  --------------  |  ----------------  |    ---------
+    1     |  33.5 à >= 35°C  |      32 à 34°C     |    31 à 34°C
+    2     |     33 à 35°C    |    31.5 à 33.5°C   |  30.5 à 33.5°C
+    3     |     33 à 34°C    |    31.2 à 33.4°C   |  30.1 à 33.2°C
+    4     |     33 à 34°C    |     31 à 32.5°C    |  29.8 à 32.8°C
+    5-14  |     33 à 34°C    |      31 à 33°C     |   29 à 32.5°C
+    
 
-    if(prematuridade == "Sim"){
-      temperatura_maxima = 35;
-      temperatura_minima = 32;
-    } else {
-      temperatura_maxima = 32;
-      temperatura_minima = 29.5;
+
+    ===============  Captura de Temperatura Máxima & Mínima ideal para a criança  ===============
+
+      Temperatura Máxima/Mínima Ideal = Valor Base(quando peso = 0kg) - (°C/kg Reduzido * Peso da Criança) 
+      
+      °C/kg Reduzido = ((min_col1 + max_col2) / 2) - ((min_col2 + max_col3) / 2)
+      Valor Base = (°C/kg Reduzido * 1.5 kg) + (min_col1 + max_col2) / 2
+      
+      Não Prematuros: Reduz em até 2°C a temperatura ideal
+      
+      Cálculo baseado na Tabela "Faixas de ambiente termoneutro" realizada pelo Ministério da Saúde
+      */
+     
+     
+     var mediaCol1_2 = 0;
+     var mediaCol2_3 = 0;
+     var celsius_kilo = 0;
+     var diferenca = 0;
+
+     var valor_base = 0;
+
+    if(idade === 1){
+      mediaCol1_2 = (33.5 + 34) / 2;
+      mediaCol2_3 = (32 + 34) / 2;
+      diferenca = ((35 - 33.5) + (34 - 32) + (34 - 31)) / 3;
+    } 
+
+    else if(idade === 2){
+      mediaCol1_2 = (33 + 33.5) / 2;
+      mediaCol2_3 = (31.5 + 33.5) / 2;
+      diferenca = ((35 - 33) + (33.5 - 31.5) + (33.5 - 30.5)) / 3;
+    }
+
+    else if(idade === 3){
+      mediaCol1_2 = (33 + 33.4) / 2;
+      mediaCol2_3 = (31.2 + 33.2) / 2;
+      diferenca = ((34 - 33) + (33.4 - 31.2) + (33.2 - 30.1)) / 3;
     }
     
+    else if(idade === 4){
+      mediaCol1_2 = (33 + 33.2) / 2;
+      mediaCol2_3 = (31 + 32.8) / 2;
+      diferenca = ((34 - 33) + (33.2 - 31) + (32.8 - 29.8)) / 3;
+    }
+
+    else {
+      mediaCol1_2 = (33 + 33) / 2;
+      mediaCol2_3 = (31 + 32.5) / 2;
+      diferenca = ((34 - 33) + (33 - 31) + (32.5 - 29)) / 3;
+    }
+
+    celsius_kilo = mediaCol1_2 - mediaCol2_3;
+    valor_base = mediaCol1_2 + (celsius_kilo * 1.5);
+
+    console.log(mediaCol1_2, mediaCol2_3, valor_base, celsius_kilo, diferenca);
+    temperatura_maxima = valor_base - (celsius_kilo * peso);
+    temperatura_minima = temperatura_maxima - diferenca;
+    
+    if(prematuridade == "Não"){
+      temperatura_maxima -= 0.8;
+      temperatura_minima -= 0.8;
+    }
 
     for(var cont = 0; cont < 7; cont++){
       maxTemperatures[cont] = temperatura_maxima;
@@ -303,8 +369,8 @@
                 yAxes: [{
                     ticks: {
                         beginAtZero: false,
-                        min: Number(temperatura_minima.toFixed(0)) - 2,
-                        max: Number(temperatura_maxima.toFixed(0)) + 2
+                        min: Number(temperatura_minima.toFixed(0)) - 1,
+                        max: Number(temperatura_maxima.toFixed(0)) + 1
                     }
                 }]
               }

@@ -10,7 +10,7 @@
 }
 
 .imgContainer span {
-  color: white;
+  color: white; 
   background-color: #0d1c2b;
   text-align: center;
   font-size: 60px;
@@ -45,34 +45,6 @@
   width: 40%;
 }
 
-.main .tecnologies {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 5%;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-}
-
-.main .tecnologies .box {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 80px;
-}
-
-.main .tecnologies .box img {
-  transition: transform 0.2s;
-  width: 250px;
-  height: 250px;
-}
-
-.main .tecnologies .box img:hover {
-  transform: scale(110%, 110%);
-}
-
 .main .advantages {
   display: flex;
   flex-wrap: wrap;
@@ -86,22 +58,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
-  border: 3px #0d1c2b solid;
-  padding: 1%;
+  border-radius: 5px;
+  border: 8px #eaefea dashed;
+  padding: 10px;
   padding-top: 0;
   width: 25%;
-  background-color: #f0f5f0;
-  color: #101030;
+  background-color: #0d1c2b;
+  color: white;
 }
 
 .main .advantages .card h2 {
-  border-radius: 0 0 10px 10px;
-  padding: 2% 7%;
+  padding: 20px 0;
   background-color: #0d1c2b;
   font-weight: bold;
   font-size: 1.8rem;
+  width: 80%;
   color: white;
+  border-bottom: 7px white dashed;
+  text-align: center;
 }
 
 .main .advantages .card img {

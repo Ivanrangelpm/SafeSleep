@@ -102,3 +102,64 @@
   border: 8px dashed #101F2F;
   border-radius: 8px;
 }
+
+.main .tecnologias {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 5%;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 50px;
+  border: 13px dashed #eaefea;
+  background-color: #001725;
+  background-image: url('../images/dot.png');
+}
+
+.main .tecnologias button {
+  transition: transform 0.2s;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  border: 7px dashed #001725;
+}
+
+.main .tecnologias button:hover {
+  transform: scale(110%, 110%);
+}
+
+.main .tecnologias button img {
+  width: 230px;
+  height: 230px;
+}
+
+.main .section #descricao {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 60px;
+}
+
+#descricao .content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#descricao .content span {
+  width: 100%;
+  margin-left: 70px;
+  font-size: 1.5rem;
+}
+
+#descricao .content img {
+  width: 300px;
+  height: 300px;
+}

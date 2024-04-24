@@ -46,6 +46,11 @@
       </div>
       <hr />
       <div class="section">
+        <h1>Nossa visão de negócio</h1>
+        <img src="images/diagrama_visao-de-negocio.png" class="diagrama">
+      </div>
+      <hr />
+      <div class="section">
         <h1>Desenvolvedores</h1>
         <div class="members">
           <div class="card">
@@ -87,30 +92,6 @@
           </div>
         </div>
       </div>
-      <hr />
-      <div class="section">
-        <h1>Nossa visão de negócio</h1>
-        <img src="images/diagrama_visao-de-negocio.png" class="diagrama">
-      </div>
-      <hr />
-      <div class="section">
-        <h1>Tecnologias</h1>
-        <div class="tecnologias" id="technologies">
-          <button onclick="showMore('HTML')">
-            <img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" alt="HTML" class="imgIcone" />
-          </button>
-          <button onclick="showMore('CSS')">
-            <img src="https://cdn-icons-png.flaticon.com/512/919/919826.png" alt="CSS" class="imgIcone" />
-          </button>
-          <button onclick="showMore('JavaScript')">
-            <img src="https://cdn-icons-png.flaticon.com/512/919/919828.png" alt="JS" class="imgIcone" />
-          </button>
-          <button onclick="showMore('Visual Studio Code')">
-            <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" alt="VSCode" class="imgIcone" />
-          </button>
-        </div>
-        <div id="descricao"></div>
-      </div>
     </div>
     <div class="footer">
       <div class="developers">
@@ -136,85 +117,3 @@
     </div>
   </body>
 </html>
-<script>
-  var cont = 1;
-  var content = "";
-
-  setInterval(() => {
-    if(cont === 0) {
-      cont = 1;
-      content = `
-        <button onclick="showMore('HTML')">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919827.png" alt="HTML" class="imgIcone" />
-        </button>
-        <button onclick="showMore('CSS')">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919826.png" alt="CSS" class="imgIcone" />
-        </button>
-        <button onclick="showMore('JavaScript')">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919828.png" alt="JS" class="imgIcone" />
-        </button>
-        <button onclick="showMore('Visual Studio Code')">
-          <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" alt="VSCode" class="imgIcone" />
-        </button>
-      `
-    } else {
-      cont = 0;
-      content = `
-        <button onclick="showMore('C++')">
-          <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" alt="C++" class="imgIcone" />
-        </button>
-        <button onclick="showMore('Arduino IDE')">
-          <img src="https://cdn.iconscout.com/icon/free/png-256/free-arduino-226072.png?f=webp" alt="Arduino" class="imgIcone">
-        </button>
-        <button onclick="showMore('NodeJS')">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919825.png" alt="NodeJS" class="imgIcone">
-        </button>
-        <button onclick="showMore('MySQL')">
-          <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" alt="MySQL" class="imgIcone">
-        </button>
-      `
-    }
-    technologies.innerHTML = content;
-  }, 3000);
-
-  function showMore(tecnologia){
-    var imgLink = "";
-    var desc = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti sint dignissimos repellendus nulla explicabo cum doloribus ad, optio, dolore incidunt rem nobis. Ipsa at saepe repellendus labore voluptatum nostrum tempore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aspernatur quidem voluptatibus provident laudantium. Obcaecati aliquid reprehenderit odio et nisi ducimus, ad voluptate doloribus assumenda adipisci soluta. Harum, excepturi deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti sint dignissimos repellendus nulla explicabo cum doloribus ad, optio, dolore incidunt rem nobis. Ipsa at saepe repellendus labore voluptatum nostrum tempore! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti sint dignissimos repellendus nulla explicabo cum doloribus ad, optio, dolore incidunt rem nobis. Ipsa at saepe repellendus labore voluptatum nostrum tempore!";
-
-    if(tecnologia == 'HTML'){
-      imgLink = "https://cdn-icons-png.flaticon.com/512/919/919827.png";
-      // desc = "";
-    } else if(tecnologia == 'CSS') {
-      imgLink = "https://cdn-icons-png.flaticon.com/512/919/919826.png";
-      // desc = "";
-    } else if(tecnologia == 'JavaScript') {
-      imgLink = "https://cdn-icons-png.flaticon.com/512/919/919828.png";
-      // desc = "";
-    } else if(tecnologia == 'Visual Studio Code') {
-      imgLink = "https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png";
-      // desc = "";
-    } else if(tecnologia == 'C++') {
-      imgLink = "https://cdn-icons-png.flaticon.com/512/6132/6132222.png";
-      // desc = "";
-    } else if(tecnologia == 'Arduino IDE') {
-      imgLink = "https://cdn.iconscout.com/icon/free/png-256/free-arduino-226072.png?f=webp";
-      // desc = "";
-    } else if(tecnologia == 'NodeJS') {
-      imgLink = "https://cdn-icons-png.flaticon.com/512/919/919825.png";
-      // desc = "";
-    } else {
-      imgLink = "https://cdn-icons-png.flaticon.com/512/919/919836.png";
-      // desc = "";
-    }
-
-    document.getElementById('descricao').style = 'border: 13px dashed #001725; margin-top: 50px'
-
-    descricao.innerHTML = `
-      <h2>${tecnologia}</h2>
-      <div class="content">
-        <img src=${imgLink} alt=${tecnologia} class="descricaoImg">
-        <span>${desc}</span>
-      </div>
-    `
-  }
-</script>

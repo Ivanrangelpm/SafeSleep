@@ -199,6 +199,7 @@
     var btn3 = document.getElementById('btn3');
     var btn4 = document.getElementById('btn4');
 
+    //Funcionário
     if(form == 1){
       form1.style.display = 'flex';
       form2.style.display = 'none';
@@ -208,7 +209,10 @@
       btn2.style.backgroundColor = '#2d4053';
       btn3.style.backgroundColor = '#2d4053';
       btn4.style.backgroundColor = '#2d4053';
-    } else if(form == 2){
+    } 
+    
+    //Incubadora
+    else if(form == 2){
       form1.style.display = 'none';
       form2.style.display = 'flex';
       form3.style.display = 'none';
@@ -217,7 +221,10 @@
       btn2.style.backgroundColor = '#19A7A8';
       btn3.style.backgroundColor = '#2d4053';
       btn4.style.backgroundColor = '#2d4053';
-    } else if(form == 3){
+    } 
+    
+    //Bebê
+    else if(form == 3){
       form1.style.display = 'none';
       form2.style.display = 'none';
       form3.style.display = 'flex';
@@ -226,7 +233,10 @@
       btn2.style.backgroundColor = '#2d4053';
       btn3.style.backgroundColor = '#19A7A8';
       btn4.style.backgroundColor = '#2d4053';
-    } else {
+    } 
+    
+    //Responsável
+    else {
       form1.style.display = 'none';
       form2.style.display = 'none';
       form3.style.display = 'none';
@@ -236,7 +246,6 @@
       btn3.style.backgroundColor = '#2d4053';
       btn4.style.backgroundColor = '#19A7A8';
     }
-
   }
 
   function cadastrar() {

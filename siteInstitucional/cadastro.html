@@ -45,7 +45,7 @@
             <h1>Cadastre seu Hospital</h1>
             <div class="inputs">
               <label>
-                <span>Razão social:</span>
+                <span>Razão social:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_razao" placeholder="Razão Social"/>
               </label>
               <label>
@@ -54,27 +54,27 @@
                 <div id="div_erro_fantasia" class="error"></div>
               </label>
               <label>
-                <span>CNPJ:</span>
+                <span>CNPJ:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_cnpj" oninput="formatar_cnpj()" placeholder="XX.XXX.XXX/XXXX-XX"/>
                 <div id="div_erro_cnpj" class="error"></div>
               </label>
               <label>
-                <span>E-mail:</span>
+                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_email" placeholder="E-mail"/>
                 <div id="div_erro_email" class="error"></div>
               </label>
               <label>
-                <span>Telefone:</span>
+                <span>Telefone:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_telefone" oninput="formatar_telefone()" placeholder="(xx) xxxx-xxxx"/>
                 <div id="div_erro_telefone" class="error"></div>
               </label>
               <label>
-                <span>CEP:</span>
+                <span>CEP:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_cep" placeholder="xxxxx-xxx"/>
                 <div id="div_erro_cep" class="error"></div>
               </label>
               <label>
-                <span>Número:</span>
+                <span>Número:<span class="campo_obrigatorio"> *</span></span>
                 <input type="number" id="input_numero" placeholder="Número da Instituição"/>
                 <div id="div_erro_numero" class="error"></div>
               </label>
@@ -84,27 +84,32 @@
             <h1>Cadastre-se como Representante</h1>
             <div class="inputs">
               <label>
-                <span>Nome:</span>
+                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_nome" placeholder="Nome"/>
                 <div id="div_erro_nome" class="error"></div>
               </label>
               <label>
-                <span>Sobrenome:</span>
+                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_sobrenome" placeholder="Sobrenome"/>
                 <div id="div_erro_sobrenome" class="error"></div>
               </label>
               <label>
-                <span>CPF:</span>
+                <span>CPF:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_cpf" oninput="formatar_cpf()" placeholder="xxx.xxx.xxx-xx"/>
                 <div id="div_erro_cpf" class="error"></div>
               </label>
               <label>
-                <span>Senha:</span>
+                <span>Licença Médica:<span class="campo_obrigatorio"> *</span></span>
+                <input type="text" id="input_licenca" placeholder="Licença Médica"/>
+                <div id="div_erro_licenca" class="error"></div>
+              </label>
+              <label>
+                <span>Senha:<span class="campo_obrigatorio"> *</span></span>
                 <input type="password" id="input_senha" placeholder="Senha"/>
                 <div id="div_erro_senha" class="error"></div>
               </label>
               <label>
-                <span>Confirme sua senha:</span>
+                <span>Confirme sua senha:<span class="campo_obrigatorio"> *</span></span>
                 <input type="password" id="input_confirmar" placeholder="Senha"/>
                 <div id="div_erro_confirmar" class="error"></div>
               </label>

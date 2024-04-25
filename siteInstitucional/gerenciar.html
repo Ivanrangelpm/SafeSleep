@@ -30,34 +30,30 @@
       <div class="section">
         <div class="cadastros">
           <div class="form" id="form1">
-            <h1>Cadastro de funcionário</h1>
+            <h1>Cadastro de Funcionário</h1>
             <div class="inputs">
               <label>
-                <span>Nome:</span>
+                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputFuncionarioNome" placeholder="Nome"/>
               </label>
               <label>
-                <span>Sobrenome:</span>
+                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputFuncionarioSobrenome" placeholder="Sobrenome"/>
               </label>
               <label>
-                <span>CPF:</span>
+                <span>CPF:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputFuncionarioCpf" placeholder="xxx.xxx.xxx-xx"/>
               </label>
               <label>
-                <span>Licença Médica:</span>
+                <span>Licença Médica:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputFuncionarioLicenca" placeholder="Licença Médica"/>
               </label>
               <label>
-                <span>Cargo:</span>
-                <input type="text" id="inputFuncionarioCargo" placeholder="Cargo"/>
-              </label>
-              <label>
-                <span>Senha:</span>
+                <span>Senha:<span class="campo_obrigatorio"> *</span></span>
                 <input type="password" id="inputFuncionarioSenha" placeholder="Senha"/>
               </label>
               <label>
-                <span>Confirme sua senha:</span>
+                <span>Confirme sua senha:<span class="campo_obrigatorio"> *</span></span>
                 <input type="password" id="inputFuncionarioConfirmarSenha" placeholder="Senha"/>
               </label>
             </div>
@@ -68,11 +64,11 @@
             <h1>Cadastro de incubadoras</h1>
             <div class="inputs">
               <label>
-                <span>Código de Série:</span>
+                <span>Código de Série:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputIncubadoraCodigo" placeholder="Código"/>
               </label>
               <label>
-                <span>Modelo da Incubadora:</span>
+                <span>Modelo da Incubadora:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputIncubadoraModelo" placeholder="Modelo"/>
               </label>
               <div id="erroIncubadora" style="color: red; font-weight: bold;"></div>
@@ -83,11 +79,11 @@
             <h1>Cadastro do Bebê</h1>
             <div class="inputs">
               <label>
-                <span>Nome:</span>
+                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputBebeNome" placeholder="Nome"/>
               </label>
               <label>
-                <span>Sobrenome:</span>
+                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputBebeSobrenome" placeholder="Sobrenome"/>
               </label>
               <label>
@@ -99,11 +95,11 @@
                 <input type="text" id="inputBebeIncubadora" placeholder="Código de Série"/>
               </label>
               <label>
-                <span>Data de nascimento:</span>
+                <span>Data de nascimento:<span class="campo_obrigatorio"> *</span></span>
                 <input type="date" id="inputBebeNasc" placeholder="dd/mm/aaaa"/>
               </label>
               <label>
-                <span>Sexo:</span>
+                <span>Sexo:<span class="campo_obrigatorio"> *</span></span>
                 <select id="selectBebeSexo">
                   <option disabled selected>Selecione</option>
                   <option>Feminino</option>
@@ -111,7 +107,7 @@
                 </select>
               </label>
               <label>
-                <span>Prematuridade</span>
+                <span>Prematuridade<span class="campo_obrigatorio"> *</span></span>
                 <select id="selectBebePrematura">
                   <option disabled selected>Selecione</option>
                   <option value="0">Não</option>
@@ -123,30 +119,30 @@
             </div>
           </div>
           <div class="form" id="form4">
-            <h1>Cadastro do responsável</h1>
+            <h1>Cadastro do Responsável</h1>
             <div class="inputs">
               <label>
-                <span>Nome:</span>
-                <input type="text" id="inputResponsavelNome" placeholder="Nome"/>
+                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
+                <input maxlength="50" type="text" id="inputResponsavelNome" placeholder="Nome"/>
               </label>
               <label>
-                <span>Sobrenome:</span>
-                <input type="text" id="inputResponsavelSobrenome" placeholder="Sobrenome"/>
+                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
+                <input maxlength="50" type="text" id="inputResponsavelSobrenome" placeholder="Sobrenome"/>
               </label>
               <label>
-                <span>CPF:</span>
+                <span>CPF:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputResponsavelCpf" placeholder="xxx.xxx.xxx-xx"/>
               </label>
               <label>
-                <span>E-mail:</span>
+                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputResponsavelEmail" placeholder="E-mail"/>
               </label>
               <label>
-                <span>Telefone:</span>
+                <span>Telefone:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputResponsavelTelefone" placeholder="(xx) xxxxx-xxxx"/>
               </label>
               <label>
-                <span>Parentesco:</span>
+                <span>Parentesco:<span class="campo_obrigatorio"> *</span></span>
                 <select id="selectParentesco">
                   <option disabled selected>Selecione</option>
                   <option>Mãe</option>

@@ -28,7 +28,7 @@ const serial = async (
             host: '10.18.36.3',
             user: 'aluno',
             password: 'Sptech#2024',
-            database: 'exemplo',
+            database: 'SafeSleep',
             port: 3307
         }
     ).promise();
@@ -66,8 +66,8 @@ const serial = async (
             // altere!
             // Este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO medida (temperatura) VALUES (?)',
-                [lm35Temperatura]
+                'INSERT INTO historico (temperatura, fkIncubadora, peso) VALUES (?, ?, ?)',
+                [lm35Temperatura, 2, 2]
             );
             console.log("valores inseridos no banco: ", lm35Temperatura)
         

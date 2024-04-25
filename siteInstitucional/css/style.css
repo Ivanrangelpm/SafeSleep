@@ -232,3 +232,7 @@ body {
   padding: 3%;
   color: #2ca52c;
 }
+
+.main .form .inputs .campo_obrigatorio {
+  color: #19A7A8;
+}

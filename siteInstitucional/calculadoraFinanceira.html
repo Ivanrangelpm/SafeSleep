@@ -18,24 +18,6 @@
           <li><a href="./login.html">Login</a></li>
         </ul>
     </div>
-    <!-- <h1 class="titulo">Calculadora Financeira</h1> 
-    <div class="caixa">
-        <span>Insira os dados abaixo para verificar os custos relacionados ao monitoramento inadequado da temperatura nas incubadoras</span>
-        <label>
-            <span>Quantidade de bebês internados por mês:</span>
-            <input type="number" id="input_internados" placeholder="Quantidade de Internados">
-        </label>
-        <label>
-            <span>Quantidade média de dias dos internados por mês:</span>
-            <input type="number" id="input_dias" placeholder="Quantidade de Dias">
-        </label>
-        <label>
-            <span>Custo diário para o hospital (por recém-nascido):</span>
-            <input type="number" id="input_custo" placeholder="Custo (em reais)">
-        </label>
-        <button class="botao" onclick="calcular()">Calcular</button>
-        <div id="div_mensagem"></div>
-    </div> -->
     <div class="main">
         <div class="form">
             <h1>Calculadora Financeira</h1>
@@ -98,49 +80,49 @@
             alert("Os valores inseridos não podem ser negativos ou nulos.");
             limpar();
         } else {
-            var custoDiario = (internados * custo).toFixed(2);
-            var custoMensal = (30 * custoDiario).toFixed(2);
-            var custoAnual = (custoMensal * 12).toFixed(2);
-            var monit_inadeq = (internados * 0.16).toFixed(2);
+            var custoDiario = (internados * custo);
+            var custoMensal = (30 * custoDiario);
+            var custoAnual = (custoMensal * 12);
+            var monit_inadeq = (internados * 0.16);
     
             //desconto dado por conta dos bebes que não precisarão de cuidados extremos por conta da temperatura e pela radução de mão de obra no monitoramento do bebê
     
-            var reducaoDiaria = (monit_inadeq * custo).toFixed(2);
-            var reducaoMensal = (dias * reducaoDiaria).toFixed(2);
-            var reducaoAnual = (reducaoMensal * 12).toFixed(2);
+            var reducaoDiaria = (monit_inadeq * custo);
+            var reducaoMensal = (dias * reducaoDiaria);
+            var reducaoAnual = (reducaoMensal * 12);
     
-            var custoFinalDiario = (custoDiario - reducaoDiaria).toFixed(2);
-            var custoFinalMensal = (custoMensal - reducaoMensal).toFixed(2);
-            var custoFinalAnual = (custoAnual - reducaoAnual).toFixed(2);
+            var custoFinalDiario = (custoDiario - reducaoDiaria);
+            var custoFinalMensal = (custoMensal - reducaoMensal);
+            var custoFinalAnual = (custoAnual - reducaoAnual);
     
             div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3> <br>
             Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento. <br> <br>
     
             <b>O custo será de:</b><br> 
-            Por ano <b style="color: red;"> R$${custoAnual}</b><br>
-            Por mês <b style="color: red;">R$${custoMensal}</b><br>
-            Por dia <b style="color: red;">R$${custoDiario}</b><br> <br>
+            Por ano <b style="color: red;">${custoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br>
+            Por mês <b style="color: red;">${custoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br>
+            Por dia <b style="color: red;">${custoDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br> <br>
     
             <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3> <br>
             
             <b>O valor do desconto médio será de: </b> <br>   <br>
-            Por ano <b style="color: green;">R$${reducaoAnual}</b> <br>
-            Por mês <b style="color: green;">R$${reducaoMensal}</b> <br>
-            Por dia <b style="color: green;">R$${reducaoDiaria}</b> <br>
+            Por ano <b style="color: green;">${reducaoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
+            Por mês <b style="color: green;">${reducaoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
+            Por dia <b style="color: green;">${reducaoDiaria.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
             <br>
 
     
             <b>Então, o custo final com o desconto será de: </b> <br> <br>
     
-            Por ano <b style="color: rgb(161, 161, 0);">R$${custoFinalAnual}</b> <br>
-            Por mês <b style="color: rgb(161, 161, 0);">R$${custoFinalMensal}</b> <br>
-            Por dia <b style="color: rgb(161, 161, 0);">R$${custoFinalDiario}</b> <br><br>
+            Por ano <b style="color: rgb(161, 161, 0);">${custoFinalAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
+            Por mês <b style="color: rgb(161, 161, 0);">${custoFinalMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
+            Por dia <b style="color: rgb(161, 161, 0);">${custoFinalDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br><br>
 
             <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém nascido em 28% <h3> <br>
             
-            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$681.996 <br>
+            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$ 681.996,00 <br>
 
-            O que, nesse caso, será de: R$ ${processo} <br> <br>
+            O que, nesse caso, será de: ${processo.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} <br> <br>
             
             
             <button class="botao btnDiv" onclick="limpar()">Limpar resultado</button> <br>

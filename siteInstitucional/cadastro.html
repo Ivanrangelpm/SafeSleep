@@ -13,7 +13,7 @@
       <a href="index.html">
         <img src="./images/ssLogoExtended.png" alt="logo" class="logo"/>
       </a>
-      <ul class="navbar">
+      <ul class="navbar"> 
         <li><a href="index.html">Início</a></li>
         <li><a href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
         <li><a href="./sobreNos.html">Sobre Nós</a></li>
@@ -47,6 +47,7 @@
               <label>
                 <span>Razão social:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_razao" placeholder="Razão Social"/>
+                <div id="div_erro_razao" class="error"></div>
               </label>
               <label>
                 <span>Nome fantasia:</span>
@@ -173,41 +174,6 @@
     btn1.style = 'transform: scale(100%, 100%); background-color: #3b536b;';
   }
 
-  function formatar_cnpj() {
-    var cnpj = input_cnpj.value;
-    var tamanho = cnpj.length;
-
-    if (tamanho == 2 || tamanho == 6) {
-      input_cnpj.value += ".";
-    } else if (tamanho == 10) {
-      input_cnpj.value += "/";
-    } else if (tamanho == 15) {
-      input_cnpj.value += "-";
-    } 
-  }
-
-  function formatar_cpf() {
-    var cpf = input_cpf.value;
-    var tamanho = cpf.length;
-
-    if (tamanho == 3 || tamanho == 7) {
-      input_cpf.value += ".";
-    } else if (tamanho == 11) {
-      input_cpf.value += "-";
-    } 
-  }
-
-  function formatar_telefone() {
-    var telefone = input_telefone.value;
-    var tamanho = telefone.length;
-
-    if (tamanho == 2) {
-      input_telefone.value += " ";
-    } else if (tamanho == 8) {
-      input_telefone.value += "-";
-    }
-  }
-
   function cadastrar() {
     div_erro.innerHTML = "";
     var razao = input_razao.value;
@@ -241,6 +207,14 @@
       div_erro.innerHTML = 'É necessário preencher todos os campos!';
     } else {
 
+      //Erro para Razão Social
+      if (razao.length <= 1) {
+        div_erro_razao.innerHTML = `Razão social inválida`;
+      } else {
+        div_erro_razao.innerHTML = "";
+        valido++;
+      }
+
       //Erro para Nome Fantasia
       if (fantasia.length <= 1) {
         div_erro_fantasia.innerHTML = `Nome inválido`;
@@ -250,7 +224,7 @@
       }
 
       //Erro para CNPJ
-      if (cnpj.length != 18) {
+      if (cnpj.length != 14 || isNaN(Number(cnpj))) {
         div_erro_cnpj.innerHTML = `CNPJ inválido`;
       } else {
         div_erro_cnpj.innerHTML = "";
@@ -266,7 +240,7 @@
       }
 
       //Erro para Telefone
-      if (telefone.length != 13) {
+      if (telefone.length != 10 || isNaN(Number(telefone))) {
         div_erro_telefone.innerHTML = `Número de telefone inválido`;
       } else {
         div_erro_telefone.innerHTML = "";
@@ -274,7 +248,7 @@
       }
 
       //Erro para CEP
-      if (cep.length != 8) {
+      if (cep.length != 8 || isNaN(Number(cep))) {
         div_erro_cep.innerHTML = `CEP Inválido`;
       } else {
         div_erro_cep.innerHTML = "";
@@ -282,7 +256,7 @@
       }
 
       //Erro para Número
-      if (numero.length < 1 && Number(numero) < 1) {
+      if (numero.length < 1 || Number(numero) < 1) {
         div_erro_numero.innerHTML = `Número do Enderenço Inválido`;
       } else {
         div_erro_numero.innerHTML = "";
@@ -306,7 +280,7 @@
       }
 
       //Erro para CPF do Representante
-      if (cpf.length != 14) {
+      if (cpf.length != 11 || isNaN(Number(cpf))) {
         div_erro_cpf.innerHTML = `CPF inválido`;
       } else {
         div_erro_cpf.innerHTML = "";
@@ -316,7 +290,7 @@
       //Erro para a Senha
       if (senha.length < 8) {
         div_erro_senha.innerHTML = `Senha fraca`;
-      } 
+      } // Verificando se a senha tem caracteres especiais
       else if (
         senha.indexOf('@') < 0 && 
         senha.indexOf('$') < 0 && 
@@ -328,22 +302,22 @@
         senha.indexOf('&') < 0 &&
         senha.indexOf('!') < 0 &&
         senha.indexOf('?') < 0
-      ) {
+      ) { // Se não existir caracter especial, avisa que a senha está fraca
         div_erro_senha.innerHTML = `Senha fraca`;
       } 
-      else {
+      else {// Limpando a div senha
         div_erro_senha.innerHTML = "";
         valido++;
         if (senha == confirmar) {
           div_erro_confirmar.innerHTML = "";
           valido++;
-        } else {
+        } else {// Mensagem de erro da senha
           div_erro_confirmar.innerHTML = `Confirmação de senha incorreta`;
         }
       }
     }
 
-    if (valido == 8) {
+    if (valido == 12) {
       div_cadastro.innerHTML = '<h2 class="enviado"> Cadastro concluído! </span> <h2>';  
       div_cadastro.innerHTML += '<br> <a href="login.html"> Fazer login </a>';  
     }

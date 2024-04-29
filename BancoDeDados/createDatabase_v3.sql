@@ -1,17 +1,6 @@
 CREATE DATABASE SafeSleep;
 USE SafeSleep;
 
-CREATE TABLE sensor (
-idSensor INT PRIMARY KEY
-);
-
-INSERT INTO sensor VALUES
-	(1),
-	(2),
-	(3),
-	(4),
-	(5);
-
 CREATE TABLE hospital(
 idHospital int primary key not null auto_increment,
   razaoSocial varchar(100) not null,
@@ -54,17 +43,28 @@ CREATE TABLE incubadora(
   codigoDeSerie int primary key not null,
   modelo varchar(50),
   fkHospital int not null,
-  fkSensor int not null,
-  constraint fkSensor foreign key (fkSensor) references sensor(idSensor),
   constraint fkIncubadoraHospital foreign key (fkHospital) references hospital(idHospital)
 );
 
 INSERT INTO incubadora VALUES
-	(289, 1186, 1, 3),
-    (362, 1186, 2, 1),
-    (121, 1186, 3, 2),
-    (523, 1186, 2, 2),
-    (321, 1186, 1, 3);
+	(289, 1186, 1),
+    (362, 1186, 2),
+    (121, 1186, 3),
+    (523, 1186, 2),
+    (321, 1186, 1);
+
+CREATE TABLE sensor (
+  idSensor INT PRIMARY KEY
+  fkIncubadora int not null unique,
+  constraint fkSensorIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
+);
+
+INSERT INTO sensor VALUES
+	(1, 289),
+	(2, 362),
+	(3, 121),
+	(4, 523),
+	(5, 321);
 
 CREATE TABLE historico(
   idHistorico int not null auto_increment,

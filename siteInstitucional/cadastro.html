@@ -192,7 +192,6 @@
 
     if (
       razao == '' ||
-      fantasia == '' ||
       cnpj == '' ||
       email == '' ||
       telefone == '' ||
@@ -204,7 +203,7 @@
       senha == '' ||
       confirmar == ''
     ) {
-      div_erro.innerHTML = 'É necessário preencher todos os campos!';
+      div_erro.innerHTML = 'É necessário preencher todos os campos obrigatórios!';
     } else {
 
       //Erro para Razão Social
@@ -212,14 +211,6 @@
         div_erro_razao.innerHTML = `Razão social inválida`;
       } else {
         div_erro_razao.innerHTML = "";
-        valido++;
-      }
-
-      //Erro para Nome Fantasia
-      if (fantasia.length <= 1) {
-        div_erro_fantasia.innerHTML = `Nome inválido`;
-      } else {
-        div_erro_fantasia.innerHTML = "";
         valido++;
       }
 

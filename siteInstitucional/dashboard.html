@@ -25,7 +25,7 @@
       <ul class="navbar">
         <li><a href="./gerenciar.html">Gerenciar</a></li>
         <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
-        <li><button>Sair</button></li>
+        <li><button onclick="sair()">Sair</button></li>
       </ul>
     </div>
     <div class="main" id="main">
@@ -64,13 +64,13 @@
       <div class="developers">
         <h3>Desenvolvedores da SafeSleep</h3>
         <ul>
-          <li>Bruno Yuji Takahashi - 04241032</li>
-          <li>Diego Crispim dos Santos Campos - 04241019</li>
-          <li>Fabricio Prudente Ferreira - 04241070</li>
-          <li>Ivan Rangel Pestana Marcolin - 04241013</li>
-          <li>Lucas Tetsuo Nagasse - 04241066</li>
-          <li>Matheus Yukio Makiyama - 04241061</li>
-          <li>Renan Rocha Pacanaro - 04241004</li>
+          <li>Bruno Yuji Takahashi - bruno.ytakahashi@sptech.school</li>
+          <li>Diego Crispim dos Santos Campos - diego.campos@sptech.school</li>
+          <li>Fabricio Prudente Ferreira - fabricio.ferreira@sptech.school</li>
+          <li>Ivan Rangel Pestana Marcolin - ivan.marcolin@sptech.school</li>
+          <li>Lucas Tetsuo Nagasse - lucas.nagasse@sptech.school</li>
+          <li>Matheus Yukio Makiyama - matheus.makiyama@sptech.school</li>
+          <li>Renan Rocha Pacanaro Trinca - renan.trinca@sptech.school</li>
         </ul>
       </div>
       <div class="contact">
@@ -83,13 +83,13 @@
       </div>
     </div>
     <div id="alerta">
-      <div class="box">
+      <div class="alertaBox">
         <h1>Urgente!</h1>
         <button onclick="closeAlert()">X</button>
       </div>
-      <div class="box">
-        <img src="./images/alert.png" alt="Alerta">
-        <span id="alertText">
+      <div class="alertaBox">
+        <img src="./images/alert.png" alt="Alerta" class="alertaImg">
+        <span id="alertText" class='alertaSpan'>
           Incubadoras com Temperatura Desregulada:
         </span>
       </div> 
@@ -142,64 +142,76 @@
   var risco_incubadora2 = false;
   var risco_incubadora3 = false;
   var risco_incubadora4 = false;
+  var doenca_incubadora1 = "";
+  var doenca_incubadora2 = "";
+  var doenca_incubadora3 = "";
+  var doenca_incubadora4 = "";
   
   if(temperatures1[6] > temperatura_maxima) {
     risco_incubadora1 = true;
+    doenca_incubadora1 = 'Hipertermia';
     cont_riscoHiper++;
   } else if(temperatures1[6] < temperatura_minima) {
     risco_incubadora1 = true;
+    doenca_incubadora1 = 'Hipotermia';
     cont_riscoHipo++;
   }
 
   if(temperatures2[6] > temperatura_maxima) {
     risco_incubadora2 = true;
+    doenca_incubadora2 = 'Hipertermia';
     cont_riscoHiper++;
   } else if(temperatures2[6] < temperatura_minima) {
     risco_incubadora2 = true;
+    doenca_incubadora2 = 'Hipotermia';
     cont_riscoHipo++;
   }
 
   if(temperatures3[6] > temperatura_maxima) {
     risco_incubadora3 = true;
+    doenca_incubadora3 = 'Hipertermia';
     cont_riscoHiper++;
   } else if(temperatures3[6] < temperatura_minima) {
     risco_incubadora3 = true;
+    doenca_incubadora3 = 'Hipotermia';
     cont_riscoHipo++;
   }
 
   if(temperatures4[6] > temperatura_maxima) {
     risco_incubadora4 = true;
+    doenca_incubadora4 = 'Hipertermia';
     cont_riscoHiper++;
   } else if(temperatures4[6] < temperatura_minima) {
     risco_incubadora4 = true;
+    doenca_incubadora4 = 'Hipotermia';
     cont_riscoHipo++;
   }
 
 
   // ========================================== MOSTRAR AVISO ========================================== //
-  var alertText = "";
+  var texto_dos_alertas = "";
   
   if(risco_incubadora1){
     document.getElementById('alerta').style.display = 'flex';
-    alertText += `<br>Incubadora Nº1`; 
+    texto_dos_alertas += `<br>Incubadora Nº1 - ${doenca_incubadora1}`; 
   }
 
   if(risco_incubadora2){
     document.getElementById('alerta').style.display = 'flex';
-    alertText += `<br>Incubadora Nº2`; 
+    texto_dos_alertas += `<br>Incubadora Nº2 - ${doenca_incubadora2}`; 
   }
 
   if(risco_incubadora3){
     document.getElementById('alerta').style.display = 'flex';
-    alertText += `<br>Incubadora Nº3`; 
+    texto_dos_alertas += `<br>Incubadora Nº3 - ${doenca_incubadora3}`; 
   }
 
   if(risco_incubadora4){
     document.getElementById('alerta').style.display = 'flex';
-    alertText += `<br>Incubadora Nº4`; 
+    texto_dos_alertas += `<br>Incubadora Nº4 - ${doenca_incubadora4}`; 
   }
 
-  document.getElementById('alertText').innerHTML += alertText;
+  document.getElementById('alertText').innerHTML += texto_dos_alertas;
 
 
   // ========================================== SELECT DOS BOTÕES "GERAL" & "EM RISCO" ========================================== //
@@ -241,40 +253,8 @@
     showSelect();
   }
 
-  function btnAlertas() {
-    btnApertado = "alertas";
-    sectionInfos.innerHTML = `${mainContent}
-      <div id='divResponse' class='section'>
-        <section class="cardSection">
-          <span class="pieTitle">Quantidade de Bebês com Risco de Adquirir Doenças</span>
-          <canvas id='pieRisk'></canvas>
-        </section>
-      </div>
-    `;
-
-    var divPieRisk = document.getElementById('pieRisk').getContext('2d');
-    divPieRisk.canvas.width = 1;
-    divPieRisk.canvas.height = 1;
-
-    var graficoPieRisk = new Chart(
-        divPieRisk,
-        {
-            type: 'pie',
-            data: {
-                labels: ['Risco de Hipotermia', 'Risco de Hipertermia'],
-                datasets: [{
-                    data: [cont_riscoHipo, cont_riscoHiper],
-                    backgroundColor: [
-                    '#003050',
-                    '#19A7A8'
-                    ]
-                }]
-            }
-        }
-    )
-  }
   
-
+  
   function verificar() {
     var incubadora_num = selectIncubadora.value;
     var peso = 0;
@@ -320,7 +300,7 @@
       borderWidth: 5,
       borderColor: '#19A7A8',
       backgroundColor: 'transparent',
-      pointRadius: 0,
+      pointRadius: 0
   }
 
   var jsonMinLine = {
@@ -372,6 +352,71 @@
       ticks: {
         stepSize: 1
       }
+    }
+  }
+  
+  function btnAlertas() {
+    btnApertado = "alertas";
+    
+    if(cont_riscoHiper == 0 && cont_riscoHipo == 0){
+      sectionInfos.innerHTML = `${mainContent}
+      <hr>
+      <div id='divResponse' class='section'>
+        <h2 class='infoRisk'>Todas as crianças estão sem risco de adquirir doenças!</h2>
+      </div>
+      `;
+    } else {
+      sectionInfos.innerHTML = `${mainContent}
+        <div id='divResponse' class='section'>
+          <section class="cardSection">
+            <canvas id='pieRisk'></canvas>
+          </section>
+          <div id="alertaSection">
+            <h1>Urgente!</h1>
+            <div class="alertaBox">
+              <img src="./images/alert.png" alt="Alerta" class='alertaImg'>
+              <span id="alertPieText" class='alertaSpan'>
+                Incubadoras com Temperatura Desregulada:
+              </span>
+            </div> 
+          </div>
+        </div>
+      `;
+      document.getElementById('alertPieText').innerHTML += texto_dos_alertas;
+
+      var divPieRisk = document.getElementById('pieRisk').getContext('2d');
+      divPieRisk.canvas.width = 1;
+      divPieRisk.canvas.height = 1;
+
+      var graficoPieRisk = new Chart(
+        divPieRisk,
+        {
+          type: 'pie',
+          data: {
+            labels: ['Hipotermia', 'Hipertermia'],
+            datasets: [{
+                data: [cont_riscoHipo, cont_riscoHiper],
+                backgroundColor: [
+                '#003050',
+                '#19A7A8'
+                ]
+            }]
+          },
+          options: {
+            plugins: {
+                title: {
+                  display: true,
+                  text: 'Bebês com Risco de:',
+                  font: {
+                    size: 31
+                  },
+                  padding: 30
+                },
+                legend: optionsLegend
+            }
+          }
+        }
+      )
     }
   }
 
@@ -536,18 +581,20 @@
           backgroundColor: 'transparent',
           borderColor: '#19A7A8',
           label: 'Temperatura Máxima Permitida (°C)',
-          borderWidth: 5
+          borderWidth: 5,
+          pointRadius: 0
         }, {
           type: 'line',
           data: [temperatura_minima, temperatura_minima, temperatura_minima, temperatura_minima],
           backgroundColor: 'transparent',
           borderColor: '#003050',
           label: 'Temperatura Mínima Permitida (°C)',
-          borderWidth: 5
+          borderWidth: 5,
+          pointRadius: 0
         }, {
           data: [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]],
           backgroundColor: '#507090',
-          label: 'Temperatura de Cada Incubadora (°C)'
+          label: 'Temperatura de Cada Incubadora (°C)',
         }]
       },
       options: {
@@ -703,5 +750,9 @@
   function closeAlert(){
     var divAlert = document.getElementById('alerta');
     divAlert.style.display = 'none';
+  }
+
+  function sair(){
+    window.location.href = "./login.html";
   }
 </script>

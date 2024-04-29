@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  width: 550px;
+  width: 30%;
   padding: 20px;
 }
 
@@ -129,7 +129,8 @@
 
 #alerta {
   position: fixed;
-  width: 700px;
+  width: 45%;
+  height: 42vh;
   border-radius: 3px;
   background-color: #880022;
   bottom: 10px;
@@ -151,8 +152,7 @@
 }
 
 #alerta .box img {
-  width: 150px;
-  height: 150px;
+  width: 30%;
 }
 
 #alerta .box span {
@@ -164,8 +164,7 @@
 
 #alerta .box button {
   background-color: transparent;
-  width: 45px;
-  height: 45px;
+  width: 10%;
   color: white;
   border: none;
   font-size: 25px;

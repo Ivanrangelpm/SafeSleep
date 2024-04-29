@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  width: 500px;
+  width: 550px;
   padding: 20px;
 }
 
@@ -57,10 +57,10 @@
 }
 
 #botaoGeral {
-  background-color: #19A7A8;
+  background-color: #507090;
 }
 #botaoGeral:hover {
-  background-color: #0d5858;
+  background-color: #2d4053;
 }
 #botaoRisco {
   background-color: #003050;
@@ -69,10 +69,10 @@
   background-color: #001725;
 }
 #botaoAlertas {
-  background-color: #507090;
+  background-color: #19A7A8;
 }
 #botaoAlertas:hover {
-  background-color: #2d4053;
+  background-color: #0d5858;
 }
 
 .main .selecao {
@@ -123,7 +123,8 @@
   text-align: center;
   margin-top: 10px;
   line-height: 30px;
-  font-size: 17px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #alerta {
@@ -133,7 +134,7 @@
   background-color: #880022;
   bottom: 10px;
   right: 10px;
-  display: flex;
+  display: none;
   padding: 20px;
   color: white;
   flex-direction: column;
@@ -159,4 +160,16 @@
   margin-left: 20px;
   line-height: 30px;
   font-size: 1.2rem;
+}
+
+#alerta .box button {
+  background-color: transparent;
+  width: 45px;
+  height: 45px;
+  color: white;
+  border: none;
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  cursor: pointer;
 }

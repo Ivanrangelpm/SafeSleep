@@ -21,10 +21,10 @@
         <img src="./images/Logo_SafeSleep.png" alt="logomarca" class="leftLogo">
         <div class="topics">
           <h3>Cadastrar...</h3>
-          <button onclick="changeRegisterForm(1)" id="btn1">Funcionário</button>
-          <button onclick="changeRegisterForm(2)" id="btn2">Incubadora</button>
-          <button onclick="changeRegisterForm(3)" id="btn3">Bebê</button>
-          <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button>
+          <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
+          <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
+          <!-- <button onclick="changeRegisterForm(3)" id="btn3">Bebê</button>
+          <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
         </div>
       </div>
       <div class="section">
@@ -75,7 +75,7 @@
               <button onclick="cadastrarIncubadora()">Cadastrar</button>
             </div>
           </div>
-          <div class="form" id="form3">
+          <!-- <div class="form" id="form3">
             <h1>Cadastro do Bebê</h1>
             <div class="inputs">
               <label>
@@ -156,7 +156,7 @@
               <span id="spanResponseResponsavel" class="error"></span>
               <button onclick="cadastrarResponsavel()">Cadastrar</button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -185,63 +185,80 @@
   </body>
 </html>
 <script>
-  function changeRegisterForm(form){
-    var form1 = document.getElementById('form1');
-    var form2 = document.getElementById('form2');
-    var form3 = document.getElementById('form3');
-    var form4 = document.getElementById('form4');
-    var btn1 = document.getElementById('btn1');
-    var btn2 = document.getElementById('btn2');
-    var btn3 = document.getElementById('btn3');
-    var btn4 = document.getElementById('btn4');
+  // function changeRegisterForm(form){
+  //   var form1 = document.getElementById('form1');
+  //   var form2 = document.getElementById('form2');
+  //   var form3 = document.getElementById('form3');
+  //   var form4 = document.getElementById('form4');
+  //   var btn1 = document.getElementById('btn1');
+  //   var btn2 = document.getElementById('btn2');
+  //   var btn3 = document.getElementById('btn3');
+  //   var btn4 = document.getElementById('btn4');
 
-    //Funcionário
-    if(form == 1){
-      form1.style.display = 'flex';
-      form2.style.display = 'none';
-      form3.style.display = 'none';
-      form4.style.display = 'none';
-      btn1.style.backgroundColor = '#19A7A8';
-      btn2.style.backgroundColor = '#2d4053';
-      btn3.style.backgroundColor = '#2d4053';
-      btn4.style.backgroundColor = '#2d4053';
-    } 
+  //   //Funcionário
+  //   if(form == 1){
+  //     form1.style.display = 'flex';
+  //     form2.style.display = 'none';
+  //     form3.style.display = 'none';
+  //     form4.style.display = 'none';
+  //     btn1.style.backgroundColor = '#19A7A8';
+  //     btn2.style.backgroundColor = '#2d4053';
+  //     btn3.style.backgroundColor = '#2d4053';
+  //     btn4.style.backgroundColor = '#2d4053';
+  //   } 
     
-    //Incubadora
-    else if(form == 2){
-      form1.style.display = 'none';
-      form2.style.display = 'flex';
-      form3.style.display = 'none';
-      form4.style.display = 'none';
-      btn1.style.backgroundColor = '#2d4053';
-      btn2.style.backgroundColor = '#19A7A8';
-      btn3.style.backgroundColor = '#2d4053';
-      btn4.style.backgroundColor = '#2d4053';
-    } 
+  //   //Incubadora
+  //   else if(form == 2){
+  //     form1.style.display = 'none';
+  //     form2.style.display = 'flex';
+  //     form3.style.display = 'none';
+  //     form4.style.display = 'none';
+  //     btn1.style.backgroundColor = '#2d4053';
+  //     btn2.style.backgroundColor = '#19A7A8';
+  //     btn3.style.backgroundColor = '#2d4053';
+  //     btn4.style.backgroundColor = '#2d4053';
+  //   } 
     
-    //Bebê
-    else if(form == 3){
-      form1.style.display = 'none';
-      form2.style.display = 'none';
-      form3.style.display = 'flex';
-      form4.style.display = 'none';
-      btn1.style.backgroundColor = '#2d4053';
-      btn2.style.backgroundColor = '#2d4053';
-      btn3.style.backgroundColor = '#19A7A8';
-      btn4.style.backgroundColor = '#2d4053';
-    } 
+  //   //Bebê
+  //   else if(form == 3){
+  //     form1.style.display = 'none';
+  //     form2.style.display = 'none';
+  //     form3.style.display = 'flex';
+  //     form4.style.display = 'none';
+  //     btn1.style.backgroundColor = '#2d4053';
+  //     btn2.style.backgroundColor = '#2d4053';
+  //     btn3.style.backgroundColor = '#19A7A8';
+  //     btn4.style.backgroundColor = '#2d4053';
+  //   } 
     
-    //Responsável
-    else {
-      form1.style.display = 'none';
-      form2.style.display = 'none';
-      form3.style.display = 'none';
-      form4.style.display = 'flex';
-      btn1.style.backgroundColor = '#2d4053';
-      btn2.style.backgroundColor = '#2d4053';
-      btn3.style.backgroundColor = '#2d4053';
-      btn4.style.backgroundColor = '#19A7A8';
-    }
+  //   //Responsável
+  //   else {
+  //     form1.style.display = 'none';
+  //     form2.style.display = 'none';
+  //     form3.style.display = 'none';
+  //     form4.style.display = 'flex';
+  //     btn1.style.backgroundColor = '#2d4053';
+  //     btn2.style.backgroundColor = '#2d4053';
+  //     btn3.style.backgroundColor = '#2d4053';
+  //     btn4.style.backgroundColor = '#19A7A8';
+  //   }
+  // }
+
+  var form1 = document.getElementById('form1');
+  var form2 = document.getElementById('form2');
+
+  function form_Funcionario(){
+    form1.style.display = 'flex';
+    form2.style.display = 'none'; 
+    btn1.style.backgroundColor = '#19A7A8';
+    btn2.style.backgroundColor = '#2d4053';
+  }
+
+  function form_Incubadora(){
+    form1.style.display = 'none';
+    form2.style.display = 'flex'; 
+    btn1.style.backgroundColor = '#2d4053';
+    btn2.style.backgroundColor = '#19A7A8';
   }
 
   function cadastrar() {

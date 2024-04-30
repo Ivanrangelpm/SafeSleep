@@ -35,7 +35,7 @@ const serial = async (
 
     // Lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
-    const portaArduino = portas.find((porta) => porta.vendorId == '1A86' && porta.productId == 7523);
+    const portaArduino = portas.find((porta) => porta.vendorId == '2341' && porta.productId == '0043');
     if (!portaArduino) {
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }
@@ -66,8 +66,8 @@ const serial = async (
             // altere!
             // Este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO historico (temperatura, fkIncubadora, peso) VALUES (?, ?, ?)',
-                [lm35Temperatura, 2, 2]
+                'INSERT INTO historico (temperatura, fkSensor) VALUES (?, ?)',
+                [lm35Temperatura, 1]
             );
             console.log("valores inseridos no banco: ", lm35Temperatura)
         

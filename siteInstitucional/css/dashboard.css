@@ -22,6 +22,7 @@
 .main .graficos #sectionCanvas1 section {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .main .graficos #sectionCanvas1 span {
@@ -97,10 +98,6 @@
 
 #divResponse {
   gap: 1rem;
-  display: flex;
-  flex-direction: row;
-  width: 85vw;
-  justify-content: space-evenly;
 }
 
 .main .row {
@@ -110,6 +107,8 @@
 
 .section {
   margin-top: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .section .opcoes button {
@@ -117,6 +116,11 @@
   height: 60px;
   color: white;
   font-weight: bold;
+}
+
+#lineSection {
+  display: flex;
+  justify-content: center;
 }
 
 .lineTitle {
@@ -134,8 +138,7 @@
 
 #alerta {
   position: fixed;
-  width: 45%;
-  height: 42vh;
+  width: 700px;
   border-radius: 3px;
   background-color: #880022;
   bottom: 10px;
@@ -191,6 +194,7 @@
   color: white;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   border-radius: 10px;
 }
@@ -198,4 +202,11 @@
 .infoRisk {
   color: #0d5858;
   text-decoration: underline;
+}
+
+#divAlertRisk {
+  display: flex;
+  width: 90vw;
+  justify-content: space-around;
+  flex-direction: row;
 }

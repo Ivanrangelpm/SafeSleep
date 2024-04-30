@@ -20,7 +20,7 @@
   align-items: center;
   background-color: #001725;
   border-radius: 20px;
-  width: 500px;
+  width: 30%;
   color: white;
   padding: 20px;
 }
@@ -70,8 +70,12 @@
   border: 3px solid #003050;
   background-color: #f0f5f0;
   border-radius: 10px;
-  width: 400px;
+  width: 23%;
   height: 500px;
+}
+
+.members .card p {
+  font-size: 18px;
 }
 
 .members .card:hover{
@@ -88,8 +92,7 @@
 }
 
 .card img {
-  width: 250px;
-  height: 250px;
+  width: 60%;
   border-radius: 50%;
   border: 2px solid #003050;
 }

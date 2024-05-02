@@ -100,6 +100,11 @@
                 <div id="div_erro_emailRep" class="error"></div>
               </label>
               <label>
+                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+                <input type="text" id="input_emailRep" placeholder="E-mail"/>
+                <div id="div_erro_emailRep" class="error"></div>
+              </label>
+              <label>
                 <span>CPF:<span class="campo_obrigatorio"> *</span></span>
                 <input type="number" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
                 <div id="div_erro_cpf" class="error"></div>
@@ -178,6 +183,7 @@
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
     var email_representante = input_emailRep.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
@@ -230,6 +236,7 @@
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
     var email_representante = input_emailRep.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
@@ -252,6 +259,7 @@
       numero == '' ||
       nome == '' || 
       sobrenome == '' || 
+      email_representante == '' ||
       email_representante == '' ||
       cpf == '' || 
       licenca == '' ||

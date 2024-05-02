@@ -286,6 +286,7 @@
 
     if(nome == "" || sobrenome == "" || email == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
     else if(index == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que a senha possua algum caracter especial.<br><br>Caracteres Especiais: ! @ # $ % & / * _ ? -";
+    else if (email.indexOf('@') == -1 || email.indexOf(".") == -1) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que o email possua dois caracteres específicos.<br><br> Caracteres Específicos: @ .";
     else if(senha != senha2) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: As senhas não se confere.";
     else if(senha.length < 8) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: A senha deve conter 8 caracteres ou mais.";
     else if(cpf.length != 11) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF do funcionário não possui a quantidade correta de caracteres.";

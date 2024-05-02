@@ -43,6 +43,10 @@
               <input type="text" id="inputFuncionarioSobrenome" placeholder="Sobrenome" />
             </label>
             <label>
+              <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+              <input type="text" id="inputFuncionarioEmail" placeholder="Email" />
+            </label>
+            <label>
               <span>CPF:<span class="campo_obrigatorio"> *</span></span>
               <input type="number" id="inputFuncionarioCpf" placeholder="xxx.xxx.xxx-xx" />
             </label>
@@ -267,6 +271,7 @@
   function cadastrarFuncionario() {
     var nome = inputFuncionarioNome.value;
     var sobrenome = inputFuncionarioSobrenome.value;
+    var email = inputFuncionarioEmail.value;
     var cpf = inputFuncionarioCpf.value;
     var licenca = inputFuncionarioLicenca.value;
     var senha = inputFuncionarioSenha.value;
@@ -279,7 +284,7 @@
     var tamanhoTexto = '16px';
     var corTexto =  'red';
 
-    if(nome == "" || sobrenome == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
+    if(nome == "" || sobrenome == "" || email == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
     else if(index == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que a senha possua algum caracter especial.<br><br>Caracteres Especiais: ! @ # $ % & / * _ ? -";
     else if(senha != senha2) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: As senhas não se confere.";
     else if(senha.length < 8) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: A senha deve conter 8 caracteres ou mais.";

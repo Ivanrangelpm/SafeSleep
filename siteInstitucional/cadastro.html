@@ -45,18 +45,18 @@
             <h1>Cadastre seu Hospital</h1>
             <div class="inputs">
               <label>
-                <span>Razão social:<span class="campo_obrigatorio"> *</span></span>
+                <span>Razão Social:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_razao" placeholder="Razão Social"/>
                 <div id="div_erro_razao" class="error"></div>
               </label>
               <label>
-                <span>Nome fantasia:</span>
+                <span>Nome Fantasia:</span>
                 <input type="text" id="input_fantasia" placeholder='Nome Fantasia'/>
                 <div id="div_erro_fantasia" class="error"></div>
               </label>
               <label>
                 <span>CNPJ:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_cnpj" placeholder="XX.XXX.XXX/XXXX-XX"/>
+                <input type="number" id="input_cnpj" placeholder="XX.XXX.XXX/XXXX-XX"/>
                 <div id="div_erro_cnpj" class="error"></div>
               </label>
               <label>
@@ -66,12 +66,12 @@
               </label>
               <label>
                 <span>Telefone:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_telefone" placeholder="(xx) xxxx-xxxx"/>
+                <input type="number" id="input_telefone" placeholder="(xx) xxxx-xxxx"/>
                 <div id="div_erro_telefone" class="error"></div>
               </label>
               <label>
                 <span>CEP:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_cep" placeholder="xxxxx-xxx"/>
+                <input type="number" id="input_cep" placeholder="xxxxx-xxx"/>
                 <div id="div_erro_cep" class="error"></div>
               </label>
               <label>
@@ -95,8 +95,13 @@
                 <div id="div_erro_sobrenome" class="error"></div>
               </label>
               <label>
+                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+                <input type="text" id="input_emailRep" placeholder="E-mail"/>
+                <div id="div_erro_emailRep" class="error"></div>
+              </label>
+              <label>
                 <span>CPF:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
+                <input type="number" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
                 <div id="div_erro_cpf" class="error"></div>
               </label>
               <label>
@@ -148,6 +153,13 @@
         <img src="./images/ssLogoName.png" class="logo" />
       </div>
     </div>
+    <div id="alerta" class="divAviso">
+      <div class="alertaBox">
+        <h1>Falha no Cadastro!</h1>
+        <button onclick="closeAlert()">X</button>
+      </div>
+      <span id="alertText" class='alertaSpan'></span>
+    </div>
   </body>
 </html>
 
@@ -165,6 +177,7 @@
 
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
@@ -172,7 +185,8 @@
 
     if(
       nome == '' || 
-      sobrenome == '' || 
+      sobrenome == '' ||
+      email_representante == '' || 
       cpf == '' || 
       licenca == '' ||
       senha == '' ||
@@ -215,14 +229,19 @@
     var numero = input_numero.value;
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
     var confirmar = input_confirmar.value;
     var valido = 0;
 
+    var divAlerta = document.getElementById('alerta');
+
     var corTexto = 'red';
     var tamanhoTexto = '22px';
+
+    var textoAlerta = "";
 
     if (
       razao == '' ||
@@ -233,6 +252,7 @@
       numero == '' ||
       nome == '' || 
       sobrenome == '' || 
+      email_representante == '' ||
       cpf == '' || 
       licenca == '' ||
       senha == '' ||
@@ -244,6 +264,8 @@
       //Erro para Razão Social
       if (razao.length <= 1) {
         div_erro_razao.innerHTML = `Razão social inválida`;
+        textoAlerta += "- Razão Social<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_razao.innerHTML = "";
         valido++;
@@ -252,6 +274,8 @@
       //Erro para CNPJ
       if (cnpj.length != 14 || isNaN(Number(cnpj))) {
         div_erro_cnpj.innerHTML = `CNPJ inválido`;
+        textoAlerta += "- CNPJ<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_cnpj.innerHTML = "";
         valido++;
@@ -260,6 +284,8 @@
       //Erro para Email
       if (email.indexOf('@') == -1 || email.indexOf(".") == -1) {
         div_erro_email.innerHTML = `E-mail inválido`;
+        textoAlerta += "- E-mail do Hospital<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_email.innerHTML = "";
         valido++;
@@ -268,6 +294,8 @@
       //Erro para Telefone
       if (telefone.length != 10 || isNaN(Number(telefone))) {
         div_erro_telefone.innerHTML = `Número de telefone inválido`;
+        textoAlerta += "- Telefone do Hospital<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_telefone.innerHTML = "";
         valido++;
@@ -276,6 +304,8 @@
       //Erro para CEP
       if (cep.length != 8 || isNaN(Number(cep))) {
         div_erro_cep.innerHTML = `CEP Inválido`;
+        textoAlerta += "- CEP do Hospital<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_cep.innerHTML = "";
         valido++;
@@ -284,6 +314,8 @@
       //Erro para Número
       if (numero.length < 1 || Number(numero) < 1) {
         div_erro_numero.innerHTML = `Número do Enderenço Inválido`;
+        textoAlerta += "- Número da Unidade<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_numero.innerHTML = "";
         valido++;
@@ -292,6 +324,8 @@
       //Erro para Nome do Representante
       if (nome.length <= 1) {
         div_erro_nome.innerHTML = `Nome Inválido`;
+        textoAlerta += "- Nome do Representante<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_nome.innerHTML = "";
         valido++;
@@ -300,14 +334,28 @@
       //Erro para Sobrenome do Representante
       if (sobrenome.length <= 1) {
         div_erro_sobrenome.innerHTML = `Sobrenome Inválido`;
+        textoAlerta += "- Sobrenome do Representante<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_sobrenome.innerHTML = "";
+        valido++;
+      }
+
+      // Erro para Email do Representante
+      if (email_representante.indexOf('@') == -1 || email_representante.indexOf(".") == -1) {
+        div_erro_emailRep.innerHTML = `E-mail inválido`;
+        textoAlerta += "- E-mail do Representante<br>";
+        divAlerta.style.display = 'flex';
+      } else {
+        div_erro_emailRep.innerHTML = "";
         valido++;
       }
 
       //Erro para CPF do Representante
       if (cpf.length != 11 || isNaN(Number(cpf))) {
         div_erro_cpf.innerHTML = `CPF Inválido`;
+        textoAlerta += "- CPF do Representante<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_cpf.innerHTML = "";
         valido++;
@@ -316,6 +364,8 @@
       //Erro para Licença Médica do Representante
       if (licenca.length <= 1) {
         div_erro_licenca.innerHTML = `Licença Médica Inválida`;
+        textoAlerta += "- Licença Médica do Representante<br>";
+        divAlerta.style.display = 'flex';
       } else {
         div_erro_licenca.innerHTML = "";
         valido++;
@@ -337,6 +387,8 @@
         senha.length < 8
       ) { // Se não existir caracter especial ou se a senha for curta, avisa que a senha está fraca
         div_erro_senha.innerHTML = `Senha Fraca`;
+        textoAlerta += "- Senha";
+        divAlerta.style.display = 'flex';
       } 
       else {// Limpando a div senha
         div_erro_senha.innerHTML = "";
@@ -345,14 +397,25 @@
           div_erro_confirmar.innerHTML = "";
           valido++;
         } else {// Mensagem de erro da senha
-          div_erro_confirmar.innerHTML = `Confirmação de senha incorreta`;
+          div_erro_confirmar.innerHTML = `Senhas não se correspondem`;
+          textoAlerta += "- Confirmação de Senha";
+          divAlerta.style.display = 'flex';
         }
       }
     }
 
-    if (valido == 12) {
+    alertText.innerHTML = `As seguintes informações não foram validadas pelo sistema:<br>${textoAlerta}`;
+
+    if (valido == 13) {
       div_cadastro.innerHTML = '<h2 class="enviado">Cadastro Concluído!<h2>';  
-      div_cadastro.innerHTML += '<br> <a href="./login.html">Fazer Login</a>';  
+      div_cadastro.innerHTML += '<br> <a href="./login.html">Fazer Login</a>';
+      divAlerta.style.display = 'none';
     }
+  }
+
+  //FECHAR O ALERTA EM VERMELHO
+  function closeAlert() {
+    var divAlert = document.getElementById('alerta');
+    divAlert.style.display = 'none';
   }
 </script>

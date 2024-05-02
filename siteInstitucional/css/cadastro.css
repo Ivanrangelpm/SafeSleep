@@ -82,3 +82,7 @@
   transform: scale(120%, 120%);
   background-color: #19A7A8;
 }
+
+.main a {
+  font-weight: bold;
+}

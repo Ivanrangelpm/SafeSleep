@@ -146,7 +146,9 @@ body {
   border-radius: 8px;
   padding: 2rem;
   border: 2px solid #101030;
+  /* background-color: #f0f5f0; */
   background-color: #f0f5f0;
+  width: 800px;
 }
 
 .main .form .inputs {

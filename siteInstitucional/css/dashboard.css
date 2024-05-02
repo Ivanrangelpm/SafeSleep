@@ -10,6 +10,10 @@
   font-size: 1.5rem;
 }
 
+.main .graficos {
+  margin-top: 30px;
+}
+
 .main .graficos #sectionCanvas1 {
   width: 95vw;
   border-radius: 20px;

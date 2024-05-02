@@ -95,6 +95,11 @@
                 <div id="div_erro_sobrenome" class="error"></div>
               </label>
               <label>
+                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+                <input type="text" id="input_emailRep" placeholder="E-mail"/>
+                <div id="div_erro_emailRep" class="error"></div>
+              </label>
+              <label>
                 <span>CPF:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
                 <div id="div_erro_cpf" class="error"></div>
@@ -165,6 +170,7 @@
 
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
@@ -173,6 +179,7 @@
     if(
       nome == '' || 
       sobrenome == '' || 
+      email_representante == '' ||
       cpf == '' || 
       licenca == '' ||
       senha == '' ||
@@ -215,6 +222,7 @@
     var numero = input_numero.value;
     var nome = input_nome.value;
     var sobrenome = input_sobrenome.value;
+    var email_representante = input_emailRep.value;
     var cpf = input_cpf.value;
     var licenca = input_licenca.value;
     var senha = input_senha.value;
@@ -233,6 +241,7 @@
       numero == '' ||
       nome == '' || 
       sobrenome == '' || 
+      email_representante == '' ||
       cpf == '' || 
       licenca == '' ||
       senha == '' ||
@@ -305,6 +314,14 @@
         valido++;
       }
 
+      // Erro para Email do Representante
+      if (email_representante.indexOf('@') == -1 || email_representante.indexOf(".") == -1) {
+        div_erro_emailRep.innerHTML = `E-mail inválido`;
+      } else {
+        div_erro_emailRep.innerHTML = "";
+        valido++;
+      }
+
       //Erro para CPF do Representante
       if (cpf.length != 11 || isNaN(Number(cpf))) {
         div_erro_cpf.innerHTML = `CPF Inválido`;
@@ -350,7 +367,7 @@
       }
     }
 
-    if (valido == 12) {
+    if (valido == 13) {
       div_cadastro.innerHTML = '<h2 class="enviado">Cadastro Concluído!<h2>';  
       div_cadastro.innerHTML += '<br> <a href="./login.html">Fazer Login</a>';  
     }

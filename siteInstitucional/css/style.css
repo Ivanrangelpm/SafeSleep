@@ -68,15 +68,16 @@ body {
   color: #b2fafa;
 }
 
-.header .navbar button {
+.header .navbar .sair {
   transition: color 0.2s; /* cria uma transição para quando determinada propriedade mude, durando determinado tempo */
   cursor: pointer; /* altera o estilo do cursor */
   border: none;
   background-color: transparent;
 }
 
-.header .navbar button:hover {
+.header .navbar .sair:hover {
   color: #e07070;
+  text-decoration: none;
 }
 
 .header .navbar .paginaAtual {

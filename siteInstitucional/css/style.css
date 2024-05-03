@@ -238,3 +238,49 @@ body {
 .main .form .inputs .campo_obrigatorio {
   color: #19A7A8;
 }
+
+.divAviso {
+  position: fixed;
+  width: 700px;
+  border-radius: 3px;
+  background-color: #880022;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+  padding: 20px;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alertaBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.alertaImg {
+  width: 150px;
+  height: 150px;
+}
+
+.alertaSpan {
+  width: 100%;
+  margin-left: 20px;
+  line-height: 30px;
+  font-size: 1.2rem;
+}
+
+.alertaBox button {
+  background-color: transparent;
+  width: 10%;
+  color: white;
+  border: none;
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  cursor: pointer;
+}

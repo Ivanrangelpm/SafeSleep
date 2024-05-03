@@ -64,22 +64,23 @@
   </body>
 </html>
 <script>
-  var verificar = 0;
   var tentativas = 3;
+
   function autenticar() {
     var login = id_login.value;
     var senha = id_senha.value;
-    if (verificar == 0 || verificar == 1 || verificar == 2) {
+
+    if (tentativas >= 1) {
       if (login == "brandao@gmail.com" && senha == "1234567!") {
         window.location.href = "./gerenciar.html";
       } else {
-        verificar = verificar + 1;
-        tentativas = tentativas - 1;
+        tentativas -= 1;
         div_mensagem.innerHTML = `Falha na autenticação `;
         alert(`Falha na autenticação, você ainda tem ${tentativas} tentativas.`);
       }
-    } else {
-      div_mensagem.innerHTML = ``;
+    } 
+
+    if(tentativas == 0) {
       div_mensagem.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`;
     }
   }

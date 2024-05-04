@@ -32,7 +32,7 @@
   </div>
   <div class="main" id="main">
     <h1>GRÁFICOS ESTATÍSTICOS - SPTECH HOSPITAL</h1>
-    <h2>Responsável: Fernando Brandão</h2>
+    <h2>Representante: Fernando Brandão</h2>
     <div class="graficos">
       <div id="sectionCanvas1">
         <section>
@@ -263,12 +263,12 @@
       for (var cont = 1; cont <= totalIncubadoras; cont++) {
         selectContent += `<option value="${cont}">Incubadora Nº${cont}</option>`;
       }
-    } else if (btnApertado == "risco") { //Botão "Risco" (Vai mostrar a opção da incubadora SOMENTE SE risco_incubadora# for TRUE)
+    } else { //Botão "Risco" (Vai mostrar a opção da incubadora SOMENTE SE risco_incubadora# for TRUE)
       if (risco_incubadora1) selectContent += `<option value="1">Incubadora Nº1</option>`;
       if (risco_incubadora2) selectContent += `<option value="2">Incubadora Nº2</option>`;
       if (risco_incubadora3) selectContent += `<option value="3">Incubadora Nº3</option>`;
       if (risco_incubadora4) selectContent += `<option value="4">Incubadora Nº4</option>`;
-    }
+    } 
 
     //Mostrar o Select na Tela (mainContent é o conteúdo dos botões & selectContent são as opções)
     sectionInfos.innerHTML = `${mainContent}
@@ -285,6 +285,15 @@
         </label>
       </div>
     </div>`;
+
+    if (btnApertado == "risco" && cont_riscoHiper == 0 && cont_riscoHipo == 0) {
+      sectionInfos.innerHTML = `${mainContent}
+      <hr>
+      <div id='divResponse' class='section'>
+        <h2 class='infoRisk'>Todas as crianças estão sem risco de adquirir doenças!</h2>
+      </div>
+      `;
+    }
   }
 
   // ========================================== DETERMINA A TEMPERATURA DAS INCUBADORAS, ALÉM DA TEMPERATURA MÍNIMA E MÁXIMA ========================================== //

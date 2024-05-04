@@ -25,8 +25,8 @@
         <h3>Cadastrar...</h3>
         <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
         <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
-        <!-- <button onclick="changeRegisterForm(3)" id="btn3">Bebê</button>
-          <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
+        <button onclick="form_Bebe()" id="btn3">Bebê</button>
+          <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
       </div>
     </div>
     <div class="section">
@@ -81,7 +81,7 @@
             <button onclick="cadastrarIncubadora()">Cadastrar</button>
           </div>
         </div>
-        <!-- <div class="form" id="form3">
+        <div class="form" id="form3">
             <h1>Cadastro do Bebê</h1>
             <div class="inputs">
               <label>
@@ -97,7 +97,7 @@
                 <input type="text" id="inputBebeResponsavel" placeholder="Nome do Responsável"/>
               </label>
               <label>
-                <span>Código da incubadora:</span>
+                <span>Código da incubadora:<span class="campo_obrigatorio"> *</span></span>
                 <input type="text" id="inputBebeIncubadora" placeholder="Código de Série"/>
               </label>
               <label>
@@ -120,11 +120,11 @@
                   <option value="1">Sim</option>
                 </select>
               </label>
-              <div id="erroBebe" style="color: red; font-weight: bold;"></div>
+              <div id="erroBebe" class="erro"></div>
               <button onclick="cadastrarBebe()">Cadastrar</button>
             </div>
           </div>
-          <div class="form" id="form4">
+          <!-- <div class="form" id="form4">
             <h1>Cadastro do Responsável</h1>
             <div class="inputs">
               <label>
@@ -253,19 +253,33 @@
 
   var form1 = document.getElementById('form1');
   var form2 = document.getElementById('form2');
+  var form3 = document.getElementById('form3');
 
   function form_Funcionario() {
     form1.style.display = 'flex';
     form2.style.display = 'none';
+    form3.style.display = 'none';
     btn1.style.backgroundColor = '#19A7A8';
     btn2.style.backgroundColor = '#2d4053';
+    btn3.style.backgroundColor = '#2d4053';
   }
 
   function form_Incubadora() {
     form1.style.display = 'none';
     form2.style.display = 'flex';
+    form3.style.display = 'none';
     btn1.style.backgroundColor = '#2d4053';
     btn2.style.backgroundColor = '#19A7A8';
+    btn3.style.backgroundColor = '#2d4053';
+  }
+
+  function form_Bebe() {
+    form1.style.display = 'none';
+    form2.style.display = 'none';
+    form3.style.display = 'flex';
+    btn1.style.backgroundColor = '#2d4053';
+    btn2.style.backgroundColor = '#2d4053';
+    btn3.style.backgroundColor = '#19A7A8';
   }
 
   function cadastrarFuncionario() {
@@ -323,6 +337,29 @@
     erroIncubadora.innerHTML = text;
   }
 
+  function cadastrarBebe() {
+    var nome = inputBebeNome.value;
+    var responsavel = inputBebeResponsavel.value;
+    var incubadora = inputBebeIncubadora.value;
+    var dtNasc = inputBebeNasc.value;
+    var sexo = selectBebeSexo.value;
+    var prematuro = selectBebePrematura.value;
+    var text = "";
+    var corTexto = 'red';
+    var tamanhoTexto = '16px';
+
+    if(nome == '' || incubadora == '' || dtNasc == '' || sexo == 'Selecione' || prematuro == 'Selecione') text = "Falha ao cadastrar o bebê!<br><br>Motivo: Você não preencheu todos os campos.";
+    else {
+      text = "Bebê Cadastrado!";
+      corTexto = '#19A7A8';
+      tamanhoTexto = '22px';
+    }
+
+    document.getElementById('erroBebe').style.color = corTexto;
+    document.getElementById('erroBebe').style.fontSize = tamanhoTexto;
+    erroBebe.innerHTML = text;
+  }
+
   // function cadastrarResponsavel() {
   //   var nome = inputResponsavelNome.value;
   //   var apelido = inputResponsavelApelido.value;
@@ -339,19 +376,4 @@
   //   }
   // }
 
-  // function cadastrarBebe() {
-  //   var nome = inputBebeNome.value;
-  //   var responsavel = inputBebeResponsavel.value;
-  //   var incubadora = inputBebeIncubadora.value;
-  //   var dtNasc = inputBebeNasc.value;
-  //   var sexo = selectBebeSexo.value;
-  //   var prematuro = selectBebePrematura.value;
-  //   var tamanhoResponsavel = responsavel.length;
-
-  //   if (sexo == 'Selecione' || prematuro == 'Selecione') {
-  //     erroBebe.innerHTML = `Selecione um valor valido! <br>`
-  //   } else {
-  //     erroBebe.innerHTML = `<b style="color: rgb(8, 234, 12);">Bebe cadastrado!</b>`
-  //   }
-  // }
 </script>

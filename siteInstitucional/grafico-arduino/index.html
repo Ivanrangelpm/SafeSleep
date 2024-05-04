@@ -38,7 +38,14 @@
                         label: 'Temperatura',
                         type: 'line',
                         borderColor: ['#00376e'],
-                        backgroundColor: ['#87a8c9']
+                    }, {
+                        label: 'Temperatura Máxima',
+                        type: 'line',
+                        borderColor: ['red'],
+                    }, {
+                        label: 'Temperatura Mínima',
+                        type: 'line',
+                        borderColor: ['lime'],
                     }]
                 },
                 options: {
@@ -55,14 +62,15 @@
                                 labelString: 'Temperatura'
                             },
                             ticks: {
-                                beginAtZero: true
+                                min: 33.5,
+                                max: 38.5
                             }
                         }],
                         x: {
-                            beginAtZero: true
+                            beginAtZero: false,
                         },
                         y: {
-                            beginAtZero: true
+                            beginAtZero: false,
                         }
                     },
                     animation: {
@@ -98,6 +106,8 @@
 
                 grafico.data.labels.push(tempo[endpoint]++);
                 grafico.data.datasets[0].data.push(parseFloat(valor));
+                grafico.data.datasets[1].data.push(37.5);
+                grafico.data.datasets[2].data.push(34.5);
                 grafico.update();
             })
         }

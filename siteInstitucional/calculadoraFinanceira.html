@@ -12,8 +12,8 @@
         <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
         <ul class="navbar">
           <li><a href="index.html">Início</a></li>
-          <li><a class="paginaAtual" href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
           <li><a href="./sobreNos.html">Sobre Nós</a></li>
+          <li><a class="paginaAtual" href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
           <li><a href="./cadastro.html">Cadastro</a></li>
           <li><a href="./login.html">Login</a></li>
         </ul>
@@ -37,7 +37,9 @@
                 </label>
             </div>
             <button class="botao" onclick="calcular()">Calcular</button>
-            <div id="div_mensagem"></div>
+            <div id="div_mensagem">
+            </div>
+            <div id="calculosDiv" style="text-align: center;"></div>
         </div>
     </div>
     <div class="footer">
@@ -99,30 +101,32 @@
             Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento. <br> <br>
     
             <b>O custo será de:</b><br> 
-            Por ano <b style="color: red;">${custoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br>
-            Por mês <b style="color: red;">${custoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br>
-            Por dia <b style="color: red;">${custoDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b><br> <br>
+            - <b style="color: red;">${custoDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por dia</b><br> 
+            - <b style="color: red;">${custoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por mês</b><br>
+            - <b style="color: red;">${custoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por ano</b><br>
+            <br>
     
             <h3>Ao utilizar o sensor para evitar custos adicionais causados pelo controle inadequado de temperatura, o hospital reduzirá em <b>até</b> 16% do custo.</h3> <br>
             
             <b>O valor do desconto médio será de: </b> <br>   <br>
-            Por ano <b style="color: green;">${reducaoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
-            Por mês <b style="color: green;">${reducaoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
-            Por dia <b style="color: green;">${reducaoDiaria.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
+            - <b style="color: green;">${reducaoDiaria.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por dia</b> <br>
+            - <b style="color: green;">${reducaoMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por mês</b> <br>
+            - <b style="color: green;">${reducaoAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por ano</b> <br>
             <br>
 
     
             <b>Então, o custo final com o desconto será de: </b> <br> <br>
     
-            Por ano <b style="color: rgb(161, 161, 0);">${custoFinalAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
-            Por mês <b style="color: rgb(161, 161, 0);">${custoFinalMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br>
-            Por dia <b style="color: rgb(161, 161, 0);">${custoFinalDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</b> <br><br>
+            - <b style="color: rgb(161, 161, 0);">${custoFinalDiario.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por dia</b> <br>
+            - <b style="color: rgb(161, 161, 0);">${custoFinalMensal.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por mês</b> <br>
+            - <b style="color: rgb(161, 161, 0);">${custoFinalAnual.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} por ano</b> <br>
+            <br><br>
 
-            <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém nascido em 28% <h3> <br>
+            <h3> A variação em um grau celsius dentro de uma emcubadora aumenta a taxa de mortalidade do recém-nascido em 28% <h3> <br>
             
-            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$ 681.996,00 <br>
+            O custo médio para um hospital relacionado a óbitos causados pela falta de monitoramento é de: R$ 681.996,00 <br><br>
 
-            O que, nesse caso, será de: ${processo.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})} <br> <br>
+            Nesse caso, o hospital poderá perder <span style="color: red;">${processo.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})}</span> por criança devido à negligência de monitoramento <br> <br>
             
             
             <button class="botao btnDiv" onclick="limpar()">Limpar resultado</button> <br>
@@ -137,10 +141,11 @@
         input_dias.value = '';
         input_custo.value = '';
         div_mensagem.innerHTML = '';
+        calculosDiv.innerHTML = '';
     }
 
     function calculos() {
-        div_mensagem.innerHTML += `
+        calculosDiv.innerHTML = `
         <h4 style="margin-top: 25px;">Cálculo para saber o quanto os bebês gastam diariamente, mensalmente e anualmente:</h4>
             <b>- Custo Diário:</b> Quantidade de bebês X Custo por bebê<br>
             <b>- Custo Mensal:</b> 30 X Custo Diário<br>

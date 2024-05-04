@@ -35,7 +35,7 @@ const serial = async (
 
     // Lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
-    const portaArduino = portas.find((porta) => porta.vendorId == '2341' && porta.productId == '0043');
+    const portaArduino = portas.find((porta) => porta.vendorId == '1A86' && porta.productId == '7523');
     if (!portaArduino) {
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }

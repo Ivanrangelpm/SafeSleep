@@ -305,7 +305,8 @@
     var peso = 0;
     var idade = 0;
     var prematuridade = "Não";
-    // var nomeDoBebe = "";
+    var nomeDoBebe = "";
+    var dtNascBebe = "";
     // var nomeDoResponsavel = "";
     // var parentesco = "";
     // var nomeDoMedico = "";
@@ -328,15 +329,31 @@
 
 
     //Mostrar o gráfico de cada incubadora
-    if (incubadora_num === '1') gerarGraficoInc1();
-    else if (incubadora_num === '2') gerarGraficoInc2();
-    else if (incubadora_num === '3') gerarGraficoInc3();
+    if (incubadora_num === '1') {
+      gerarGraficoInc1();
+      nomeDoBebe = "Jorge Silva";
+      dtNascBebe = "01/05/2024";
+    }
+    else if (incubadora_num === '2') {
+      gerarGraficoInc2();
+      nomeDoBebe = "Hellen Monteiro";
+      dtNascBebe = "26/04/2024";
+      prematuridade = "Sim";
+    }
+    else if (incubadora_num === '3') {
+      gerarGraficoInc3();
+      nomeDoBebe = "Lua Santos";
+      dtNascBebe = "07/05/2024";
+    }
     else {
-      prematuridade = "Sim",
-        gerarGraficoInc4();
+    
+       gerarGraficoInc4();
+       nomeDoBebe = "Melissa Bittencourt";
+       dtNascBebe = "03/05/2024";
+        
     };
 
-    kidInfo.innerHTML = `Prematuro? ${prematuridade}`
+    kidInfo.innerHTML = `Nome: ${nomeDoBebe} | Data de Nascimento: ${dtNascBebe} | Prematuro? ${prematuridade}`
   }
 
 

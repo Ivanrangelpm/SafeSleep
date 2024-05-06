@@ -54,9 +54,9 @@ INSERT INTO incubadora VALUES
     (321, 1186, 1);
 
 CREATE TABLE sensor (
-  idSensor INT PRIMARY KEY
+  idSensor INT PRIMARY KEY,
   fkIncubadora int not null unique,
-  constraint fkSensorIncubadora foreign key (fkIncubadora) references incubadora(idIncubadora)
+  constraint fkSensorIncubadora foreign key (fkIncubadora) references incubadora(codigoDeSerie)
 );
 
 INSERT INTO sensor VALUES
@@ -68,7 +68,7 @@ INSERT INTO sensor VALUES
 
 CREATE TABLE historico(
   idHistorico int not null auto_increment,
-  dataHora date not null,
+  dataHora datetime default current_timestamp,
   temperatura decimal(5, 2) not null,
   fkSensor int not null,
   constraint pkHistoricoSensor primary key (idHistorico, fkSensor),
@@ -84,12 +84,12 @@ CREATE TABLE bebe(
   sexo VARCHAR(9),
   prematuridade BIT(1),
   CONSTRAINT fkBebeIncubadora FOREIGN KEY(fkIncubadora) 
-	REFERENCES incubadora(idIncubadora)
+	REFERENCES incubadora(codigoDeSerie)
 );
 
 INSERT INTO bebe VALUES 
-(default, 1, "Jorge", "Silva", "2024-05-01", "Masculino", 0),
-(default, 2, "Hellen", "Monteiro", "2024-04-26", "Feminino", 1),
-(default, 3, "Lua", "Santos", "2024-05-07", "Feminino", 0),
-(default, 4, "Melissa", "Bittencourt", "2024-05-03", "Feminino", 0),
-(default, 5, "Miguel", "Camargo", "2024-05-08", "Masculino", 1);
+(default, 289, "Jorge", "Silva", "2024-05-01", "Masculino", 0),
+(default, 362, "Hellen", "Monteiro", "2024-04-26", "Feminino", 1),
+(default, 121, "Lua", "Santos", "2024-05-07", "Feminino", 0),
+(default, 523, "Melissa", "Bittencourt", "2024-05-03", "Feminino", 0),
+(default, 321, "Miguel", "Camargo", "2024-05-08", "Masculino", 1);

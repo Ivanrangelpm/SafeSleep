@@ -75,6 +75,7 @@
 }
 
 .members .card p {
+  text-align: center;
   font-size: 18px;
 }
 
@@ -92,7 +93,8 @@
 }
 
 .card img {
-  width: 60%;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: 2px solid #003050;
 }

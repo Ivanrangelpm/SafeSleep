@@ -267,7 +267,7 @@
     } else {
 
       //Erro para Razão Social
-      if (razao.length <= 1) {
+      if (razao.length <= 1 || isNaN(razao) == false) {
         div_erro_razao.innerHTML = `Razão social inválida`;
         textoAlerta += "- Razão Social<br>";
         divAlerta.style.display = 'flex';
@@ -333,7 +333,7 @@
       }
 
       //Erro para Nome do Representante
-      if (nome.length <= 1) {
+      if (nome.length <= 1 || isNaN(nome) == false) {
         div_erro_nome.innerHTML = `Nome inválido`;
         textoAlerta += "- Nome do Representante<br>";
         divAlerta.style.display = 'flex';
@@ -344,7 +344,7 @@
       }
 
       //Erro para Sobrenome do Representante
-      if (sobrenome.length <= 1) {
+      if (sobrenome.length <= 1 || isNaN(nome) == false) {
         div_erro_sobrenome.innerHTML = `Sobrenome inválido`;
         textoAlerta += "- Sobrenome do Representante<br>";
         divAlerta.style.display = 'flex';

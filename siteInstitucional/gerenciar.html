@@ -299,9 +299,11 @@
     var corTexto =  'red';
 
     if(nome == "" || sobrenome == "" || email == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
+    else if(isNaN(nome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Nome inválido";
+    else if(isNaN(sobrenome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Sobrenome inválido";
     else if(index == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que a senha possua algum caracter especial.<br><br>Caracteres Especiais: ! @ # $ % & / * _ ? -";
-    else if (email.indexOf('@') == -1 || email.indexOf(".") == -1) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que o email possua dois caracteres específicos.<br><br> Caracteres Específicos: @ .";
-    else if (licenca.startsWith("CRM/") == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Licença Médica inválida!"
+    else if(email.indexOf('@') == -1 || email.indexOf(".") == -1) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que o email possua dois caracteres específicos.<br><br> Caracteres Específicos: @ .";
+    else if(licenca.startsWith("CRM/") == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Licença Médica inválida!"
     else if(senha != senha2) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: As senhas não se confere.";
     else if(senha.length < 8) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: A senha deve conter 8 caracteres ou mais.";
     else if(cpf.length != 11) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF do funcionário não possui a quantidade correta de caracteres.";
@@ -350,6 +352,7 @@
     var tamanhoTexto = '16px';
 
     if(nome == '' || incubadora == '' || dtNasc == '' || sexo == 'Selecione' || prematuro == 'Selecione') text = "Falha ao cadastrar o bebê!<br><br>Motivo: Você não preencheu todos os campos.";
+    else if(isNaN(nome) == false) text = "Falha ao cadastrar o bebê!<br><br>Motivo: Nome inválido";
     else {
       text = "Bebê Cadastrado!";
       corTexto = '#19A7A8';

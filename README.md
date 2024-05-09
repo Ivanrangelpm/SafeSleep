@@ -35,7 +35,3 @@ function SafeSleep() {
     var funcionalidade = "Para todas as funcionalidades do projeto, utilizamos o JavaScript"
 }
 ~~~
-
-coluna | coluna2 | coluna 3 
------ | ----- | ----- |
-dado | dado | dado

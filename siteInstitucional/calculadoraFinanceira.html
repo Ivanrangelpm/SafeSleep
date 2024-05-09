@@ -24,7 +24,7 @@
             <span class="describe">Insira os dados abaixo para verificar os custos relacionados ao monitoramento inadequado da temperatura nas incubadoras</span>
             <div class="inputs">
                 <label>
-                    <span class="span">Quantidade de bebês internados por mês:</span>
+                    <span class="span">Quantidade de recém-nascidos internados por mês:</span>
                     <input type="number" id="input_internados" placeholder="Quantidade de Bebês"/>
                 </label>
                 <label> 
@@ -97,7 +97,7 @@
             var custoFinalMensal = (custoMensal - reducaoMensal);
             var custoFinalAnual = (custoAnual - reducaoAnual);
     
-            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos bebês internados em incubadoras sofrem com a falta de monitoramento.</h3> <br>
+            div_mensagem.innerHTML = `<h3>Nossas pesquisas apontaram que aproxidamente 16% dos recém-nascidos internados em incubadoras sofrem com a falta de monitoramento.</h3> <br>
             Portanto, dos ${internados} bebês internados, ${monit_inadeq} sofrerão com a a falta de monitoramento. <br> <br>
     
             <b>O custo será de:</b><br> 
@@ -146,8 +146,8 @@
 
     function calculos() {
         calculosDiv.innerHTML = `
-        <h4 style="margin-top: 25px;">Cálculo para saber o quanto os bebês gastam diariamente, mensalmente e anualmente:</h4>
-            <b>- Custo Diário:</b> Quantidade de bebês X Custo por bebê<br>
+        <h4 style="margin-top: 25px;">Cálculo para saber o quanto os recém-nascidos gastam diariamente, mensalmente e anualmente:</h4>
+            <b>- Custo Diário:</b> Quantidade de recém-nascidos X Custo por recém-nascido<br>
             <b>- Custo Mensal:</b> 30 X Custo Diário<br>
             <b>- Custo Anual:</b> Custo Mensal X 12(Quantidade de meses em um ano)<br><br>    
             

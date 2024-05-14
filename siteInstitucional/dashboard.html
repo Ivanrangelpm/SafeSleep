@@ -64,7 +64,17 @@
       </div>
     </div>
   </div>
+  <div class="chatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px;">
+    <img style= " width: 120px;  border-radius: 100%;" src="images/helpDesk.jpeg" alt=""></div>
   <div class="footer">
+  <button onclick="chatbot()" class="botaoChatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px; opacity: 0; border-radius: 100%; cursor: pointer;"></button>  
+  
+  
+  <div id="divMensagem" style="border-radius: 17px; display: none; width: 300px; height: 500px; position: fixed;  bottom: 47px; right: 250px; background-color: white; border: 3px solid #30a0a0;">
+    <h2 style=" color: black;">TIre suas dúvidas!</h2>
+    <input style="margin-top: 400px;" placeholder="Digite aqui" type="text">
+  </div>
+  
     <div class="developers">
       <h3>Desenvolvedores da SafeSleep</h3>
       <ul>
@@ -103,6 +113,15 @@
 </html>
 
 <script>
+  var contChatBot = 0
+  function chatbot() {
+    if(contChatBot % 2 == 0){
+      divMensagem.style.display = 'block';
+    }else{
+      divMensagem.style.display = 'none';
+    }
+    contChatBot ++;
+  }
   /* 
     TODOS OS DADOS MOSTRADOS NOS GRÁFICOS SIMULAM UMA SITUAÇÃO EM QUE EXISTEM APENAS 4 (QUATRO) INCUBADORAS CADASTRADAS *EM USO*. 
     ESSA VARIÁVEL É USADA APENAS PARA O SELECT DOS BOTÕES "GERAL" E "RISCO" COM O OBJETIVO DE GERAR TODAS AS OPÇÕES DE INCUBADORAS ATRAVÉS DO "FOR"
@@ -220,6 +239,7 @@
   // ========================================== MOSTRAR AVISO EM VERMELHO CASO HAJA CRIANÇAS EM RISCO ========================================== //
   var texto_dos_alertas = "";
 
+/*
   if (risco_incubadora1) { //Lembre-se que a variável risco_incubadora# é uma boolean (True/False)
     document.getElementById('alerta').style.display = 'flex'; //Tornar visível
     texto_dos_alertas += `<br>Incubadora Nº1 - ${doenca_incubadora1}`; //Informar a mensagem juntamente com a doença que pode infectar a criança
@@ -242,7 +262,7 @@
 
   document.getElementById('alertText').innerHTML += texto_dos_alertas;
 
-
+*/
   // ========================================== SELECT DOS BOTÕES "GERAL" & "EM RISCO" ========================================== //
   var btnApertado = "";
 

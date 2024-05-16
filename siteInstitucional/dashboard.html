@@ -239,7 +239,6 @@
   // ========================================== MOSTRAR AVISO EM VERMELHO CASO HAJA CRIANÇAS EM RISCO ========================================== //
   var texto_dos_alertas = "";
 
-/*
   if (risco_incubadora1) { //Lembre-se que a variável risco_incubadora# é uma boolean (True/False)
     document.getElementById('alerta').style.display = 'flex'; //Tornar visível
     texto_dos_alertas += `<br>Incubadora Nº1 - ${doenca_incubadora1}`; //Informar a mensagem juntamente com a doença que pode infectar a criança
@@ -262,7 +261,7 @@
 
   document.getElementById('alertText').innerHTML += texto_dos_alertas;
 
-*/
+
   // ========================================== SELECT DOS BOTÕES "GERAL" & "EM RISCO" ========================================== //
   var btnApertado = "";
 
@@ -276,47 +275,70 @@
     showTable();
   }
 
+  var tableContent = ""
+
   function showTable() { //Mostrar Select
-    var tableContent = `
-    <table>
-        <tr>
-          <th>Código de Série</th>
-          <th>Temperatura (°C)</th>
-          <th>Nome da Criança</th>
-          <th>Status</th>
-        </tr>
-    `;
 
     var listaTemperaturasAtuais = [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]];
     var nomeDoBebe = ['Jorge Silva', 'Hellen Monteiro', 'Lua Santos', 'Melissa Bittencourt'];
 
-    for (var cont = 0; cont < 4; cont++) {
-      if (cont % 2 == 1) var classeCor = "linhabranca";
-      else var classeCor = "linhacinza";
-
-      if (listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5) var status_incubadora = "Perigo";
-      else var status_incubadora = "Safe";
-    }
-    
     if (btnApertado == "geral") { //Botão "Geral"
-    for (var cont = 1; cont <= totalIncubadoras; cont++) {
-      tableContent += `
-      <tr onclick="gerarGraficoInc${cont + 1}()"> 
-        <td class = ${classeCor}> Incubadora ${cont + 1} </td> 
-        <td class = ${classeCor}> ${listaTemperaturasAtuais[cont]} </td>
-        <td class = ${classeCor}> ${nomeDoBebe[cont]} </td>
-        <td class = ${classeCor}> ${status_incubadora} </td>
-        </tr>
+      tableContent = `
+        <h2>Incubadoras</h2>
+        <table>
+          <tr>
+            <th>Código de Série</th>
+            <th>Temperatura (°C)</th>
+            <th>Nome da Criança</th>
+            <th>Status</th>
+          </tr>`;
+
+      for (var cont = 0; cont < totalIncubadoras; cont++) {
+        if (cont % 2 == 1) var classeCor = "linhabranca";
+        else var classeCor = "linhacinza";
+
+        if (listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5) var status_incubadora = "Perigo";
+        else var status_incubadora = "Safe";
+        
+        tableContent += `
+          <tr onclick="verificar(${cont + 1})" id='dados_incubadora'> 
+            <td class = ${classeCor}> Incubadora ${cont + 1} </td> 
+            <td class = ${classeCor}> ${listaTemperaturasAtuais[cont]} </td>
+            <td class = ${classeCor}> ${nomeDoBebe[cont]} </td>
+            <td class = ${classeCor}> ${status_incubadora} </td>
+          </tr>
         `;
       }
-    } else { //Botão "Risco" (Vai mostrar a opção da incubadora SOMENTE SE risco_incubadora# for TRUE)
-    // if (risco_incubadora1) selectContent += `<option value="1">Incubadora Nº1</option>`;
-    // if (risco_incubadora2) selectContent += `<option value="2">Incubadora Nº2</option>`;
-    // if (risco_incubadora3) selectContent += `<option value="3">Incubadora Nº3</option>`;
-    // if (risco_incubadora4) selectContent += `<option value="4">Incubadora Nº4</option>`;
-  } 
-  
-  sectionInfos.innerHTML = `${mainContent}<hr/>${tableContent}`;
+    } 
+    else { //Botão "Risco" (Vai mostrar a opção da incubadora SOMENTE SE risco_incubadora# for TRUE)
+      tableContent = `
+        <h2>Incubadoras</h2>
+        <table>
+          <tr>
+            <th>Código de Série</th>
+            <th>Temperatura (°C)</th>
+            <th>Nome da Criança</th>
+          </tr>`;
+
+      for(var cont = 0; cont < totalIncubadoras; cont++){
+        if(listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5){
+          if (cont % 2 == 1) var classeCor = "linhabranca";
+          else var classeCor = "linhacinza";
+
+          tableContent += `<tr onclick="verificar(${cont + 1})" id='dados_incubadora'> 
+            <td class = ${classeCor}> Incubadora ${cont + 1} </td> 
+            <td class = ${classeCor}> ${listaTemperaturasAtuais[cont]} </td>
+            <td class = ${classeCor}> ${nomeDoBebe[cont]} </td>
+          </tr>`;
+        }
+      }
+    }  
+
+    tableContent += "</table>";
+
+    sectionInfos.innerHTML = `${mainContent}
+      <hr/>${tableContent}
+    `;
   //Mostrar o Select na Tela (mainContent é o conteúdo dos botões & selectContent são as opções)
     // sectionInfos.innerHTML = `${mainContent}
     // <hr/>
@@ -347,8 +369,7 @@
 
   // POR FAVOR, NÃO APAGUE AS LINHAS QUE ESTÃO EM COMENTÁRIOS! ELAS PODERÃO SER UTILIZADAS FUTURAMENTE.
 
-  function verificar() {
-    var incubadora_num = selectIncubadora.value;
+  function verificar(incubadora_num) {
     var peso = 0;
     var idade = 0;
     var prematuridade = "Não";
@@ -357,14 +378,13 @@
     // var parentesco = "";
     // var nomeDoMedico = "";
 
-    sectionInfos.innerHTML = `${mainContent}
+    sectionInfos.innerHTML = `${mainContent} <hr/> ${tableContent} <hr/>
     <div id="divResponse" class="section">
       <span class='lineTitle'>Temperatura da Incubadora Nº${incubadora_num}</span>  
       <section id='lineSection'>
         <canvas id='incubadoraNum${incubadora_num}'></canvas>
-        </section>
-        <span id='kidInfo'></span>
-        </div>`;
+      </section>
+    </div>`;
 
     // gerarGraficoInc(
     //   `incubadoraNum${incubadora_num}`,
@@ -375,31 +395,24 @@
 
 
     //Mostrar o gráfico de cada incubadora
-    if (incubadora_num === '1') {
+    if (incubadora_num == '1') {
       gerarGraficoInc1();
-      nomeDoBebe = "Jorge Silva";
       dtNascBebe = "01/05/2024";
     }
-    else if (incubadora_num === '2') {
+    else if (incubadora_num == '2') {
       gerarGraficoInc2();
-      nomeDoBebe = "Hellen Monteiro";
       dtNascBebe = "26/04/2024";
       prematuridade = "Sim";
     }
-    else if (incubadora_num === '3') {
+    else if (incubadora_num == '3') {
       gerarGraficoInc3();
-      nomeDoBebe = "Lua Santos";
       dtNascBebe = "07/05/2024";
     }
     else {
-    
        gerarGraficoInc4();
-       nomeDoBebe = "Melissa Bittencourt";
        dtNascBebe = "03/05/2024";
         
     };
-
-    kidInfo.innerHTML = `Nome: ${nomeDoBebe} | Data de Nascimento: ${dtNascBebe} | Prematuro? ${prematuridade}`
   }
 
 

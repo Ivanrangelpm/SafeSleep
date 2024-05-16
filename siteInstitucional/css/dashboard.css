@@ -189,10 +189,12 @@ th {
   padding: 10px;
   text-align: center;
   background-color: white;
+  cursor: pointer;
 }
 
 .linhacinza {
   padding: 10px;
   text-align: center;
   background-color: #DDD;
+  cursor: pointer;
 }

@@ -55,14 +55,6 @@
         </section>
       </div>
     </div>
-    <div class="section">
-      <table id="table">
-        <tr>
-          <th>Código de Série</th>
-          <th>Temperatura (°C)</th>
-        </tr>
-      </table>
-    </div>
     <div class="section" id="sectionInfos">
       <h1>Selecione as Opções Desejadas:</h1>
       <div class="opcoes">
@@ -145,7 +137,7 @@
     <button id="botaoGeral" onclick="btnGeral()">Geral</button>
     <button id="botaoRisco" onclick="btnRisco()">Em risco</button>
     <button id="botaoAlertas" onclick="btnAlertas()">Alertas</button>
-    </div>`;
+  </div>`;
 
 
   // ========================================== DETERMINA A TEMPERATURA DAS INCUBADORAS, ALÉM DA TEMPERATURA MÍNIMA E MÁXIMA ========================================== //
@@ -167,21 +159,6 @@
     temperatures3[cont] = Math.random().toFixed(2) * intervalo + min_random;
     temperatures4[cont] = Math.random().toFixed(2) * intervalo + min_random;
   }
-
-  var tableContent = "";
-  var listaTemperaturasAtuais = [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]];
-  for (var cont = 1; cont <= 4; cont++) {
-    if (cont % 2 == 1) var classeCor = "linhabranca";
-    else var classeCor = "linhacinza";
-
-    tableContent += `
-    <tr> 
-      <td class = ${classeCor}> Incubadora ${cont} </td> 
-      <td class = ${classeCor}> ${listaTemperaturasAtuais[cont - 1]} </td>
-    </tr>
-    `
-  }
-  table.innerHTML += tableContent;
   
   // ========================================== DETECTA SE EXISTE ALGUM RISCO EM CADA INCUBADORA ========================================== //
   
@@ -291,43 +268,70 @@
 
   function btnGeral() { //Botão "Geral"
     btnApertado = "geral";
-    showSelect();
+    showTable();
   }
 
   function btnRisco() { //Botão "Risco"
     btnApertado = "risco";
-    showSelect();
+    showTable();
   }
 
-  function showSelect() { //Mostrar Select
-    var selectContent = "";
+  function showTable() { //Mostrar Select
+    var tableContent = `
+    <table>
+        <tr>
+          <th>Código de Série</th>
+          <th>Temperatura (°C)</th>
+          <th>Nome da Criança</th>
+          <th>Status</th>
+        </tr>
+    `;
 
+    var listaTemperaturasAtuais = [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]];
+    var nomeDoBebe = ['Jorge Silva', 'Hellen Monteiro', 'Lua Santos', 'Melissa Bittencourt'];
+
+    for (var cont = 0; cont < 4; cont++) {
+      if (cont % 2 == 1) var classeCor = "linhabranca";
+      else var classeCor = "linhacinza";
+
+      if (listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5) var status_incubadora = "Perigo";
+      else var status_incubadora = "Safe";
+    }
+    
     if (btnApertado == "geral") { //Botão "Geral"
-      for (var cont = 1; cont <= totalIncubadoras; cont++) {
-        selectContent += `<option value="${cont}">Incubadora Nº${cont}</option>`;
+    for (var cont = 1; cont <= totalIncubadoras; cont++) {
+      tableContent += `
+      <tr onclick="gerarGraficoInc${cont + 1}()"> 
+        <td class = ${classeCor}> Incubadora ${cont + 1} </td> 
+        <td class = ${classeCor}> ${listaTemperaturasAtuais[cont]} </td>
+        <td class = ${classeCor}> ${nomeDoBebe[cont]} </td>
+        <td class = ${classeCor}> ${status_incubadora} </td>
+        </tr>
+        `;
       }
     } else { //Botão "Risco" (Vai mostrar a opção da incubadora SOMENTE SE risco_incubadora# for TRUE)
-      if (risco_incubadora1) selectContent += `<option value="1">Incubadora Nº1</option>`;
-      if (risco_incubadora2) selectContent += `<option value="2">Incubadora Nº2</option>`;
-      if (risco_incubadora3) selectContent += `<option value="3">Incubadora Nº3</option>`;
-      if (risco_incubadora4) selectContent += `<option value="4">Incubadora Nº4</option>`;
-    } 
-
-    //Mostrar o Select na Tela (mainContent é o conteúdo dos botões & selectContent são as opções)
-    sectionInfos.innerHTML = `${mainContent}
-    <hr/>
-    <div class="section">
-      <h2>Selecione a incubadora para ver informações adicionais:</h2>
-      <div class="selecao">
-        <label>
-          <span>Selecione a incubadora:</span>
-          <select id="selectIncubadora" onchange="verificar()">
-            <option value="0" selected disabled>Selecione a incubadora</option>
-            ${selectContent}
-          </select>
-        </label>
-      </div>
-    </div>`;
+    // if (risco_incubadora1) selectContent += `<option value="1">Incubadora Nº1</option>`;
+    // if (risco_incubadora2) selectContent += `<option value="2">Incubadora Nº2</option>`;
+    // if (risco_incubadora3) selectContent += `<option value="3">Incubadora Nº3</option>`;
+    // if (risco_incubadora4) selectContent += `<option value="4">Incubadora Nº4</option>`;
+  } 
+  
+  sectionInfos.innerHTML = `${mainContent}<hr/>${tableContent}`;
+  //Mostrar o Select na Tela (mainContent é o conteúdo dos botões & selectContent são as opções)
+    // sectionInfos.innerHTML = `${mainContent}
+    // <hr/>
+    // <div class="section">
+    //   <h2>Selecione a incubadora para ver informações adicionais:</h2>
+    //   <div class="selecao">
+    //     <label>
+    //       <span>Selecione a incubadora:</span>
+    //       <select id="selectIncubadora" onchange="verificar()">
+    //         <option value="0" selected disabled>Selecione a incubadora</option>
+    //         ${selectContent}
+    //       </select>
+    //     </label>
+    //   </div>
+    // </div>`;
 
     if (btnApertado == "risco" && cont_riscoHiper == 0 && cont_riscoHipo == 0) {
       sectionInfos.innerHTML = `${mainContent}
@@ -348,7 +352,6 @@
     var peso = 0;
     var idade = 0;
     var prematuridade = "Não";
-    var nomeDoBebe = "";
     var dtNascBebe = "";
     // var nomeDoResponsavel = "";
     // var parentesco = "";

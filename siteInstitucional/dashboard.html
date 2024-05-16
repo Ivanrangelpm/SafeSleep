@@ -55,6 +55,14 @@
         </section>
       </div>
     </div>
+    <div class="section">
+      <table id="table">
+        <tr>
+          <th>Código de Série</th>
+          <th>Temperatura (°C)</th>
+        </tr>
+      </table>
+    </div>
     <div class="section" id="sectionInfos">
       <h1>Selecione as Opções Desejadas:</h1>
       <div class="opcoes">
@@ -113,7 +121,8 @@
 </html>
 
 <script>
-  var contChatBot = 0
+  var contChatBot = 0;
+
   function chatbot() {
     if(contChatBot % 2 == 0){
       divMensagem.style.display = 'block';
@@ -159,6 +168,20 @@
     temperatures4[cont] = Math.random().toFixed(2) * intervalo + min_random;
   }
 
+  var tableContent = "";
+  var listaTemperaturasAtuais = [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]];
+  for (var cont = 1; cont <= 4; cont++) {
+    if (cont % 2 == 1) var classeCor = "linhabranca";
+    else var classeCor = "linhacinza";
+
+    tableContent += `
+    <tr> 
+      <td class = ${classeCor}> Incubadora ${cont} </td> 
+      <td class = ${classeCor}> ${listaTemperaturasAtuais[cont - 1]} </td>
+    </tr>
+    `
+  }
+  table.innerHTML += tableContent;
   
   // ========================================== DETECTA SE EXISTE ALGUM RISCO EM CADA INCUBADORA ========================================== //
   

@@ -546,6 +546,7 @@
           numeroServer: numero,
         }),
       }).then(function (hospitalCadastrado) {
+        console.log(`Resposta hosp: ${hospitalCadastrado}`);
         fetch("/usuarios/cadastrar", {
           method: "POST",
           headers: {

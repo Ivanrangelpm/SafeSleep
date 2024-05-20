@@ -13,10 +13,10 @@ function autenticar(email, senha) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(nome, sobrenome, email_representante, cpf, licenca, senha) {
+function cadastrar(nome, sobrenome, email_representante, cpf, licenca, senha, fkHospital) {
   var instrucao = `
-        INSERT INTO usuario (login, senha, cpf, nome, sobrenome, licenca) VALUES
-        ('${email_representante}', '${senha}', '${cpf}', '${nome}', '${sobrenome}', '${licenca}');
+        INSERT INTO usuario (login, senha, cpf, nome, sobrenome, licenca, fkHospital) VALUES
+        ('${email_representante}', '${senha}', '${cpf}', '${nome}', '${sobrenome}', '${licenca}', ${fkHospital});
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);

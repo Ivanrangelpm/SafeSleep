@@ -45,6 +45,7 @@ function cadastrar(req, res) {
   var cpf = req.body.cpfServer;
   var licenca = req.body.licencaServer;
   var senha = req.body.senhaServer;
+  var fkHospital = req.body.fkHospitalServer;
 
   if (nome == undefined) {
     res.status(400).send("Seu nome está indefinido!");
@@ -59,7 +60,7 @@ function cadastrar(req, res) {
   }
 
   userModel
-    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, senha)
+    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, senha, fkHospital)
     .then(function (resposta) {
       res.json(resposta);
     })

@@ -439,10 +439,69 @@
     if(form2Erro) document.getElementById('chgPage2').style.backgroundColor = '#880022';
 
     if (valido == 13) {
-      div_cadastro.innerHTML = '<h2 class="enviado">Cadastro Concluído!<h2>';  
-      div_cadastro.innerHTML += '<br> <a href="./login.html">Fazer Login</a>';
+      //div_cadastro.innerHTML = '<h2 class="enviado">Cadastro Concluído!<h2>';  
+      //div_cadastro.innerHTML += '<br> <a href="./login.html">Fazer Login</a>';
       divAlerta.style.display = 'none';
-    }
+
+      fetch("/hospital/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/hospital.js
+          razaoServer: razao,
+          fantasiaServer: fantasia,
+          cnpjServer: cnpj, 
+          emailServer: email,  
+          telefoneServer: telefone,
+          cepServer: cep,  
+          numeroServer: numero
+        }),
+      })
+      fetch("/user/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/user.js
+          nomeServer: nome,    
+          sobrenomeServer: sobrenome,
+          emailRepServer: email_representante,
+          cpfServer: cpf,
+          licencaServer: licenca,
+          senhaServer: senha
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            //cardErro.style.display = "block";
+
+            //mensagem_erro.innerHTML =
+              //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            setTimeout(() => {
+              window.location = "login.html";
+            }, "2000");
+
+            //limparFormulario();
+            //finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          //finalizarAguardar();
+        });
+
+      return false;
+      }
   }
 
   //FECHAR O ALERTA EM VERMELHO

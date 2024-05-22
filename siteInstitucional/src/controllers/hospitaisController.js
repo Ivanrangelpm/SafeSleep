@@ -15,27 +15,12 @@ function cadastrar(req, res) {
   } else {
     hospitaisModel
       .cadastrar(razao, fantasia, cnpj, email, telefone, cep, numero)
-      .then(function (resultadoAutenticar) {
-        console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-        console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-
-        if (resultadoAutenticar.length == 1) {
-          console.log(`resultado autenticar: ${resultadoAutenticar[0].insertId}`);
-          res.json({
-            insertId: resultadoAutenticar[0].insertId,
-          });
-        } else if (resultadoAutenticar.length == 0) {
-          res.status(403).send("Email e/ou senha inválido(s)");
-        } else {
-          res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-        }
+      .then(function (resposta) {
+        res.status(200).json(resposta);
       })
       .catch(function (erro) {
         console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o login! Erro: ",
-          erro.sqlMessage
-        );
+        console.log("\nHouve um erro ao realizar o cadastro do hospital! Erro: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
       });
   }

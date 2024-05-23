@@ -16,7 +16,7 @@ function autenticar(email, senha) {
     senha
   );
   var instrucaoSql = `
-  SELECT email, senha, usuario.nome, count(fkUsuario) AS grupos FROM usuario JOIN GrupoUsuario ON fkUsuario = idUsuario WHERE email = '${email}' AND senha = '${senha}' GROUP BY fkUsuario;
+  SELECT idUsuario, nome, login, senha FROM usuario WHERE login = '${email}' AND senha = '${senha}' ;
     `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

@@ -64,16 +64,17 @@
       </div>
     </div>
   </div>
-  <div class="chatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px;">
-    <img style= " width: 120px;  border-radius: 100%;" src="images/helpDesk.jpeg" alt=""></div>
+  <!-- <div class="chatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px;">
+    <img style= " width: 120px;  border-radius: 100%;" src="images/helpDesk.jpeg" alt="">
+    <button onclick="chatbot()" class="botaoChatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px; opacity: 0; border-radius: 100%; cursor: pointer;"></button>  
+  
+
+    <div id="divMensagem" style="border-radius: 17px; display: none; width: 300px; height: 500px; position: fixed;  bottom: 47px; right: 250px; background-color: white; border: 3px solid #30a0a0;">
+      <h2 style=" color: black;">TIre suas dúvidas!</h2>
+      <input style="margin-top: 400px;" placeholder="Digite aqui" type="text">
+    </div>
+  </div> -->
   <div class="footer">
-  <button onclick="chatbot()" class="botaoChatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px; opacity: 0; border-radius: 100%; cursor: pointer;"></button>  
-  
-  
-  <div id="divMensagem" style="border-radius: 17px; display: none; width: 300px; height: 500px; position: fixed;  bottom: 47px; right: 250px; background-color: white; border: 3px solid #30a0a0;">
-    <h2 style=" color: black;">TIre suas dúvidas!</h2>
-    <input style="margin-top: 400px;" placeholder="Digite aqui" type="text">
-  </div>
   
     <div class="developers">
       <h3>Desenvolvedores da SafeSleep</h3>
@@ -297,15 +298,15 @@
         if (cont % 2 == 1) var classeCor = "linhabranca";
         else var classeCor = "linhacinza";
 
-        if (listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5) var status_incubadora = "Perigo";
-        else var status_incubadora = "Safe";
+        if (listaTemperaturasAtuais[cont] > 37.5 || listaTemperaturasAtuais[cont] < 34.5) var status_incubadora = "https://static.vecteezy.com/system/resources/previews/017/178/212/original/warning-hazard-sign-on-transparent-background-free-png.png";
+        else var status_incubadora = "https://www.pngall.com/wp-content/uploads/12/Secure-HTTPS-Green-Symbol-PNG.png";
         
         tableContent += `
           <tr onclick="verificar(${cont + 1})" id='dados_incubadora'> 
             <td class = ${classeCor}> Incubadora ${cont + 1} </td> 
             <td class = ${classeCor}> ${listaTemperaturasAtuais[cont]} </td>
             <td class = ${classeCor}> ${nomeDoBebe[cont]} </td>
-            <td class = ${classeCor}> ${status_incubadora} </td>
+            <td class = ${classeCor}> <img src=${status_incubadora} style='width: 50px; height: 50px;'> </td>
           </tr>
         `;
       }

@@ -168,3 +168,33 @@
   justify-content: space-around;
   flex-direction: row;
 }
+table,th,td {
+  border: 1px black solid;
+}
+table {
+  background-color: #001725;
+  width: 50%;
+  border-radius: 8px;
+  
+}
+th {
+  background-color: #507090;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  border-radius: 8px 8px 0 0;
+}
+
+.linhabranca {
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+}
+
+.linhacinza {
+  padding: 10px;
+  text-align: center;
+  background-color: #DDD;
+  cursor: pointer;
+}

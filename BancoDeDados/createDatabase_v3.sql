@@ -83,13 +83,15 @@ CREATE TABLE bebe(
   nasc DATE NOT NULL,
   sexo VARCHAR(9),
   prematuridade BIT(1),
+  dtEntrada DATETIME,
+  dtSaida DATETIME,
   CONSTRAINT fkBebeIncubadora FOREIGN KEY(fkIncubadora) 
 	REFERENCES incubadora(codigoDeSerie)
 );
 
 INSERT INTO bebe VALUES 
-(default, 289, "Jorge", "Silva", "2024-05-01", "Masculino", 0),
-(default, 362, "Hellen", "Monteiro", "2024-04-26", "Feminino", 1),
-(default, 121, "Lua", "Santos", "2024-05-07", "Feminino", 0),
-(default, 523, "Melissa", "Bittencourt", "2024-05-03", "Feminino", 0),
-(default, 321, "Miguel", "Camargo", "2024-05-08", "Masculino", 1);
+(default, 289, "Jorge", "Silva", "2024-05-01", "Masculino", 0, '2024-05-02 22:40', '2024-05-04 10:03'),
+(default, 362, "Hellen", "Monteiro", "2024-04-26", "Feminino", 1,  '2024-04-29 02:23', '2024-05-15 12:00'),
+(default, 121, "Lua", "Santos", "2024-05-07", "Feminino", 0, '2024-05-07 17:51', '2024-05-14 16:58'),
+(default, 523, "Melissa", "Bittencourt", "2024-05-03", "Feminino", 0, '2024-05-03 22:07', '2024-05-08 22:10'),
+(default, 321, "Miguel", "Camargo", "2024-05-08", "Masculino", 1, '2024-05-08 23:33', null);

@@ -23,7 +23,6 @@
     </div> 
     <div id="div_cadastro" class="main">
       <div class="section cadastro-hospital">
-        <h1>CADASTRO</h1>
         <div class="lineForms">
           <div class="line">
             <label>
@@ -44,81 +43,93 @@
           <div class="form form1" id="form1">
             <h1>Cadastre seu Hospital</h1>
             <div class="inputs">
-              <label>
-                <span>Razão Social:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_razao" placeholder="Razão Social"/>
-                <div id="div_erro_razao" class="error"></div>
-              </label>
-              <label>
-                <span>Nome Fantasia:</span>
-                <input type="text" id="input_fantasia" placeholder='Nome Fantasia'/>
-                <div id="div_erro_fantasia" class="error"></div>
-              </label>
-              <label>
-                <span>CNPJ:<span class="campo_obrigatorio"> *</span></span>
-                <input type="number" id="input_cnpj" placeholder="XX.XXX.XXX/XXXX-XX"/>
-                <div id="div_erro_cnpj" class="error"></div>
-              </label>
-              <label>
-                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_email" placeholder="E-mail"/>
-                <div id="div_erro_email" class="error"></div>
-              </label>
-              <label>
-                <span>Telefone:<span class="campo_obrigatorio"> *</span></span>
-                <input type="number" id="input_telefone" placeholder="(xx) xxxx-xxxx"/>
-                <div id="div_erro_telefone" class="error"></div>
-              </label>
-              <label>
-                <span>CEP:<span class="campo_obrigatorio"> *</span></span>
-                <input type="number" id="input_cep" placeholder="xxxxx-xxx"/>
-                <div id="div_erro_cep" class="error"></div>
-              </label>
-              <label>
-                <span>Número:<span class="campo_obrigatorio"> *</span></span>
-                <input type="number" id="input_numero" placeholder="Número da Instituição"/>
-                <div id="div_erro_numero" class="error"></div>
-              </label>
+              <div class="inputs_cadastro">
+                <div>
+                  <label>
+                    <span>Razão Social:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_razao" placeholder="Razão Social"/>
+                    <div id="div_erro_razao" class="error"></div>
+                  </label>
+                  <label>
+                    <span>Nome Fantasia:</span>
+                    <input type="text" id="input_fantasia" placeholder='Nome Fantasia'/>
+                    <div id="div_erro_fantasia" class="error"></div>
+                  </label>
+                  <label>
+                    <span>CNPJ:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="number" id="input_cnpj" placeholder="XX.XXX.XXX/XXXX-XX"/>
+                    <div id="div_erro_cnpj" class="error"></div>
+                  </label>
+                  <label>
+                    <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_email" placeholder="E-mail"/>
+                    <div id="div_erro_email" class="error"></div>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <span>Telefone:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="number" id="input_telefone" placeholder="(xx) xxxx-xxxx"/>
+                    <div id="div_erro_telefone" class="error"></div>
+                  </label>
+                  <label>
+                    <span>CEP:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="number" id="input_cep" placeholder="xxxxx-xxx"/>
+                    <div id="div_erro_cep" class="error"></div>
+                  </label>
+                  <label>
+                    <span>Número:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="number" id="input_numero" placeholder="Número da Instituição"/>
+                    <div id="div_erro_numero" class="error"></div>
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form form2" id="form2">
             <h1>Cadastre-se como Representante</h1>
             <div class="inputs">
-              <label>
-                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_nome" placeholder="Nome"/>
-                <div id="div_erro_nome" class="error"></div>
-              </label>
-              <label>
-                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_sobrenome" placeholder="Sobrenome"/>
-                <div id="div_erro_sobrenome" class="error"></div>
-              </label>
-              <label>
-                <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_emailRep" placeholder="E-mail"/>
-                <div id="div_erro_emailRep" class="error"></div>
-              </label>
-              <label>
-                <span>CPF:<span class="campo_obrigatorio"> *</span></span>
-                <input type="number" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
-                <div id="div_erro_cpf" class="error"></div>
-              </label>
-              <label>
-                <span>Licença Médica:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="input_licenca" placeholder="Licença Médica"/>
-                <div id="div_erro_licenca" class="error"></div>
-              </label>
-              <label>
-                <span>Senha:<span class="campo_obrigatorio"> *</span></span>
-                <input type="password" id="input_senha" placeholder="Senha"/>
-                <div id="div_erro_senha" class="error"></div>
-              </label>
-              <label>
-                <span>Confirme sua senha:<span class="campo_obrigatorio"> *</span></span>
-                <input type="password" id="input_confirmar" placeholder="Senha"/>
-                <div id="div_erro_confirmar" class="error"></div>
-              </label>
+              <div class="inputs_cadastro">
+                <div>
+                  <label>
+                    <span>Nome:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_nome" placeholder="Nome"/>
+                    <div id="div_erro_nome" class="error"></div>
+                  </label>
+                  <label>
+                    <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_sobrenome" placeholder="Sobrenome"/>
+                    <div id="div_erro_sobrenome" class="error"></div>
+                  </label>
+                  <label>
+                    <span>E-mail:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_emailRep" placeholder="E-mail"/>
+                    <div id="div_erro_emailRep" class="error"></div>
+                  </label>
+                  <label>
+                    <span>CPF:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="number" id="input_cpf" placeholder="xxx.xxx.xxx-xx"/>
+                    <div id="div_erro_cpf" class="error"></div>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <span>Licença Médica:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="text" id="input_licenca" placeholder="Licença Médica"/>
+                    <div id="div_erro_licenca" class="error"></div>
+                  </label>
+                  <label>
+                    <span>Senha:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="password" id="input_senha" placeholder="Senha"/>
+                    <div id="div_erro_senha" class="error"></div>
+                  </label>
+                  <label>
+                    <span>Confirme sua senha:<span class="campo_obrigatorio"> *</span></span>
+                    <input type="password" id="input_confirmar" placeholder="Senha"/>
+                    <div id="div_erro_confirmar" class="error"></div>
+                  </label>
+                </div>
+              </div>
               <span id="spanResponse">(A senha deve possuir pelo menos 8 <br> caracteres e um caracter especial)</span>
             </div>
           </div>

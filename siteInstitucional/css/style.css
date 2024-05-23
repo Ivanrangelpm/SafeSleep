@@ -148,7 +148,7 @@ body {
   border: 2px solid #101030;
   /* background-color: #f0f5f0; */
   background-color: #f0f5f0;
-  width: 800px;
+  width: fit-content;
 }
 
 .main .form .inputs {
@@ -174,7 +174,7 @@ body {
 .main .form .inputs input {
   border-radius: 5px;
   padding: 0.5rem;
-  width: 31rem;
+  width: 25rem;
   color: #101030;
   height: 40px;
 }

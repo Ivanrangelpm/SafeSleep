@@ -26,7 +26,7 @@
         <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
         <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
         <button onclick="form_Bebe()" id="btn3">Recém-Nascido</button>
-          <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
+        <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
       </div>
     </div>
     <div class="section">
@@ -82,49 +82,49 @@
           </div>
         </div>
         <div class="form" id="form3">
-            <h1>Cadastro de Recém-Nascido</h1>
-            <div class="inputs">
-              <label>
-                <span>Nome:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="inputBebeNome" placeholder="Nome"/>
-              </label>
-              <label>
-                <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="inputBebeSobrenome" placeholder="Sobrenome"/>
-              </label>
-              <label>
-                <span>Responsável:</span>
-                <input type="text" id="inputBebeResponsavel" placeholder="Nome do Responsável"/>
-              </label>
-              <label>
-                <span>Código da incubadora:<span class="campo_obrigatorio"> *</span></span>
-                <input type="text" id="inputBebeIncubadora" placeholder="Código de Série"/>
-              </label>
-              <label>
-                <span>Data de nascimento:<span class="campo_obrigatorio"> *</span></span>
-                <input type="date" id="inputBebeNasc" placeholder="dd/mm/aaaa"/>
-              </label>
-              <label>
-                <span>Sexo:<span class="campo_obrigatorio"> *</span></span>
-                <select id="selectBebeSexo">
-                  <option disabled selected>Selecione</option>
-                  <option>Feminino</option>
-                  <option>Masculino</option>
-                </select>
-              </label>
-              <label>
-                <span>Prematuridade<span class="campo_obrigatorio"> *</span></span>
-                <select id="selectBebePrematura">
-                  <option disabled selected>Selecione</option>
-                  <option value="0">Não</option>
-                  <option value="1">Sim</option>
-                </select>
-              </label>
-              <div id="erroBebe" class="erro"></div>
-              <button onclick="cadastrarBebe()">Cadastrar</button>
-            </div>
+          <h1>Cadastro de Recém-Nascido</h1>
+          <div class="inputs">
+            <label>
+              <span>Nome:<span class="campo_obrigatorio"> *</span></span>
+              <input type="text" id="inputBebeNome" placeholder="Nome" />
+            </label>
+            <label>
+              <span>Sobrenome:<span class="campo_obrigatorio"> *</span></span>
+              <input type="text" id="inputBebeSobrenome" placeholder="Sobrenome" />
+            </label>
+            <label>
+              <span>Responsável:</span>
+              <input type="text" id="inputBebeResponsavel" placeholder="Nome do Responsável" />
+            </label>
+            <label>
+              <span>Código da incubadora:<span class="campo_obrigatorio"> *</span></span>
+              <input type="text" id="inputBebeIncubadora" placeholder="Código de Série" />
+            </label>
+            <label>
+              <span>Data de nascimento:<span class="campo_obrigatorio"> *</span></span>
+              <input type="date" id="inputBebeNasc" placeholder="dd/mm/aaaa" />
+            </label>
+            <label>
+              <span>Sexo:<span class="campo_obrigatorio"> *</span></span>
+              <select id="selectBebeSexo">
+                <option disabled selected>Selecione</option>
+                <option>Feminino</option>
+                <option>Masculino</option>
+              </select>
+            </label>
+            <label>
+              <span>Prematuridade<span class="campo_obrigatorio"> *</span></span>
+              <select id="selectBebePrematura">
+                <option disabled selected>Selecione</option>
+                <option value="0">Não</option>
+                <option value="1">Sim</option>
+              </select>
+            </label>
+            <div id="erroBebe" class="erro"></div>
+            <button onclick="cadastrarBebe()">Cadastrar</button>
           </div>
-          <!-- <div class="form" id="form4">
+        </div>
+        <!-- <div class="form" id="form4">
             <h1>Cadastro do Responsável</h1>
             <div class="inputs">
               <label>
@@ -296,24 +296,63 @@
     var index = senha.indexOf('!') >= 0 || senha.indexOf('@') >= 0 || senha.indexOf('#') >= 0 || senha.indexOf('$') >= 0 || senha.indexOf('%') >= 0 || senha.indexOf('&') >= 0 || senha.indexOf('/') >= 0 || senha.indexOf('*') >= 0 || senha.indexOf('_') >= 0 || senha.indexOf('?') >= 0 || senha.indexOf('-') >= 0;
 
     var tamanhoTexto = '16px';
-    var corTexto =  'red';
+    var corTexto = 'red';
 
-    if(nome == "" || sobrenome == "" || email == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
-    else if(isNaN(nome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Nome inválido";
-    else if(isNaN(sobrenome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Sobrenome inválido";
-    else if(index == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que a senha possua algum caracter especial.<br><br>Caracteres Especiais: ! @ # $ % & / * _ ? -";
-    else if(email.indexOf('@') == -1 || email.indexOf(".") == -1) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que o email possua dois caracteres específicos.<br><br> Caracteres Específicos: @ .";
-    else if(licenca.startsWith("CRM/") == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Licença Médica inválida!"
-    else if(senha != senha2) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: As senhas não se confere.";
-    else if(senha.length < 8) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: A senha deve conter 8 caracteres ou mais.";
-    else if(cpf.length != 11) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF do funcionário não possui a quantidade correta de caracteres.";
-    else if(cpf.indexOf('e') >= 0 || isNaN(Number(cpf))) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF possui caracteres inválidos. Insira apenas números.";
+    if (nome == "" || sobrenome == "" || email == "" || cpf == "" || licenca == "" || senha == "" || senha2 == "") text = 'Falha ao cadastrar o funcionário!<br><br>Motivo: Você não preencheu todos os campos.';
+    else if (isNaN(nome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Nome inválido";
+    else if (isNaN(sobrenome) == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Sobrenome inválido";
+    else if (index == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que a senha possua algum caracter especial.<br><br>Caracteres Especiais: ! @ # $ % & / * _ ? -";
+    else if (email.indexOf('@') == -1 || email.indexOf(".") == -1) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: É necessário que o email possua dois caracteres específicos.<br><br> Caracteres Específicos: @ .";
+    else if (licenca.startsWith("CRM/") == false) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: Licença Médica inválida!"
+    else if (senha != senha2) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: As senhas não se confere.";
+    else if (senha.length < 8) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: A senha deve conter 8 caracteres ou mais.";
+    else if (cpf.length != 11) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF do funcionário não possui a quantidade correta de caracteres.";
+    else if (cpf.indexOf('e') >= 0 || isNaN(Number(cpf))) text = "Falha ao cadastrar o funcionário!<br><br>Motivo: O CPF possui caracteres inválidos. Insira apenas números.";
     else {
       text = `Médico Cadastrado!`;
       corTexto = '#19A7A8';
       tamanhoTexto = '22px';
+
+      fetch("/funcionario/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nomeServer: nome,
+          sobrenomeServer: sobrenome,
+          emailFuncServer: email,
+          cpfServer: cpf,
+          licencaServer: licenca,
+          cargoServer: cargo,
+          senhaServer: senha,
+          fkHospitalServer: sessionStorage.ID_HOSPITAL,
+        }),
+      })
+        .then(function (respostaFuncionario) {
+          console.log("Resposta repr: ", respostaFuncionario);
+          if (respostaFuncionario.ok) {
+            //cardErro.style.display = "block";
+
+            //mensagem_erro.innerHTML =
+            //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            setTimeout(() => {
+              window.location.reload(true);
+            }, "2000");
+
+            //limparFormulario();
+            // finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (respostaFuncionario) {
+          console.log(`#ERRO:`, respostaFuncionario);
+          // finalizarAguardar();
+        });
     }
-    
+
     document.getElementById('erroFuncionario').style.color = corTexto;
     document.getElementById('erroFuncionario').style.fontSize = tamanhoTexto;
     erroFuncionario.innerHTML = text;
@@ -327,14 +366,48 @@
     var corTexto = 'red';
     var tamanhoTexto = '16px'
 
-    if(codigo == "" || modelo == "") text = "Falha ao cadastrar a incubadora!<br><br>Motivo: Você não preencheu todos os campos.";
+    if (codigo == "" || modelo == "") text = "Falha ao cadastrar a incubadora!<br><br>Motivo: Você não preencheu todos os campos.";
     else if (tamanhoCodigo > 10) text = `Falha ao cadastrar a incubadora!<br><br>Motivo: O código da incubadora só pode ter menos de 10 caracteres!`;
     else {
       text = `Incubadora Cadastrada!`;
       corTexto = '#19A7A8';
       tamanhoTexto = '22px';
+
+      fetch("/incubadora/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          codigoServer: codigo,
+          modeloServer: modelo,
+          fkHospitalServer: sessionStorage.ID_HOSPITAL,
+        }),
+      })
+        .then(function (respostaIncubadora) {
+          console.log("Resposta repr: ", respostaIncubadora);
+          if (respostaIncubadora.ok) {
+            //cardErro.style.display = "block";
+
+            //mensagem_erro.innerHTML =
+            //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            setTimeout(() => {
+              window.location.reload(true);
+            }, "2000");
+
+            //limparFormulario();
+            // finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (respostaIncubadora) {
+          console.log(`#ERRO:`, respostaIncubadora);
+          // finalizarAguardar();
+        });
     }
-    
+
     document.getElementById('erroIncubadora').style.color = corTexto;
     document.getElementById('erroIncubadora').style.fontSize = tamanhoTexto;
     erroIncubadora.innerHTML = text;
@@ -351,8 +424,8 @@
     var corTexto = 'red';
     var tamanhoTexto = '16px';
 
-    if(nome == '' || incubadora == '' || dtNasc == '' || sexo == 'Selecione' || prematuro == 'Selecione') text = "Falha ao cadastrar o bebê!<br><br>Motivo: Você não preencheu todos os campos.";
-    else if(isNaN(nome) == false) text = "Falha ao cadastrar o bebê!<br><br>Motivo: Nome inválido";
+    if (nome == '' || incubadora == '' || dtNasc == '' || sexo == 'Selecione' || prematuro == 'Selecione') text = "Falha ao cadastrar o bebê!<br><br>Motivo: Você não preencheu todos os campos.";
+    else if (isNaN(nome) == false) text = "Falha ao cadastrar o bebê!<br><br>Motivo: Nome inválido";
     else {
       text = "Bebê Cadastrado!";
       corTexto = '#19A7A8';

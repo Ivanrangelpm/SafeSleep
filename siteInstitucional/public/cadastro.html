@@ -677,6 +677,7 @@
           .json()
           .then(function (hospitalCadastrado) {
             console.log("Json hosp: ", hospitalCadastrado);
+            sessionStorage.ID_HOSPITAL = hospitalCadastrado.insertId;
             fetch("/usuarios/cadastrar", {
               method: "POST",
               headers: {
@@ -701,6 +702,7 @@
 
                   //mensagem_erro.innerHTML =
                   //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
 
                   setTimeout(() => {
                     window.location = "login.html";

@@ -9,7 +9,7 @@
   <link href="./css/gerenciar.css" rel="stylesheet" />
 </head>
 
-<body>
+<body onload="pegarIncubadoras()">
   <div class="header">
     <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
@@ -98,7 +98,10 @@
             </label>
             <label>
               <span>Código da incubadora:<span class="campo_obrigatorio"> *</span></span>
-              <input type="text" id="inputBebeIncubadora" placeholder="Código de Série" />
+              <select id="inputBebeIncubadora" placeholder="Código de Série">
+                <option disabled selected>Selecione</option>
+
+              </select>
             </label>
             <label>
               <span>Data de nascimento:<span class="campo_obrigatorio"> *</span></span>
@@ -330,7 +333,7 @@
         }),
       })
         .then(function (respostaFuncionario) {
-          console.log("Resposta repr: ", respostaFuncionario);
+          console.log("Resposta funcionario: ", respostaFuncionario);
           if (respostaFuncionario.ok) {
             //cardErro.style.display = "block";
 
@@ -385,7 +388,7 @@
         }),
       })
         .then(function (respostaIncubadora) {
-          console.log("Resposta repr: ", respostaIncubadora);
+          console.log("Resposta incubadora: ", respostaIncubadora);
           if (respostaIncubadora.ok) {
             //cardErro.style.display = "block";
 
@@ -413,8 +416,45 @@
     erroIncubadora.innerHTML = text;
   }
 
+  function pegarIncubadoras() {
+    fetch("/incubadora/pegarIncubadoras", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (respostaIncubadora) {
+        console.log(respostaIncubadora);
+
+        if (respostaIncubadora.ok) {
+
+          respostaIncubadora.json().then(respostaIncubadora => {
+            console.log(respostaIncubadora);
+
+            var opcoes = document.getElementById('inputBebeIncubadora');
+
+            for (var i = 0; i < respostaIncubadora.resposta.length; i++) {
+              var codigo = respostaIncubadora.resposta[i].codigoDeSerie;
+              var incubadora = document.createElement("option");
+
+              incubadora.value = codigo;
+              incubadora.innerHTML = codigo;
+
+              opcoes.appendChild(incubadora);
+            }
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO:`, erro);
+      });
+  }
+
   function cadastrarBebe() {
     var nome = inputBebeNome.value;
+    var sobrenome = inputBebeSobrenome.value;
     var responsavel = inputBebeResponsavel.value;
     var incubadora = inputBebeIncubadora.value;
     var dtNasc = inputBebeNasc.value;
@@ -430,6 +470,42 @@
       text = "Bebê Cadastrado!";
       corTexto = '#19A7A8';
       tamanhoTexto = '22px';
+      fetch("/bebe/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nomeServer: nome,
+          sobrenomeServer: sobrenome,
+          dtnascServer: dtnasc,
+          sexoServer: sexo,
+          incubadoraServer: incubadora, // VER MELHOR FORMA DE INSERIR EM OUTRA TABELA
+          prematuroServer: prematuro,
+        }),
+      })
+        .then(function (respostabebe) {
+          console.log("Resposta bebe: ", respostabebe);
+          if (respostabebe.ok) {
+            //cardErro.style.display = "block";
+
+            //mensagem_erro.innerHTML =
+            //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+            setTimeout(() => {
+              window.location.reload(true);
+            }, "2000");
+
+            //limparFormulario();
+            // finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (respostabebe) {
+          console.log(`#ERRO:`, respostabebe);
+          // finalizarAguardar();
+        });
     }
 
     document.getElementById('erroBebe').style.color = corTexto;

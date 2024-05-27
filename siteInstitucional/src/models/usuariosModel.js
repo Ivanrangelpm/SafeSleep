@@ -16,7 +16,7 @@ function autenticar(email, senha) {
     senha
   );
   var instrucaoSql = `
-  SELECT idUsuario, nome, login, senha FROM usuario WHERE login = '${email}' AND senha = '${senha}' ;
+  SELECT idUsuario, nome, login, senha, fkHospital FROM usuario WHERE login = '${email}' AND senha = '${senha}' ;
     `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

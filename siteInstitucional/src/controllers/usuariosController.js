@@ -51,10 +51,15 @@ function autenticar(req, res) {
 
         if (resultadoAutenticar.length == 1) {
           console.log(resultadoAutenticar);
-          res.json({resultadoAutenticar, 
-            nome: resultadoAutenticar[0].nome, 
-            grupos: resultadoAutenticar[0].grupos });
-            
+          res.json({
+            resultadoAutenticar,
+            nome: resultadoAutenticar[0].nome,
+            idUsuario: resultadoAutenticar[0].idUsuario,
+            senha: resultadoAutenticar[0].senha,
+            email: resultadoAutenticar[0].login,
+            fkHospital: resultadoAutenticar[0].fkHospital,
+          });
+
         } else if (resultadoAutenticar.length == 0) {
           res.status(403).send("Email e/ou senha inválido(s)");
         } else {

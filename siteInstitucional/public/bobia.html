@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeSleep | bobIA</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/bobia.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header">
+        <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
+        <ul class="navbar">
+            <li><a class="paginaAtual" href="./bobia.html">bobIA</a></li>
+            <li><a href="./gerenciar.html">Gerenciar</a></li>
+            <li><a href="./dashboard.html">Incubadoras</a></li>
+            <li><a href="./index.html" class="sair">Sair</a></li>
+
+        </ul>
+    </div>
+    <div class="main">
+        <div class="leftDiv">
+            <img src="./images/Logo_SafeSleep.png" alt="logomarca" class="leftLogo">
+            <div class="topics">
+                <!-- <h3>Gerenciar...</h3>
+        <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
+        <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
+        <button onclick="form_Bebe()" id="btn3">Recém-Nascido</button> -->
+                <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
+            </div>
+        </div>
+        <div class="section">
+            <div class="conversas">
+                <div class="form">
+                    <h1>Inteligência Artificial da SafeSleep</h1>
+                    <div id="resposta"></div>
+                    <div id="impBox" class="inputBox">
+                        <div class="inputDiv">
+                            <input id="pergunta" type="text" class="inp_pergunta" placeholder="Digite sua pergunta">
+                            <button onclick="gerarResposta()" class="btnIcon" id="btnIcon">
+                                <img src="./images/enviar.png" class="imgEnviar">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="footer">
+        <div class="developers">
+            <h3>Desenvolvedores da SafeSleep</h3>
+            <ul>
+                <li>Bruno Yuji Takahashi - bruno.ytakahashi@sptech.school</li>
+                <li>Diego Crispim dos Santos Campos - diego.campos@sptech.school</li>
+                <li>Fabricio Prudente Ferreira - fabricio.ferreira@sptech.school</li>
+                <li>Ivan Rangel Pestana Marcolin - ivan.marcolin@sptech.school</li>
+                <li>Lucas Tetsuo Nagasse - lucas.nagasse@sptech.school</li>
+                <li>Matheus Yukio Makiyama - matheus.makiyama@sptech.school</li>
+                <li>Renan Rocha Pacanaro Trinca - renan.trinca@sptech.school</li>
+            </ul>
+        </div>
+        <div class="contact">
+            <h3>Contatos</h3>
+            <ul>
+                <li>safesleep@gmail.com</li>
+                <li>+55 11 99999-9999</li>
+            </ul>
+            <img src="./images/ssLogoName.png" class="logo" />
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+        async function gerarResposta() {
+            const pergunta = document.getElementById('pergunta').value;
+
+            const response = await fetch('/perguntar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pergunta })
+            });
+
+            const data = await response.json();
+
+            resposta.style.display = 'block';
+            document.getElementById('resposta').innerText = data.resultado;
+        }
+</script>

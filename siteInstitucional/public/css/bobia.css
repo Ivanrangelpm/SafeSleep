@@ -1,0 +1,141 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .inputBox {
+    position: absolute;
+    bottom: 5px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    height: 60px;
+    margin-bottom: -150px;
+    justify-content: center;
+    align-items: center;
+  }
+
+.inp_pergunta{
+    width: 8000px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+  .btnIcon {
+    margin-left: 10px;
+    width: 60px;
+    height: 55px;
+    background-color: white;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .imgEnviar {
+    width: 50px;
+    height: 50px;
+  }
+  
+
+  .inputDiv {
+    width: 500px;
+    height: 55px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .section h1 {
+    margin-top: 30px;
+  }
+  
+  .main .leftDiv {
+    width: 45%;
+    height: 1100px;
+    background-color: #0d1c2b;
+    justify-content: space-evenly;
+    color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main .conversas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 73vw;
+    justify-content: center;
+  }
+  
+  .main .conversas .form {
+    margin: 30px 0;
+    min-height: 600px;
+    
+  }
+  
+  .form button {
+    background-color: #0d5858;
+    width: 200px;
+  }
+  
+  .form button:hover{
+    background-color: #19A7A8;
+  }
+  
+  #form1 {
+    display: flex;
+  }
+  
+  #form2 {
+    display: none;
+  }
+  
+  #form3 {
+    display: none;
+  }
+  
+  #form4 {
+    display: none;
+  }
+  
+  .leftLogo {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .topics {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 2rem;
+    font-size: 25px;
+  }
+  
+  .topics button {
+    width: 85%;
+    height: 50px;
+    background-color: #2d4053;
+    font-size: 25px;
+  }
+  
+  #btn1 {
+    background-color: #19A7A8;
+  }
+  
+  .erro {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
+  

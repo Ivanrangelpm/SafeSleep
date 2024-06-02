@@ -74,8 +74,11 @@ CREATE TABLE historico(
   temperatura decimal(5, 2) not null,
   fkSensor int not null,
   constraint pkHistoricoSensor primary key (idHistorico, fkSensor),
-  constraint pkHistoricoSensor foreign key (fkSensor) references sensor(idSensor)
+  constraint fkHistoricoSensor foreign key (fkSensor) references sensor(idSensor)
 );
+INSERT INTO historico (temperatura, fkSensor) VALUES
+	(35.5, 2),
+	(37.5, 4);
 
 CREATE TABLE bebe(
   idBebe INT PRIMARY KEY AUTO_INCREMENT,
@@ -111,3 +114,19 @@ INSERT INTO controleFluxo VALUES
 (default, 3, 121, '2024-05-07 17:51', '2024-05-14 16:58'),
 (default, 4, 523, '2024-05-03 22:07', '2024-05-08 22:10'),
 (default, 5, 321, '2024-05-08 23:33', null);
+
+ SELECT concat('Incubadora ', C.codigoDeSerie) as Incubadora, A.temperatura, A.dataHora
+	FROM historico as A
+	JOIN sensor as B ON B.idSensor = A.fkSensor
+    JOIN incubadora as C ON C.codigoDeSerie = B.fkIncubadora
+		join (SELECT codigoDeSerie, max(dataHora) as dataHora
+		FROM historico 
+		JOIN sensor ON idSensor = fkSensor
+		JOIN incubadora ON codigoDeSerie = fkIncubadora
+		WHERE fkHospital = 2
+		GROUP BY codigoDeSerie) as retorno on
+        C.codigoDeSerie = retorno.codigoDeSerie
+        and A.dataHora = retorno.dataHora
+    WHERE C.fkHospital = 2;
+    
+select * from historico;

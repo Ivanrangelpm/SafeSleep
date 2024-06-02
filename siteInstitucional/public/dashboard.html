@@ -21,7 +21,7 @@
   </style>
 </head>
 
-<body>
+<body onload="mostrarGraficoPrincipal()">
   <div class="header">
     <a><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
@@ -32,8 +32,8 @@
     </ul>
   </div>
   <div class="main" id="main">
-    <h1>GRÁFICOS ESTATÍSTICOS - FAMÍLIA FELIZ</h1>
-    <h2>Representante: Fernando Brandão</h2>
+    <h1 id="nomeHospital"></h1>
+    <h2 id="nomeRepresentante"></h2>
     <div class="graficos">
       <div id="sectionCanvas1">
         <section>
@@ -115,6 +115,13 @@
 </html>
 
 <script>
+  var nome_hospital = sessionStorage.NOME_HOSPITAL;
+  console.log(sessionStorage.NOME_HOSPITAL);
+  var nome_representante = sessionStorage.NOME_USUARIO;
+
+  nomeHospital.innerHTML = `GRÁFICOS ESTATÍSTICOS - ${nome_hospital}`;
+  nomeRepresentante.innerHTML = `Representante: ${nome_representante}`;
+
   var contChatBot = 0;
 
   function chatbot() {
@@ -711,190 +718,335 @@
   // ========================================== GRÁFICOS GERAIS ========================================== //
   
   //TEMPERATURA DE TODAS AS INCUBADORAS (ATUALIZADAS A CADA HORA)
-  var divTemperaturaAll = document.getElementById('temperaturaAll').getContext('2d');
-  divTemperaturaAll.canvas.parentNode.style.width = '100%';
-  divTemperaturaAll.canvas.parentNode.style.height = '400px';
-  divTemperaturaAll.canvas.width = 4;
-  divTemperaturaAll.canvas.height = 1;
+  let proximaAtualizacao;
 
-  var graficoTemperaturaAll = new Chart(
-    divTemperaturaAll,
-    {
-      type: 'bar',
-      data: {
-        labels: ['Incubadora 1', 'Incubadora 2', 'Incubadora 3', 'Incubadora 4'],
-        datasets: [{
-          type: 'line',
-          data: [temperatura_maxima, temperatura_maxima, temperatura_maxima, temperatura_maxima],
-          backgroundColor: 'transparent',
-          borderColor: '#19A7A8',
-          label: 'Temperatura Máxima Permitida (°C)',
-          borderWidth: 5,
-          pointRadius: 0
-        }, {
-          type: 'line',
-          data: [temperatura_minima, temperatura_minima, temperatura_minima, temperatura_minima],
-          backgroundColor: 'transparent',
-          borderColor: '#003050',
-          label: 'Temperatura Mínima Permitida (°C)',
-          borderWidth: 5,
-          pointRadius: 0
-        }, {
-          data: [temperatures1[6], temperatures2[6], temperatures3[6], temperatures4[6]],
-          backgroundColor: '#507090',
-          label: 'Temperatura de Cada Incubadora (°C)',
-        }]
-      },
-      options: {
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Incubadoras',
-              font: {
-                size: 16,
-                weight: 'bold'
-              }
-            }
-          },
-          y: {
-            min: min_random - 0.5,
-            max: max_random + 0.5,
-            title: {
-              display: true,
-              text: 'Temperatura (°C)',
-              font: {
-                size: 16,
-                weight: 'bold'
-              }
-            },
-            ticks: {
-              stepSize: 1
-            }
+  function mostrarGraficoPrincipal() {
+
+      var idHospital = sessionStorage.ID_HOSPITAL;
+
+      if (proximaAtualizacao != undefined) {
+          clearTimeout(proximaAtualizacao);
+      }
+
+      fetch(`/temperatura/ultimas/${idHospital}`, { cache: 'no-store' }).then(function (response) {
+          if (response.ok) {
+              response.json().then(function (resposta) {
+                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                  
+                  plotarGrafico(resposta, idHospital);
+              });
+          } else {
+              console.error('Nenhum dado encontrado ou erro na API');
           }
+      })
+          .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+          });
+    }
+
+  function plotarGrafico(resposta, idHospital) {
+    console.log(resposta);
+    console.log('iniciando plotagem do gráfico...');
+
+    var divTemperaturaAll = document.getElementById('temperaturaAll').getContext('2d');
+    divTemperaturaAll.canvas.parentNode.style.width = '100%';
+    divTemperaturaAll.canvas.parentNode.style.height = '400px';
+    divTemperaturaAll.canvas.width = 4;
+    divTemperaturaAll.canvas.height = 1;
+
+    var incubadoras = [];
+    var max = [];
+    var min = [];
+    var temperaturas = [];
+    console.log(resposta[0].Incubadora)
+
+    for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            incubadoras.push(registro.Incubadora)
+            max.push(temperatura_maxima);
+            min.push(temperatura_minima);
+            temperaturas.push(Number(registro.temperatura));
+        }
+      
+    console.log(incubadoras);
+    console.log(temperaturas);
+
+    var grafico = {
+        type: 'bar',
+        data: {
+          labels: incubadoras,
+          datasets: [{
+            type: 'line',
+            data: max,
+            backgroundColor: 'transparent',
+            borderColor: '#19A7A8',
+            label: 'Temperatura Máxima Permitida (°C)',
+            borderWidth: 5,
+            pointRadius: 0
+          }, {
+            type: 'line',
+            data: min,
+            backgroundColor: 'transparent',
+            borderColor: '#003050',
+            label: 'Temperatura Mínima Permitida (°C)',
+            borderWidth: 5,
+            pointRadius: 0
+          }, {
+            data: temperaturas,
+            backgroundColor: '#507090',
+            label: 'Temperatura de Cada Incubadora (°C)',
+          }]
         },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Temperatura das Incubadoras (°C)',
-            font: {
-              size: 31
+        options: {
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Incubadoras',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
+              }
             },
-            padding: 30
+            y: {
+              min: min_random - 0.5,
+              max: max_random + 0.5,
+              title: {
+                display: true,
+                text: 'Temperatura (°C)',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
+              },
+              ticks: {
+                stepSize: 1
+              }
+            }
           },
-          legend: optionsLegend
+          plugins: {
+            title: {
+              display: true,
+              text: 'Temperatura das Incubadoras (°C)',
+              font: {
+                size: 31
+              },
+              padding: 30
+            },
+            legend: optionsLegend
+          }
         }
       }
-    }
-  )
+  
+    var graficoTemperaturaAll = new Chart(
+      divTemperaturaAll,
+      grafico
+    )
+
+    //setTimeout(() => atualizarGrafico(idHospital, grafico, graficoTemperaturaAll), 2000);
+  }
+
+/*function atualizarGrafico(idHospital, grafico, graficoTemperaturaAll) {
+
+  fetch(`/temperatura/ultimas/${idHospital}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+          response.json().then(function (novoRegistro) {
+
+              obterdados(idHospital);
+              // alertar(novoRegistro, idHospital);
+              console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+              console.log(`Dados atuais do gráfico:`);
+              console.log(grafico);
+
+              //let avisoCaptura = document.getElementById(`avisoCaptura${idHospital}`)
+              //avisoCaptura.innerHTML = ""
+
+
+              if (novoRegistro[0].momento_grafico == grafico.labels[grafico.labels.length - 1]) {
+                  console.log("---------------------------------------------------------------")
+                  console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                  //avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                  console.log("Horário do novo dado capturado:")
+                  //console.log(novoRegistro[0].momento_grafico)
+                  console.log("Horário do último dado capturado:")
+                  console.log(grafico.labels[grafico.labels.length - 1])
+                  console.log("---------------------------------------------------------------")
+              } else {
+                  // tirando e colocando valores no gráfico
+                  grafico.labels.shift(); // apagar o primeiro
+                  //grafico.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                  grafico.datasets[0].data.shift();  // apagar o primeiro de umidade
+                  grafico.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+
+                  grafico.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                  grafico.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                  graficoTemperaturaAll.update();
+              }
+
+              // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+              proximaAtualizacao = setTimeout(() => atualizarGrafico(idHospital, grafico, graficoTemperaturaAll), 2000);
+          });
+      } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacao = setTimeout(() => atualizarGrafico(idHospital, grafico, graficoTemperaturaAll), 2000);
+      }
+  })
+      .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+}*/
 
   //INCUBADORAS DISPONÍVEIS
   //Apesar de simularmos 4 incubadoras, simulamos também a situação que existem 8 incubadoras ao todo, porém apenas 4 em uso.
-  var divIncubadorasUso = document.getElementById('incubadorasUso').getContext('2d');
-  divIncubadorasUso.canvas.width = 1;
-  divIncubadorasUso.canvas.height = 1;
+  function mostrarGraficosPizza() {
+    var idHospital = sessionStorage.ID_HOSPITAL;
 
-  var graficoIncubadorasUso = new Chart(
-    divIncubadorasUso,
-    {
-      type: 'pie',
-      data: {
-        labels: ['Livres', 'Em uso', 'Manutenção'],
-        datasets: [{
-          data: [3, 4, 1],
-          backgroundColor: [
-            '#19A7A8',
-            '#003050',
-            '#507090'
-          ],
-          label: 'Quantidade de Incubadoras'
-        }]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Incubadoras Disponíveis',
-            font: {
-              size: 31
+      if (proximaAtualizacao != undefined) {
+          clearTimeout(proximaAtualizacao);
+      }
+
+      fetch(`/temperatura/status/${idHospital}`, { cache: 'no-store' }).then(function (response) {
+          if (response.ok) {
+              response.json().then(function (resposta) {
+                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                  console.log(resposta);
+                  console.log('iniciando plotagem do gráfico...');
+
+                  var divIncubadorasUso = document.getElementById('incubadorasUso').getContext('2d');
+                  divIncubadorasUso.canvas.width = 1;
+                  divIncubadorasUso.canvas.height = 1;
+
+                  var incubadoras = [];
+                  var max = [];
+                  var min = [];
+                  var temperaturas = [];
+                  console.log(resposta[0].Incubadora)
+
+                  for (i = 0; i < resposta.length; i++) {
+                          var registro = resposta[i];
+                          incubadoras.push(registro.Incubadora)
+                          max.push(temperatura_maxima);
+                          min.push(temperatura_minima);
+                          temperaturas.push(Number(registro.temperatura));
+                      }
+                  
+                  
+                
+                  var graficoIncubadorasUso = new Chart(
+                    divIncubadorasUso,
+                    {
+                      type: 'pie',
+                      data: {
+                        labels: ['Livres', 'Em uso', 'Manutenção'],
+                        datasets: [{
+                          data: [3, 4, 1],
+                          backgroundColor: [
+                            '#19A7A8',
+                            '#003050',
+                            '#507090'
+                          ],
+                          label: 'Quantidade de Incubadoras'
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          title: {
+                            display: true,
+                            text: 'Incubadoras Disponíveis',
+                            font: {
+                              size: 31
+                            },
+                            padding: 30
+                          },
+                          legend: optionsLegend
+                        }
+                      }
+                    }
+                  )
+              });
+          } else {
+              console.error('Nenhum dado encontrado ou erro na API');
+          }
+      })
+          .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+          });
+
+  
+    //GRÁFICO DOS BEBÊS COM RISCO
+    var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
+    divBebesCritico.canvas.width = 1;
+    divBebesCritico.canvas.height = 1;
+  
+    var graficoBebesCritico = new Chart(
+      divBebesCritico,
+      {
+        type: 'pie',
+        data: {
+          labels: ['Com Risco', 'Sem Risco'],
+          datasets: [{
+            data: [cont_riscoHiper + cont_riscoHipo, 4 - (cont_riscoHiper + cont_riscoHipo)],
+            backgroundColor: [
+              '#003050',
+              '#19A7A8'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Recém-Nascidos com Risco de Saúde',
+              font: {
+                size: 31
+              },
+              padding: 30
             },
-            padding: 30
-          },
-          legend: optionsLegend
+            legend: optionsLegend
+          }
         }
       }
-    }
-  )
-
-  //GRÁFICO DOS BEBÊS COM RISCO
-  var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
-  divBebesCritico.canvas.width = 1;
-  divBebesCritico.canvas.height = 1;
-
-  var graficoBebesCritico = new Chart(
-    divBebesCritico,
-    {
-      type: 'pie',
-      data: {
-        labels: ['Com Risco', 'Sem Risco'],
-        datasets: [{
-          data: [cont_riscoHiper + cont_riscoHipo, 4 - (cont_riscoHiper + cont_riscoHipo)],
-          backgroundColor: [
-            '#003050',
-            '#19A7A8'
-          ]
-        }]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Recém-Nascidos com Risco de Saúde',
-            font: {
-              size: 31
+    )
+  
+    //GRÁFICO DA PREMATURIDADE
+    var divPrematuridade = document.getElementById('prematuridade').getContext('2d');
+    divPrematuridade.canvas.width = 1;
+    divPrematuridade.canvas.height = 1;
+  
+    var graficoPrematuridade = new Chart(
+      divPrematuridade,
+      {
+        type: 'pie',
+        data: {
+          labels: ['Prematuro', 'Não Prematuro'],
+          datasets: [{
+            data: [1, 3],
+            backgroundColor: [
+              '#82FAF9',
+              '#507090'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Prematuridade',
+              font: {
+                size: 31
+              },
+              padding: 30
             },
-            padding: 30
-          },
-          legend: optionsLegend
+            legend: optionsLegend
+          }
         }
       }
-    }
-  )
-
-  //GRÁFICO DA PREMATURIDADE
-  var divPrematuridade = document.getElementById('prematuridade').getContext('2d');
-  divPrematuridade.canvas.width = 1;
-  divPrematuridade.canvas.height = 1;
-
-  var graficoPrematuridade = new Chart(
-    divPrematuridade,
-    {
-      type: 'pie',
-      data: {
-        labels: ['Prematuro', 'Não Prematuro'],
-        datasets: [{
-          data: [1, 3],
-          backgroundColor: [
-            '#82FAF9',
-            '#507090'
-          ]
-        }]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Prematuridade',
-            font: {
-              size: 31
-            },
-            padding: 30
-          },
-          legend: optionsLegend
-        }
-      }
-    }
-  )
+    )
+  }
 
   //FECHAR O ALERTA EM VERMELHO
   function closeAlert() {

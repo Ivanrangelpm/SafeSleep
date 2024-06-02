@@ -94,6 +94,7 @@
                     senhaServer: senha
                 })
             }).then(function (resposta) {
+              console.log(resposta);
                 if (resposta.ok) {
                     resposta.json().then(json => {
                         sessionStorage.ID_USUARIO = json.idUsuario;
@@ -101,6 +102,7 @@
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.SENHA_USUARIO = json.senha;
                         sessionStorage.ID_HOSPITAL = json.fkHospital;
+                        sessionStorage.NOME_HOSPITAL = json.razaoSocial;
 
                         setTimeout(function () {
                             window.location = "./dashboard.html";

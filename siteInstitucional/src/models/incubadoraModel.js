@@ -19,5 +19,5 @@ function pegarIncubadoras() {
 
 module.exports = {
     cadastrar,
-    pegarIncubadoras,
+    pegarIncubadoras
 };

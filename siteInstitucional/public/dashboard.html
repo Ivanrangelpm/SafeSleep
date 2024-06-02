@@ -21,7 +21,7 @@
   </style>
 </head>
 
-<body onload="mostrarGraficoPrincipal()">
+<body onload="mostrarGraficoPrincipal(), mostrarGraficosPizza()">
   <div class="header">
     <a><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
@@ -191,6 +191,7 @@
  
   var cont_riscoHipo = 0;
   var cont_riscoHiper = 0;
+  var qtd_incubadoras_uso = 0;
   var risco_incubadora1 = false;
   var risco_incubadora2 = false;
   var risco_incubadora3 = false;
@@ -201,7 +202,7 @@
   var doenca_incubadora4 = "";
 
   //INCUBADORA 1
-  if (temperatures1[6] > temperatura_maxima) { 
+  /*if (temperatures1[6] > temperatura_maxima) { 
     risco_incubadora1 = true;
     doenca_incubadora1 = 'Hipertermia';
     cont_riscoHiper++;
@@ -242,7 +243,7 @@
     risco_incubadora4 = true;
     doenca_incubadora4 = 'Hipotermia';
     cont_riscoHipo++;
-  }
+  }*/
 
 
   // ========================================== MOSTRAR AVISO EM VERMELHO CASO HAJA CRIANÇAS EM RISCO ========================================== //
@@ -766,6 +767,12 @@
             max.push(temperatura_maxima);
             min.push(temperatura_minima);
             temperaturas.push(Number(registro.temperatura));
+            qtd_incubadoras_uso++;
+            if (temperaturas[i] > temperatura_maxima) {
+              cont_riscoHiper++;
+            } else if (temperaturas[i] < temperatura_minima) {
+              cont_riscoHipo++;
+            }
         }
       
     console.log(incubadoras);
@@ -844,6 +851,41 @@
       grafico
     )
 
+    //GRÁFICO DOS BEBÊS COM RISCO
+    var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
+    divBebesCritico.canvas.width = 1;
+    divBebesCritico.canvas.height = 1;
+  
+    var graficoBebesCritico = new Chart(
+      divBebesCritico,
+      {
+        type: 'pie',
+        data: {
+          labels: ['Com Risco', 'Sem Risco'],
+          datasets: [{
+            data: [cont_riscoHiper + cont_riscoHipo, qtd_incubadoras_uso - (cont_riscoHiper + cont_riscoHipo)],
+            backgroundColor: [
+              '#003050',
+              '#19A7A8'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Recém-Nascidos com Risco de Saúde',
+              font: {
+                size: 31
+              },
+              padding: 30
+            },
+            legend: optionsLegend
+          }
+        }
+      }
+    )
+
     //setTimeout(() => atualizarGrafico(idHospital, grafico, graficoTemperaturaAll), 2000);
   }
 
@@ -920,30 +962,24 @@
                   divIncubadorasUso.canvas.width = 1;
                   divIncubadorasUso.canvas.height = 1;
 
-                  var incubadoras = [];
-                  var max = [];
-                  var min = [];
-                  var temperaturas = [];
+                  var statusIncubadora = [];
+                  var quantidadeIncubadoras = [];
                   console.log(resposta[0].Incubadora)
 
                   for (i = 0; i < resposta.length; i++) {
                           var registro = resposta[i];
-                          incubadoras.push(registro.Incubadora)
-                          max.push(temperatura_maxima);
-                          min.push(temperatura_minima);
-                          temperaturas.push(Number(registro.temperatura));
+                          statusIncubadora.push(registro.status)
+                          quantidadeIncubadoras.push(Number(registro.qtdIncubadoras));
                       }
-                  
-                  
-                
+                                  
                   var graficoIncubadorasUso = new Chart(
                     divIncubadorasUso,
                     {
                       type: 'pie',
                       data: {
-                        labels: ['Livres', 'Em uso', 'Manutenção'],
+                        labels: statusIncubadora,
                         datasets: [{
-                          data: [3, 4, 1],
+                          data: quantidadeIncubadoras,
                           backgroundColor: [
                             '#19A7A8',
                             '#003050',
@@ -976,76 +1012,60 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
           });
 
-  
-    //GRÁFICO DOS BEBÊS COM RISCO
-    var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
-    divBebesCritico.canvas.width = 1;
-    divBebesCritico.canvas.height = 1;
-  
-    var graficoBebesCritico = new Chart(
-      divBebesCritico,
-      {
-        type: 'pie',
-        data: {
-          labels: ['Com Risco', 'Sem Risco'],
-          datasets: [{
-            data: [cont_riscoHiper + cont_riscoHipo, 4 - (cont_riscoHiper + cont_riscoHipo)],
-            backgroundColor: [
-              '#003050',
-              '#19A7A8'
-            ]
-          }]
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: 'Recém-Nascidos com Risco de Saúde',
-              font: {
-                size: 31
-              },
-              padding: 30
-            },
-            legend: optionsLegend
+          //GRÁFICO DA PREMATURIDADE
+          fetch(`/temperatura/prematuridade/${idHospital}`, { cache: 'no-store' }).then(function (response) {
+          if (response.ok) {
+              response.json().then(function (resposta) {
+                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                  var divPrematuridade = document.getElementById('prematuridade').getContext('2d');
+                  divPrematuridade.canvas.width = 1;
+                  divPrematuridade.canvas.height = 1;
+
+                  var qtdBebes = [];
+
+                  for (i = 0; i < resposta.length; i++) {
+                          var registro = resposta[i];
+                          qtdBebes.push(Number(registro.qtdBebes));
+                      }
+                
+                  var graficoPrematuridade = new Chart(
+                    divPrematuridade,
+                    {
+                      type: 'pie',
+                      data: {
+                        labels: ['Prematuro', 'Não Prematuro'],
+                        datasets: [{
+                          data: qtdBebes,
+                          backgroundColor: [
+                            '#82FAF9',
+                            '#507090'
+                          ]
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          title: {
+                            display: true,
+                            text: 'Prematuridade',
+                            font: {
+                              size: 31
+                            },
+                            padding: 30
+                          },
+                          legend: optionsLegend
+                        }
+                      }
+                    }
+                  )                                
+              });
+          } else {
+              console.error('Nenhum dado encontrado ou erro na API');
           }
-        }
-      }
-    )
-  
-    //GRÁFICO DA PREMATURIDADE
-    var divPrematuridade = document.getElementById('prematuridade').getContext('2d');
-    divPrematuridade.canvas.width = 1;
-    divPrematuridade.canvas.height = 1;
-  
-    var graficoPrematuridade = new Chart(
-      divPrematuridade,
-      {
-        type: 'pie',
-        data: {
-          labels: ['Prematuro', 'Não Prematuro'],
-          datasets: [{
-            data: [1, 3],
-            backgroundColor: [
-              '#82FAF9',
-              '#507090'
-            ]
-          }]
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: 'Prematuridade',
-              font: {
-                size: 31
-              },
-              padding: 30
-            },
-            legend: optionsLegend
-          }
-        }
-      }
-    )
+      })
+          .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+          });
   }
 
   //FECHAR O ALERTA EM VERMELHO

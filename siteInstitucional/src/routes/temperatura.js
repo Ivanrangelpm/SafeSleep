@@ -11,4 +11,8 @@ router.get("/status/:idHospital", function (req, res) {
     temperaturaController.pegarStatusIncubadora(req, res);
 });
 
+router.get("/prematuridade/:idHospital", function (req, res) {
+    temperaturaController.verificarPrematuridade(req, res);
+});
+
 module.exports = router;

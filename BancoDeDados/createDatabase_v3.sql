@@ -54,7 +54,8 @@ INSERT INTO incubadora VALUES
     (121, 1186, "Ocupado", 3),
     (523, 1186, "Ocupado", 2),
     (321, 1186, "Ocupado", 1);
-
+INSERT INTO incubadora VALUES
+	(200, 1186, "Livre", 2);
 CREATE TABLE sensor (
   idSensor INT PRIMARY KEY,
   fkIncubadora int not null unique,

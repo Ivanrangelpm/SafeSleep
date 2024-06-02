@@ -1,4 +1,5 @@
-const { pegarStatusIncubadora } = require("../controllers/temperaturaController");
+//const { pegarStatusIncubadora } = require("../controllers/temperaturaController");
+//const { verificarPrematuridade } = require("../controllers/temperaturaController");
 var database = require("../database/config");
 
 function buscarUltimasTemperaturas(idHospital) {
@@ -32,7 +33,21 @@ function pegarStatusIncubadora(idHospital) {
     return database.executar(instrucaoSql);
 }
 
+function verificarPrematuridade(idHospital) {
+
+    var instrucaoSql = `SELECT prematuridade, count(prematuridade) AS qtdBebes FROM bebe 
+                            JOIN controleFluxo ON fkBebe = idBebe
+                            JOIN incubadora ON fkCodigoDeSerie = codigoDeSerie
+                            JOIN hospital ON fkHospital = idHospital
+                                WHERE idHospital = ${idHospital}
+                                GROUP BY prematuridade;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasTemperaturas,
-    pegarStatusIncubadora
+    pegarStatusIncubadora,
+    verificarPrematuridade
 }

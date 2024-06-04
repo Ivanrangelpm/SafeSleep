@@ -222,10 +222,10 @@
                   </label>
                 </div>
               </div>
-              <span id="spanResponse"
-                >(A senha deve possuir pelo menos 8 <br />
-                caracteres e um caracter especial)</span
-              >
+              <span id="spanResponse">
+                (A senha deve possuir pelo menos 8 <br />
+                caracteres e um caracter especial)
+              </span>
             </div>
           </div>
           <div id="btn_div">
@@ -234,9 +234,7 @@
             </button>
           </div>
           <div class="linkRedirecionar">
-            <span
-              >Já possui um usuário? <a href="login.html">Fazer login</a></span
-            >
+            <span>Já possui um usuário? <a href="login.html">Fazer login</a></span>
           </div>
         </div>
         <!-- <div class="forms">
@@ -692,6 +690,7 @@
                 cpfServer: cpf,
                 licencaServer: licenca,
                 senhaServer: senha,
+                cargoServer: 'Representante',
                 fkHospitalServer: hospitalCadastrado.insertId,
               }),
             })
@@ -703,6 +702,12 @@
                   //mensagem_erro.innerHTML =
                   //"Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
+                  divAlerta.style.display = 'flex';
+                  divAlerta.style.color = '#19A7A8';
+                  divAlerta.style.backgroundColor = '#eaefea';
+                  divAlerta.style.fontWeight = 'bold';
+                  divAlerta.style.fontSize = '30px';
+                  divAlerta.innerHTML = "Cadastro realizado! Aguarde...";
 
                   setTimeout(() => {
                     window.location = "login.html";

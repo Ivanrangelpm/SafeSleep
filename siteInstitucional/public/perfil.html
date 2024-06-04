@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeSleep | Perfil</title>
+  <link href="./css/style.css" rel="stylesheet" />
+  <link href="./css/gerenciar.css" rel="stylesheet" />
+</head>
+
+<body onload="pegarIncubadoras()">
+  <div class="header">
+    <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
+    <ul class="navbar">
+      <li><a class="paginaAtual" href="./perfil.html">Perfil</a></li>
+      <li><a href="./bobia.html">bobIA</a></li>
+      <li><a href="./gerenciar.html">Gerenciar</a></li>
+      <li><a href="./dashboard.html">Incubadoras</a></li>
+      <li><a href="./index.html" class="sair">Sair</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="section">
+      <div class="cadastros">
+        <div class="form perfil">
+          <h1>Perfil</h1>
+          <h2>Seus dados:</h2>
+          <div class="inputs">
+            <label>
+              <span>Nome: <span id="span_nome"></span> <img onclick="editar_nome()" src="./images/edit_icon.png"> </span> 
+              <div id="div_edit"></div>
+            </label>
+            <label>
+              <span>E-mail: <span id="span_email"></span> </span>
+            </label>
+            <label>
+              <span>Nome do hospital: <span id="span_hospital"></span> </span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="developers">
+      <h3>Desenvolvedores da SafeSleep</h3>
+      <ul>
+        <li>Bruno Yuji Takahashi - bruno.ytakahashi@sptech.school</li>
+        <li>Diego Crispim dos Santos Campos - diego.campos@sptech.school</li>
+        <li>Fabricio Prudente Ferreira - fabricio.ferreira@sptech.school</li>
+        <li>Ivan Rangel Pestana Marcolin - ivan.marcolin@sptech.school</li>
+        <li>Lucas Tetsuo Nagasse - lucas.nagasse@sptech.school</li>
+        <li>Matheus Yukio Makiyama - matheus.makiyama@sptech.school</li>
+        <li>Renan Rocha Pacanaro Trinca - renan.trinca@sptech.school</li>
+      </ul>
+    </div>
+    <div class="contact">
+      <h3>Contatos</h3>
+      <ul>
+        <li>safesleep@gmail.com</li>
+        <li>+55 11 99999-9999</li>
+      </ul>
+      <img src="./images/ssLogoName.png" class="logo" />
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+    span_nome.innerHTML = sessionStorage.NOME_USUARIO;
+    span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+    span_hospital.innerHTML = sessionStorage.NOME_HOSPITAL;
+
+    function editar_nome() {
+      var nome_atual = span_nome.innerHTML;
+
+      div_edit.innerHTML = `
+      <input id="input_atual" type="text" value="${nome_atual}">
+      <button onclick="alterar()">Alterar nome</button> <span onclick="fechar()">&#9746;</span>
+      `;
+
+      document.getElementById('nome_atual').focus();
+    }
+
+    function fechar() {
+      div_edit.innerHTML = "";
+    }
+
+    function alterar() {
+      var nome = input_atual.value;
+      sessionStorage.NOME_USUARIO = nome;
+      span_nome.innerHTML = sessionStorage.NOME_USUARIO;
+
+      var idUser = sessionStorage.ID_USUARIO;
+
+      fechar();
+
+        fetch("/profile/renomear", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                idUserServer: idUser
+            }),
+            })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+            return false;
+    }
+</script>

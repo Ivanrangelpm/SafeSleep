@@ -70,42 +70,45 @@
     var login = id_login.value;
     var senha = id_senha.value;
 
-    // if (tentativas >= 1) {
-    //   if (login == "brandao@gmail.com" && senha == "1234567!") {
-    //     window.location.href = "./dashboard.html";
-    //   } else {
-    //     tentativas -= 1;
-    //     div_mensagem.innerHTML = `Falha na autenticação `;
-    //     alert(`Falha na autenticação, você ainda tem ${tentativas} tentativas.`);
-    //   }
-    // } 
-
-    // if(tentativas == 0) {
-    //   div_mensagem.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`;
-    // }
-    // else{
+    if(login == "" || senha == ""){
+      alert("Por favor, preencha os campos para efetuar login");
+    }
+    else if(tentativas > 0) {
       fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: login,
-                    senhaServer: senha
-                })
-            }).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        sessionStorage.ID_USUARIO = json.idUsuario;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.SENHA_USUARIO = json.senha;
-                        sessionStorage.ID_HOSPITAL = json.fkHospital;
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: login,
+            senhaServer: senha
+        })
+      }).then(function (resposta) {
+          if (resposta.ok) {
+              resposta.json().then(json => {
+                sessionStorage.ID_USUARIO = json.idUsuario;
+                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.SENHA_USUARIO = json.senha;
+                sessionStorage.ID_HOSPITAL = json.fkHospital;
+                div_mensagem.style.color = '#19A7A8';
+                div_mensagem.style.fontWeight = 'bold';
+                div_mensagem.innerHTML = "Aguarde...";
 
-                        setTimeout(function () {
-                            window.location = "./dashboard.html";
-                        }, 1000); // apenas para exibir o loading
-                    });
-               
-                  }})}
+                setTimeout(function () {
+                    window.location = "./dashboard.html";
+                }, 1000);
+              });
+          } else {
+            tentativas--;
+            div_mensagem.innerHTML = "E-mail e/ou senha incorreto(s)";
+          }
+        }
+      ).catch(function(erro){
+        console.error('Falha ao realizar o login: ', erro);
+      })
+    } else {
+      div_mensagem.innerHTML = `O número máximo de tentativas foi alcançado, tente novamente mais tarde.`;
+    }
+  }
 </script>

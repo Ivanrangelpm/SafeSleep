@@ -7,6 +7,7 @@ function cadastrar(req, res) {
   var cpf = req.body.cpfServer;
   var licenca = req.body.licencaServer;
   var senha = req.body.senhaServer;
+  var cargo = req.body.cargoServer;
   var fkHospital = req.body.fkHospitalServer;
 
   if (nome == undefined) {
@@ -20,7 +21,7 @@ function cadastrar(req, res) {
   }
 
   usuariosModel
-    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, senha, fkHospital)
+    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, senha, cargo, fkHospital)
     .then(function (resposta) {
       res.json(resposta);
     })

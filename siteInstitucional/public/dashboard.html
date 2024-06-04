@@ -25,6 +25,7 @@
   <div class="header">
     <a><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
+      <li><a href="./perfil.html">Perfil</a></li>
       <li><a href="./bobia.html">bobIA</a></li>
       <li><a href="./gerenciar.html">Gerenciar</a></li>
       <li><a class="paginaAtual" href="./dashboard.html">Incubadoras</a></li>
@@ -65,16 +66,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="chatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px;">
-    <img style= " width: 120px;  border-radius: 100%;" src="images/helpDesk.jpeg" alt="">
-    <button onclick="chatbot()" class="botaoChatBot" style=" width: 120px; height: 120px; position: fixed;  bottom: 40px; right: 150px; opacity: 0; border-radius: 100%; cursor: pointer;"></button>  
-  
-
-    <div id="divMensagem" style="border-radius: 17px; display: none; width: 300px; height: 500px; position: fixed;  bottom: 47px; right: 250px; background-color: white; border: 3px solid #30a0a0;">
-      <h2 style=" color: black;">TIre suas dúvidas!</h2>
-      <input style="margin-top: 400px;" placeholder="Digite aqui" type="text">
-    </div>
-  </div> -->
   <div class="footer">
   
     <div class="developers">
@@ -115,22 +106,13 @@
 </html>
 
 <script>
-  var contChatBot = 0;
-
-  function chatbot() {
-    if(contChatBot % 2 == 0){
-      divMensagem.style.display = 'block';
-    }else{
-      divMensagem.style.display = 'none';
-    }
-    contChatBot ++;
-  }
   /* 
     TODOS OS DADOS MOSTRADOS NOS GRÁFICOS SIMULAM UMA SITUAÇÃO EM QUE EXISTEM APENAS 4 (QUATRO) INCUBADORAS CADASTRADAS *EM USO*. 
     ESSA VARIÁVEL É USADA APENAS PARA O SELECT DOS BOTÕES "GERAL" E "RISCO" COM O OBJETIVO DE GERAR TODAS AS OPÇÕES DE INCUBADORAS ATRAVÉS DO "FOR"
 
     A ALTERAÇÃO DO VALOR DA VARIÁVEL ABAIXO NÃO MUDARÁ OS DADOS MOSTRADOS NOS GRÁFICOS. TODOS OS GRÁFICOS PERMANECERÃO SIMULANDO 4 INCUBADORAS
   */
+ 
   var totalIncubadoras = 4; 
 
   var mainContent = `

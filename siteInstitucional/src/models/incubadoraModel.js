@@ -17,7 +17,16 @@ function pegarIncubadoras() {
     return database.executar(instrucao);
 }
 
+function preencherIncubadora(codigoDeSerie) {
+    var instrucao = `
+    UPDATE incubadora SET status='Ocupado' WHERE codigoDeSerie='${codigoDeSerie}';
+      `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     cadastrar,
-    pegarIncubadoras
+    pegarIncubadoras,
+    preencherIncubadora
 };

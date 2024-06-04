@@ -23,12 +23,13 @@
   <div class="main">
     <div class="section">
       <div class="cadastros">
-        <div class="form" id="form1">
+        <div class="form perfil">
           <h1>Perfil</h1>
           <h2>Seus dados:</h2>
           <div class="inputs">
             <label>
-              <span>Nome: <span id="span_nome"></span> </span>
+              <span>Nome: <span id="span_nome"></span> <img onclick="editar_nome()" src="./images/edit_icon.png"> </span> 
+              <div id="div_edit"></div>
             </label>
             <label>
               <span>E-mail: <span id="span_email"></span> </span>
@@ -71,4 +72,48 @@
     span_nome.innerHTML = sessionStorage.NOME_USUARIO;
     span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
     span_hospital.innerHTML = sessionStorage.NOME_HOSPITAL;
+
+    function editar_nome() {
+      var nome_atual = span_nome.innerHTML;
+
+      div_edit.innerHTML = `
+      <input id="input_atual" type="text" value="${nome_atual}">
+      <button onclick="alterar()">Alterar nome</button> <span onclick="fechar()">&#9746;</span>
+      `;
+
+      document.getElementById('nome_atual').focus();
+    }
+
+    function fechar() {
+      div_edit.innerHTML = "";
+    }
+
+    function alterar() {
+      var nome = input_atual.value;
+      sessionStorage.NOME_USUARIO = nome;
+      span_nome.innerHTML = sessionStorage.NOME_USUARIO;
+
+      var idUser = sessionStorage.ID_USUARIO;
+
+      fechar();
+
+        fetch("/profile/renomear", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                idUserServer: idUser
+            }),
+            })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+            return false;
+    }
 </script>

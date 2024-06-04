@@ -151,6 +151,25 @@ body {
   width: fit-content;
 }
 
+.main .perfil {
+  width: 40vw;
+  font-size: 1.7rem;
+}
+
+.main .perfil img {
+  width: 2vw;
+  cursor: pointer;
+}
+
+.main .perfil h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#div_edit span {
+  cursor: pointer;
+}
+
 .main .form .inputs {
   display: flex;
   flex-direction: column;

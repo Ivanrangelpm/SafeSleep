@@ -11,4 +11,8 @@ router.post("/pegarIncubadoras", function (req, res) {
   incubadoraController.pegarIncubadoras(req, res);
 })
 
+router.post("/capturarIncubadoras", function (req, res) {
+  incubadoraController.capturarIncubadoras(req, res);
+})
+
 module.exports = router;

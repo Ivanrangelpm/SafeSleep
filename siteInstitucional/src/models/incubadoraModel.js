@@ -25,8 +25,17 @@ function preencherIncubadora(codigoDeSerie) {
     return database.executar(instrucao);
 }
 
+function capturarIncubadoras(idHospital) {
+  var instucao = `
+    SELECT codigoDeSerie, status, nome FROM incubadora JOIN controleFluxo ON fkcodigoDeSerie = codigoDeSerie JOIN bebe ON fkBebe = idBebe WHERE status = "Ocupado" AND fkHospital = ${idHospital};
+  `;
+
+  return database.executar(instucao);
+}
+
 module.exports = {
     cadastrar,
     pegarIncubadoras,
-    preencherIncubadora
+    preencherIncubadora,
+    capturarIncubadoras
 };

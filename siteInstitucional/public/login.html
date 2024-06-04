@@ -1,67 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SafeSleep | Login</title>
-    <link href="./css/style.css" rel="stylesheet" />
-    <link href="./css/login.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="header">
-      <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
-      <ul class="navbar">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="./sobreNos.html">Sobre Nós</a></li>
-        <li><a href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
-        <li><a href="./cadastro.html">Cadastro</a></li>
-        <li><a class="paginaAtual" href="./login.html">Login</a></li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeSleep | Login</title>
+  <link href="./css/style.css" rel="stylesheet" />
+  <link href="./css/login.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header">
+    <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
+    <ul class="navbar">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="./sobreNos.html">Sobre Nós</a></li>
+      <li><a href="./calculadoraFinanceira.html">Simulador Financeiro</a></li>
+      <li><a href="./cadastro.html">Cadastro</a></li>
+      <li><a class="paginaAtual" href="./login.html">Login</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="form">
+      <h1>Login</h1>
+      <div class="inputs">
+        <label>
+          <span class="span">E-mail:</span>
+          <input type="text" id="id_login" placeholder="E-mail" />
+        </label>
+        <label>
+          <span class="span">Senha:</span>
+          <input type="password" id="id_senha" placeholder="Senha" />
+        </label>
+      </div>
+      <button class="botao" onclick="autenticar()">Autenticar</button>
+      <div id="div_mensagem"></div>
+      <a href="esqueciSenha.html">Esqueci a minha senha</a>
+    </div>
+  </div>
+  <div class="linkRedirecionar">
+    <span>Não tem uma conta? <a href="cadastro.html">Registre-se</a></span>
+  </div>
+  <div class="footer">
+    <div class="developers">
+      <h3>Desenvolvedores da SafeSleep</h3>
+      <ul>
+        <li>Bruno Yuji Takahashi - bruno.ytakahashi@sptech.school</li>
+        <li>Diego Crispim dos Santos Campos - diego.campos@sptech.school</li>
+        <li>Fabricio Prudente Ferreira - fabricio.ferreira@sptech.school</li>
+        <li>Ivan Rangel Pestana Marcolin - ivan.marcolin@sptech.school</li>
+        <li>Lucas Tetsuo Nagasse - lucas.nagasse@sptech.school</li>
+        <li>Matheus Yukio Makiyama - matheus.makiyama@sptech.school</li>
+        <li>Renan Rocha Pacanaro Trinca - renan.trinca@sptech.school</li>
       </ul>
     </div>
-    <div class="main">
-      <div class="form">
-        <h1>Login</h1>
-        <div class="inputs">
-          <label>
-            <span class="span">E-mail:</span>
-            <input type="text" id="id_login" placeholder="E-mail"/>
-          </label>
-          <label> 
-            <span class="span">Senha:</span>
-            <input type="password" id="id_senha" placeholder="Senha"/>
-          </label>
-        </div>
-        <button class="botao" onclick="autenticar()">Autenticar</button>
-        <div id="div_mensagem"></div>
-        <a href="esqueciSenha.html">Esqueci a minha senha</a>
-      </div>
+    <div class="contact">
+      <h3>Contatos</h3>
+      <ul>
+        <li>safesleep@gmail.com</li>
+        <li>+55 11 99999-9999</li>
+      </ul>
+      <img src="./images/ssLogoName.png" class="logo" />
     </div>
-    <div class="linkRedirecionar">
-      <span>Não tem uma conta? <a href="cadastro.html">Registre-se</a></span>
-    </div>
-    <div class="footer">
-      <div class="developers">
-        <h3>Desenvolvedores da SafeSleep</h3>
-        <ul>
-          <li>Bruno Yuji Takahashi - bruno.ytakahashi@sptech.school</li>
-          <li>Diego Crispim dos Santos Campos - diego.campos@sptech.school</li>
-          <li>Fabricio Prudente Ferreira - fabricio.ferreira@sptech.school</li>
-          <li>Ivan Rangel Pestana Marcolin - ivan.marcolin@sptech.school</li>
-          <li>Lucas Tetsuo Nagasse - lucas.nagasse@sptech.school</li>
-          <li>Matheus Yukio Makiyama - matheus.makiyama@sptech.school</li>
-          <li>Renan Rocha Pacanaro Trinca - renan.trinca@sptech.school</li>
-        </ul>
-      </div>
-      <div class="contact">
-        <h3>Contatos</h3>
-        <ul>
-          <li>safesleep@gmail.com</li>
-          <li>+55 11 99999-9999</li>
-        </ul>
-        <img src="./images/ssLogoName.png" class="logo" />
-      </div>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
 <script>
   var tentativas = 3;
@@ -70,38 +73,43 @@
     var login = id_login.value;
     var senha = id_senha.value;
 
-    if(login == "" || senha == ""){
+    if (login == "" || senha == "") {
       alert("Por favor, preencha os campos para efetuar login");
     }
-    else if(tentativas > 0) {
+    else if (tentativas > 0) {
       fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: login,
-                    senhaServer: senha
-                })
-            }).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        sessionStorage.ID_USUARIO = json.idUsuario;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.SENHA_USUARIO = json.senha;
-                        sessionStorage.ID_HOSPITAL = json.fkHospital;
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          emailServer: login,
+          senhaServer: senha
+        })
+      }).then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then(json => {
+            sessionStorage.ID_USUARIO = json.idUsuario;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.SENHA_USUARIO = json.senha;
+            sessionStorage.ID_HOSPITAL = json.fkHospital;
+            sessionStorage.NOME_HOSPITAL = json.razaoSocial;
 
-                setTimeout(function () {
-                    window.location = "./dashboard.html";
-                }, 1000);
-              });
-          } else {
-            tentativas--;
-            div_mensagem.innerHTML = "E-mail e/ou senha incorreto(s)";
-          }
+            div_mensagem.innerHTML = "Aguarde...";
+            div_mensagem.style.fontWeight = "bold";
+            div_mensagem.style.color = "#19A7A8";
+
+            setTimeout(function () {
+              window.location = "./dashboard.html";
+            }, 1000);
+          });
+        } else {
+          tentativas--;
+          div_mensagem.innerHTML = "E-mail e/ou senha incorreto(s)";
         }
-      ).catch(function(erro){
+      }
+      ).catch(function (erro) {
         console.error('Falha ao realizar o login: ', erro);
       })
     } else {

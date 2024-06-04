@@ -59,6 +59,7 @@ function autenticar(req, res) {
             senha: resultadoAutenticar[0].senha,
             email: resultadoAutenticar[0].login,
             fkHospital: resultadoAutenticar[0].fkHospital,
+            razaoSocial: resultadoAutenticar[0].razaoSocial
           });
 
         } else if (resultadoAutenticar.length == 0) {

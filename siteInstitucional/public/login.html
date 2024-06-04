@@ -75,25 +75,22 @@
     }
     else if(tentativas > 0) {
       fetch("/usuarios/autenticar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            emailServer: login,
-            senhaServer: senha
-        })
-      }).then(function (resposta) {
-          if (resposta.ok) {
-              resposta.json().then(json => {
-                sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.SENHA_USUARIO = json.senha;
-                sessionStorage.ID_HOSPITAL = json.fkHospital;
-                div_mensagem.style.color = '#19A7A8';
-                div_mensagem.style.fontWeight = 'bold';
-                div_mensagem.innerHTML = "Aguarde...";
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: login,
+                    senhaServer: senha
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.SENHA_USUARIO = json.senha;
+                        sessionStorage.ID_HOSPITAL = json.fkHospital;
 
                 setTimeout(function () {
                     window.location = "./dashboard.html";

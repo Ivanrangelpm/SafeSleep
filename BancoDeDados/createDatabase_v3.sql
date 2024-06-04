@@ -102,7 +102,7 @@ CREATE TABLE controleFluxo (
     idControle INT AUTO_INCREMENT,
     fkBebe INT,
     fkcodigoDeSerie INT,
-    dtEntrada DATETIME,
+    dtEntrada DATETIME DEFAULT CURRENT_TIMESTAMP,
     dtSaida DATETIME,
     CONSTRAINT pkControle PRIMARY KEY (idControle, fkBebe, fkcodigoDeSerie),
     CONSTRAINT fkBebeControle FOREIGN KEY (fkBebe) REFERENCES bebe(idBebe),

@@ -243,9 +243,9 @@
             //Capturar os dados
             for(var index = 0; index < resultado.length; index++){
               lista_nome.push(resultado[index].nome);
-              lista_codigo.push(resultado[index].codigoDeSerie);
+              lista_codigo.push(resultado[index].incubadora);
               lista_status.push(resultado[index].status);
-              lista_temperatura.push(35);
+              lista_temperatura.push(resultado[index].temperatura);
             }
   
             //Plotar na tabela
@@ -424,7 +424,7 @@
     * MODIFICAR O VALOR 7 DO "FOR" (LINHA 134);
     * MODIFICAR A QUANTIDADE DE VALORES EM "data" NAS VARIÁVEIS "jsonMaxLine" (Linha 337) E "jsonMinLine" (Linha 346) --- Padrão: 7 valores
   */
-
+   
   //Configuração das Legendas dos gráficos (Todos os gráficos)
   var optionsLegend = {
     display: true,
@@ -450,8 +450,8 @@
       }
     },
     y: {
-      min: min_random - 0.5,
-      max: max_random + 0.5,
+      min: temperatura_minima,
+      max: temperatura_maxima,
       title: {
         display: true,
         text: 'Temperatura (°C)',
@@ -684,7 +684,7 @@
   // ========================================== GRÁFICOS GERAIS ========================================== //
 
   //TEMPERATURA DE TODAS AS INCUBADORAS (ATUALIZADAS A CADA HORA)
-  let proximaAtualizacao;
+  var proximaAtualizacao;
 
   function mostrarGraficoPrincipal() {
 
@@ -782,8 +782,8 @@
             }
           },
           y: {
-            min: min_random - 0.5,
-            max: max_random + 0.5,
+            min: temperatura_minima,
+            max: temperatura_maxima,
             title: {
               display: true,
               text: 'Temperatura (°C)',

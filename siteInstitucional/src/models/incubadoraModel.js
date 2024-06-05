@@ -27,7 +27,21 @@ function preencherIncubadora(codigoDeSerie) {
 
 function capturarIncubadoras(idHospital) {
   var instucao = `
-    SELECT codigoDeSerie, status, nome FROM incubadora JOIN controleFluxo ON fkcodigoDeSerie = codigoDeSerie JOIN bebe ON fkBebe = idBebe WHERE status = "Ocupado" AND fkHospital = ${idHospital};
+  SELECT concat('Incubadora ', C.codigoDeSerie) as incubadora, bebe.nome AS nome, A.temperatura, status, A.dataHora
+                            FROM historico as A
+							JOIN sensor as B ON B.idSensor = A.fkSensor
+                            JOIN incubadora as C ON C.codigoDeSerie = B.fkIncubadora
+                            JOIN controleFluxo ON fkcodigoDeSerie = C.codigoDeSerie
+                            JOIN bebe ON fkBebe = idBebe
+								join (SELECT codigoDeSerie, max(dataHora) as dataHora
+                                FROM historico 
+                                JOIN sensor ON idSensor = fkSensor
+                                JOIN incubadora ON codigoDeSerie = fkIncubadora
+                                WHERE fkHospital = ${idHospital}
+                                GROUP BY codigoDeSerie) as retorno on
+                                C.codigoDeSerie = retorno.codigoDeSerie
+                                and A.dataHora = retorno.dataHora
+                            WHERE C.fkHospital = ${idHospital} AND status = 'Ocupado';
   `;
 
   return database.executar(instucao);

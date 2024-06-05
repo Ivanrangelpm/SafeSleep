@@ -147,7 +147,7 @@ body {
   padding: 2rem;
   border: 2px solid #101030;
   /* background-color: #f0f5f0; */
-  background-color: #f0f5f0;
+  /* background-color: #f0f5f0; */
   width: fit-content;
 }
 
@@ -157,7 +157,7 @@ body {
 }
 
 .main .perfil img {
-  width: 2vw;
+  width: 1.6vw;
   cursor: pointer;
 }
 

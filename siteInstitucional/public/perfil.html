@@ -78,8 +78,9 @@
 
       div_edit.innerHTML = `
       <input id="input_atual" type="text" value="${nome_atual}">
+      <div class="botoes">
       <button onclick="alterar()">Alterar nome</button> <span onclick="fechar()">&#9746;</span>
-      `;
+      </div>`;
 
       document.getElementById('nome_atual').focus();
     }
@@ -109,8 +110,10 @@
             })
             .then(function (resposta) {
                 console.log("resposta: ", resposta);
-            })
+                alert("Nome alterado com sucesso!");
+            })  
             .catch(function (resposta) {
+                alert("Houve um erro ao alterar o nome no banco de dos!");
                 console.log(`#ERRO: ${resposta}`);
             });
 

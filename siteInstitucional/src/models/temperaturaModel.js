@@ -21,6 +21,14 @@ function buscarUltimasTemperaturas(idHospital) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscarUltimasTemperaturasLinhas(idHospital, codigo, sensor) {
+
+    var instrucaoSql = ` select temperatura, DATE_FORMAT(dataHora, '%H:%i:%s') as dataHora from historico join sensor on historico.fkSensor = idSensor join incubadora on fkIncubadora = codigoDeSerie join hospital on fkHospital = idHospital where idHospital = ${idHospital} and codigoDeSerie = ${codigo} and idSensor = ${sensor} order by idHistorico limit 7;
+      `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 function pegarStatusIncubadora(idHospital) {
 
@@ -46,8 +54,10 @@ function verificarPrematuridade(idHospital) {
     return database.executar(instrucaoSql);
 }
 
+
 module.exports = {
     buscarUltimasTemperaturas,
+    buscarUltimasTemperaturasLinhas,
     pegarStatusIncubadora,
     verificarPrematuridade
 }

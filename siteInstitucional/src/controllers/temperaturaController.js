@@ -19,6 +19,27 @@ function buscarUltimasTemperaturas(req, res) {
     });
 }
 
+function buscarUltimasTemperaturasLinhas(req, res) {
+
+    var idHospital = req.body.idHospital;
+    var codigo = req.body.codigo;
+    var sensor = req.body.Sensor;
+
+    console.log(`Recuperando as ultimas temperaturas`);
+
+    temperaturaModel.buscarUltimasTemperaturasLinhas(idHospital, codigo, sensor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas temperaturas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function pegarStatusIncubadora(req, res) {
 
     var idHospital = req.params.idHospital;
@@ -60,5 +81,6 @@ function verificarPrematuridade(req, res) {
 module.exports = {
     buscarUltimasTemperaturas,
     pegarStatusIncubadora,
-    verificarPrematuridade
+    verificarPrematuridade,
+    buscarUltimasTemperaturasLinhas
 }

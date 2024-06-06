@@ -14,5 +14,8 @@ router.get("/status/:idHospital", function (req, res) {
 router.get("/prematuridade/:idHospital", function (req, res) {
     temperaturaController.verificarPrematuridade(req, res);
 });
+router.post("/buscarUltimasTemperaturasLinhas", function (req, res) {
+    temperaturaController.buscarUltimasTemperaturasLinhas(req, res);
+});
 
 module.exports = router;

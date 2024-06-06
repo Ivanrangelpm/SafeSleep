@@ -225,6 +225,7 @@
     var lista_codigo = [];
     var lista_temperatura = [];
     var lista_status = []
+    var lista_sensor = []
 
     fetch("/incubadora/capturarIncubadoras", {
       method: "POST",
@@ -246,6 +247,7 @@
               lista_codigo.push(resultado[index].incubadora);
               lista_status.push(resultado[index].status);
               lista_temperatura.push(resultado[index].temperatura);
+              lista_sensor.push(resultado[index].sensor)
             }
   
             //Plotar na tabela
@@ -268,7 +270,7 @@
                 else var status_incubadora = "https://www.pngall.com/wp-content/uploads/12/Secure-HTTPS-Green-Symbol-PNG.png";
   
                 tableContent += `
-                  <tr onclick="verificar(${cont + 1})" id='dados_incubadora'> 
+                  <tr onclick="verificar(${lista_codigo[cont]}, ${lista_sensor[cont]})" id='dados_incubadora'> 
                     <td class = ${classeCor}> ${lista_codigo[cont]} </td> 
                     <td class = ${classeCor}> ${lista_temperatura[cont]} </td>
                     <td class = ${classeCor}> ${lista_nome[cont]} </td>
@@ -291,7 +293,7 @@
                     if (cont % 2 == 1) var classeCor = "linhabranca";
                     else var classeCor = "linhacinza";
   
-                    tableContent += `<tr onclick="verificar(${cont + 1})" id='dados_incubadora'> 
+                    tableContent += `<tr onclick="verificar(${lista_codigo[cont]}, ${lista_sensor[cont]})" id='dados_incubadora'> 
                       <td class = ${classeCor}> ${lista_codigo[cont]} </td> 
                       <td class = ${classeCor}> ${lista_temperatura[cont]} </td>
                       <td class = ${classeCor}> ${lista_nome[cont]} </td>
@@ -344,7 +346,10 @@
 
   // POR FAVOR, NÃO APAGUE AS LINHAS QUE ESTÃO EM COMENTÁRIOS! ELAS PODERÃO SER UTILIZADAS FUTURAMENTE.
 
-  function verificar(incubadora_num) {
+  function verificar(codigoDeSerie_Incubadora, idSensor) {
+    console.log(idSensor)
+    var codigo_serie = codigoDeSerie_Incubadora;
+    var sensor = idSensor;
     var peso = 0;
     var idade = 0;
     var prematuridade = "Não";
@@ -355,12 +360,48 @@
 
     sectionInfos.innerHTML = `${mainContent} <hr/> ${tableContent} <hr/>
     <div id="divResponse" class="section">
-      <span class='lineTitle'>Temperatura da Incubadora Nº${incubadora_num}</span>  
+      <span class='lineTitle'>Temperatura da Incubadora ${codigoDeSerie_Incubadora}</span>  
       <section id='lineSection'>
-        <canvas id='incubadoraNum${incubadora_num}'></canvas>
+        <canvas id='incubadoraNum${codigoDeSerie_Incubadora}'></canvas>
       </section>
     </div>`;
 
+    fetch("/temperatura/buscarUltimasTemperaturasLinhas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      idHospital : sessionStorage.ID_HOSPITAL,  
+      codigo: codigo_serie,
+      Sensor : sensor
+
+      }),
+    }).then(function (resultado) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resultado.ok) {
+        console.log(resultado);
+        console.log(resultado[0])
+        resultado.json().then(function (resultado) {
+          //console.log(json);
+          console.log(JSON.stringify(resultado));
+          
+          var vetor_temp = [];
+          var vetor_data = [];
+          console.log(vetor_data);
+          console.log(vetor_temp);
+          for ( var cont = 0; cont < resultado.length; cont ++){
+              var registro = resultado[cont]
+              vetor_temp.push(registro.temperatura)
+              vetor_data.push(registro.dataHora)
+              console.log(vetor_data);
+              console.log(vetor_temp);
+          }
+          gerarGraficoInc(codigo_serie, vetor_data, vetor_temp)
+        })
+      }}
+      )
     // gerarGraficoInc(
     //   `incubadoraNum${incubadora_num}`,
     //   temperatures,
@@ -370,7 +411,7 @@
 
 
     //Mostrar o gráfico de cada incubadora
-    if (incubadora_num == '1') {
+    /*if (incubadora_num == '1') {
       gerarGraficoInc1();
       dtNascBebe = "01/05/2024";
     }
@@ -387,10 +428,10 @@
       gerarGraficoInc4();
       dtNascBebe = "03/05/2024";
 
-    };
+    };*/
   }
 
-
+  
   // ========================================== GRÁFICOS INDIVIDUAIS ========================================== //
 
   //Variáveis para determinar as linhas de temperatura Máxima e Mínima nos gráficos ChartJS
@@ -450,8 +491,8 @@
       }
     },
     y: {
-      min: temperatura_minima,
-      max: temperatura_maxima,
+      min: temperatura_minima - 2.0,
+      max: temperatura_maxima + 2.0,
       title: {
         display: true,
         text: 'Temperatura (°C)',
@@ -527,28 +568,32 @@
               legend: optionsLegend
             }
           }
+          
         }
       )
     }
   }
 
   //Gráfico Incubadora 1
-  function gerarGraficoInc1() {
-    var incubadoraElement = document.getElementById('incubadoraNum1').getContext('2d');
+  function gerarGraficoInc(codigoDeSerie_Incubadora, vetor_data, vetor_temp){
+    var incubadoraElement = document.getElementById(`incubadoraNum${codigoDeSerie_Incubadora}`).getContext('2d');
     incubadoraElement.canvas.parentNode.style.width = '100%';
     incubadoraElement.canvas.parentNode.style.height = '400px';
     incubadoraElement.canvas.width = 4;
     incubadoraElement.canvas.height = 1;
-
+    console.log(vetor_data);
+    console.log(vetor_temp);
+    //var datas = vetor_data
+    //var temps = vetor_temp
     var chartIncubadora = new Chart(
       incubadoraElement,
       {
         type: 'line',
         data: {
-          labels: eixoXValues,
+          labels: vetor_data,
           datasets: [{
             label: 'Temperatura da Incubadora (°C)',
-            data: temperatures1,
+            data: vetor_temp,
             borderWidth: 4,
             borderColor: '#507090',
             backgroundColor: 'transparent',
@@ -570,7 +615,7 @@
   }
 
   //Gráfico Incubadora 2
-  function gerarGraficoInc2() {
+  /*function gerarGraficoInc2() {
     var incubadoraElement = document.getElementById('incubadoraNum2').getContext('2d');
     incubadoraElement.canvas.parentNode.style.width = '100%';
     incubadoraElement.canvas.parentNode.style.height = '400px';
@@ -678,7 +723,7 @@
         }
       }
     )
-  }
+  }*/
 
 
   // ========================================== GRÁFICOS GERAIS ========================================== //
@@ -782,8 +827,8 @@
             }
           },
           y: {
-            min: temperatura_minima,
-            max: temperatura_maxima,
+            min: temperatura_minima - 1.0,
+            max: temperatura_maxima + 1.0,
             title: {
               display: true,
               text: 'Temperatura (°C)',

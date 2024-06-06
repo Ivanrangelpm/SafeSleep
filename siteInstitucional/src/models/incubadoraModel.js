@@ -8,6 +8,14 @@ function cadastrar(codigo, modelo, fkHospital) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function cadastrar2( codigo ) {
+  var instrucao = `
+        INSERT INTO sensor ( fkIncubadora) VALUES
+        ( '${codigo}');
+        `;
+  console.log("Executando a instrução SQL: \n" + instrucao);
+  return database.executar(instrucao);
+}
 
 function pegarIncubadoras() {
     var instrucao = `
@@ -27,7 +35,7 @@ function preencherIncubadora(codigoDeSerie) {
 
 function capturarIncubadoras(idHospital) {
   var instucao = `
-  SELECT concat('Incubadora ', C.codigoDeSerie) as incubadora, bebe.nome AS nome, A.temperatura, status, A.dataHora
+  SELECT C.codigoDeSerie as incubadora,B.idSensor as sensor, bebe.nome AS nome, A.temperatura, status, A.dataHora
                             FROM historico as A
 							JOIN sensor as B ON B.idSensor = A.fkSensor
                             JOIN incubadora as C ON C.codigoDeSerie = B.fkIncubadora
@@ -49,6 +57,7 @@ function capturarIncubadoras(idHospital) {
 
 module.exports = {
     cadastrar,
+    cadastrar2,
     pegarIncubadoras,
     preencherIncubadora,
     capturarIncubadoras

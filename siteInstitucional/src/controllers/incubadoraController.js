@@ -15,7 +15,7 @@ function cadastrar(req, res) {
     .cadastrar(codigo, modelo, fkHospital)
     .then(function (resposta) {
       res.json(resposta);
-    })
+    incubadoraModel.cadastrar2(codigo)
     .catch(function (erro) {
       console.log(erro);
       console.log(
@@ -24,6 +24,7 @@ function cadastrar(req, res) {
       );
       res.status(500).json(erro.sqlMessage);
     });
+  })
 }
 
 function pegarIncubadoras(req, res) {

@@ -23,7 +23,7 @@ function buscarUltimasTemperaturas(idHospital) {
 }
 function buscarUltimasTemperaturasLinhas(idHospital, codigo, sensor) {
 
-    var instrucaoSql = ` select temperatura, DATE_FORMAT(dataHora, '%H:%i:%s') as dataHora from historico join sensor on historico.fkSensor = idSensor join incubadora on fkIncubadora = codigoDeSerie join hospital on fkHospital = idHospital where idHospital = ${idHospital} and codigoDeSerie = ${codigo} and idSensor = ${sensor} order by idHistorico limit 7;
+    var instrucaoSql = ` select temperatura, DATE_FORMAT(dataHora, '%H:%i:%s') as dataHora from historico join sensor on historico.fkSensor = idSensor join incubadora on fkIncubadora = codigoDeSerie join hospital on fkHospital = idHospital where idHospital = ${idHospital} and codigoDeSerie = ${codigo} and idSensor = ${sensor} order by dataHora desc limit 7;
       `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

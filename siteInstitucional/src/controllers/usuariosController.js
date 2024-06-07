@@ -1,5 +1,25 @@
 var usuariosModel = require("../models/usuariosModel");
 
+function criptografar(palavra) {
+  let resposta = "";
+  for (let i = 0; i < palavra.length; i++) {
+    let ascii = palavra.charCodeAt(i) + 2;
+    if (ascii > 65535) { ascii -= 65535; }
+    resposta += String.fromCharCode(ascii);
+  }
+  return resposta;
+}
+
+function descriptografar(palavra) {
+  let resposta = "";
+  for (let i = 0; i < palavra.length; i++) {
+    let ascii = palavra.charCodeAt(i) - 2;
+    if (ascii < 0) { ascii += 65535; }
+    resposta += String.fromCharCode(ascii);
+  }
+  return resposta;
+}
+
 function cadastrar(req, res) {
   var nome = req.body.nomeServer;
   var sobrenome = req.body.sobrenomeServer;
@@ -21,7 +41,7 @@ function cadastrar(req, res) {
   }
 
   usuariosModel
-    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, senha, cargo, fkHospital)
+    .cadastrar(nome, sobrenome, emailRep, cpf, licenca, criptografar(senha), cargo, fkHospital)
     .then(function (resposta) {
       res.json(resposta);
     })
@@ -45,7 +65,7 @@ function autenticar(req, res) {
     res.status(400).send("Sua senha está indefinida!");
   } else {
     usuariosModel
-      .autenticar(email, senha)
+      .autenticar(email, criptografar(senha))
       .then(function (resultadoAutenticar) {
         console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
         console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String

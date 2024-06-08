@@ -34,7 +34,7 @@ CREATE TABLE usuario(
 );
 
 INSERT INTO usuario VALUES
-	(default, 'brandao@gmail.com', '1234567!', '85768548503', 'Diretor', 'Fernando', 'Brandão', 'CRM/SP 123456', 3),
+	(default, 'brandao@gmail.com', '3456789#', '85768548503', 'Diretor', 'Fernando', 'Brandão', 'CRM/SP 123456', 3),
 	(default, 'david@outlook.com', '2345678@', '38569845804', 'Diretor', 'David', 'Oliveira', 'CRM/SP 987654', 1),
 	(default, 'raul@yahoo.com.br', '8745643#', '75684295505', 'Médico', 'Raul', 'Gagliardo', 'CRM/SP 758692', 1),
 	(default, 'rebecca@gmail.com.br', '6789$647', '75849368502', 'Diretora', 'Rebecca', 'Andrade', 'CRM/SP 746583', 2);

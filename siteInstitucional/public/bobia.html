@@ -36,7 +36,8 @@
             <div class="conversas">
                 <div class="form">
                     <h1>Inteligência Artificial da SafeSleep</h1>
-                    <div id="resposta"></div>
+                    <div id="resposta">
+                    </div>
                     <div id="impBox" class="inputBox">
                         <div class="inputDiv">
                             <input id="pergunta" type="text" class="inp_pergunta" placeholder="Digite sua pergunta">
@@ -76,8 +77,13 @@
 
 </html>
 <script>
+
+    var conversa = []
+
         async function gerarResposta() {
             const pergunta = document.getElementById('pergunta').value;
+
+            conversa.push(pergunta)
 
             const response = await fetch('/perguntar', {
                 method: 'POST',
@@ -90,6 +96,32 @@
             const data = await response.json();
 
             resposta.style.display = 'block';
-            document.getElementById('resposta').innerText = data.resultado;
+
+            conversa.push(data.resultado)
+            console.log(conversa)
+            exibirConversa()
+
+        }
+
+        function exibirConversa() {
+            var tamanhoLista = conversa.length;
+
+            resposta.innerHTML = '';
+
+            for(var i = 0; i < tamanhoLista;i++ ){
+                var resto = i % 2;
+                var texto = conversa[i];
+                if(resto == 0){
+                    resposta.innerHTML += `
+                        <div class="direita">
+                            <p>${texto}</p>
+                        </div>`
+                }else{
+                    resposta.innerHTML += `
+                        <div class="esquerda">
+                            <p>${texto}</p>
+                        </div>`
+                }
+            }
         }
 </script>

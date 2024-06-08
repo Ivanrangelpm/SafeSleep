@@ -15,4 +15,10 @@ router.post("/capturarIncubadoras", function (req, res) {
   incubadoraController.capturarIncubadoras(req, res);
 })
 
+
+router.post("/removerBebe", function (req, res) {
+  incubadoraController.removerBebe(req, res);
+})
+
+
 module.exports = router;

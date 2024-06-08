@@ -24,10 +24,12 @@
     <div class="leftDiv">
       <img src="./images/ssLogoName.png" alt="logomarca" class="leftLogo">
       <div class="topics">
-        <h3>Gerenciar...</h3>
+        <h3>Cadastrar...</h3>
         <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
         <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
         <button onclick="form_Bebe()" id="btn3">Recém-Nascido</button>
+        <h3>Gerenciar...</h3>
+        <button onclick="form_RemoverBebe()" id="btn4">Remover Bebê</button>
         <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
       </div>
     </div>
@@ -131,6 +133,21 @@
             </label>
             <div id="erroBebe" class="erro"></div>
             <button onclick="cadastrarBebe()">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="removerBebe">
+        <div class="form" id="form4">
+          <h1></h1>
+          <div class="inputs">
+            <label>
+              <span>Código de Série:<span class="campo_obrigatorio"> *</span></span>
+              <input type="text" id="inpIncubadoraCodigo" placeholder="Código" />
+            </label>
+            <div id="erroIncubadora" class="erro"></div>
+            <button onclick="removerBebe()">Finalizar uso da incubadora</button>
+            <div id="mensagemSucesso"></div>
           </div>
         </div>
       </div>
@@ -263,33 +280,56 @@
   var form1 = document.getElementById("form1");
   var form2 = document.getElementById("form2");
   var form3 = document.getElementById("form3");
+  var form4 = document.getElementById("form4");
+  
 
   function form_Funcionario() {
     form1.style.display = "flex";
     form2.style.display = "none";
     form3.style.display = "none";
+    form4.style.display = "none";
     btn1.style.backgroundColor = "#19A7A8";
     btn2.style.backgroundColor = "#2d4053";
     btn3.style.backgroundColor = "#2d4053";
+    btn4.style.backgroundColor = "#2d4053";
   }
 
   function form_Incubadora() {
     form1.style.display = "none";
     form2.style.display = "flex";
     form3.style.display = "none";
+    form4.style.display = "none";
+
     btn1.style.backgroundColor = "#2d4053";
     btn2.style.backgroundColor = "#19A7A8";
     btn3.style.backgroundColor = "#2d4053";
+    btn4.style.backgroundColor = "#2d4053";
   }
 
   function form_Bebe() {
     form1.style.display = "none";
     form2.style.display = "none";
     form3.style.display = "flex";
+    form4.style.display = "none";
     btn1.style.backgroundColor = "#2d4053";
     btn2.style.backgroundColor = "#2d4053";
     btn3.style.backgroundColor = "#19A7A8";
+    btn4.style.backgroundColor = "#2d4053";
   }
+
+  function form_RemoverBebe(){
+    form1.style.display = "none";
+    form2.style.display = "none";
+    form3.style.display = "none";
+    form4.style.display = "flex";
+    btn1.style.backgroundColor = "#2d4053";
+    btn2.style.backgroundColor = "#2d4053";
+    btn3.style.backgroundColor = "#2d4053";
+    btn4.style.backgroundColor = "#19A7A8";
+
+  }
+
+
 
   function cadastrarFuncionario() {
     var nome = inputFuncionarioNome.value;
@@ -567,6 +607,44 @@
     document.getElementById("erroBebe").style.fontSize = tamanhoTexto;
     erroBebe.innerHTML = text;
   }
+
+  function removerBebe() {
+    var codigo = inpIncubadoraCodigo.value;
+    fetch("/incubadora/removerBebe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          codigoServer: codigo,
+        }),
+      }).then(function (respostaIncubadora) {
+        console.log(respostaIncubadora);
+
+        if (respostaIncubadora.ok) {
+          respostaIncubadora.json().then((respostaIncubadora) => {
+            console.log(respostaIncubadora[0]);
+
+            var resposta = respostaIncubadora[0];
+
+            var nome = resposta.nome;
+            var sobrenome = resposta.sobrenome;
+// O Miguel Camargo foi tirado da incubadora numero 321 as 13:29
+            mensagemSucesso.innerHTML = `${nome} ${sobrenome} finalizou sua estadia na incubadora número ${codigo}`
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO:`, erro);
+      });
+  }
+
+
+
+
+
 
   // function cadastrarResponsavel() {
   //   var nome = inputResponsavelNome.value;

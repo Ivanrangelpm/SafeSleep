@@ -52,13 +52,61 @@ function capturarIncubadoras(idHospital) {
                             WHERE C.fkHospital = ${idHospital} AND status = 'Ocupado';
   `;
 
+
+  
+
   return database.executar(instucao);
 }
+
+function removerBebe(codigoDeSerie) {
+  console.log(`CODIGO DE SERIE ${codigoDeSerie}`)
+  var instrucaoSql = `
+SELECT controleFluxo.*, bebe.nome, bebe.sobrenome FROM controleFluxo 
+		JOIN bebe ON controleFluxo.fkBebe = bebe.idBebe 
+        WHERE fkCodigoDeSerie = ${codigoDeSerie};
+  `;
+
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+  return database.executar(instrucaoSql);
+}
+
+function removerBebe2(codigoDeSerie) {
+  console.log(`CODIGO DE SERIE ${codigoDeSerie}`)
+  var instrucaoSql = `
+  UPDATE controleFluxo SET dtSaida = current_timestamp() where fkCodigoDeSerie = ${codigoDeSerie};
+
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+  return database.executar(instrucaoSql);
+}
+
+
+function removerBebe3(codigoDeSerie) {
+  console.log(`CODIGO DE SERIE ${codigoDeSerie}`)
+  var instrucaoSql = `
+  UPDATE incubadora SET status='Livre' WHERE codigoDeSerie= ${codigoDeSerie};
+
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+  return database.executar(instrucaoSql);
+}
+
+
+
+
+
 
 module.exports = {
     cadastrar,
     cadastrar2,
     pegarIncubadoras,
     preencherIncubadora,
-    capturarIncubadoras
+    capturarIncubadoras,
+    removerBebe,
+    removerBebe2,
+    removerBebe3
 };

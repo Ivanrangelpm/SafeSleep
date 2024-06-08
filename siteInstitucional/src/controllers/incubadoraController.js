@@ -27,6 +27,34 @@ function cadastrar(req, res) {
   })
 }
 
+function removerBebe(req, res) {
+  var codigo = req.body.codigoServer;
+  console.log('Pegando dados do ControleFluxo')
+  if (codigo == undefined) {
+    res.status(400).send("Seu codigo está indefinido!");
+  } else {
+
+
+    incubadoraModel
+    .removerBebe(codigo)
+    .then(function(resposta){
+      res.json(resposta);
+    incubadoraModel.removerBebe2(codigo);
+    incubadoraModel.removerBebe3(codigo)
+
+    })
+    .catch(function(erro){
+      console.error(erro);
+      console.error("Houve um erro ao capturar os dados das incubadoras: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    })
+
+
+  }
+}
+
+
+
 function pegarIncubadoras(req, res) {
   incubadoraModel.pegarIncubadoras(req, res)
     .then(function (resposta) {
@@ -62,8 +90,15 @@ function capturarIncubadoras(req, res) {
 }
 
 
+
+
+
+
+
+
 module.exports = {
   cadastrar,
   pegarIncubadoras,
-  capturarIncubadoras
+  capturarIncubadoras,
+  removerBebe
 };

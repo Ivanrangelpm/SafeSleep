@@ -21,7 +21,7 @@
   </style>
 </head>
 
-<body onload="mostrarGraficoPrincipal(), mostrarGraficosPizza()">
+<body onload="mostrarGraficosDinamicos(), mostrarGraficosPizza()">
   <div class="header">
     <a><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
     <ul class="navbar">
@@ -241,50 +241,18 @@
       .catch(function (erro) {
         console.error(erro);
       })
-  
-    
-
-    
-    //Mostrar o Select na Tela (mainContent é o conteúdo dos botões & selectContent são as opções)
-    // sectionInfos.innerHTML = `${mainContent}
-    // <hr/>
-    // <div class="section">
-    //   <h2>Selecione a incubadora para ver informações adicionais:</h2>
-    //   <div class="selecao">
-    //     <label>
-    //       <span>Selecione a incubadora:</span>
-    //       <select id="selectIncubadora" onchange="verificar()">
-    //         <option value="0" selected disabled>Selecione a incubadora</option>
-    //         ${selectContent}
-    //       </select>
-    //     </label>
-    //   </div>
-    // </div>`;
-
-    // if (btnApertado == "risco" && cont_riscoHiper == 0 && cont_riscoHipo == 0) {
-    //   sectionInfos.innerHTML = `${mainContent}
-    //   <hr>
-    //   <div id='divResponse' class='section'>
-    //     <h2 class='infoRisk'>Todas as crianças estão sem risco de adquirir doenças!</h2>
-    //   </div>
-    //   `;
-    // }
   }
 
   // ========================================== DETERMINA A TEMPERATURA DAS INCUBADORAS, ALÉM DA TEMPERATURA MÍNIMA E MÁXIMA ========================================== //
 
   // POR FAVOR, NÃO APAGUE AS LINHAS QUE ESTÃO EM COMENTÁRIOS! ELAS PODERÃO SER UTILIZADAS FUTURAMENTE.
 
-  var intervaloTela = setInterval(() => {
-    
-  }, 1000);
-
   var intervaloGraficoLinha = undefined;
   var intervaloTabelas = undefined;
   var chartIncubadora = undefined;
 
   function verificar(codigoDeSerie_Incubadora, idSensor) {
-    console.log(idSensor)
+    clearInterval(intervaloGraficoLinha);
     var codigo_serie = codigoDeSerie_Incubadora;
     var sensor = idSensor;
     var peso = 0;
@@ -312,15 +280,23 @@
         data: {
           datasets: [{
             label: 'Temperatura da Incubadora (°C)',
-            // data: vetor_temp,
             borderWidth: 4,
             borderColor: '#507090',
             backgroundColor: 'transparent',
             lineTension: 0.4
-          },
-            //jsonMaxLine e jsonMinLine são as outras duas linhas (constantes)
-            jsonMaxLine,
-            jsonMinLine
+          }, {
+            label: 'Temperatura Máxima (°C)',
+            borderWidth: 5,
+            borderColor: '#19A7A8',
+            backgroundColor: 'transparent',
+            pointRadius: 0
+          }, {
+            label: 'Temperatura Mínima (°C)',
+            borderWidth: 5,
+            borderColor: '#001725',
+            backgroundColor: 'transparent',
+            pointRadius: 0
+          }
           ]
         },
         options: {
@@ -332,7 +308,7 @@
       }
     )
 
-    intervaloGraficoLinha = setInterval(()=>{ultimasTemperaturas_GraficoLinha(codigo_serie, sensor)}, 2000);
+    intervaloGraficoLinha = setInterval(()=>{ultimasTemperaturas_GraficoLinha(codigo_serie, sensor)}, 1000);
   }
 
   function ultimasTemperaturas_GraficoLinha(codigo_serie, sensor){
@@ -342,30 +318,31 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-      idHospital : sessionStorage.ID_HOSPITAL,  
-      codigo: codigo_serie,
-      Sensor : sensor
-
+        idHospital : sessionStorage.ID_HOSPITAL,  
+        codigo: codigo_serie,
+        Sensor : sensor
       }),
     }).then(function (resultado) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
       if (resultado.ok) {
         resultado.json().then(function (resultado) {
 
           var vetor_temp = [];
+          var vetor_temp_max = [];
+          var vetor_temp_min = [];
           var vetor_data = [];
           
-          for ( var cont = resultado.length - 1; cont >= 0; cont --){
-              var registro = resultado[cont]
-              vetor_temp.push(registro.temperatura)
-              vetor_data.push(registro.dataHora)
-              console.log(vetor_data);
-              console.log(vetor_temp);
+          for ( var cont = resultado.length - 1; cont >= 0; cont--){
+              var registro = resultado[cont];
+              vetor_temp.push(registro.temperatura);
+              vetor_data.push(registro.dataHora);
+              vetor_temp_max.push(37.5);
+              vetor_temp_min.push(34.5);
           }
 
           chartIncubadora.data.labels = vetor_data
           chartIncubadora.data.datasets[0].data = vetor_temp;
+          chartIncubadora.data.datasets[1].data = vetor_temp_max;// = [37.5, 37.5, 37.5, 37.5, 37.5, 37.5, 37.5];
+          chartIncubadora.data.datasets[2].data = vetor_temp_min;// = [34.5, 34.5, 34.5, 34.5, 34.5, 34.5, 34.5];
           chartIncubadora.update();
         })
       }}
@@ -374,27 +351,6 @@
 
   
   // ========================================== GRÁFICOS INDIVIDUAIS ========================================== //
-
-  //Variáveis para determinar as linhas de temperatura Máxima e Mínima nos gráficos ChartJS
-  var jsonMaxLine = {
-    label: 'Temperatura Máxima (°C)',
-    data: [37.5, 37.5, 37.5, 37.5, 37.5, 37.5, 37.5],
-    borderWidth: 5,
-    borderColor: '#19A7A8',
-    backgroundColor: 'transparent',
-    pointRadius: 0
-  }
-
-  var jsonMinLine = {
-    label: 'Temperatura Mínima (°C)',
-    data: [34.5, 34.5, 34.5, 34.5, 34.5, 34.5, 34.5],
-    borderWidth: 5,
-    borderColor: '#001725',
-    backgroundColor: 'transparent',
-    pointRadius: 0
-  }
-
-  var eixoXValues = ['10h', '11h', '12h', '13h', '14h', '15h', '16h'];
 
   //Configuração das Legendas dos gráficos (Todos os gráficos)
   var optionsLegend = {
@@ -508,39 +464,150 @@
 
   //TEMPERATURA DE TODAS AS INCUBADORAS (ATUALIZADAS A CADA HORA)
   var proximaAtualizacao;
+  var divTemperaturaAll = document.getElementById('temperaturaAll').getContext('2d');
+  divTemperaturaAll.canvas.parentNode.style.width = '100%';
+  divTemperaturaAll.canvas.parentNode.style.height = '400px';
+  divTemperaturaAll.canvas.width = 4;
+  divTemperaturaAll.canvas.height = 1;
 
-  function mostrarGraficoPrincipal() {
+  var grafico = {
+    type: 'bar',
+    data: {
+      // labels: incubadoras,
+      datasets: [{
+        type: 'line',
+        // data: max,
+        backgroundColor: 'transparent',
+        borderColor: '#19A7A8',
+        label: 'Temperatura Máxima Permitida (°C)',
+        borderWidth: 5,
+        pointRadius: 0
+      }, {
+        type: 'line',
+        // data: min,
+        backgroundColor: 'transparent',
+        borderColor: '#003050',
+        label: 'Temperatura Mínima Permitida (°C)',
+        borderWidth: 5,
+        pointRadius: 0
+      }, {
+        // data: temperaturas,
+        backgroundColor: '#507090',
+        label: 'Temperatura de Cada Incubadora (°C)',
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Incubadoras',
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          min: temperatura_minima - 1.0,
+          max: temperatura_maxima + 1.0,
+          title: {
+            display: true,
+            text: 'Temperatura (°C)',
+            font: {
+              size: 16,
+              weight: 'bold'
+            }
+          },
+          ticks: {
+            stepSize: 1
+          }
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Temperatura das Incubadoras (°C)',
+          font: {
+            size: 31
+          },
+          padding: 30
+        },
+        legend: optionsLegend
+      }
+    }
+  }
 
+  var graficoTemperaturaAll = new Chart(
+    divTemperaturaAll,
+    grafico
+  )
+
+  // TEMPERATURA DE RISCO DOS BEBÊS
+  var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
+  divBebesCritico.canvas.width = 1;
+  divBebesCritico.canvas.height = 1;
+
+  var graficoBebesCritico = new Chart(
+    divBebesCritico,
+    {
+      type: 'pie',
+      data: {
+        labels: ['Com Risco', 'Sem Risco'],
+        datasets: [{
+          backgroundColor: [
+            '#003050',
+            '#19A7A8'
+          ]
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Recém-Nascidos com Risco de Saúde',
+            font: {
+              size: 31
+            },
+            padding: 30
+          },
+          legend: optionsLegend
+        }
+      }
+    }
+  )
+
+  function mostrarGraficosDinamicos() {
     var idHospital = sessionStorage.ID_HOSPITAL;
 
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
     }
 
-    fetch(`/temperatura/ultimas/${idHospital}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-          plotarGrafico(resposta, idHospital);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
+    setInterval(() => {
+      fetch(`/temperatura/ultimas/${idHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+  
+            plotarGraficosDinamicos(resposta, idHospital);
+          });
+        } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+        }
+      })
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
+    }, 1000);
   }
 
-  function plotarGrafico(resposta, idHospital) {
-    console.log('iniciando plotagem do gráfico...');
-
-    var divTemperaturaAll = document.getElementById('temperaturaAll').getContext('2d');
-    divTemperaturaAll.canvas.parentNode.style.width = '100%';
-    divTemperaturaAll.canvas.parentNode.style.height = '400px';
-    divTemperaturaAll.canvas.width = 4;
-    divTemperaturaAll.canvas.height = 1;
+  function plotarGraficosDinamicos(resposta, idHospital) {
+    alerta.style.display = 'none';
+    alertText.innerHTML = `Incubadoras com Temperatura Desregulada:`;
+    cont_riscoHiper = 0;
+    cont_riscoHipo = 0;
+    qtd_incubadoras_uso = 0;
 
     var incubadoras = [];
     var max = [];
@@ -556,120 +623,23 @@
       qtd_incubadoras_uso++;
       if (temperaturas[i] > temperatura_maxima) {
         cont_riscoHiper++;
+        alerta.style.display = 'flex';
+        alertText.innerHTML += `<br>${incubadoras[i]} - Hipertermia`;
       } else if (temperaturas[i] < temperatura_minima) {
         cont_riscoHipo++;
+        alerta.style.display = 'flex';
+        alertText.innerHTML += `<br>${incubadoras[i]} - Hipotermia`;
       }
     }
 
-    var grafico = {
-      type: 'bar',
-      data: {
-        labels: incubadoras,
-        datasets: [{
-          type: 'line',
-          data: max,
-          backgroundColor: 'transparent',
-          borderColor: '#19A7A8',
-          label: 'Temperatura Máxima Permitida (°C)',
-          borderWidth: 5,
-          pointRadius: 0
-        }, {
-          type: 'line',
-          data: min,
-          backgroundColor: 'transparent',
-          borderColor: '#003050',
-          label: 'Temperatura Mínima Permitida (°C)',
-          borderWidth: 5,
-          pointRadius: 0
-        }, {
-          data: temperaturas,
-          backgroundColor: '#507090',
-          label: 'Temperatura de Cada Incubadora (°C)',
-        }]
-      },
-      options: {
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Incubadoras',
-              font: {
-                size: 16,
-                weight: 'bold'
-              }
-            }
-          },
-          y: {
-            min: temperatura_minima - 1.0,
-            max: temperatura_maxima + 1.0,
-            title: {
-              display: true,
-              text: 'Temperatura (°C)',
-              font: {
-                size: 16,
-                weight: 'bold'
-              }
-            },
-            ticks: {
-              stepSize: 1
-            }
-          }
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Temperatura das Incubadoras (°C)',
-            font: {
-              size: 31
-            },
-            padding: 30
-          },
-          legend: optionsLegend
-        }
-      }
-    }
+    graficoTemperaturaAll.data.labels = incubadoras;
+    graficoTemperaturaAll.data.datasets[0].data = max;
+    graficoTemperaturaAll.data.datasets[1].data = min;
+    graficoTemperaturaAll.data.datasets[2].data = temperaturas;
+    graficoTemperaturaAll.update();
 
-    var graficoTemperaturaAll = new Chart(
-      divTemperaturaAll,
-      grafico
-    )
-
-    //GRÁFICO DOS BEBÊS COM RISCO
-    var divBebesCritico = document.getElementById('bebesCritico').getContext('2d');
-    divBebesCritico.canvas.width = 1;
-    divBebesCritico.canvas.height = 1;
-
-    var graficoBebesCritico = new Chart(
-      divBebesCritico,
-      {
-        type: 'pie',
-        data: {
-          labels: ['Com Risco', 'Sem Risco'],
-          datasets: [{
-            data: [cont_riscoHiper + cont_riscoHipo, qtd_incubadoras_uso - (cont_riscoHiper + cont_riscoHipo)],
-            backgroundColor: [
-              '#003050',
-              '#19A7A8'
-            ]
-          }]
-        },
-        options: {
-          plugins: {
-            title: {
-              display: true,
-              text: 'Recém-Nascidos com Risco de Saúde',
-              font: {
-                size: 31
-              },
-              padding: 30
-            },
-            legend: optionsLegend
-          }
-        }
-      }
-    )
-
-    //setTimeout(() => atualizarGrafico(idHospital, grafico, graficoTemperaturaAll), 2000);
+    graficoBebesCritico.data.datasets[0].data = [cont_riscoHiper + cont_riscoHipo, qtd_incubadoras_uso - (cont_riscoHiper + cont_riscoHipo)];
+    graficoBebesCritico.update();
   }
 
   //INCUBADORAS DISPONÍVEIS
@@ -808,4 +778,22 @@
   function sair() {
     window.location.href = "./login.html";
   }
+
+  setInterval(() => {
+    var TEMPERATURAMINIMATESTE = 33;
+    var TEMPERATURAMAXIMATESTE = 38;
+    var INTERVALOTESTE = TEMPERATURAMAXIMATESTE - TEMPERATURAMINIMATESTE;
+    var temperaturaServer = Number((Math.random() * INTERVALOTESTE + TEMPERATURAMINIMATESTE).toFixed(2));
+
+    fetch(`/temperatura/temperatura/${temperaturaServer}`, 
+      { cache: 'no-store' }
+    )
+    .then(function (response) {
+      if(response.ok){
+        console.log(temperaturaServer);
+      } else {
+        console.log('Erro :D');
+      }
+    })
+  }, 1000);
 </script>

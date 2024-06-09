@@ -78,9 +78,23 @@ function verificarPrematuridade(req, res) {
     });
 }
 
+function inserirTemperaturasTeste(req, res){
+    var temperatura = req.params.temperaturaServer;
+
+    temperaturaModel.inserirTemperaturasTeste(temperatura)
+    .then(function(resultado){
+        res.json(resultado);
+    })
+    .catch(function(erro){
+        console.error(erro);
+        console.error('OLHA EU AKI')
+    })
+}
+
 module.exports = {
     buscarUltimasTemperaturas,
     pegarStatusIncubadora,
     verificarPrematuridade,
-    buscarUltimasTemperaturasLinhas
+    buscarUltimasTemperaturasLinhas,
+    inserirTemperaturasTeste
 }

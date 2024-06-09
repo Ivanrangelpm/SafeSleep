@@ -54,10 +54,28 @@ function verificarPrematuridade(idHospital) {
     return database.executar(instrucaoSql);
 }
 
+function inserirTemperaturasTeste(temperatura){
+    var min1 = -1.5;
+    var max1 = 1.5;
+    var intervalo1 = max1 - min1;
+    var diferenca1 = Number((Math.random() * intervalo1 + min1).toFixed(2));
+    
+    var min2 = -1.5;
+    var max2 = 1.5;
+    var intervalo2 = max2 - min2;
+    var diferenca2 = Number((Math.random() * intervalo2 + min2).toFixed(2));
+
+    var instrucaoSql = `
+        INSERT INTO historico(temperatura, fkSensor) VALUES(${temperatura}, 1), (${Number(temperatura) + diferenca1}, 2), (${Number(temperatura) - diferenca2}, 3);
+    `;
+
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     buscarUltimasTemperaturas,
     buscarUltimasTemperaturasLinhas,
     pegarStatusIncubadora,
-    verificarPrematuridade
+    verificarPrematuridade,
+    inserirTemperaturasTeste
 }

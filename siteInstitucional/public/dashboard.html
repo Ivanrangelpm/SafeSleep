@@ -308,7 +308,7 @@
       }
     )
 
-    intervaloGraficoLinha = setInterval(()=>{ultimasTemperaturas_GraficoLinha(codigo_serie, sensor)}, 1000);
+    intervaloGraficoLinha = setInterval(()=>{ultimasTemperaturas_GraficoLinha(codigo_serie, sensor)}, 3000);
   }
 
   function ultimasTemperaturas_GraficoLinha(codigo_serie, sensor){
@@ -599,7 +599,7 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
-    }, 1000);
+    }, 3000);
   }
 
   function plotarGraficosDinamicos(resposta, idHospital) {
@@ -795,5 +795,5 @@
         console.log('Erro :D');
       }
     })
-  }, 1000);
+  }, 3000);
 </script>

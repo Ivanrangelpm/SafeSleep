@@ -129,5 +129,39 @@ INSERT INTO controleFluxo VALUES
         C.codigoDeSerie = retorno.codigoDeSerie
         and A.dataHora = retorno.dataHora
     WHERE C.fkHospital = 2;
-    
-select * from historico;
+
+select * from hospital;
+select * from historico; #WHERE idHistorico >= 2001;
+select * from usuario;
+SELECT * FROM incubadora;
+select * from sensor;
+SELECT * FROM bebe;
+SELECT * FROM controleFluxo;
+TRUNCATE TABLE historico;
+
+select temperatura, DATE_FORMAT(dataHora, '%H:%i:%s') as dataHora from historico join sensor on historico.fkSensor = idSensor join incubadora on fkIncubadora = codigoDeSerie join hospital on fkHospital = idHospital where idHospital = 3 and codigoDeSerie = 121 and idSensor = 3 order by dataHora desc limit 7;
+
+SELECT 
+	C.codigoDeSerie as incubadora,
+    B.idSensor as sensor, 
+    bebe.nome AS nome, 
+    A.temperatura, 
+    status, 
+    A.dataHora
+FROM historico as A
+	JOIN sensor as B ON B.idSensor = A.fkSensor
+	JOIN incubadora as C ON C.codigoDeSerie = B.fkIncubadora
+	JOIN controleFluxo ON fkcodigoDeSerie = C.codigoDeSerie
+	JOIN bebe ON fkBebe = idBebe
+	JOIN (
+		SELECT 
+			codigoDeSerie, 
+            max(dataHora) as dataHora
+		FROM historico 
+			JOIN sensor ON idSensor = fkSensor
+			JOIN incubadora ON codigoDeSerie = fkIncubadora
+			WHERE fkHospital = 3
+			GROUP BY codigoDeSerie
+		) AS retorno 
+	ON C.codigoDeSerie = retorno.codigoDeSerie AND A.dataHora = retorno.dataHora
+	WHERE C.fkHospital = 3 AND status = 'Ocupado';

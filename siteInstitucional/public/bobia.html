@@ -34,9 +34,10 @@
         </div>
         <div class="section">
             <div class="conversas">
+                <h1>Inteligência Artificial da SafeSleep</h1>
                 <div class="form">
-                    <h1>Inteligência Artificial da SafeSleep</h1>
-                    <div id="resposta">
+                
+                    <div id="resposta">     
                     </div>
                     <div id="impBox" class="inputBox">
                         <div class="inputDiv">
@@ -95,7 +96,7 @@
 
             const data = await response.json();
 
-            resposta.style.display = 'block';
+            resposta.style.display = 'flex';
 
             conversa.push(data.resultado)
             console.log(conversa)

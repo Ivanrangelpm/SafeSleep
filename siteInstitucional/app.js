@@ -121,7 +121,8 @@ app.post("/perguntar", async (req, res) => {
 
     try {
         const resultado = await gerarResposta(conversa);
-        var resultadoFormat = `IA: ${resultado}`
+        var mandarResult = resultado;
+        var resultadoFormat = `${resultado}`
         conversa.push(resultadoFormat)
         res.json( { resultado } );
         console.log(conversa)

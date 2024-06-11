@@ -15,6 +15,12 @@ body{
   background-color: #99adc1;
 }
 
+.imgSalvar{
+  width: 35px;
+}
+
+
+
 .main {
     display: flex;
     flex-direction: row;
@@ -24,11 +30,12 @@ body{
   }
 
   .section{
-    margin-top: -360px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 100%;
+    align-self: flex-start;
   }
 
 
@@ -65,20 +72,24 @@ body{
   flex-direction: column;
   text-align: center;
   width: 95%;
+  /* height: 80dvh; */
+  overflow: auto;
 }
 
 .main .conversas .form {
-  margin: 30px 0;
-  min-height: 600px;
+  /* min-height: 600px; */
   width: 80%;
+  height: 600px;
   display: flex;
   flex-direction: column;
   background-color: #eaefea;
 }
 
+/* 
 .conversas{
-  margin-top: 50px;
-}
+  background-color: red;
+} */
+
 
 
 
@@ -86,7 +97,6 @@ body{
   color: white;
   display: flex;
   flex-direction: column;
-  overflow: auto;
 
 }
 
@@ -175,6 +185,22 @@ body{
     width: 250px;
     height: 250px;
   }
+
+
+  #divConversas{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 2rem;
+    font-size: 25px;
+  }
+
+  #divConversas button{
+    width: 85%;
+    background-color: #2d4053;
+    font-size: 25px;
+  }
   
   .topics {
     display: flex;
@@ -187,14 +213,11 @@ body{
   
   .topics button {
     width: 85%;
-    height: 50px;
     background-color: #2d4053;
     font-size: 25px;
   }
   
-  #btn1 {
-    background-color: #19A7A8;
-  }
+
   
   .erro {
     font-weight: bold;
@@ -202,3 +225,27 @@ body{
     text-align: center;
   }
   
+.topics .btnSalvar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #19A7A8;
+}
+
+.topics .btnSalvar{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #19A7A8;
+}
+
+.erroSalvar{
+  margin-top: -15px;
+  color: red;
+  font-size: 20px;
+}
+
+.erroSalvar span{
+  color: rgb(25, 171, 2);
+
+}

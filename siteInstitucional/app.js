@@ -25,6 +25,7 @@ var incubadoraRouter = require("./src/routes/incubadora");
 var bebeRouter = require("./src/routes/bebe");
 var temperaturaRouter = require("./src/routes/temperatura");
 var profileRouter = require("./src/routes/profile");
+var bobiaRouter = require("./src/routes/bobia");
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var aquariosRouter = require("./src/routes/aquarios");
@@ -44,6 +45,7 @@ app.use("/incubadora", incubadoraRouter);
 app.use("/bebe", bebeRouter);
 app.use("/temperatura", temperaturaRouter);
 app.use("/profile", profileRouter);
+app.use("/bobia", bobiaRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/aquarios", aquariosRouter);
@@ -68,7 +70,7 @@ app.listen(PORTA_APP, function () {
 
 var conversa = []
 var inicio = `
-Com base nesse escopo responda qualquer pergunta feita pelo usuario(a conversa começa após o "CONVERSA:::" sendo que as falas da IA são representada por "IA:" e as falas do usuario são representadas por "USUARIO: "):
+Com base nesse escopo responda qualquer pergunta feita pelo usuario(a conversa começa após o "CONVERSA:::" sendo que as falas da IA são representada por "IA:" (não é necessario você escrever IA no começo de suas falas isso é feito automaticamente) e as falas do usuario são representadas por "USUARIO: "), Em nenhum momento da conversa você precisa mencionar coisas como "de acordo com o resumo da safeSleep" ou "de acordo com o escopo da SafeSleep" e comece a conversa com "bom dia, sou a inteligencia artificial da SafeSleep como posso te ajudar?" caso o usuario comece a conversa dando bom dia ou boa tarde?:
 Resumo da Empresa SafeSleep
 A SafeSleep tem como objetivo desenvolver um sistema de monitoramento da temperatura de incubadoras para recém-nascidos prematuros, com o uso de um sensor Arduino LM35, segundo os dados obtidos da FIOCRUZ, a queda de 1°C da temperatura corporal em um recém-nascido ocasiona em 28% de aumento na taxa de óbitos.
 Objetivo da SafeSleep:  
@@ -122,7 +124,7 @@ app.post("/perguntar", async (req, res) => {
     try {
         const resultado = await gerarResposta(conversa);
         var mandarResult = resultado;
-        var resultadoFormat = `${resultado}`
+        var resultadoFormat = `IA: ${resultado}`
         conversa.push(resultadoFormat)
         res.json( { resultado } );
         console.log(conversa)

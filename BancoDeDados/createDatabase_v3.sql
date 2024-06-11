@@ -116,6 +116,25 @@ INSERT INTO controleFluxo VALUES
 (default, 4, 523, '2024-05-03 22:07', '2024-05-08 22:10'),
 (default, 5, 321, '2024-05-08 23:33', null);
 
+
+CREATE TABLE conversa(
+	idConversa int,
+    titulo varchar(75),
+    fkUsuario int,
+    constraint fkUsuarioConversa foreign key (fkUsuario) references usuario(idUsuario),
+    primary key (idConversa, fkUsuario)
+);
+
+
+CREATE TABLE comentario(
+	idComentario int auto_increment,
+    texto varchar(2000),
+    fkConversa int,
+    constraint fkConversaComentario foreign key (fkConversa) references conversa(idConversa),
+    primary key (idComentario, fkConversa)
+);
+
+
  SELECT concat('Incubadora ', C.codigoDeSerie) as Incubadora, A.temperatura, A.dataHora
 	FROM historico as A
 	JOIN sensor as B ON B.idSensor = A.fkSensor

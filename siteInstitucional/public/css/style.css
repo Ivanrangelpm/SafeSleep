@@ -260,7 +260,8 @@ body {
 
 .divAviso {
   position: fixed;
-  width: 700px;
+  width: 600px;
+  height: 250px;
   border-radius: 3px;
   background-color: #880022;
   bottom: 10px;

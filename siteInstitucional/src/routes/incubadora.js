@@ -20,5 +20,12 @@ router.post("/removerBebe", function (req, res) {
   incubadoraController.removerBebe(req, res);
 })
 
+router.post("/trocarBebe", function (req, res) {
+  incubadoraController.trocarBebe(req, res);
+})
+
+router.post("/trocarBebe2", function (req, res) {
+  incubadoraController.trocarBebe2(req, res);
+})
 
 module.exports = router;

@@ -84,6 +84,8 @@ function removerBebe2(codigoDeSerie) {
 }
 
 
+
+
 function removerBebe3(codigoDeSerie) {
   console.log(`CODIGO DE SERIE ${codigoDeSerie}`)
   var instrucaoSql = `
@@ -95,6 +97,17 @@ function removerBebe3(codigoDeSerie) {
   return database.executar(instrucaoSql);
 }
 
+
+function trocarBebe(fkBebe, codigoNovo) {
+  console.log(`CODIGO DE SERIE ${codigoNovo}`)
+  var instrucaoSql = `
+  INSERT INTO controleFluxo VALUES (default, ${fkBebe}, ${codigoNovo}, default, null);
+
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+
+  return database.executar(instrucaoSql);
+}
 
 
 
@@ -108,5 +121,6 @@ module.exports = {
     capturarIncubadoras,
     removerBebe,
     removerBebe2,
-    removerBebe3
+    removerBebe3,
+    trocarBebe
 };

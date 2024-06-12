@@ -154,7 +154,7 @@ body{
   
   .main .leftDiv {
     width: 45%;
-    height: 1100px;
+    height: 94vh;
     background-color: #0d1c2b;
     justify-content: space-evenly;
     color: white;
@@ -182,8 +182,8 @@ body{
   }
   
   .leftLogo {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
   }
 
 

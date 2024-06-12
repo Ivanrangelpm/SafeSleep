@@ -237,6 +237,10 @@ body {
   height: 10rem;
 }
 
+.footer .contact a {
+  color: blue;
+}
+
 .linkRedirecionar{
   width: 93vw;
   text-align: center;

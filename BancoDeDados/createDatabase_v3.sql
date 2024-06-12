@@ -49,30 +49,25 @@ CREATE TABLE incubadora(
 );
 
 INSERT INTO incubadora VALUES
-	(289, 1186, "Ocupado", 3),
-    (362, 1186, "Ocupado", 2),
+	(289, 1186, "Ocupado", 1),
+    (362, 1186, "Livre", 2),
     (121, 1186, "Ocupado", 3),
-    (523, 1186, "Ocupado", 2),
-    (800, 1186, "Ocupado", 3),
-    (1000, 1186, "Manutenção", 3),
-    (900, 1186, "Livre", 3),
+    (523, 1186, "Livre", 2),
     (321, 1186, "Ocupado", 1);
-
+INSERT INTO incubadora VALUES
+	(200, 1186, "Livre", 2);
 CREATE TABLE sensor (
-  idSensor INT PRIMARY KEY AUTO_INCREMENT,
+  idSensor INT PRIMARY KEY,
   fkIncubadora int not null unique,
   constraint fkSensorIncubadora foreign key (fkIncubadora) references incubadora(codigoDeSerie)
 );
 
-INSERT INTO sensor(fkIncubadora) VALUES
-	(289),
-	(362),
-	(121),
-	(523),
-	(800),
-	(1000),
-	(900),
-	(321);
+INSERT INTO sensor VALUES
+	(1, 289),
+	(2, 362),
+	(3, 121),
+	(4, 523),
+	(5, 321);
 
 CREATE TABLE historico(
   idHistorico int not null auto_increment,
@@ -80,8 +75,11 @@ CREATE TABLE historico(
   temperatura decimal(5, 2) not null,
   fkSensor int not null,
   constraint pkHistoricoSensor primary key (idHistorico, fkSensor),
-  constraint pkHistoricoSensor foreign key (fkSensor) references sensor(idSensor)
+  constraint fkHistoricoSensor foreign key (fkSensor) references sensor(idSensor)
 );
+INSERT INTO historico (temperatura, fkSensor) VALUES
+	(35.5, 2),
+	(37.5, 4);
 
 CREATE TABLE bebe(
   idBebe INT PRIMARY KEY AUTO_INCREMENT,
@@ -97,7 +95,6 @@ INSERT INTO bebe VALUES
 (default, "Hellen", "Monteiro", "2024-04-26", "Feminino", 1),
 (default, "Lua", "Santos", "2024-05-07", "Feminino", 0),
 (default, "Melissa", "Bittencourt", "2024-05-03", "Feminino", 0),
-(default, "Enzo", "Ferreira", "2024-02-01", "Masculino", 1),
 (default, "Miguel", "Camargo", "2024-05-08", "Masculino", 1);
 
 
@@ -105,7 +102,7 @@ CREATE TABLE controleFluxo (
     idControle INT AUTO_INCREMENT,
     fkBebe INT,
     fkcodigoDeSerie INT,
-    dtEntrada DATETIME,
+    dtEntrada DATETIME DEFAULT CURRENT_TIMESTAMP,
     dtSaida DATETIME,
     CONSTRAINT pkControle PRIMARY KEY (idControle, fkBebe, fkcodigoDeSerie),
     CONSTRAINT fkBebeControle FOREIGN KEY (fkBebe) REFERENCES bebe(idBebe),
@@ -113,16 +110,21 @@ CREATE TABLE controleFluxo (
 );
 
 INSERT INTO controleFluxo VALUES
-(default, 1, 289, '2024-05-02 22:40', '2024-05-04 10:03'),
+(default, 1, 289, '2024-05-02 22:40', null),
 (default, 2, 362, '2024-04-29 02:23', '2024-05-15 12:00'),
-(default, 3, 121, '2024-05-23 17:51', '2024-05-30 16:58'),
-(default, 4, 523, '2024-02-03 18:52', '2024-02-06 16:58'),
-(default, 5, 800, '2024-04-15 20:00', '2024-04-20 22:10'),
-(default, 6, 321, '2024-03-22 23:48', '2024-03-30 22:10');
+(default, 3, 121, '2024-05-07 17:51', null),
+(default, 4, 523, '2024-05-03 22:07', '2024-05-08 22:10'),
+(default, 5, 321, '2024-05-08 23:33', null);
 
+
+SELECT controleFluxo.*, bebe.nome, bebe.sobrenome FROM controleFluxo 
+		JOIN bebe ON controleFluxo.fkBebe = bebe.idBebe 
+        WHERE fkCodigoDeSerie = 200;
+        
+        
 CREATE TABLE conversa(
 	idConversa int,
-    titulo varchar(75),
+    titulo varchar(45),
     fkUsuario int,
     constraint fkUsuarioConversa foreign key (fkUsuario) references usuario(idUsuario),
     primary key (idConversa, fkUsuario)
@@ -136,7 +138,6 @@ CREATE TABLE comentario(
     constraint fkConversaComentario foreign key (fkConversa) references conversa(idConversa),
     primary key (idComentario, fkConversa)
 );
-
 
  SELECT concat('Incubadora ', C.codigoDeSerie) as Incubadora, A.temperatura, A.dataHora
 	FROM historico as A
@@ -155,3 +156,35 @@ CREATE TABLE comentario(
 select * from hospital;
 select * from historico; #WHERE idHistorico >= 2001;
 select * from usuario;
+SELECT * FROM incubadora;
+select * from sensor;
+SELECT * FROM bebe;
+SELECT * FROM controleFluxo;
+TRUNCATE TABLE historico;
+
+select temperatura, DATE_FORMAT(dataHora, '%H:%i:%s') as dataHora from historico join sensor on historico.fkSensor = idSensor join incubadora on fkIncubadora = codigoDeSerie join hospital on fkHospital = idHospital where idHospital = 3 and codigoDeSerie = 121 and idSensor = 3 order by dataHora desc limit 7;
+
+SELECT 
+	C.codigoDeSerie as incubadora,
+    B.idSensor as sensor, 
+    bebe.nome AS nome, 
+    A.temperatura, 
+    status, 
+    A.dataHora
+FROM historico as A
+	JOIN sensor as B ON B.idSensor = A.fkSensor
+	JOIN incubadora as C ON C.codigoDeSerie = B.fkIncubadora
+	JOIN controleFluxo ON fkcodigoDeSerie = C.codigoDeSerie
+	JOIN bebe ON fkBebe = idBebe
+	JOIN (
+		SELECT 
+			codigoDeSerie, 
+            max(dataHora) as dataHora
+		FROM historico 
+			JOIN sensor ON idSensor = fkSensor
+			JOIN incubadora ON codigoDeSerie = fkIncubadora
+			WHERE fkHospital = 3
+			GROUP BY codigoDeSerie
+		) AS retorno 
+	ON C.codigoDeSerie = retorno.codigoDeSerie AND A.dataHora = retorno.dataHora
+	WHERE C.fkHospital = 3 AND status = 'Ocupado';

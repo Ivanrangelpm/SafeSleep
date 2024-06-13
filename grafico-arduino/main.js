@@ -67,8 +67,8 @@ const serial = async (
             var max = 1.5;
             var intervalo = max - min;
 
-            var random1 = Number((Math.random() * intervalo + min).toFixed(2));
-            var random2 = Number((Math.random() * intervalo + min).toFixed(2));
+            var random1 = Number((Math.random().toFixed(2) * intervalo + min).toFixed(2));
+            var random2 = Number((Math.random().toFixed(2) * intervalo + min).toFixed(2));
 
             // altere!
             // Este insert irá inserir os dados na tabela "medida"

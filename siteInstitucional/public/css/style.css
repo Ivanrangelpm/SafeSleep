@@ -238,7 +238,11 @@ body {
 }
 
 .footer .contact a {
-  color: blue;
+  color: #19A7A8;
+}
+
+.footer .contact a:hover {
+  color: #00f
 }
 
 .linkRedirecionar{

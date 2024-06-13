@@ -11,9 +11,9 @@ cores:
   #f0f5f0 card
 */
 
-body{
+/* body{
   background-color: #99adc1;
-}
+} */
 
 .imgSalvar{
   width: 35px;
@@ -82,7 +82,7 @@ body{
   height: 600px;
   display: flex;
   flex-direction: column;
-  background-color: #eaefea;
+  background-color: #f6faf6;
 }
 
 /* 
@@ -182,8 +182,8 @@ body{
   }
   
   .leftLogo {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
   }
 
 

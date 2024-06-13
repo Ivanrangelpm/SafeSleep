@@ -117,3 +117,7 @@
 .cadastros .botoes button {
   box-shadow: 5px 5px 10px #0d1c2b;
 }
+
+.bebe .form .inputs label input {
+  width: 31rem;
+}

@@ -50,9 +50,9 @@ CREATE TABLE incubadora(
 
 INSERT INTO incubadora VALUES
 	(289, 1186, "Ocupado", 1),
-    (362, 1186, "Ocupado", 2),
+    (362, 1186, "Livre", 2),
     (121, 1186, "Ocupado", 3),
-    (523, 1186, "Ocupado", 2),
+    (523, 1186, "Livre", 2),
     (321, 1186, "Ocupado", 1);
 INSERT INTO incubadora VALUES
 	(200, 1186, "Livre", 2);
@@ -110,11 +110,34 @@ CREATE TABLE controleFluxo (
 );
 
 INSERT INTO controleFluxo VALUES
-(default, 1, 289, '2024-05-02 22:40', '2024-05-04 10:03'),
+(default, 1, 289, '2024-05-02 22:40', null),
 (default, 2, 362, '2024-04-29 02:23', '2024-05-15 12:00'),
-(default, 3, 121, '2024-05-07 17:51', '2024-05-14 16:58'),
+(default, 3, 121, '2024-05-07 17:51', null),
 (default, 4, 523, '2024-05-03 22:07', '2024-05-08 22:10'),
 (default, 5, 321, '2024-05-08 23:33', null);
+
+
+SELECT controleFluxo.*, bebe.nome, bebe.sobrenome FROM controleFluxo 
+		JOIN bebe ON controleFluxo.fkBebe = bebe.idBebe 
+        WHERE fkCodigoDeSerie = 200;
+        
+        
+CREATE TABLE conversa(
+	idConversa int,
+    titulo varchar(45),
+    fkUsuario int,
+    constraint fkUsuarioConversa foreign key (fkUsuario) references usuario(idUsuario),
+    primary key (idConversa, fkUsuario)
+);
+
+
+CREATE TABLE comentario(
+	idComentario int auto_increment,
+    texto varchar(2000),
+    fkConversa int,
+    constraint fkConversaComentario foreign key (fkConversa) references conversa(idConversa),
+    primary key (idComentario, fkConversa)
+);
 
  SELECT concat('Incubadora ', C.codigoDeSerie) as Incubadora, A.temperatura, A.dataHora
 	FROM historico as A

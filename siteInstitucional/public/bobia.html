@@ -5,11 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SafeSleep | bobIA</title>
+    <link rel="icon" href="./images/Logo_SafeSleep.png">
+    <link rel="shortcut icon" href="images/Logo_SafeSleep.png" type="image/x-icon">
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/bobia.css" rel="stylesheet" />
 </head>
 
-<body>
+<body onload="carregarConversas()">
     <div class="header">
         <a href="index.html"><img src="./images/ssLogoExtended.png" alt="logo" class="logo" /></a>
         <ul class="navbar">
@@ -23,21 +25,25 @@
     </div>
     <div class="main">
         <div class="leftDiv">
-            <img src="./images/Logo_SafeSleep.png" alt="logomarca" class="leftLogo">
-            <div class="topics">
-                <!-- <h3>Gerenciar...</h3>
-        <button onclick="form_Funcionario()" id="btn1">Funcionário</button>
-        <button onclick="form_Incubadora()" id="btn2">Incubadora</button>
-        <button onclick="form_Bebe()" id="btn3">Recém-Nascido</button> -->
-                <!-- <button onclick="changeRegisterForm(4)" id="btn4">Responsável pela Criança</button> -->
+            <div id="divTopicos" class="topics">
+                <button class="btnSalvar" onclick="novaConversa()">
+                    Nova Conversa <img class="imgSalvar" src="./images/edit_icon.png" alt="">
+                </button>
+                <button class="btnSalvar" onclick="salvarConversa()" id="btnSalvarConversa">
+                    Salvar Conversa <img class="imgSalvar" src="./images/salvarConversa.svg">
+                </button>
+                <p class="erroSalvar" id="pErroSalvar"></p>
+                <div id="divConversas">
+                </div>
             </div>
+            <img src="./images/Logo_SafeSleep.png" alt="logomarca" class="leftLogo">
         </div>
         <div class="section">
             <div class="conversas">
                 <h1>Inteligência Artificial da SafeSleep</h1>
                 <div class="form">
-                
-                    <div id="resposta">     
+
+                    <div id="resposta" style="display: flex;">
                     </div>
                     <div id="impBox" class="inputBox">
                         <div class="inputDiv">
@@ -68,8 +74,9 @@
         <div class="contact">
             <h3>Contatos</h3>
             <ul>
-                <li>safesleep@gmail.com</li>
-                <li>+55 11 99999-9999</li>
+              <li>Manual de instalação: <a href="./images/Manual de Instalação.pdf" download>Clique aqui para baixar</a></li>
+              <li>E-mail: support@safe-sleep.atlassian.net</li>
+              <li> Central de atendimento: <a href="https://safe-sleep.atlassian.net/servicedesk/customer/portal/1">https://safe-sleep.atlassian.net/servicedesk/customer/portal/1</a> </li>
             </ul>
             <img src="./images/ssLogoName.png" class="logo" />
         </div>
@@ -81,48 +88,252 @@
 
     var conversa = []
 
-        async function gerarResposta() {
-            const pergunta = document.getElementById('pergunta').value;
 
-            conversa.push(pergunta)
+    function novaConversa() {
+        conversa = []
+        btnSalvarConversa.style.display = 'flex';
+        exibirConversa()
+    }
+    
+    function acessarConversa(idConversa){
+        fetch("/bobia/acessarConversa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idConversaServer: idConversa,
+        }),
+      }).then(function (resposta) {
+        console.log(resposta);
 
-            const response = await fetch('/perguntar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ pergunta })
-            });
+        if (resposta.ok) {
+          resposta.json().then((resposta) => {
+            console.log(resposta);
 
-            const data = await response.json();
+            conversa = []
 
-            resposta.style.display = 'flex';
+            for (let i = 0; i < resposta.length; i++) {
+                        var jsonConversa = resposta[i];
 
-            conversa.push(data.resultado)
-            console.log(conversa)
-            exibirConversa()
+                        var texto = jsonConversa.texto;
 
+                        conversa.push(texto)
+
+                        exibirConversa()
+                    }
+
+
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
         }
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO:`, erro);
+      });
+    }
 
-        function exibirConversa() {
-            var tamanhoLista = conversa.length;
+    function carregarConversas() {
+        fetch("/bobia/pegarConversas",
+        {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+        )
+        .then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var p = document.getElementById("pErroSalvar");
+                    p.innerHTML = "Nenhuma conversa encontrada."
+                    throw "Nenhum resultado encontrado!!";
+                }
 
-            resposta.innerHTML = '';
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-            for(var i = 0; i < tamanhoLista;i++ ){
-                var resto = i % 2;
-                var texto = conversa[i];
-                if(resto == 0){
-                    resposta.innerHTML += `
+
+                    // Adicionar divContainer e deixar feedForm como um incremento que 
+                    // Ao contAuxiliar chegar no numero XX é criado um novo feedForum e o contador é zerado
+                    var divConversas = document.getElementById("divConversas");
+                    divConversas.innerHTML = '';
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var jsonConversa = resposta[i];
+
+                        if(i == 0){
+                            divConversas.innerHTML += `
+                            <h3>Acessar conversas</h3>
+                            `
+                        }
+                        divConversas.innerHTML += `
+                            <button onclick="acessarConversa(${jsonConversa.idConversa})">${jsonConversa.titulo}</button>
+                        `
+            
+                        
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+
+    }
+
+    function salvarComentarios(idConversa){
+        var tamanhoConversa = conversa.length;
+        
+        var fkUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("/bobia/salvarComentarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idConversa,
+          conversa
+        }),
+      }).then(function (resposta) {
+        console.log(resposta);
+
+        if (resposta.ok) {
+          resposta.json().then((resposta) => {
+            console.log(resposta);
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (erro) {
+        console.log(`#ERRO:`, erro);
+      });
+
+
+    }
+
+
+    async function salvarConversa(){
+        
+
+        var tamanhoConversa = conversa.length;
+        if(tamanhoConversa == 0){
+            pErroSalvar.style.display = 'block'
+            pErroSalvar.innerHTML = 'Comece uma conversa!'
+            setTimeout(() => {
+                pErroSalvar.style.display = 'none';
+            }, 2000);
+        }else{
+        const pergunta = 'Gere um nome para essa conversa em no maximo 5 palavras para futura consulta do usuario nessa conversa com base na conversa com o usuario, ou seja, ignorando o contexto que foi passado no começo dessa interação'
+        
+
+        const response = await fetch('/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
+
+        const data = await response.json();
+
+        var min = 1;
+        var max = 10000;
+        var intervalo = max - min;
+        var aleatorio = Math.random() * intervalo    + min;
+        var aleatorioInt = aleatorio.toFixed(0);
+
+        var nome = data.resultado;
+
+
+        fetch("/bobia/salvarConversa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idConversaServer: aleatorioInt,
+          tituloServer: nome,
+          fkUsuarioServer: sessionStorage.ID_USUARIO,
+
+        }),
+      })
+        .then(function (resposta) {
+          console.log("Resposta salvar Conversa: ", resposta);
+          if (resposta.ok) {
+            btnSalvarConversa.style.display = 'none';
+            pErroSalvar.style.display = 'block';
+            pErroSalvar.innerHTML = `
+            <span>Conversa Salva com sucesso!</span>
+            `
+
+            setTimeout(() => {
+                pErroSalvar.style.display = 'none';
+            }, 2000);
+
+
+            salvarComentarios(aleatorioInt);
+            carregarConversas();
+            
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (respostaIncubadora) {
+          console.log(`#ERRO:`, respostaIncubadora);
+          // finalizarAguardar();
+        });
+        }
+    }
+
+
+
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta').value;
+
+        conversa.push(pergunta)
+
+        const response = await fetch('/perguntar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta })
+        });
+
+        const data = await response.json();
+
+        resposta.style.display = 'flex';
+
+        conversa.push(data.resultado)
+        console.log(conversa)
+        exibirConversa()
+
+    }
+
+    function exibirConversa() {
+        var tamanhoLista = conversa.length;
+
+        resposta.innerHTML = '';
+
+        for (var i = 0; i < tamanhoLista; i++) {
+            var resto = i % 2;
+            var texto = conversa[i];
+            if (resto == 0) {
+                resposta.innerHTML += `
                         <div class="direita">
                             <p>${texto}</p>
                         </div>`
-                }else{
-                    resposta.innerHTML += `
+            } else {
+                resposta.innerHTML += `
                         <div class="esquerda">
                             <p>${texto}</p>
                         </div>`
-                }
             }
         }
+    }
 </script>

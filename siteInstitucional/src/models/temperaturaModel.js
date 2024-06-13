@@ -43,12 +43,12 @@ function pegarStatusIncubadora(idHospital) {
 
 function verificarPrematuridade(idHospital) {
 
-    var instrucaoSql = `SELECT prematuridade, count(prematuridade) AS qtdBebes FROM bebe 
+    var instrucaoSql = `SELECT prematuridade FROM bebe 
                             JOIN controleFluxo ON fkBebe = idBebe
                             JOIN incubadora ON fkCodigoDeSerie = codigoDeSerie
                             JOIN hospital ON fkHospital = idHospital
-                                WHERE idHospital = ${idHospital}
-                                GROUP BY prematuridade;`;
+                                WHERE idHospital = ${idHospital};
+    `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

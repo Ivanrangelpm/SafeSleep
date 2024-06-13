@@ -53,6 +53,75 @@ function removerBebe(req, res) {
   }
 }
 
+// select idBebe
+// dtSaida ANTIGA
+// update p livre
+// insert
+// update p ocupado
+function trocarBebe(req, res) {
+  var codigoNovo = req.body.codigoNovoServer;
+  var codigoAntigo = req.body.codigoAntigoServer;
+
+  console.log('Pegando dados do ControleFluxo')
+  if (codigoNovo == undefined) {
+    res.status(400).send("Seu codigo está indefinido!");
+  }else if (codigoAntigo == undefined) {
+    res.status(400).send("Seu codigo está indefinido!");
+  } 
+  else {
+
+
+    incubadoraModel
+    .removerBebe(codigoAntigo)
+    .then(function(resposta){
+      res.json(resposta);
+    incubadoraModel.removerBebe2(codigoAntigo);
+    incubadoraModel.removerBebe3(codigoAntigo);
+
+    })
+    .catch(function(erro){
+      console.error(erro);
+      console.error("Houve um erro ao capturar os dados das incubadoras: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    })
+
+
+  }
+}
+
+function trocarBebe2(req, res) {
+  
+  var codigoAntigo = req.body.codigoAntigoServer;
+  var codigoNovo = req.body.codigoNovoServer;
+  var fkBebe = req.body.fkBebeServer;
+
+  console.log('Pegando dados do ControleFluxo')
+  if (codigoNovo == undefined) {
+    res.status(400).send("Seu codigo está indefinido!");
+  }else if (fkBebe == undefined) {
+    res.status(400).send("Seu fkBebe está indefinido!");
+  } 
+  else {
+
+
+    incubadoraModel
+    .removerBebe(codigoAntigo)
+    .then(function(resposta){
+      res.json(resposta);
+      incubadoraModel.preencherIncubadora(codigoNovo);
+      incubadoraModel.trocarBebe(fkBebe, codigoNovo);
+
+    })
+    .catch(function(erro){
+      console.error(erro);
+      console.error("Houve um erro ao capturar os dados das incubadoras: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    })
+
+
+  }
+}
+
 
 
 function pegarIncubadoras(req, res) {
@@ -100,5 +169,7 @@ module.exports = {
   cadastrar,
   pegarIncubadoras,
   capturarIncubadoras,
-  removerBebe
+  removerBebe,
+  trocarBebe,
+  trocarBebe2
 };

@@ -67,7 +67,15 @@ function verificarPrematuridade(req, res) {
 
     temperaturaModel.verificarPrematuridade(idHospital).then(function (resultado) {
         if (resultado.length > 0) {
-            res.status(200).json(resultado);
+            // res.status(200).json(resultado);
+            var lista_prematuridade = [];
+
+            for(var index = 0; index < resultado.length; index++){
+                lista_prematuridade.push(resultado[index].prematuridade[0]);
+            }
+            
+            res.status(200).json(lista_prematuridade);
+        
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }

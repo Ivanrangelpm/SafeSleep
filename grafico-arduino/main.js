@@ -25,7 +25,7 @@ const serial = async (
         {
             // altere!
             // Credenciais do banco de dados
-            host: '10.18.34.95',
+            host: '10.18.32.14',
             user: 'aluno',
             password: 'Sptech#2024',
             database: 'SafeSleep',
@@ -74,17 +74,17 @@ const serial = async (
             // Este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
                 'INSERT INTO historico (temperatura, fkSensor) VALUES (?, ?)',
-                [lm35Temperatura, 1]
+                [lm35Temperatura, 3]
             );
 
             await poolBancoDados.execute(
                 'INSERT INTO historico (temperatura, fkSensor) VALUES (?, ?)',
-                [lm35Temperatura + random1, 3]
+                [lm35Temperatura + random1, 5]
             );
 
             await poolBancoDados.execute(
                 'INSERT INTO historico (temperatura, fkSensor) VALUES (?, ?)',
-                [lm35Temperatura + random2, 5]
+                [lm35Temperatura + random2, 6]
             );
             console.log(`Valores inseridos no banco: ${lm35Temperatura}, ${lm35Temperatura + random1}, ${lm35Temperatura + random2}`);
         
